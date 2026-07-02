@@ -1,0 +1,13 @@
+{
+  "topics": ["legal-tech", "contract-analysis", "legal-ai", "nlp-legal", "legal-nlp", "e-discovery"],
+  "agentKeywords": "AI legal contract analysis NLP open source",
+  "repoKeywords": "legal document NLP contract review open source",
+  "verticalKeywords": "legal case management practice management open source",
+  "minStars": 100,
+  "licenses": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause"],
+  "keywords": {
+    "agents": ["contract review AI", "legal NLP", "document classification", "clause extraction"],
+    "repos": ["legal NLP", "contract analysis", "law text", "legal document"],
+    "verticals": ["OpenLegal", "Legal case management", "Law practice software"]
+  }
+}
