@@ -9,7 +9,68 @@ updated: 2026-11-20
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
-## 🆕 2026-11-20 — el líder de la categoría estaba ausente, y dos slugs eran obsoletos
+## 🆕 2026-11-20 (pase 2) — el clúster por jurisdicción se vuelve medible, y dos licencias mienten
+
+**Qué cambió respecto al pase de hace unas horas:** aquel pase cerró con la frase *«el patrón de
+producto del año es la plantilla por jurisdicción»* y contaba 6 activos de ese tipo. Hoy, con el
+mismo canal de búsqueda pero consultas por **`legal mcp server`** en vez de por nombre de agente,
+el recuento es **13**. La tendencia no era una lectura: es un clúster, y tiene una forma repetida.
+
+### Agentes con señal real esta semana
+
+| Agente | Licencia (leída) | Región | Señal | Stars |
+|--------|------------------|--------|-------|-------|
+| [awesome-legal-skills](https://github.com/lawve-ai/awesome-legal-skills) | 🔴 CC-BY-NC-ND 4.0 (19.122 B) | Global | El índice de skills legales más grande que existe — **y no se puede usar**. Ver correcciones. | **966** |
+| [devnors-data-mcp](https://github.com/DevnorsAI/devnors-data-mcp) | MIT (1.064 B) | APAC (CN) | Primer acceso MCP a sentencias, normativa y registro mercantil chinos en esta KB. Creado jul-2026. | 796 |
+| [tw-legal-rag](https://github.com/aa0101181514/tw-legal-rag) | ⚠️ ELv2 (4.044 B) | APAC (TW) | 22,8 M de sentencias taiwanesas **con verificación de cita incorporada**. Licencia cambiada en v2. | 350 |
+| [mcp-taiwan-legal-db](https://github.com/lawchat-oss/mcp-taiwan-legal-db) | MIT (1.092 B) | APAC (TW) | La alternativa limpia a la anterior, misma jurisdicción. | 234 |
+| [legal-research-skill](https://github.com/Golden2002/legal-research-skill) | MIT (1.066 B) | APAC (CN) | Agent Skill de búsqueda normativa para Cursor / Claude Code / OpenCode. | 168 |
+| [contract-review](https://github.com/xiaodingfeng/contract-review) | MIT (1.069 B) | APAC (CN) | Revisión de contratos en chino con **OnlyOffice** y puntos de revisión configurables. | 168 |
+| [legal-skills-open](https://github.com/ThomasMoreAI/legal-skills-open) | Apache-2.0 (11.314 B) | Global · 54 jurisd. | **18.000+ skills, 410+ plugins — y cobertura LATAM real.** Refuta un hueco declarado. | 141 |
+| [due-diligence-agents](https://github.com/zoharbabin/due-diligence-agents) | Apache-2.0 (10.762 B) | Global | 13 agentes sobre el data room en 9 dominios, **cruzando legal con financiero y citando**. | 139 |
+| [ayunis-legal-mcp](https://github.com/ayunis-core/ayunis-legal-mcp) | MIT (1.070 B) | EMEA (DE) | Códigos legales alemanes por MCP. Complemento de fuentes a los flujos de `claude-fuer-deutsches-recht`. | 91 |
+| [doc-haus](https://github.com/sure-scale/doc-haus) | **GPL-3.0** ⚠️ (35.149 B) | Global | Redline local con tracked changes en Word. Rama **`dochaus`**, no `main`. | 83 |
+| [ms-word-addin](https://github.com/Vaquill-AI/ms-word-addin) | Apache-2.0 (11.340 B) | Global | Revisión de contratos **dentro de Word** con licencia permisiva. | 81 |
+| [opencaselaw](https://github.com/jonashertner/opencaselaw) | **MIT + CC0 datos** (1.069 B) | EMEA (CH) | **El activo del pase.** 1M+ sentencias suizas, grafo de citas de 10M aristas, 42 tools MCP, commit de hoy. | 80 |
+| [italia-mcp-servers](https://github.com/bsab/italia-mcp-servers) | MIT (1.069 B) | EMEA (IT) | Catálogo de MCP italianos (datos públicos, legal-tech, PA). | 78 |
+| [bettercallclaude](https://github.com/fedec65/bettercallclaude) | **AGPL-3.0** ⚠️ | EMEA (CH) | Plugin de práctica jurídica suiza. Par natural de `opencaselaw`. | 47 |
+| [us-legal-mcp](https://github.com/JamesANZ/us-legal-mcp) | MIT (1.071 B) | NA (US) | Legislación federal estadounidense por MCP. | 39 |
+
+**15 filas, las 15 verificadas hoy por API de búsqueda + lectura byte a byte del LICENSE.
+0 placeholders.**
+
+### Correcciones registradas este pase
+
+1. 🔴 **`awesome-legal-skills` no es permisivo: es CC-BY-NC-ND 4.0.** La API dice `NOASSERTION`;
+   el fichero dice NonCommercial **y** NoDerivatives. Un engagement de cliente es uso comercial y
+   adaptar una skill a su jurisdicción es una obra derivada: **las dos cosas que haría Globant
+   están prohibidas.** Con 966★ y nombre `awesome-*`, es la trampa de licencia más probable de
+   toda esta KB.
+2. ⚠️ **`tw-legal-rag` se relicenció a mitad de su historia.** LICENSE de 4.044 B que **empieza
+   mencionando MIT** (así que un `grep` lo aprueba) y resulta ser **Elastic License 2.0**, con
+   nota explícita: *MIT se mantiene sólo hasta v1.2.2*. **Modo de fallo nuevo para esta KB: la
+   licencia depende del tag, no del repo.** Regla adoptada: verificar la licencia **en la versión
+   que se va a fijar**.
+3. 🟡 **Hueco LATAM parcialmente refutado — error propio, de hace unas horas.** `agents/top.md`
+   afirmaba en negrita *«No existe ninguno para Brasil ni México»*. `legal-skills-open` tiene
+   **Brasil 15 plugins** (9.ª jurisdicción del repo, por delante de Francia, UK, Italia y España),
+   Argentina 2, México 2, Colombia 1, Perú 1, Rep. Dominicana 1. **Causa del error: se buscaron
+   repos de *origen* LATAM y no cobertura LATAM *dentro de* repos globales.** Corregido en
+   `agents/top.md` y en `intel/market.md`.
+4. **El clúster por jurisdicción pasa de 6 a 13 activos.** Hoy hay MCP de fuentes oficiales para
+   EE. UU., Alemania, Suiza, Italia, Taiwán (×2) y Corea; más flujos para España, India y China.
+
+### Hueco declarado — el que queda, y es más preciso que el anterior
+
+🔴 **No existe ningún servidor MCP de fuentes legales oficiales para ninguna jurisdicción LATAM.**
+Verificado por los dos canales. El hueco **cambió de forma**: no es «LATAM no tiene nada» (falso,
+hay flujos Apache-2.0), es **«LATAM no tiene fuentes»**. Es un hueco mejor, porque la arquitectura
+a copiar ya está probada dos veces: `opencaselaw` (26 cantones, 3 idiomas, CC0) y `korean-law-mcp`
+(42 APIs oficiales).
+
+🗄️ *Nota de histórico: la sección de abajo es el primer pase del 2026-11-20, conservado íntegro.*
+
+## 2026-11-20 (pase 1) — el líder de la categoría estaba ausente, y dos slugs eran obsoletos
 
 **Qué cambió respecto al pase anterior:** el pase del 2026-11-04 verificó licencias byte a byte
 pero creyó que **la API de GitHub estaba bloqueada**. No lo está. Reprobada hoy, aportó lo que la

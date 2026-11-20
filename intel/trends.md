@@ -103,6 +103,91 @@ datos del cliente y de-identificación previa (Presidio) + custodia (Databunker)
 la prueba de que el mercado open source ya lo está construyendo: BYOK, sin telemetría, índice y
 chat en infraestructura del cliente.
 
+### 🆕 13. El «MCP de fuentes oficiales» es ya el patrón dominante del sector, y es medible
+
+El pase anterior dijo que *la plantilla por jurisdicción es el patrón de producto del año* y contó
+6 activos. Con consultas por **capa de arquitectura** en vez de por nombre de agente, el recuento
+es **13**, y comparten una forma casi idéntica:
+
+> **envolver las fuentes legales oficiales de un país en un servidor MCP, y exponer la
+> verificación de cita como herramienta.**
+
+| Jurisdicción | Activo | Licencia |
+|---|---|---|
+| 🇨🇭 Suiza | `opencaselaw` — 1M+ sentencias, grafo de citas 10M aristas | MIT + **CC0** |
+| 🇰🇷 Corea | `korean-law-mcp` — 42 APIs oficiales del 법제처 | MIT |
+| 🇹🇼 Taiwán | `tw-legal-rag` (22,8 M sentencias) / `mcp-taiwan-legal-db` | ⚠️ ELv2 / MIT |
+| 🇩🇪 Alemania | `ayunis-legal-mcp` | MIT |
+| 🇮🇹 Italia | `mcp-legal-it` (200+ tools) / `italia-mcp-servers` | Apache-2.0 / MIT |
+| 🇺🇸 EE. UU. | `us-legal-mcp` | MIT |
+| 🇨🇳 China | `devnors-data-mcp` | MIT |
+
+**Implicación para Globant:** no hay que inventar la arquitectura de una oferta legal por país
+— está escrita siete veces, casi siempre en MIT. **Lo que escasea no es el diseño: son las
+fuentes de cada país conectadas.** Y para LATAM hay **cero**.
+
+### 🆕 14. La licencia es una propiedad del *tag*, no del repositorio
+
+Esta KB verificaba licencias byte a byte sobre `HEAD`. **Insuficiente.** `tw-legal-rag` (350★)
+tiene en su LICENSE: *«las versiones hasta la v1.2.2 incluida se publicaron bajo MIT, que sigue
+aplicando a esas versiones»* — el resto es **Elastic License 2.0**, que prohíbe ofrecer el
+software como servicio gestionado a terceros.
+
+⇒ **Las estrellas de un repo pueden haberse ganado bajo una licencia que ya no rige.** Un repo
+puede volverse propietario sin cambiar de nombre, de slug ni de descripción, y los dos canales de
+verificación de esta KB mirarían `HEAD` y verían la licencia nueva como si siempre hubiera estado.
+
+Y en la dirección contraria: `awesome-legal-skills` (966★) parece permisivo por nombre y por
+tamaño y es **CC-BY-NC-ND 4.0** — **NonCommercial prohíbe el engagement y NoDerivatives prohíbe
+adaptarlo a la jurisdicción del cliente**, que son las dos únicas cosas que Globant haría con él.
+
+> **Tendencia de fondo, no anécdota:** a medida que los proyectos legal-AI open source buscan
+> monetizar, el relicenciamiento hacia ELv2/BUSL y el contenido bajo CC-NC van a crecer.
+> **La licencia hay que verificarla en la versión que se fija y re-verificarla en cada pase.**
+
+### 🆕 15. En LATAM la obligación de verificar citas llega por el juez, no por el legislador
+
+Mientras Brasil, México y Colombia **no tienen ley de AI en vigor**, sus tribunales ya resolvieron:
+
+- **Colombia, Corte Suprema (AC739-2026):** multa de **15 salarios mínimos mensuales** a un
+  abogado por citar jurisprudencia inventada por AI.
+- **México, dos tesis de ene-2026:** la AI puede **calcular la garantía del amparo**, pero
+  **no debe alcanzar el razonamiento jurídico**.
+- **Colombia, Corte Constitucional (T-008 de 2026):** remite a la contencioso-administrativa la
+  cuestión de los actos administrativos redactados con AI.
+
+⇒ **Convergencia por tres vías distintas hacia el mismo requisito técnico:** Indiana Trial Rule 11
+(regla procesal, EE. UU.), Art. 50 del AI Act (reglamento, UE) y la vía judicial (LATAM).
+**La verificación de cita con log auditable es el único requisito que las tres rutas comparten**, y
+es el que esta KB puede implementar hoy con `opencaselaw`, `korean-law-mcp`, `tw-legal-rag` y
+`CaseCite`. **Para LATAM no hay fuente conectada: ese es el trabajo.**
+
+### 🆕 16. La capa de menor riesgo del sector legal era la que nadie había mirado
+
+`shmsoft/FreeEed` (Apache-2.0, creado en **2011**, commit de **hoy**) es la única plataforma de
+e-discovery open source viva, y hasta este pase **esta KB no tenía una sola fila en esa capa**.
+
+**Por qué es la de menor riesgo:** el producto del e-discovery es **un conjunto de documentos
+responsivos**, no un consejo jurídico. Si el sistema falla, el fallo es *recall* medible y
+corregible — **no una afirmación falsa firmada por un abogado**. Es el único flujo legal donde la
+alucinación no se traslada al cliente final en forma de riesgo deontológico.
+
+⇒ **Es el punto de entrada técnicamente más defendible de un engagement legal**, y el más fácil
+de justificar ante un socio reticente. Que estuviera ausente de la KB es un recordatorio:
+**una capa no buscada se parece mucho a una capa que no hace falta.**
+
+### 🆕 17. El corpus en dominio público deja de ser hipotético
+
+Esta KB sostenía que *el corpus permisivo es más escaso que el código permisivo* y que el **grant
+partido código/corpus** era el modo de fallo propio del sector. `opencaselaw` tiene el grant
+partido **a favor**: **MIT el código, CC0 los datos** — 1M+ sentencias suizas, 21k leyes y un grafo
+de citas de 10M de aristas **en dominio público**, descargables en Parquet.
+
+⇒ **La conclusión se refina:** el grant partido no es el problema; **partirlo en la dirección
+contraria** lo es. Y ahora hay un caso positivo que demuestra que el régimen que esta KB pide
+(datos incorporables sin cadena de licencias) **es alcanzable**, lo que convierte «no existe
+corpus permisivo para mi país» de excusa en **especificación de trabajo**.
+
 ## Repos con actividad real relevante (verificados 2026-11-20)
 
 Todos comprobados por API de búsqueda (existencia, estrellas, `archived`, `pushed_at`) **y** con

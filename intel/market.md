@@ -26,6 +26,32 @@ dato único. Difieren por definición de mercado (sólo AI legal tech vs. plataf
 desacuerdo metodológico. Para una propuesta, usar la **dirección** (crecimiento 30%+ CAGR,
 Norteamérica ~45% del mercado) y no la cifra absoluta.
 
+### 🆕 Mediciones añadidas hoy — y el desacuerdo empeora de forma informativa
+
+| Segmento | Valor 2026 | Proyección | CAGR | Fuente |
+|----------|-----------|------------|------|--------|
+| Legal AI (amplio) | USD 2,1 B | 3,9 B (2030) | 17,3% | Grand View Research |
+| Legal AI (amplio) | USD 5,59 B | — | — | Azumo |
+| Legal AI (amplio) | USD ~6,72 B | 42,18 B (2036) | 20,2% | GlobeNewswire (oct-2026) |
+| **Revisión y redacción de contratos** | **USD 4,21 B** | 14,76 B (2031) | **28,52%** | Mordor Intelligence |
+| Revisión de contratos | USD 3,7 B | 32 B (2036) | — | Datanext |
+| **AI legal «agéntica»** | **USD 134,41 M** | — | 28,91% | Mordor Intelligence |
+| **AI legal «agéntica»** | **USD 5,8 B** | 30,6 B (2036) | — | Fact.MR |
+
+🔴 **El dato más útil de esta tabla es una contradicción, no una cifra.** Dos casas sitúan el
+**mismo** segmento agéntico en **134,41 M** y en **5.800 M** para el **mismo año**: un factor de
+**~43×**. Eso no es incertidumbre de estimación; es que **miden cosas distintas bajo el mismo
+nombre** (probablemente: software de agentes legales vs. todo flujo legal que toque un agente).
+
+⇒ **Regla para propuestas:** **no citar el tamaño del mercado agéntico legal.** Citar en su lugar
+las dos cosas en las que las fuentes **sí** coinciden:
+- **El CAGR, que converge en 17–30%** en todos los segmentos y casas. Es la afirmación defendible.
+- **Que el contrato es el caso de uso dominante:** **CLM concentra el 34,0% de la demanda en 2026**
+  (Fact.MR) y **el 50% de los profesionales legales que usan AI la aplican a extraer datos de
+  contratos** (Thomson Reuters). ⇒ **La revisión de contratos no es «un» caso de uso legal: es *el*
+  caso de uso**, y es exactamente donde esta KB tiene más activos verificados (ContextGem,
+  OpenContracts, contract-review-agent, doc-haus, ms-word-addin, contract-review 中文).
+
 ## Adopción — la señal más sólida
 
 | Dato | Valor | Fuente |
@@ -112,6 +138,26 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   `corey-coders/mcp-us-legal` (MIT, pequeño). Es la región con más oferta open source, con mucha
   diferencia.
 
+
+- 🆕 **La brecha individuo/firma es la cifra que vende gobernanza en esta región:** **69% de los
+  profesionales legales usa AI, pero sólo el 34% de los despachos la ha adoptado formalmente.**
+  Y en el extremo pequeño, **Clio** mide **57% de despachos unipersonales y 55% de despachos
+  pequeños sin ninguna política de AI**. ⇒ El uso ya ocurre; lo que falta es el marco. Vender
+  *política + registro + herramienta aprobada* es menos arriesgado de vender que productividad,
+  porque el comprador ya sabe que el uso existe sin control.
+- 🆕 **El andamiaje deontológico ya está puesto en casi todo el país:** **47 estados** han emitido
+  guía formal de ética sobre AI para abogados (a feb-2026), apoyada en la **ABA Formal Opinion
+  512**. Carolina del Norte y Virginia tienen opinión propia, y **Virginia discrepa en facturación**:
+  mide el valor del resultado en vez de las horas ahorradas. ⚠️ Fuentes secundarias concordantes;
+  no se leyó el texto de cada colegio.
+- 🆕 **El riesgo tiene jurisprudencia con nombre:** abogados de **Morgan & Morgan** fueron
+  sancionados por citar casos alucinados en mociones de responsabilidad por producto. ⚠️ Circula
+  un recuento de **505 casos sancionados y 2,5 M USD+ en costas**: **no verificado — no usar en
+  material de cliente.** El caso nominal sí es citable; la cifra agregada no.
+- 🆕 **Oferta técnica añadida esta región:** `JamesANZ/us-legal-mcp` (MIT) y, sobre todo,
+  **`shmsoft/FreeEed` (Apache-2.0)** — e-discovery, la capa donde el mercado norteamericano ya
+  gasta por volumen de datos y no por consejo jurídico.
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -163,6 +209,29 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   francés), `openlegaldata/oldp` (DE, MIT), `ContextGem` (PL/UE), `Blackstone` (UK, dormido).
 - Mercado legal tech europeo citado en >4.000 M€ (2025), ⚠️ de fuente de baja autoridad.
 
+
+- 🆕 **El instrumento que retrasa el alto riesgo ya tiene número:** las fuentes de hoy identifican
+  el *Digital Omnibus* como **Reglamento (UE) 2026/1744, de 8 de julio de 2026**. Esto mejora la
+  trazabilidad de la afirmación que esta KB ya daba por resuelta (alto riesgo a 2-dic-2027 Anexo III
+  / 2-ago-2028 Anexo I). ⚠️ **Sigue sin leerse el Diario Oficial** — eur-lex continúa inalcanzable
+  desde este entorno. Es una referencia concordante, no la fuente primaria.
+- ⚠️ **Y el desacuerdo NO está cerrado en la prensa del sector.** Una parte de las fuentes de hoy
+  sigue tratando **agosto de 2026** como la fecha de alto riesgo, y el AI Act **clasifica
+  expresamente como alto riesgo la AI usada en procedimientos judiciales y decisiones de justicia**
+  — es decir, el núcleo de este sector. ⇒ **Consecuencia comercial concreta:** en una conversación
+  de cliente europeo hay que asumir que *su* asesoría puede estar operando con el calendario
+  pre-enmienda. **Llevar las dos fechas y el número del Reglamento, no una sola fecha.**
+- 🆕 **Concentración del lado propietario, y es el argumento de la alternativa open source:**
+  las fuentes sitúan a **Harvey y Legora en 16,5 B USD combinados**, con **el 50% del Am Law 100
+  ya sobre Harvey**. ⚠️ Cifras de origen vendedor. ⇒ La lectura útil no es el valor: es que **el
+  comprador europeo grande ya está decidido**, y el espacio abierto está en (a) el mid-market y
+  (b) el trabajo que no puede salir de la jurisdicción.
+- 🆕 **La región estrena el mejor activo de datos de toda esta KB:** **`opencaselaw`** (Suiza,
+  MIT + **CC0**) — 1M+ sentencias de 26 cantones desde 1875, trilingüe, grafo de citas de 10M de
+  aristas. Más `ayunis-legal-mcp` (DE, MIT) y `italia-mcp-servers` (IT, MIT). ⇒ **EMEA es hoy la
+  región con más fuentes legales oficiales accesibles por MCP**, y eso invierte el supuesto de que
+  la soberanía del dato europea es sólo una restricción: también es un activo disponible.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -207,6 +276,29 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   ⚠️ Una guía de GC afirma que «APAC tiene la mayor velocidad de adopción legal del mundo y la
   gobernanza más débil», pero es **un blog de asesoría sin dato citado**: no usar.
   **No se debe inferir adopción a partir de regulación ni de número de repos.**
+
+
+- 🆕 **El calendario regulatorio de la región, con el detalle que importa para arquitectura:**
+  **Corea del Sur — AI Basic Act en vigor desde el 22-ene-2026**, descrita como la primera ley
+  nacional integral de AI después de la UE. **Japón — AI Promotion Act**, ley marco **sin
+  sanciones**: la AI se regula por las normas que ya existen (protección de datos, propiedad
+  intelectual). **India — sin ley de AI**; el instrumento vinculante es el **DPDP Act**, y en
+  **jul-2026 el Gobierno señaló que podría legislar** específicamente. **Singapur — sin estatuto
+  vinculante**: Model AI Governance Framework + **AI Verify**, pero la guía del **sector financiero
+  exige de hecho los mismos controles que exigiría una ley.**
+  ⇒ **Lectura de diseño:** en APAC el cumplimiento se demuestra **por evidencia**, no por
+  certificación. Un pipeline con log auditable sirve en las cuatro jurisdicciones; un certificado
+  no sirve en ninguna.
+- 🆕 **Taiwán entra en la KB y entra fuerte:** `tw-legal-rag` expone **22,8 M de sentencias,
+  interpretaciones administrativas y resoluciones del Tribunal Constitucional, con verificación de
+  cita incorporada** (⚠️ **ELv2 desde v2.0.0** — para producto, fijar v1.2.2 en MIT o usar
+  `mcp-taiwan-legal-db`, MIT). **China** suma acceso programático real con `devnors-data-*` (MIT):
+  sentencias, articulado, registro mercantil y listas de ejecutados — la base de due diligence de
+  contraparte.
+- ⚠️ **Hueco de datos declarado:** las búsquedas regionales **no devolvieron ninguna cifra de
+  adopción de AI por despachos ni reglas de colegios o tribunales** para Japón, Corea, Singapur o
+  India. **La región está bien cubierta en regulación y mal cubierta en adopción**, y eso es un
+  hueco de esta KB, no una señal de que no haya adopción.
 
 ### LATAM
 
@@ -264,6 +356,44 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   - ⚠️ **Trampa de etiquetado evitada:** `claude-para-abogados` está en castellano pero es
     **derecho de España — región EMEA**. Contarlo como activo LATAM sería un error con
     consecuencias para un engagement brasileño o mexicano.
+
+
+- 🆕 **EL HALLAZGO DE LA REGIÓN, y es el mejor gancho comercial que LATAM ha tenido en esta KB:
+  los tribunales latinoamericanos ya están sancionando la cita alucinada.**
+  - **Colombia — Corte Suprema, AC739-2026: multa a un abogado de 15 salarios mínimos mensuales
+    por citar jurisprudencia inventada por AI.**
+  - **Colombia — Corte Constitucional, T-008 de 2026:** se abstiene de pronunciarse sobre actos
+    administrativos redactados con AI y remite la cuestión a la jurisdicción contencioso-administrativa.
+  - **México — dos tesis jurisprudenciales de ene-2026:** admiten usar AI para **calcular la
+    garantía en el juicio de amparo**, y señalan que **la AI no debe alcanzar el razonamiento
+    jurídico**. Es una línea trazada exactamente donde importa: cálculo sí, criterio no.
+  ⇒ **Esto alinea LATAM con la regla de Indiana (Trial Rule 11) y con el Art. 50 europeo, pero por
+  vía judicial en vez de legislativa.** La consecuencia de producto es idéntica:
+  **la verificación de cita con log auditable es el entregable.** Y aquí el comprador no es un
+  departamento de compliance: es **el abogado firmante con una multa nominada delante.**
+- 🆕 **Estado legislativo, para no prometer lo que no está en vigor:** **Brasil — PL 2338/2023**
+  aprobado por el Senado en dic-2024, **sigue en la Cámara de Diputados**, con votación esperada
+  **después de las elecciones de oct-2026**; clasifica como alto riesgo la AI en contratación y
+  despido. Lo **ya vinculante** es la **LGPD**, que reconoce **derecho a revisión de decisiones
+  automatizadas**. **México** — varias iniciativas, **ninguna aprobada**; la ley de protección de
+  datos sí incorporó **derecho de oposición a decisiones automatizadas**. **Colombia** — sin
+  estatuto; el instrumento es **CONPES 4144 (2025)**, política pública, soft law. ⚠️ Fuentes
+  discrepan sobre publicaciones en gaceta mexicanas: verificar antes de citar.
+- 🆕 **Señales de mercado reales, no proyecciones:** la **ANPD** brasileña pasó su **sandbox
+  regulatorio de AI y protección de datos a pruebas supervisadas en feb-2026**. **Jusbrasil
+  adquirió MinutaIA** (startup de redacción) el **2-sep-2026** — consolidación nativa, no entrada
+  de un vendor global. **Baker McKenzie (may-2026)** señala la **AI en materia laboral** como la
+  exposición más aguda a corto plazo para multinacionales en LATAM. Brasil lidera en número de
+  legaltechs, México concentra el interés de venture transfronterizo y Colombia se describe como
+  permisiva para experimentar.
+- ✅ **Corrección a esta misma sección (error de hace unas horas):** esta KB afirmaba que no existe
+  ninguna adaptación por jurisdicción para Brasil ni México. **`ThomasMoreAI/legal-skills-open`
+  (Apache-2.0) tiene Brasil 15 plugins, Argentina 2, México 2, Colombia 1, Perú 1, Rep. Dominicana
+  1.** Brasil es la 9.ª jurisdicción del repo, por delante de Francia, Reino Unido, Italia y España.
+  **Lo que sigue vacío, verificado por doble canal, es otra cosa: no existe ningún servidor MCP de
+  fuentes legales oficiales para ninguna jurisdicción LATAM.** El hueco es de **fuentes**, no de
+  **flujos** — y la arquitectura a copiar ya está probada en `opencaselaw` (CH) y `korean-law-mcp`
+  (KR). Ver `compose/patterns.md` → P12.
 
 ## Hueco de producto transversal (las cuatro regiones)
 

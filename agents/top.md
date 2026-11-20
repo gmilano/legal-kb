@@ -37,6 +37,29 @@ Ninguno basta solo. `freelawproject/courtlistener` y `OpenSignLabs/OpenSign` dev
 inversa, los dos renombrados de abajo son invisibles en `raw` (resuelve por redirección) y sólo
 aparecen en la API.
 
+### 🆕 Tercera divergencia de canal, medida hoy — y protege contra un borrado futuro
+
+El pase anterior documentó que los canales discrepan en una dirección (`NOASSERTION` en la API con
+LICENSE legible, y renombrados invisibles en `raw`). **Hoy apareció la tercera, y es la peligrosa:**
+
+| Repo | API de búsqueda | `raw` | Lectura correcta |
+|------|-----------------|-------|------------------|
+| `lowtidebuild/contract-review-agent` | **ausente** (`repo:` no devuelve nada) | **200** en `README.md` y `LICENSE` | **El repo existe.** No está en el índice de búsqueda. |
+
+> 🔧 **Regla que esta KB adopta:** **ausente en la API de búsqueda ≠ inexistente.** Antes de
+> retirar una fila por «no encontrada», hay que **probar `raw`**. Un repo puede existir y no estar
+> indexado (recién creado, poca señal, o excluido del índice).
+>
+> La inversa también sigue vigente: **existir en `raw` no acredita procedencia.** `raw` resuelve
+> por redirección, así que un slug renombrado devuelve 200 apuntando a otro sitio. Por eso esta
+> fila conserva su ⚠️ de procedencia: *está viva, pero no verificada en origen.*
+
+**Cómo se verificó todo lo nuevo de este pase:** los **16 repos añadidos** pasaron **los dos
+canales** (API de búsqueda para existencia/estrellas/`pushed_at`/`archived`/rama, y lectura byte a
+byte del LICENSE por `raw`). **Barrido completo del fichero: 65 URL únicas de GitHub comprobadas,
+62 resuelven en la API, 1 resuelve sólo por `raw` (arriba) y 2 son slugs obsoletos citados a
+propósito** en la tabla de renombrados de más abajo. **0 enlaces roto sin declarar.**
+
 ## Agentes y herramientas destacadas
 
 | Nombre | Repo | Licencia (leída) | País / región de origen | Descripción | Stars | Último commit |
@@ -59,8 +82,24 @@ aparecen en la API.
 | DISC-LawLLM | [FudanDISC/DISC-LawLLM](https://github.com/FudanDISC/DISC-LawLLM) | Apache-2.0 | China · APAC | 中文法律大模型 — sistema legal inteligente sobre LLM para derecho chino (Fudan DISC). 🪦 **18 meses sin commits.** | 961 | 2025-05-27 |
 | lawyer-llama | [AndrewZhe/lawyer-llama](https://github.com/AndrewZhe/lawyer-llama) | Apache-2.0 | China · APAC | LLM legal chino con instruction-tuning jurídico. Nuevo en esta KB. 🪦 **27 meses sin commits.** | 1.003 | 2024-08-28 |
 | fuzi.mingcha (夫子·明察) | [irlab-sdu/fuzi.mingcha](https://github.com/irlab-sdu/fuzi.mingcha) | Apache-2.0 | China · APAC | LLM judicial chino (U. de Shandong + Inspur Cloud + CUPL) sobre base ChatGLM. 🪦 **16 meses sin commits.** | 401 | 2025-07-30 |
+| **legal-skills-open** | [ThomasMoreAI/legal-skills-open](https://github.com/ThomasMoreAI/legal-skills-open) | Apache-2.0 (11.314 B) | Global · **54 jurisdicciones** | **El hallazgo que refuta el hueco LATAM de esta KB.** Biblioteca abierta de skills legales en formato `SKILL.md` para agentes compatibles con MCP: 18.000+ skills, 410+ plugins, 48 áreas de práctica, agrupados **por jurisdicción** (`br/`, `mx/`, `ar/`, `co/`, `pe/`, `do/`, `es/`…). Apache-2.0 sobre el contenido, no sólo sobre el código. Ver la corrección al hueco LATAM abajo. | 141 | 2026-10-12 |
+| **opencaselaw** | [jonashertner/opencaselaw](https://github.com/jonashertner/opencaselaw) | **MIT código (1.069 B) + CC0 datos** | **Suiza** · EMEA | **El mejor activo del pase, y el primero que resuelve el problema del corpus permisivo.** Corpus legal suizo abierto: **1M+ sentencias de los 26 cantones, 1875–hoy**, 21k leyes, **grafo de citas de 10M de aristas**, 42 herramientas MCP, más REST, CLI y **Parquet** para análisis a escala de corpus. Alemán, francés e italiano. `ocl citations resolve 'BGE 136 III 513'` dice **si la sentencia existe y cuál es** — primitiva de verificación de cita ejecutable, no prometida. Vivo en `mcp.opencaselaw.ch`. | 80 | 2026-11-20 |
+| devnors-data-mcp | [DevnorsAI/devnors-data-mcp](https://github.com/DevnorsAI/devnors-data-mcp) | MIT (1.064 B) | China · APAC | Servidor MCP sobre datos legales y corporativos chinos: **裁判文书** (sentencias), **法律法规/法条** (leyes y articulado), registro mercantil, cuentas anuales, datos fiscales y **失信核查/被执行人** (listas de morosos judiciales y ejecutados). Es la pieza que faltaba para due diligence de contraparte en China. | 796 | 2026-09-15 |
+| tw-legal-rag | [aa0101181514/tw-legal-rag](https://github.com/aa0101181514/tw-legal-rag) | ⚠️ **Elastic License 2.0** (4.044 B) — **MIT sólo hasta v1.2.2** | **Taiwán** · APAC | MCP + CLI de derecho taiwanés: **22,8 M de sentencias**, interpretaciones administrativas y resoluciones del Tribunal Constitucional, **con verificación de cita incorporada**. Retrieval-only, BYO-LLM. ⚠️ **Relicenciado: v2.0.0+ es ELv2 (prohíbe servicio gestionado a terceros y manipular la clave de licencia). Ver el modo de fallo nuevo abajo.** | 350 | 2026-11-12 |
+| mcp-taiwan-legal-db | [lawchat-oss/mcp-taiwan-legal-db](https://github.com/lawchat-oss/mcp-taiwan-legal-db) | MIT (1.092 B) | **Taiwán** · APAC | Sentencias del 司法院 (Yuan Judicial) + **全國法規資料庫** (base nacional de normativa) como servidor MCP consultable desde cualquier agente. **La alternativa permisiva a `tw-legal-rag`** para la misma jurisdicción: menos corpus, licencia limpia. | 234 | 2026-10-21 |
+| legal-research-skill | [Golden2002/legal-research-skill](https://github.com/Golden2002/legal-research-skill) | MIT (1.066 B) | China · APAC | Agent Skill de búsqueda jurídica para Cursor, Claude Code y OpenCode: localización y ordenación sistemática de normas, pensada tanto para no juristas como para profesionales. | 168 | 2026-08-28 |
+| contract-review (中文) | [xiaodingfeng/contract-review](https://github.com/xiaodingfeng/contract-review) | MIT (1.069 B) | China · APAC | App web de revisión de contratos en chino: carga, preanálisis AI, **puntos de revisión configurables**, previsualización y edición con **OnlyOffice**, base de conocimiento, refuerzo con sentencias y búsqueda web controlada. El flujo completo, no un wrapper de prompt. | 168 | 2026-08-05 |
+| due-diligence-agents | [zoharbabin/due-diligence-agents](https://github.com/zoharbabin/due-diligence-agents) | Apache-2.0 (10.762 B) | Global | Due diligence forense de M&A: **13 agentes leen el data room en 9 dominios** (legal, financiero, comercial, tecnología, ciber, RR. HH.…) y **cruzan hallazgos entre dominios con cita** — un riesgo legal y uno financiero que se conectan. El único activo de la KB que opera a nivel transacción, no documento. | 139 | 2026-11-17 |
+| Vaquill MS Word add-in | [Vaquill-AI/ms-word-addin](https://github.com/Vaquill-AI/ms-word-addin) | Apache-2.0 (11.340 B) | Global | **Cierra en licencia permisiva el canal que esta KB declara decisivo para la adopción: Word.** Add-in de task-pane para MS Word con revisión de contratos, **playbooks**, redacción e investigación legal. Del mismo equipo que `awesome-legaltech`. | 81 | 2026-10-01 |
+| ayunis-legal-mcp | [ayunis-core/ayunis-legal-mcp](https://github.com/ayunis-core/ayunis-legal-mcp) | MIT (1.070 B) | **Alemania** · EMEA | Servidor MCP sobre los códigos legales alemanes. Complemento permisivo y mantenido de `claude-fuer-deutsches-recht` (que aporta los flujos, no las fuentes). | 91 | 2026-11-08 |
+| italia-mcp-servers | [bsab/italia-mcp-servers](https://github.com/bsab/italia-mcp-servers) | MIT (1.069 B) | **Italia** · EMEA | Catálogo curado de servidores MCP italianos: datos públicos, legal-tech, facturación y administración pública. Mapa de entrada para un engagement italiano. | 78 | 2026-09-11 |
+| us-legal-mcp | [JamesANZ/us-legal-mcp](https://github.com/JamesANZ/us-legal-mcp) | MIT (1.071 B) | EE. UU. · North America | Servidor MCP sobre legislación federal estadounidense. Pequeño, pero licencia limpia y mantenido. | 39 | 2026-10-15 |
+| doc-haus | [sure-scale/doc-haus](https://github.com/sure-scale/doc-haus) | **GPL-3.0** ⚠️ (35.149 B) · rama **`dochaus`** | Global | "The open-source legal AI agent": los documentos **no salen del disco** y los redlines llegan a Word como **tracked changes**. Fork de OpenCode. ⚠️ GPL-3.0: copyleft fuerte: contamina el derivado distribuido. Para despliegue interno de cliente es viable; para producto cerrado no. | 83 | 2026-11-14 |
+| bettercallclaude | [fedec65/bettercallclaude](https://github.com/fedec65/bettercallclaude) | **AGPL-3.0** ⚠️ | **Suiza** · EMEA | Plugin de Claude Cowork Desktop para la práctica jurídica suiza. Par natural de `opencaselaw` (flujos + corpus). ⚠️ AGPL-3.0. | 47 | 2026-09-20 |
+| awesome-legal-skills | [lawve-ai/awesome-legal-skills](https://github.com/lawve-ai/awesome-legal-skills) | 🔴 **CC-BY-NC-ND 4.0** (19.122 B) | Global | Lista curada de Agent Skills para automatizar trabajo legal. 966★, el índice de skills legales más grande. 🔴 **NO USABLE POR GLOBANT TAL CUAL: NonCommercial + NoDerivatives.** Ver el aviso de licencia abajo: es el peor régimen de los que aparecen en esta KB y el que menos lo parece. | **966** | 2026-10-19 |
 
-**18 agentes reales, los 18 verificados hoy por API + lectura de licencia. 0 filas de ejemplo, 0 placeholders.**
+**33 agentes reales, los 33 verificados hoy por API de búsqueda + lectura byte a byte de LICENSE. 0 filas de ejemplo, 0 placeholders.** (18 heredadas y revalidadas, 15 nuevas en este pase.)
+
 
 ## ⚠️ Dos renombrados detectados hoy (y cómo se detectan)
 
@@ -106,6 +145,52 @@ enlace a `github.com`, así que **no se pudo determinar el slug canónico actual
 licencia verificada y con la advertencia: **el owner puede haber cambiado.** No se declara
 muerto —`raw` lo sirve— ni vivo-en-este-slug, porque ninguna de las dos cosas está probada.
 
+## 🆕 Dos modos de fallo de licencia nuevos — detectados hoy, ninguno visible en la API
+
+Esta KB ya documentaba el *grant partido código/corpus*. El pase de hoy encontró dos más, y los
+dos **se leen como permisivos en el canal rápido**:
+
+### 1. El *copyleft que no lo parece*: CC-BY-NC-ND sobre contenido
+
+`lawve-ai/awesome-legal-skills` (**966★**, el índice de skills legales más grande que existe) sale
+como **`NOASSERTION`** en la API de GitHub. El fichero dice:
+`Attribution-NonCommercial-NoDerivatives 4.0 International` (19.122 B).
+
+| Cláusula | Consecuencia para Globant |
+|----------|---------------------------|
+| **NonCommercial** | Un engagement de cliente **es** uso comercial. Bloqueado. |
+| **NoDerivatives** | Adaptar una skill a la jurisdicción del cliente **es** una obra derivada. Bloqueado. |
+
+⚠️ **Es el régimen más restrictivo de toda esta KB, y el que menos lo parece**: un repo llamado
+`awesome-*` con 966★ se asume MIT por reflejo. **Usar como mapa de lectura, nunca como insumo.**
+El sustituto directo existe y es Apache-2.0: **`ThomasMoreAI/legal-skills-open`**.
+
+### 2. El *relicenciamiento con frontera temporal* (el más peligroso de los dos)
+
+`aa0101181514/tw-legal-rag` (350★) también aparece como `NOASSERTION`. Su LICENSE (4.044 B)
+**empieza con la palabra «MIT» en los primeros 400 bytes**, así que una comprobación por `grep`
+lo clasifica mal. El texto real:
+
+> Elastic License 2.0 (ELv2) — Licensor: Dr.Legal
+> *Note: versions up to and including **v1.2.2** were released under the MIT License, which
+> continues to apply to those versions.*
+
+**O sea: el mismo repo es MIT en v1.2.2 y ELv2 en v2.0.0+.** ELv2 prohíbe ofrecer el software
+como servicio gestionado a terceros — exactamente el modelo de un entregable SaaS de Globant — y
+prohíbe tocar la funcionalidad de clave de licencia.
+
+> 🔧 **Regla operativa que esta KB adopta desde hoy:** la licencia se verifica **en el tag que se
+> va a usar**, no en `HEAD`. Un repo cuyas estrellas se ganaron bajo MIT puede estar propietario
+> hoy, y `HEAD` es lo único que miran los dos canales de verificación.
+>
+> ```bash
+> # la licencia de HEAD NO es la licencia de la versión que vas a fijar
+> curl -s https://raw.githubusercontent.com/<owner>/<repo>/v1.2.2/LICENSE | head -3
+> ```
+>
+> Para esta jurisdicción, la alternativa sin frontera temporal es
+> **`lawchat-oss/mcp-taiwan-legal-db`** (MIT, 1.092 B, 234★).
+
 ## Agentes por función
 
 ### Flujos legales completos como plugins (la categoría que faltaba)
@@ -141,32 +226,67 @@ de ser un extra:
   + verificación multi-paso. Converge con el Art. 50 del EU AI Act.
 
 ### Jurisdicciones específicas
-- **EMEA**: claude-fuer-deutsches-recht (DE), claude-para-abogados (ES), mcp-legal-it (IT),
-  Blackstone (UK, dormido).
-- **APAC**: korean-law-mcp (KR, el más grande de la categoría), LawGlance (IN), DISC-LawLLM /
-  lawyer-llama / fuzi.mingcha (CN, los tres dormidos).
-- **LATAM**: ninguno. Ver abajo.
 
-## 🔴 Hueco LATAM — buscado explícitamente hoy, resultado honesto
+**El patrón de producto del año ya es un clúster medible, no una tendencia.** Hoy la KB cuenta
+**13 activos por jurisdicción** frente a 6 en el pase anterior, y la forma dominante es la misma:
+**un servidor MCP sobre las fuentes oficiales del país**.
 
-Se buscó con **vocabulario es/pt**, no sólo en inglés: `juridico IA agente contratos`,
-`direito juridico IA LGPD brasil`, `derecho legal IA abogados español`,
-`jurisprudencia IA busqueda legal`.
+- **North America**: us-legal-mcp (US, MIT), CourtListener (US, AGPL-3.0), FreeEed (e-discovery).
+- **EMEA**: ayunis-legal-mcp (DE, MIT) + claude-fuer-deutsches-recht (DE, flujos),
+  **opencaselaw (CH, MIT+CC0 — el más completo del clúster)** + bettercallclaude (CH, AGPL-3.0),
+  mcp-legal-it + italia-mcp-servers (IT, MIT), claude-para-abogados (ES), oldp (DE, corpus),
+  Blackstone (UK, dormido 28 meses).
+- **APAC**: korean-law-mcp (KR, 42 APIs oficiales), **tw-legal-rag (TW, 22,8 M sentencias —
+  ⚠️ ELv2 en v2+)** y mcp-taiwan-legal-db (TW, MIT, la alternativa limpia), devnors-data-mcp +
+  legal-research-skill + contract-review (CN, MIT), LawGlance (IN), DISC-LawLLM / lawyer-llama /
+  fuzi.mingcha (CN, los tres dormidos).
+- **LATAM**: **flujos sí, fuentes no.** `legal-skills-open` aporta plugins para `br/` (15), `ar/`
+  (2), `mx/` (2), `co/` (1), `pe/` (1) y `do/` (1) bajo Apache-2.0. **Servidores MCP de fuentes
+  oficiales LATAM: cero.** Ver abajo — el hueco cambió de forma, no desapareció.
 
-**Resultado: no existe ningún agente legal open source de origen LATAM con señal.** Lo encontrado:
-`turborocket-dev/Agente-Assistente-Juridico-De-Contratos` (0★), `jhondados/chatbot-juridico` (0★),
-`manfredjr/legal-br` (MIT, 0★), `desdobroprod-eng/nexus-juris-agente-juridico` (3★),
-`jontimoteo-programmer/agente-de-ia-...-contratos-de-tecnologia` (0★). Ninguno pasa el umbral.
+## 🟡 Hueco LATAM — **PARCIALMENTE REFUTADO HOY** (era 🔴 hace unas horas)
 
-⚠️ **Y una trampa que esta KB podría haber caído:** `claude-para-abogados` está en castellano, pero
-es **derecho de España** — región EMEA. Contarlo como activo LATAM sería un error de etiquetado
-con consecuencias: su contenido mercantil, laboral y procesal es español y europeo, no brasileño
-ni mexicano.
+> ⚠️ **Corrección a lo que este mismo fichero afirmaba en el pase anterior de hoy.** Decía, en
+> negrita: *«No existe ninguno para Brasil ni México»*, hablando de adaptaciones por jurisdicción.
+> **Es falso, y la causa del error es metodológica:** se buscaron *repos* de origen LATAM y no se
+> buscó **cobertura LATAM dentro de repos globales**. El activo existía, con 141★ y Apache-2.0.
 
-**Lo que esto sí es: una oportunidad acotada y con plantilla probada.** Existen adaptaciones por
-jurisdicción de `claude-for-legal` para Alemania y España, y servidores MCP por jurisdicción para
-Corea, Italia, Singapur y EE. UU. **No existe ninguno para Brasil ni México.** Ver
-`intel/market.md` → *Opportunities by region* → LATAM.
+**`ThomasMoreAI/legal-skills-open` cubre LATAM, y no de forma simbólica.** Recuento leído del
+README (no inferido):
+
+| Jurisdicción | Plugins | | Jurisdicción | Plugins |
+|---|---:|---|---|---:|
+| 🇧🇷 `br/` Brasil | **15** | | 🇨🇴 `co/` Colombia | 1 |
+| 🇦🇷 `ar/` Argentina | 2 | | 🇵🇪 `pe/` Perú | 1 |
+| 🇲🇽 `mx/` México | 2 | | 🇩🇴 `do/` Rep. Dominicana | 1 |
+
+**Brasil con 15 plugins es la 9.ª jurisdicción del repo**, por delante de Francia (14), Reino
+Unido (14), Italia (10) y España (9). El supuesto de esta KB de que LATAM está vacío en derecho
+open source **no se sostiene para Brasil**.
+
+**Lo que sigue siendo cierto, y ahora está cuantificado.** La asimetría, no la ausencia:
+
+- **Alemania 44 y EE. UU. 44 plugins** frente a **Colombia 1, Perú 1, Rep. Dominicana 1**.
+  Brasil (15) tiene un tercio de la cobertura de EE. UU.; el resto de LATAM está entre el 2% y
+  el 5%.
+- **No existe ningún servidor MCP de fuentes legales oficiales para ninguna jurisdicción LATAM.**
+  Esto sí se verificó por los dos canales y **sigue vacío**. Hoy hay MCP de fuentes oficiales para
+  EE. UU., Alemania, Suiza, Italia, Taiwán (×2) y Corea. Para Brasil, México, Argentina, Chile,
+  Colombia y Perú: **nada**. Es el hueco real, y es de *fuentes*, no de *flujos*.
+- Sigue sin aparecer ningún agente legal open source **de origen** LATAM con señal. Re-verificado:
+  `turborocket-dev/Agente-Assistente-Juridico-De-Contratos` (0★), `jhondados/chatbot-juridico`
+  (0★), `manfredjr/legal-br` (MIT, 0★), `desdobroprod-eng/nexus-juris-agente-juridico` (3★).
+
+⚠️ **La trampa de etiquetado se mantiene vigente:** `claude-para-abogados` está en castellano pero
+es **derecho de España** → EMEA. Y en `legal-skills-open`, `es/` (9 plugins) es España, no LATAM;
+el código LATAM es `br/`, `mx/`, `ar/`, `co/`, `pe/`, `do/`.
+
+⇒ **Oportunidad reformulada, y es mejor que la anterior.** Ya no es «construir desde cero»: es
+**(a)** contribuir profundidad a `br/`, `mx/`, `ar/` sobre una estructura Apache-2.0 que ya existe
+y acepta contribuciones por jurisdicción, y **(b)** construir **el primer MCP de fuentes legales
+oficiales de LATAM** — DJe/Jusbrasil para Brasil, DOF/SCJN para México — copiando la arquitectura
+ya probada de `opencaselaw` (26 cantones, 3 idiomas) y `korean-law-mcp` (42 APIs oficiales). Ver
+`compose/patterns.md` → P7 y P12.
 
 ## Descartes documentados — revalidados este pase
 
@@ -192,5 +312,9 @@ Corea, Italia, Singapur y EE. UU. **No existe ninguno para Brasil ni México.** 
   todos verificados hoy**, ninguno con señal. Se conservan en el histórico de `trending`, no aquí.
 
 ---
-*Verificado 2026-11-20 por doble canal (API de búsqueda + lectura de LICENSE). 18 filas reales,
-0 placeholders. 2 renombrados corregidos, 1 repo muerto retirado, 4 dormancias declaradas.*
+*Verificado 2026-11-20 (pase 2 del día) por doble canal (API de búsqueda + lectura byte a byte de
+LICENSE). **33 filas reales, 0 placeholders** (18 heredadas y revalidadas + 15 nuevas). En este
+pase: 2 modos de fallo de licencia nuevos documentados (CC-BY-NC-ND y relicenciamiento ELv2 con
+frontera temporal), 1 hueco declarado parcialmente refutado con la causa del error a la vista, y el
+clúster de activos por jurisdicción pasa de 6 a 13. Pases anteriores: 2 renombrados corregidos,
+1 repo muerto retirado, 4 dormancias declaradas.*

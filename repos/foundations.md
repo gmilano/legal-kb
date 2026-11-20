@@ -45,6 +45,31 @@ updated: 2026-11-20
 | [openlegaldata/awesome-legal-data](https://github.com/openlegaldata/awesome-legal-data) | **master** | **NONE** ⚠️ | Índice de fuentes de datos legales abiertos, del mismo equipo que OLDP. Útil para localizar corpus por país. ⚠️ Sin fichero de licencia: usar como *mapa*, no redistribuir su contenido. | 330 | 2026-10-20 |
 | [freelawproject/courtlistener](https://github.com/freelawproject/courtlistener) | main | **AGPL-3.0** ⚠️ (35.140 B en `LICENSE.txt`) | "A fully-searchable and accessible archive of court data": opiniones, audios de alegatos, jueces, declaraciones financieras judiciales y expedientes federales (EE. UU.). Muy activo. | 1.076 | 2026-11-20 |
 | [LexPredict/lexpredict-lexnlp](https://github.com/LexPredict/lexpredict-lexnlp) | **master** | **AGPL-3.0** ⚠️ | LexNLP: extracción de hechos legales (fechas, montos, cláusulas, definiciones, jurisdicciones). Base de ContraxSuite. 🪦 **30 meses sin commits** — medido por primera vez aquí. | 798 | 2024-05-27 |
+| [jonashertner/opencaselaw](https://github.com/jonashertner/opencaselaw) | main | **MIT código (1.069 B) + CC0 datos** | 🆕 **Resuelve el problema que este fichero lleva declarando desde el primer pase: el corpus permisivo es más escaso que el código permisivo.** Corpus legal suizo: **1M+ sentencias de los 26 cantones (1875–hoy)**, 21k leyes, **grafo de citas de 10M de aristas**, en alemán, francés e italiano. Se consume por **MCP (42 herramientas), REST, CLI o descarga Parquet**. CC0 sobre los datos = dominio público: el texto entra en un entregable cerrado de cliente sin cadena de licencias. Incluye `ocl citations resolve`, que comprueba si una cita existe. | 80 | 2026-11-20 |
+| [DevnorsAI/devnors-data-python](https://github.com/DevnorsAI/devnors-data-python) | main | MIT (1.064 B) | 🆕 SDK Python sobre datos legales y corporativos chinos: sentencias (**裁判文书**), leyes y articulado (**法律法规/法条**), registro mercantil, cuentas anuales, datos fiscales y listas de morosos judiciales (**失信核查/被执行人**). Par del servidor MCP del mismo equipo. **El primer acceso programático a fuentes legales chinas en esta KB.** | 867 | 2026-09-15 |
+
+## 🆕 E-discovery — una capa que esta KB no tenía en ningún fichero
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [shmsoft/FreeEed](https://github.com/shmsoft/FreeEed) | main | Apache-2.0 (12.177 B) | **La única plataforma de e-discovery open source con mantenimiento real que se encontró.** Procesamiento de evidencia electrónica: ingesta de contenedores (PST, ZIP, imágenes forenses), deduplicación, extracción de metadatos, cultling y producción. **Creada en 2011 y con commits de hoy mismo (2026-11-20)** — 15 años de continuidad, algo que ningún otro activo de esta KB puede decir. | 155 | 2026-11-20 |
+
+> **Por qué importa el hueco que cierra.** E-discovery es donde el sector legal **ya** gasta en
+> volumen de datos, y es el flujo que mejor tolera automatización porque el output es un conjunto
+> de documentos responsivos, no un consejo jurídico: **el riesgo de alucinación no se traslada al
+> cliente final de la misma forma.** Hasta hoy esta KB no tenía una sola fila en esta capa.
+>
+> ⚠️ **Descartes medidos en la misma búsqueda** (para que nadie repita el barrido): la consulta
+> `ediscovery OR e-discovery` devuelve 56 repos y **casi todos son falsos positivos de
+> *service discovery*** (ECS, etcd, Prometheus). De los realmente legales:
+> `FreeDiscovery/FreeDiscovery` (79★) está **muerto desde 2022-06** y en `NOASSERTION`.
+
+## 🆕 Bibliotecas de skills legales por jurisdicción
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [ThomasMoreAI/legal-skills-open](https://github.com/ThomasMoreAI/legal-skills-open) | main | Apache-2.0 (11.314 B) | **18.000+ skills `SKILL.md`, 410+ plugins, 54 jurisdicciones, 48 áreas de práctica**, organizados por código de país. Apache-2.0 cubre **el contenido**, no sólo el código — poco común en corpus de conocimiento. Cubre LATAM (`br/` 15, `ar/` 2, `mx/` 2, `co/` 1, `pe/` 1, `do/` 1). Acepta contribuciones por jurisdicción. | 141 | 2026-10-12 |
+| [lawve-ai/awesome-legal-skills](https://github.com/lawve-ai/awesome-legal-skills) | main | 🔴 **CC-BY-NC-ND 4.0** (19.122 B) | El índice de skills legales más grande (966★) y **el peor régimen de licencia de esta KB**. NonCommercial bloquea el uso en engagement; NoDerivatives bloquea adaptarlo a la jurisdicción del cliente. 🔴 **Mapa de lectura, nunca insumo.** Ver `agents/top.md` → modos de fallo de licencia. | **966** | 2026-10-19 |
 
 ## Índices de investigación
 

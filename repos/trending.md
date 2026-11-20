@@ -9,7 +9,76 @@ updated: 2026-11-20
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
-## 🆕 2026-11-20 — corpus, firma y el canal que esta KB creía cerrado
+## 🆕 2026-11-20 (pase 2) — el corpus en dominio público existe, y la capa de e-discovery nunca se había mirado
+
+**Divergencia mantenida:** este fichero cubre **repos e infraestructura**; los agentes van en
+`agents/trending.md`.
+
+**Qué cambió respecto al pase de hace unas horas:** aquel pase escribió que *«el corpus permisivo
+es más escaso que el código permisivo»* y coronó `General-Legal/legal-templates` (CC0) como el
+único corpus incorporable a un entregable cerrado. **Hoy hay un segundo, y es jurisprudencia real,
+no plantillas.**
+
+### Repos de infraestructura con tracción (verificados 2026-11-20, pase 2)
+
+| Repo | Licencia (leída) | Capa | Señal | Stars |
+|------|------------------|------|-------|-------|
+| [DevnorsAI/devnors-data-python](https://github.com/DevnorsAI/devnors-data-python) | MIT (1.064 B) | Acceso a datos | SDK Python de sentencias, normativa, registro mercantil y listas de morosos judiciales de China. Creado jul-2026, 867★ en 4 meses. | 867 |
+| [shmsoft/FreeEed](https://github.com/shmsoft/FreeEed) | Apache-2.0 (12.177 B) | **E-discovery** | **Capa entera que esta KB no tenía.** Creado 2011-02-24, **commit de hoy**: 15 años de continuidad, el récord de esta KB con diferencia. | 155 |
+| [ThomasMoreAI/legal-skills-open](https://github.com/ThomasMoreAI/legal-skills-open) | Apache-2.0 (11.314 B) | Conocimiento | 18.000+ skills en 54 jurisdicciones, **Apache-2.0 sobre el contenido**. Cobertura LATAM real. | 141 |
+| [jonashertner/opencaselaw](https://github.com/jonashertner/opencaselaw) | **MIT (1.069 B) + CC0 datos** | **Corpus** | **El hallazgo del pase.** 1M+ sentencias suizas (1875–hoy, 26 cantones, 3 idiomas), 21k leyes, grafo de citas de 10M de aristas. MCP + REST + CLI + **Parquet**. Commit de hoy. | 80 |
+
+**4 filas, las 4 verificadas por API de búsqueda + lectura byte a byte del LICENSE. 0 placeholders.**
+
+### 🆕 Por qué `opencaselaw` cambia una conclusión publicada de este fichero
+
+Este fichero venía sosteniendo que **el grant partido código/corpus** es el modo de fallo propio
+del sector: código permisivo, corpus restringido. `opencaselaw` tiene el grant partido **a favor**:
+
+| Parte | Licencia | Consecuencia |
+|-------|----------|--------------|
+| Código (42 tools MCP, REST, CLI) | MIT (1.069 B) | Se integra en producto cerrado. |
+| **Datos (1M+ sentencias, 21k leyes, grafo de citas)** | **CC0** | **Dominio público: el texto entra en el entregable del cliente sin atribución ni cadena de licencias.** |
+
+⇒ **El grant partido no es intrínsecamente un problema: es un problema cuando se parte en la
+dirección contraria.** La lección operativa no es «desconfiar del grant partido», es
+**«leer las dos mitades»** — que es lo que esta KB ya hacía y ahora tiene un caso positivo que lo
+demuestra.
+
+Y aporta una primitiva que ningún otro repo de esta KB tiene como comando:
+
+```bash
+# devuelve, por cada referencia: si la sentencia existe y cuál es
+ocl citations resolve 'BGE 136 III 513' '4A_747/2012' 'BGE 999 III 1'
+```
+
+Con la regla de Indiana (Trial Rule 11, 1-ago-2026) y la sanción colombiana **AC739-2026**, esto
+deja de ser una utilidad de investigación y pasa a ser **un control con consecuencia disciplinaria
+detrás**. Ver `compose/patterns.md` → P10.
+
+### Observación metodológica de este pase
+
+El pase anterior corrigió la creencia heredada de que *«la API de GitHub está bloqueada»*. Este
+pase corrige algo más fino: **las consultas estaban formuladas por nombre de agente, no por capa
+de arquitectura.** Buscar `legal mcp server` y `ediscovery` devolvió 13 y 56 repos donde buscar
+`legal ai agent` devolvía 13 en total. **La cobertura de una KB está limitada por el vocabulario
+de sus consultas antes que por lo que existe en GitHub.**
+
+⚠️ Y un recordatorio del coste del ruido: de los 56 resultados de `ediscovery`, **la mayoría son
+falsos positivos de *service discovery*** (ECS, etcd, Prometheus). Una capa puede parecer vacía
+porque el término está ocupado por otra industria.
+
+### Huecos declarados
+
+- 🔴 **Corpus LATAM en licencia permisiva: sigue vacío.** `opencaselaw` (CH) y `oldp` (DE) cubren
+  EMEA; `CourtListener` (US) es AGPL-3.0. **No hay equivalente para ningún país LATAM.**
+- 🟢 **Cerrado este pase:** e-discovery (`FreeEed`). Se deja constancia de que el hueco existió
+  **sin declararse** durante todos los pases anteriores, porque la capa no se buscó.
+- 🔴 **Practice management permisivo:** sigue abierto (ver `verticals/solutions.md`).
+
+🗄️ *Nota de histórico: la sección de abajo es el primer pase del 2026-11-20, conservado íntegro.*
+
+## 2026-11-20 (pase 1) — corpus, firma y el canal que esta KB creía cerrado
 
 **Divergencia mantenida:** este fichero cubre **repos e infraestructura**; los agentes van en
 `agents/trending.md`. Este pase añade dos capas que la KB no tenía: **corpus de plantillas con

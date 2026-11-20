@@ -28,10 +28,15 @@ updated: 2026-11-20
 | CourtListener | **AGPL-3.0** ⚠️ | [freelawproject/courtlistener](https://github.com/freelawproject/courtlistener) | Django | **Archivo de datos judiciales buscable** (opiniones, alegatos, jueces, expedientes federales EE. UU.). Excelente backend de investigación; licencia bloqueante para SaaS cerrado. CaseCite lo usa como fuente externa. | 1.076 |
 | mike | **AGPL-3.0** ⚠️ | [open-legal-products/mike](https://github.com/open-legal-products/mike) | Self-hosted + app alojada | "OSS Legal AI Platform" estilo Harvey. **4.504★ y commit de ayer: es la plataforma legal AI open source más grande que existe.** Referencia arquitectónica y *benchmark competitivo*; AGPL inviable para producto cerrado. | **4.504** |
 | LawLink | MIT (1.072 B) | [lawflow-boop/LawLink](https://github.com/lawflow-boop/LawLink) | Node.js 22 + PostgreSQL 16 | **Gestión de casos y despacho** self-hosted para abogados solos y despachos pequeños. ⚠️ **Verificar procedencia antes de adoptar** — ver aviso abajo. | 110 |
+| 🆕 **FreeEed** | Apache-2.0 (12.177 B) | [shmsoft/FreeEed](https://github.com/shmsoft/FreeEed) | Java/JVM, procesamiento distribuido | **E-discovery — la capa que esta KB no cubría en ningún fichero.** Ingesta de contenedores de evidencia (PST, ZIP, imágenes forenses), deduplicación, extracción de metadatos, culling y producción. **Activa desde 2011 con commits de hoy**: la única opción open source de la capa con continuidad demostrada. | 155 |
+| 🆕 **opencaselaw** | **MIT código + CC0 datos** | [jonashertner/opencaselaw](https://github.com/jonashertner/opencaselaw) | MCP + REST + CLI + Parquet | **Portal de jurisprudencia nacional listo para agentes, y el único con datos en dominio público.** 1M+ sentencias suizas de 26 cantones (1875–hoy), 21k leyes, grafo de citas de 10M de aristas, trilingüe. **Es la plantilla de referencia** si el engagement pide montar el equivalente para otro país. | 80 |
+| 🆕 **Vaquill MS Word add-in** | Apache-2.0 (11.340 B) | [Vaquill-AI/ms-word-addin](https://github.com/Vaquill-AI/ms-word-addin) | Office.js task pane | **Revisión de contratos dentro de Word, con licencia permisiva.** Playbooks, redacción e investigación legal en el task pane. Cierra con Apache-2.0 el canal que esta KB declara decisivo para la adopción: el abogado no cambia de herramienta. | 81 |
+| 🆕 doc-haus | **GPL-3.0** ⚠️ (35.149 B) | [sure-scale/doc-haus](https://github.com/sure-scale/doc-haus) | Fork de OpenCode (rama **`dochaus`**) | **Redline local con tracked changes reales en Word**, sin que el documento salga del disco. Fork de OpenCode. ⚠️ GPL-3.0: viable para despliegue interno en el cliente, bloqueante para producto cerrado redistribuido. | 83 |
+| 🆕 mcp-taiwan-legal-db | MIT (1.092 B) | [lawchat-oss/mcp-taiwan-legal-db](https://github.com/lawchat-oss/mcp-taiwan-legal-db) | Servidor MCP | **Fuentes oficiales de una jurisdicción como backend de agente.** Sentencias del Yuan Judicial + base nacional de normativa de Taiwán. La opción **permisiva** frente a `tw-legal-rag` (ELv2 en v2+) para la misma jurisdicción. | 234 |
 
 **9 plataformas reales, las 9 verificadas hoy, las 9 licencias comprobadas.**
 
-### ⚠️ Aviso AGPL-3.0 — afecta a tres de las nueve
+### ⚠️ Aviso AGPL-3.0 — afecta a tres de las catorce
 `OpenSign`, `CourtListener` y `mike` son AGPL-3.0 (leído del fichero). Si el cliente **expone el
 servicio por red**, debe ofrecer el código fuente del derivado. Para OpenSign esto es
 especialmente relevante porque la firma suele integrarse *dentro* del producto del cliente: ahí la
@@ -78,6 +83,12 @@ Se volvió a buscar hoy: `legal practice management self-hosted matters invoicin
 despachos legales» con licencia permisiva y gobernanza clara.** Dado que Clio publica adopción de
 AI del 75–86% en despachos pequeños y medianos, **el segmento existe y no tiene base abierta.**
 Es la oportunidad de producto más clara de esta KB (ver `intel/market.md`).
+
+## 🟢 Hueco cerrado este pase: e-discovery
+
+Los pases anteriores no declararon este hueco porque **no se había mirado la capa**. Queda
+cerrado con `FreeEed` (Apache-2.0, activo). Se deja constancia de que el hueco existió sin
+declararse: *una capa que nadie buscó se parece mucho a una capa que no hace falta.*
 
 ## 🔴 Segundo hueco: firma electrónica permisiva
 Lo único relevante que apareció es OpenSign, y es AGPL. **No se encontró ninguna plataforma de

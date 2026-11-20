@@ -201,6 +201,13 @@ medir internamente, **no** para incluir en un entregable.
 ---
 
 ## 🆕 P7 — Adaptación por jurisdicción: la plaza vacía de LATAM
+
+> ⚠️ **CORRECCIÓN (pase 2 del 2026-11-20).** La premisa de «plaza vacía» era **parcialmente
+> falsa**: `ThomasMoreAI/legal-skills-open` (Apache-2.0) ya tiene **Brasil 15 plugins**, Argentina
+> 2, México 2, Colombia 1, Perú 1, Rep. Dominicana 1. **Este patrón sigue siendo válido pero ya no
+> parte de cero: parte de contribuir profundidad a una estructura existente.** Y el hueco que
+> **sí** está vacío se trabaja en **P12** (ningún MCP de fuentes legales oficiales LATAM).
+
 **Región:** LATAM · **Esfuerzo:** 3–5 semanas (plugins) + 4–8 semanas (MCP de fuentes oficiales)
 
 **Esta es la receta más acotada de esta KB, porque no inventa el patrón: lo copia.** Existe una
@@ -325,6 +332,167 @@ LICENSE correcto envuelto en un bloque de código Markdown hace que el detector 
 **no** responde la pregunta de los pesos del modelo.
 
 ---
+
+## 🆕 P10 — Verificación de cita ejecutable (la obligación que converge en las tres regiones)
+
+**Para quién:** despacho o legal dept. en EE. UU. (Indiana Trial Rule 11, 1-ago-2026), UE
+(Art. 50) o LATAM (Colombia AC739-2026: 15 salarios mínimos de multa). **El comprador es el
+abogado que firma.**
+
+**Piezas (todas verificadas, todas permisivas):**
+
+| Capa | Repo | Licencia |
+|---|---|---|
+| Fuente + resolución de citas | [jonashertner/opencaselaw](https://github.com/jonashertner/opencaselaw) | MIT + **CC0** datos |
+| Fuente alternativa por jurisdicción | [chrisryugj/korean-law-mcp](https://github.com/chrisryugj/korean-law-mcp) · [lawchat-oss/mcp-taiwan-legal-db](https://github.com/lawchat-oss/mcp-taiwan-legal-db) · [JamesANZ/us-legal-mcp](https://github.com/JamesANZ/us-legal-mcp) · [ayunis-core/ayunis-legal-mcp](https://github.com/ayunis-core/ayunis-legal-mcp) | MIT |
+| Afirmación ↔ pasaje | [thomasunise/casecite](https://github.com/thomasunise/casecite) | Apache-2.0 |
+| Extracción con trazabilidad | [shcherbak-ai/contextgem](https://github.com/shcherbak-ai/contextgem) | Apache-2.0 |
+| Redacción de PII antes del LLM | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT |
+
+**Cableado — el paso 3 es el que no existía antes de este pase:**
+
+1. **Extraer** del borrador toda cadena con forma de cita (regex por jurisdicción: `BGE \d+ \w+ \d+`,
+   `\d+ U.S. \d+`, número de radicado, etc.).
+2. **Redactar PII** con Presidio antes de que el borrador toque cualquier modelo externo.
+3. **Resolver cada cita contra la fuente oficial** — ejecutable, no prometido:
+   ```bash
+   # por cada referencia: si la sentencia existe y cuál es
+   ocl citations resolve 'BGE 136 III 513' '4A_747/2012' 'BGE 999 III 1'
+   ```
+   Las que no resuelven son **citas inexistentes**: ese es el hallazgo que evita la sanción.
+4. **Para las que sí resuelven**, contrastar con CaseCite que **la proposición del borrador
+   coincide con el pasaje citado** — una cita real que no dice lo que se le atribuye falla la
+   misma regla procesal.
+5. **Emitir un log firmable** por cita: `{cita, resuelta: sí/no, id_fuente, pasaje, hash, timestamp}`.
+
+> ⚠️ **Límite que hay que decirle al cliente, y decirlo es parte del producto.** El propio
+> `opencaselaw` lo documenta: **una comprobación de cita establece que la sentencia existe, no que
+> sea autoridad aplicable al caso.** El paso 4 cubre la correspondencia textual; **la pertinencia
+> jurídica sigue siendo del abogado.** Vender esto como «AI que valida tu argumentación» es
+> exactamente la sobrepromesa que produce la sanción que el producto dice evitar.
+
+**Por qué gana:** es el único requisito que comparten las tres rutas regulatorias (regla procesal
+en EE. UU., reglamento en la UE, jurisprudencia en LATAM). Se vende al **riesgo de sanción
+nominado**, no al ahorro de horas.
+
+## 🆕 P11 — E-discovery como punto de entrada (el flujo donde la alucinación no llega al cliente)
+
+**Para quién:** litigation support, investigaciones internas, respuesta a requerimientos.
+**Por qué primero:** el entregable es *un conjunto de documentos responsivos*. Un fallo es **recall
+medible y corregible**, no una afirmación falsa firmada. Es el engagement legal más fácil de
+defender ante un socio escéptico.
+
+| Paso | Repo | Licencia |
+|---|---|---|
+| Ingesta forense (PST, ZIP, imágenes), dedup, metadatos, culling, producción | [shmsoft/FreeEed](https://github.com/shmsoft/FreeEed) | Apache-2.0 |
+| Parsing estructural de lo que FreeEed extrae | [docling-project/docling](https://github.com/docling-project/docling) | MIT |
+| Barrido de PII antes de cualquier modelo externo | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT |
+| Custodia de PII identificada | [securitybunker/databunker](https://github.com/securitybunker/databunker) | MIT |
+| Clasificación responsivo/privilegiado con trazabilidad al párrafo | [shcherbak-ai/contextgem](https://github.com/shcherbak-ai/contextgem) | Apache-2.0 |
+
+**Cableado:** FreeEed hace la ingesta y el culling determinista (dedup por hash, filtros de fecha y
+custodio) → Docling normaliza a estructura con número de página → Presidio marca PII y Databunker
+la custodia tokenizada → **ContextGem clasifica con el párrafo de soporte atado a cada decisión** →
+revisión humana sólo sobre el subconjunto dudoso.
+
+**La métrica que hace vendible el piloto:** el culling determinista de FreeEed se mide contra el
+corpus completo (**% de volumen eliminado sin revisión humana**) y es verificable sin discutir sobre
+la calidad del modelo. **Todo el pipeline es MIT/Apache-2.0: entregable cerrado sin cadena de
+licencias.**
+
+## 🆕 P12 — El primer MCP de fuentes legales oficiales de LATAM (el hueco real, con plantilla probada)
+
+**El hueco, verificado por doble canal:** existen MCP de fuentes oficiales para EE. UU., Alemania,
+Suiza, Italia, Taiwán (×2), Corea y China. **Para Brasil, México, Argentina, Chile, Colombia y
+Perú: ninguno.** Y lo que **sí** existe para LATAM son *flujos*:
+`ThomasMoreAI/legal-skills-open` (Apache-2.0) con `br/` 15 plugins, `ar/` 2, `mx/` 2, `co/` 1,
+`pe/` 1, `do/` 1. **Hay con qué razonar y no hay contra qué verificar.**
+
+**Plantilla a copiar, dos implementaciones de referencia:**
+
+| Referencia | Qué demuestra |
+|---|---|
+| [`opencaselaw`](https://github.com/jonashertner/opencaselaw) (MIT+CC0) | 26 jurisdicciones subnacionales, **3 idiomas**, grafo de citas, MCP + REST + CLI + Parquet. **El caso análogo a un país federal multilingüe.** |
+| [`chrisryugj/korean-law-mcp`](https://github.com/chrisryugj/korean-law-mcp) (MIT) | **42 APIs oficiales** envueltas en 10 tools, con contraste de la cita del LLM contra el texto original. |
+
+**Cableado para Brasil (el de mayor cobertura de flujos, 15 plugins ya escritos):**
+
+1. **Fuentes:** DJe / diarios de justicia de los tribunales, LexML Brasil, Planalto para legislación
+   federal. Un conector por fuente, igual que las 42 APIs de `korean-law-mcp`.
+2. **Herramientas MCP mínimas**, copiando la superficie de `opencaselaw`: `buscar_jurisprudencia`,
+   `obtener_sentencia`, `resolver_cita`, `buscar_legislacao`, `obter_artigo`.
+3. **`resolver_cita` es la pieza no negociable** — es lo que convierte el servidor en defensa
+   frente a **AC739-2026** y a la LGPD. Sin ella es un buscador más.
+4. **Plug de los flujos que ya existen:** los 15 plugins de `legal-skills-open/br/` consumen el
+   servidor como fuente. Apache-2.0 en ambos lados, sin fricción de licencia.
+5. **Contribuir de vuelta** la profundidad de `br/`, `mx/`, `ar/`: el repo acepta contribuciones por
+   jurisdicción, y Colombia/Perú/Rep. Dominicana están a **1 plugin** frente a los 44 de EE. UU. y
+   Alemania.
+
+⚠️ **Antes de prometerlo:** la disponibilidad y los términos de uso de cada fuente oficial LATAM
+**no se verificaron en este pase** — sólo se verificó que **no existe el servidor**. El primer
+sprint es un **inventario de accesibilidad y licencia por fuente**, no código.
+
+## 🆕 P13 — Gate de licencia por *tag* (amplía P9, y P9 por sí solo ya no basta)
+
+**Qué cambió:** P9 verifica la licencia de `HEAD`. **Insuficiente** — `tw-legal-rag` es MIT hasta
+v1.2.2 y **Elastic License 2.0** desde v2.0.0. Un `pip install` sin pin trae la versión propietaria.
+
+```bash
+#!/usr/bin/env bash
+# Verifica la licencia EN EL TAG QUE SE VA A FIJAR, no en HEAD.
+# Uso: ./lic-gate.sh owner/repo v1.2.2
+repo="$1"; ref="${2:-HEAD}"
+for f in LICENSE LICENSE.md LICENSE.txt LICENCE COPYING LICENSE-CODE; do
+  url="https://raw.githubusercontent.com/$repo/$ref/$f"
+  code=$(curl -sL -o /tmp/lic -w '%{http_code}' "$url")
+  [ "$code" = 200 ] || continue
+  echo "== $repo@$ref  $f  $(wc -c </tmp/lic) B"
+  # NO fiarse de los primeros bytes: ELv2 empieza mencionando MIT.
+  grep -oiE 'Elastic License|Business Source|NonCommercial|NoDerivatives|GNU AFFERO|GNU GENERAL PUBLIC|Apache License|MIT License|CC0' /tmp/lic | sort -u
+  grep -niE 'versions? (up to|prior)|continues? to apply|relicens' /tmp/lic | head -3
+  exit 0
+done
+echo "== $repo@$ref  SIN FICHERO DE LICENCIA"
+```
+
+**Tres reglas que salen de los hallazgos de hoy, no de teoría:**
+
+1. **No clasificar por los primeros bytes.** El LICENSE de `tw-legal-rag` **empieza mencionando
+   MIT** y es ELv2. Un `head -1` lo aprueba.
+2. **Buscar la cláusula de frontera temporal** (`versions up to…`, `continues to apply`): es la que
+   dice que la licencia vieja sobrevive en tags viejos — y es la que permite fijar v1.2.2 y seguir
+   en MIT **legítimamente**.
+3. **Comparar el tamaño con el canónico.** MIT ≈ 1.069 B, Apache-2.0 ≈ 11.3 KB, AGPL-3.0 ≈ 35 KB,
+   CC-BY-NC-ND ≈ 19 KB. **Un «MIT» de 4.044 B no es MIT**, y el tamaño lo delata antes que el texto.
+   Fue así como salieron los dos hallazgos de licencia de este pase.
+
+## 🆕 P14 — Revisión de contratos dentro de Word, permisiva de punta a punta
+
+**El problema de adopción, que esta KB ya tenía identificado:** el abogado no cambia de
+herramienta. El redline tiene que llegar a Word. Hasta hoy la opción con tracked changes reales
+era `doc-haus` (**GPL-3.0**) o `contract-review-agent` (procedencia sin confirmar) — **ninguna apta
+para producto cerrado.**
+
+| Capa | Repo | Licencia |
+|---|---|---|
+| UI dentro de Word (task pane, playbooks, redacción) | [Vaquill-AI/ms-word-addin](https://github.com/Vaquill-AI/ms-word-addin) | Apache-2.0 |
+| Extracción de cláusulas con trazabilidad al párrafo | [shcherbak-ai/contextgem](https://github.com/shcherbak-ai/contextgem) | Apache-2.0 |
+| Repositorio contractual y analítica de cláusulas | [Open-Source-Legal/OpenContracts](https://github.com/Open-Source-Legal/OpenContracts) | MIT |
+| PII fuera antes del modelo | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT |
+| Firma al cierre | [OpenSignLabs/OpenSign](https://github.com/OpenSignLabs/OpenSign) | ⚠️ AGPL-3.0 |
+
+**Cableado:** el add-in de Vaquill es la superficie (el abogado nunca sale de Word) → Presidio
+redacta antes de salir → ContextGem extrae cláusulas **con el párrafo de soporte** → OpenContracts
+guarda el contrato y la analítica de cláusulas para la revisión tabular de la cartera → OpenSign
+cierra la firma.
+
+⚠️ **El eslabón AGPL:** sólo OpenSign. Desplegado como **servicio separado** que se invoca por API
+(no enlazado al producto) el riesgo es acotado; **enlazado, contamina.** Alternativa: integrar el
+proveedor de firma que ya use el cliente y dejar OpenSign fuera del entregable.
+
+**Por qué importa:** es el **primer camino de punta a punta de esta KB en el que todo lo que se
+redistribuye es MIT/Apache-2.0** y el entregable aterriza donde el abogado ya trabaja.
 
 ## Nota sobre este fichero
 
