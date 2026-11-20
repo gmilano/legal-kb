@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 # 📈 Agentes trending — Legal Services
@@ -9,7 +9,75 @@ updated: 2026-11-04
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
-## 🆕 2026-11-04 — primer pase con verificación de licencia byte a byte
+## 🆕 2026-11-20 — el líder de la categoría estaba ausente, y dos slugs eran obsoletos
+
+**Qué cambió respecto al pase anterior:** el pase del 2026-11-04 verificó licencias byte a byte
+pero creyó que **la API de GitHub estaba bloqueada**. No lo está. Reprobada hoy, aportó lo que la
+lectura de `raw` no puede ver: `archived`, `pushed_at` y la **existencia canónica del slug**.
+Resultado: **1 agente líder que faltaba, 2 renombrados, 1 repo muerto y 4 dormancias**, todo
+invisible para el método anterior.
+
+### Agentes con señal real esta semana
+
+| Nombre | Repo | Licencia (leída) | Por qué importa | Stars | Último commit |
+|--------|------|------------------|-----------------|-------|---------------|
+| **Claude for Legal** | [anthropics/claude-for-legal](https://github.com/anthropics/claude-for-legal) | Apache-2.0 | 🥇 **EL HALLAZGO DEL PASE.** Suite de plugins para flujos legales (in-house, privacidad, corporativo, laboral, litigio, regulatorio, gobernanza AI, IP, clínicas). Permisiva, mantenida y con dos vías de despliegue: plugin de Claude Code/Cowork **o** Managed Agents API. **30× lavern, y esta KB no la tenía en ningún fichero.** | **10.054** | 2026-11-19 |
+| mike | [open-legal-products/mike](https://github.com/open-legal-products/mike) | ⚠️ AGPL-3.0 | De «—» a **4.504★**: la plataforma legal AI open source más grande que existe. Primera publicación 29-abr-2026 ⇒ **todo ese crecimiento es de siete meses.** Licencia bloqueante para SaaS cerrado: sirve de benchmark competitivo, no de base. | **4.504** | 2026-11-19 |
+| Korean Law MCP | [chrisryugj/korean-law-mcp](https://github.com/chrisryugj/korean-law-mcp) | MIT (1.062 B) | 🇰🇷 **El mayor MCP legal que existe** y el primer activo APAC de peso de esta KB. Las **42 APIs oficiales del 법제처** en 10 herramientas, y **contraste de las citas del LLM contra el texto original**. En npm y en el MCP Registry. | **2.904** | 2026-11-20 |
+| Claude für deutsches Recht | [Klotzkette/claude-fuer-deutsches-recht](https://github.com/Klotzkette/claude-fuer-deutsches-recht) | Apache-2.0 | 🇩🇪 **Primer activo EMEA de peso de esta KB**, que declaraba no haber encontrado ninguno. Plugins, skills y prompts para la práctica alemana, con **Testakten** (expedientes ficticios) para ensayar sin datos reales. README de 115.817 B. | **1.866** | 2026-11-20 |
+| CaseCite | [thomasunise/casecite](https://github.com/thomasunise/casecite) | Apache-2.0 | Legal RAG self-hosted **BYOK y sin telemetría**: cada afirmación contrastada contra su pasaje, deep research sobre corpus propio + CourtListener, pipeline de contratos con redline y **revisión tabular de cientos de contratos** con cada valor atado a su pasaje. Lo más cercano a lo que esta KB describe como producto ideal. | 286 | 2026-11-05 |
+| LawGlance | [lawglance/lawglance](https://github.com/lawglance/lawglance) | Apache-2.0 | 🇮🇳 Asistente legal RAG libre. Primer activo de India en esta KB. | 343 | 2026-09-21 |
+| Claude para Abogados | [betobetico/claude-para-abogados](https://github.com/betobetico/claude-para-abogados) | Apache-2.0 | 🇪🇸 Adaptación declarada de `claude-for-legal` al derecho **español y de la UE**: 20 módulos, 100 skills, 17 agentes. **Prueba de que la plantilla por jurisdicción se replica.** ⚠️ Es España (EMEA), **no LATAM**. | 49 | 2026-09-30 |
+| mcp-legal-it | [capazme/mcp-legal-it](https://github.com/capazme/mcp-legal-it) | Apache-2.0 | 🇮🇹 MCP + plugin para derecho italiano, 200+ herramientas con statutes verificados. Pequeño pero real. | 33 | 2026-11-18 |
+
+**8 agentes con señal. No se rellena la tabla hasta un número redondo.**
+
+### Correcciones registradas este pase
+
+1. ⚠️ **LA API DE GITHUB NO ESTÁ BLOQUEADA.** Esta KB lo afirmaba en tres ficheros. Reprobada hoy:
+   `gh api -X GET search/repositories -f q='repo:<owner>/<name>'` devuelve existencia, SPDX,
+   estrellas, `archived`, `pushed_at` y rama en **una sola llamada**. Lo que sí está bloqueado:
+   `gh api repos/<owner>/<name>` (fuera de scope) y `curl` sobre `github.com` (403 del proxy).
+   **Un canal declarado bloqueado por un pase anterior se vuelve a probar, nunca se hereda.**
+2. ⚠️ **DOS RENOMBRADOS.** `microsoft/presidio` → **`data-privacy-stack/presidio`** (11.989★;
+   probado con `LICENSE` idéntico de 1.084 B y MD5 `edb1b1745226` en ambos slugs) y
+   `JSv4/OpenContracts` → **`Open-Source-Legal/OpenContracts`** (1.550★, coincide con el «1.5k★»
+   que la KB atribuía al slug viejo). **Firma, idéntica en ambos:** `repo:` da **422** mientras
+   `raw` sobre el slug viejo da **200** (GitHub sirve por redirección). Con sólo `raw` el
+   renombrado es invisible; con sólo la API el repo parece borrado.
+   **Tasa medida: 2 renombrados + 1 muerto en 31 URL ≈ 1 incidencia por 10 repos.**
+3. ⚠️ **`TheAtticusProject/cuad` ESTÁ MUERTO**, no sólo sin licencia como se publicó. `repo:` da
+   422 y `raw` da 404 en `main`, `master` y `HEAD`. El descarte era correcto por la razón
+   equivocada.
+4. ⚠️ **CUATRO DORMANCIAS NO DECLARADAS**, medidas por primera vez porque `pushed_at` nunca se
+   había consultado: Blackstone **28 meses**, lawyer-llama **27**, DISC-LawLLM **18**,
+   fuzi.mingcha **16**. Los dos últimos eran, textualmente, «los dos activos de APAC» de esta KB.
+   Siguen sirviendo como modelos y corpus; **no son proyectos vivos.**
+5. ⚠️ **«Kourti Legal» NO EXISTE.** Una fuente lo describía como practice management legal **MIT y
+   self-hostable**, exactamente el hueco que esta KB declara. Buscado: `boyeesu/Kourti` (MIT, 1★),
+   `kourti2026/kourti` (0★) y cuatro cuentas homónimas sin relación. **Un candidato que cerraría
+   el hueco de la KB merece verificación nominal antes de celebrarlo.**
+6. ⚠️ **Estrellas medidas por primera vez** en filas que la KB publicaba con «—»:
+   claude-legal-skill **518**, DISC-LawLLM **961**, fuzi.mingcha **401**, mike **4.504**.
+
+### Hueco declarado — y uno cerrado
+
+- ✅ **CERRADO: «no hay agentes legales de origen EMEA ni APAC».** El pase anterior lo declaró.
+  **Era un artefacto de búsqueda:** las búsquedas se hicieron en inglés sobre blogs y listicles.
+  El canal `topic:legal-ai` / `topic:legal-tech` de GitHub devuelve de inmediato activos alemanes,
+  italianos, coreanos, vietnamitas, taiwaneses, indios y chinos. **Un hueco hallado en blogs no es
+  un hueco de mercado hasta buscarlo en el índice de la plataforma.**
+- 🔴 **ABIERTO Y CONFIRMADO: ningún agente legal open source de origen LATAM con señal.** Medido
+  hoy con vocabulario es/pt (`juridico IA agente contratos`, `direito juridico IA LGPD brasil`,
+  `derecho legal IA abogados español`, `jurisprudencia IA busqueda legal`): todo lo hallado está
+  entre 0 y 3★. ⚠️ Y el único activo en castellano con tracción, `claude-para-abogados`, es
+  **derecho de España**. Contarlo como LATAM sería un error de etiquetado con consecuencias.
+
+---
+
+## 🗄️ Histórico de pases anteriores
+
+## 2026-11-04 — primer pase con verificación de licencia byte a byte
 
 **Qué cambió respecto al histórico:** el pase anterior (2026-07-02) era salida de pipeline
 automático sin verificación. Este pase comprobó cada repo con `git ls-remote --symref` y **leyó
@@ -72,3 +140,6 @@ en las búsquedas de esta semana, salvo los dos LLM legales chinos ya recogidos 
 
 ---
 *Append-only. Último pase: 2026-11-04.*
+
+---
+*Append-only. Último pase: 2026-11-20.*

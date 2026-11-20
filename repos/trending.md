@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 # 📈 Repos trending — Legal Services
@@ -9,7 +9,91 @@ updated: 2026-11-04
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
-## 🆕 2026-11-04 — infraestructura, no agentes
+## 🆕 2026-11-20 — corpus, firma y el canal que esta KB creía cerrado
+
+**Divergencia mantenida:** este fichero cubre **repos e infraestructura**; los agentes van en
+`agents/trending.md`. Este pase añade dos capas que la KB no tenía: **corpus de plantillas con
+licencia redistribuible** y **firma electrónica**.
+
+### Repos de infraestructura con tracción (verificados 2026-11-20)
+
+| Repo | Licencia (leída) | Por qué importa ahora | Stars | Último commit |
+|------|------------------|----------------------|-------|---------------|
+| [docling-project/docling](https://github.com/docling-project/docling) | MIT | **70.821★** (+721 en 16 días). Sigue siendo la entrada por defecto del pipeline documental y el backend de lectura de ContextGem. | **70.821** | 2026-11-20 |
+| [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT (1.084 B) | **11.989★.** PII en texto, imágenes y datos estructurados; el componente que hace viables los despliegues EMEA (EU AI Act) y LATAM (LGPD). ⚠️ **RENOMBRADO** desde `microsoft/presidio` — la KB apuntaba al slug viejo. | **11.989** | 2026-11-19 |
+| [Unstructured-IO/unstructured](https://github.com/Unstructured-IO/unstructured) | Apache-2.0 | **15.770★ — primera medición**: la KB lo publicaba con «—», así que resulta ser **más grande que Presidio**, no un complemento menor de Docling. | **15.770** | 2026-11-19 |
+| [OpenSignLabs/OpenSign](https://github.com/OpenSignLabs/OpenSign) | ⚠️ **AGPL-3.0** (35.051 B) | 🆕 **Capa que esta KB nunca tuvo: la firma electrónica.** Alternativa open source a DocuSign. Ningún flujo legal termina sin firma. ⚠️ La API dice `NOASSERTION`; el fichero son 35.051 B con 16 menciones a Affero. Rama por defecto **`staging`**. | **7.315** | 2026-11-20 |
+| [apache/tika](https://github.com/apache/tika) | Apache-2.0 | **4.153★ — primera medición.** ~1.000 formatos; el que sigue ganando en e-discovery y formatos legacy. | 4.153 | 2026-11-20 |
+| [General-Legal/legal-templates](https://github.com/General-Legal/legal-templates) | CC0-1.0 (7.048 B) | 🆕 **El mayor corpus abierto de plantillas legales hallado.** CC0 = dominio público sin atribución obligatoria: **el único régimen que permite incorporar el texto en un entregable cerrado de cliente** sin arrastrar cadena de licencias. | **3.753** | 2026-09-22 |
+| [securitybunker/databunker](https://github.com/securitybunker/databunker) | MIT (1.078 B) | 🆕 Vault de PII con API para GDPR/CCPA: cifra y custodia los datos personales fuera de la base de la aplicación y devuelve tokens. **Complementa a Presidio** — Presidio *detecta y redacta*, Databunker *custodia*. Rama **`master`**. | 1.498 | 2026-11-20 |
+| [jhpyle/docassemble](https://github.com/jhpyle/docassemble) | MIT | **1.015★.** Entrevistas guiadas + document assembly. El documento sale de **plantilla determinista, no de generación** → el patrón más defendible que existe ante un regulador. Rama **`master`**. | 1.015 | 2026-11-13 |
+| [freelawproject/courtlistener](https://github.com/freelawproject/courtlistener) | ⚠️ **AGPL-3.0** (35.140 B, **`LICENSE.txt`**) | Archivo judicial EE. UU., muy activo. CaseCite lo usa como fuente externa de research. Gran corpus, licencia de red. | 1.076 | 2026-11-20 |
+| [accordproject/template-archive](https://github.com/accordproject/template-archive) | Apache-2.0 (11.356 B) | 🆕 Plantillas del **Accord Project** (Linux Foundation): contratos como plantillas con lógica ejecutable. **Gobernanza de fundación, no de autor individual** — poco común en este sector y relevante para riesgo de proveedor. | 381 | 2026-10-20 |
+| [openlegaldata/awesome-legal-data](https://github.com/openlegaldata/awesome-legal-data) | **NONE** ⚠️ | 🆕 Índice de fuentes de datos legales abiertos, del equipo de OLDP. Útil para localizar corpus por país. Sin licencia: usar como mapa, no redistribuir. Rama **`master`**. | 330 | 2026-10-20 |
+| [Vaquill-AI/awesome-legaltech](https://github.com/Vaquill-AI/awesome-legaltech) | **NONE** ⚠️ | 🆕 **8× el índice que esta KB venía usando**, y además cubre servidores MCP. Mismo nombre de repo que `chen-friedman/awesome-legaltech` (34★), dueño distinto — **no es un renombrado, es que el pequeño estaba coronado.** | 273 | 2026-10-26 |
+| [openlegaldata/oldp](https://github.com/openlegaldata/oldp) | **MIT** | Sigue siendo **la única plataforma de corpus legal con licencia permisiva**. Django + Elasticsearch + API REST. | 164 | 2026-11-11 |
+| [LexPredict/lexpredict-lexnlp](https://github.com/LexPredict/lexpredict-lexnlp) | ⚠️ **AGPL-3.0** | 798★ — **primera medición**. 🪦 Y **30 meses sin commits**, también primera medición. La KB lo listaba como repo fundacional sin indicar ninguna de las dos cosas. Rama **`master`**. | 798 | 2024-05-27 |
+
+**14 repos, los 14 verificados hoy por API + lectura de licencia.**
+
+### Observación metodológica de este pase — rectificando la del pase anterior
+
+> El pase del 2026-11-04 escribió aquí: *«el payload AGPL es prácticamente constante porque no
+> interpola ningún nombre»*, apoyándose en **35.140 B** (courtlistener), **34.519 B** (lexnlp) y
+> **34.523 B** (mike). **Las tres cifras refutan la afirmación en el mismo renglón:** courtlistener
+> difiere de los otros dos en **617 B**. Leído hoy el fichero, el motivo es que **sí lleva texto
+> antepuesto**: `"This software and any associated files are Copyright 2010, Free Law Project."`
+> sobre el AGPL canónico de ~34.523 B. Y un segundo error de método en la misma frase: la KB
+> declaraba leer `.../<rama>/LICENSE`, pero **courtlistener no tiene `LICENSE`** — tiene
+> **`LICENSE.txt`**, y `LICENSE` devuelve 404. **El procedimiento publicado no reproducía el
+> resultado publicado.**
+
+**La regla correcta, y es útil:** las licencias tienen longitudes canónicas — MIT/Expat
+1.050–1.150, CC0 ~7.048, Apache-2.0 ~11.358, MPL-2.0 ~16.700, AGPL-3.0 ~34.523, GPL-3.0 ~35.149.
+Una fila cuyos bytes caen fuera de la banda de su familia **está mal clasificada o lleva texto
+añadido**, y la regla es **asimétrica**: bytes *por encima* ⇒ preámbulo o licencia compuesta (leer
+el fichero); bytes *muy por debajo* ⇒ **fichero puntero** (seguir el puntero, nunca concluir «sin
+licencia»). Aplicada hoy a 12 licencias leídas: **3 señaladas, 3 explicadas, 0 falsas alarmas.**
+
+### 🆕 Un modo de fallo nuevo, y es específico de esta industria
+
+**En legal, la licencia del repo frecuentemente NO cubre el texto legal que contiene.** Los dos
+casos los destapó la regla de bytes:
+
+- **`lexifina/global-law`** (2.143★, activo hoy) — `LICENSE.md` de **935 B**, muy por debajo de los
+  ~7.048 de CC0 ⇒ señalado como puntero. Es **CC0 1.0 en forma corta** y lleva una sección
+  *«What this does not cover»*: cubre el árbol de jurisdicciones, el manifiesto, las herramientas,
+  los tests y la documentación — **no la ley**, que vive en `lexifina/<country>-law` como
+  **submódulos git, cada uno con su propio LICENSE y SOURCES.md**. La API dice `NOASSERTION`.
+- **`mhfed/vn-law-check`** (508★) — `LICENSE` de **1.356 B**, ~200 por encima de la banda MIT ⇒
+  señalado. Es **MIT + nota añadida**: *«does not and cannot license the underlying Vietnamese
+  legal texts»*. (Su aviso de copyright nombra *"Contributors to vn-web-compliance-audit"*, **un
+  proyecto distinto del nombre del repo** — señal de derivación sin confirmar.)
+
+**Por qué importa para un entregable:** decir «el repo es MIT» **no responde la pregunta del
+cliente**, que es *¿puedo redistribuir el corpus?*. Son **dos licencias** y hay que verificar las
+dos. Es el análogo exacto de la pregunta de los *pesos del modelo* que la KB de gaming dejó
+abierta: en ambos casos **la mitad del entregable queda fuera de la licencia que se verificó.**
+
+### Huecos declarados
+
+- ✅ **CERRADO: «ningún repo de infraestructura legal de origen EMEA/APAC».** Artefacto de
+  búsqueda. El canal `topic:` devuelve activos alemanes, italianos, franceses (`betagouv/mon-entreprise`,
+  MIT, 337★, del gobierno francés), rumanos, coreanos, vietnamitas, taiwaneses e indios.
+- 🔴 **Ningún repo de infraestructura legal de origen LATAM.** Confirmado hoy con vocabulario es/pt.
+- 🔴 **No existe practice management open source permisivo con procedencia clara** — y este pase
+  **refutó el único candidato** («Kourti Legal» no existe). Ver `verticals/solutions.md`.
+- 🔴 **No existe firma electrónica open source permisiva.** OpenSign, la única relevante, es
+  AGPL-3.0. Para un entregable cerrado esta capa se compra, no se forkea.
+- 🔴 **En legal el corpus es más escaso que el código:** de los cinco repos de datos de
+  `repos/foundations.md`, **sólo dos permiten redistribuir** (OLDP MIT, legal-templates CC0); dos
+  son AGPL y uno no declara licencia. Al contrario que en la mayoría de industrias de esta rotación.
+
+---
+
+## 🗄️ Histórico de pases anteriores
+
+## 2026-11-04 — infraestructura, no agentes
 
 **Divergencia deliberada:** hasta este pase, este fichero era **byte a byte idéntico** a
 `agents/trending.md`. Desde hoy cubre la capa de infraestructura — parsing, PII, corpus — que es
@@ -70,3 +154,6 @@ un vistazo, pero **no** para identificar MIT — hay que leer el cuerpo.
 
 ---
 *Append-only. Último pase: 2026-11-04.*
+
+---
+*Append-only. Último pase: 2026-11-20.*

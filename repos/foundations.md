@@ -1,75 +1,148 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 # 🏗️ Repos fundacionales — Legal Services
 
 > Bases sobre las cuales construir. Licencia abierta, comunidad activa.
-> Última actualización: 2026-11-04
+> Última actualización: 2026-11-20
 >
-> Verificación: existencia por `git ls-remote --symref`, licencia leída desde el LICENSE real
-> en la rama por defecto. La columna de rama importa: tres de estos repos **no están en `main`**.
+> Verificación por doble canal: **API de búsqueda de GitHub** (existencia, SPDX, estrellas,
+> `archived`, `pushed_at`, rama) + **lectura byte a byte del LICENSE** en `raw` sobre `/HEAD/`.
+> La columna de rama importa: cuatro de estos repos **no están en `main`**.
 
 ## Ingesta y parsing documental (la capa que todo engagement legal necesita primero)
 
-| Repo | Rama | Licencia (leída) | Descripción | Stars | ¿Base para AI? |
-|------|------|------------------|-------------|-------|----------------|
-| [docling-project/docling](https://github.com/docling-project/docling) | main | MIT | "Get your documents ready for gen AI". Parsea PDF, DOCX, PPTX, XLSX, HTML, EPUB, ODT/ODS/ODP, email (EML/MSG), imágenes, LaTeX, audio y vídeo, preservando estructura y números de página. | 70.1k | ✅ entrada canónica del pipeline |
-| [Unstructured-IO/unstructured](https://github.com/Unstructured-IO/unstructured) | main | Apache-2.0 | Librerías de preprocesado e ingesta de documentos para LLM/RAG. Alternativa/complemento a Docling con más conectores. | — | ✅ ingesta a escala |
-| [apache/tika](https://github.com/apache/tika) | main | Apache-2.0 | Detección de tipo y extracción de contenido/metadatos para ~1.000 formatos. Maduro, JVM, probado en e-discovery. | — | ✅ formatos legacy y forense |
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [docling-project/docling](https://github.com/docling-project/docling) | main | MIT | "Get your documents ready for gen AI". Parsea PDF, DOCX, PPTX, XLSX, HTML, EPUB, ODT/ODS/ODP, email (EML/MSG), imágenes, LaTeX, audio y vídeo, preservando estructura y números de página. | **70.821** | 2026-11-20 |
+| [Unstructured-IO/unstructured](https://github.com/Unstructured-IO/unstructured) | main | Apache-2.0 | Librerías de preprocesado e ingesta de documentos para LLM/RAG. Alternativa/complemento a Docling con más conectores. **Primera medición de estrellas en esta KB** (antes «—»). | **15.770** | 2026-11-19 |
+| [apache/tika](https://github.com/apache/tika) | main | Apache-2.0 | Detección de tipo y extracción de contenido/metadatos para ~1.000 formatos. Maduro, JVM, probado en e-discovery. **Primera medición de estrellas** (antes «—»). | **4.153** | 2026-11-20 |
 
 ## Privacidad, PII y compliance
 
-| Repo | Rama | Licencia (leída) | Descripción | Stars | ¿Base para AI? |
-|------|------|------------------|-------------|-------|----------------|
-| [microsoft/presidio](https://github.com/microsoft/presidio) | main | MIT | Detección, redacción, enmascarado y anonimización de PII en texto, imágenes y datos estructurados. | 11.7k | ✅ habilitador de LGPD / GDPR / EU AI Act |
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | main | MIT (1.084 B) | Detección, redacción, enmascarado y anonimización de PII en texto, imágenes y datos estructurados. ⚠️ **RENOMBRADO desde `microsoft/presidio`** — ver `agents/top.md`. | **11.989** | 2026-11-19 |
+| [securitybunker/databunker](https://github.com/securitybunker/databunker) | **master** | MIT (1.078 B) | Vault de datos personales con API, pensado para GDPR/CCPA: almacena PII cifrada fuera de la base de datos de la aplicación y devuelve tokens. **Nuevo en esta KB.** Complementa a Presidio: Presidio *detecta y redacta*, Databunker *custodia*. | 1.498 | 2026-11-20 |
 
 ## Automatización de documentos y acceso a la justicia
 
-| Repo | Rama | Licencia (leída) | Descripción | Stars | ¿Base para AI? |
-|------|------|------------------|-------------|-------|----------------|
-| [jhpyle/docassemble](https://github.com/jhpyle/docassemble) | **master** | MIT | Sistema experto libre para entrevistas guiadas y *document assembly*, basado en Python, YAML y Markdown. El estándar de facto en access-to-justice. | 999 | ✅ intake y redacción guiada |
-| [SuffolkLITLab/docassemble-AssemblyLine](https://github.com/SuffolkLITLab/docassemble-AssemblyLine) | main | MIT | "Quickly go from a paper court form to a runnable, guided, step-by-step web application powered by Docassemble". Proyecto insignia: CourtFormsOnline.org. | 73 | ✅ formularios judiciales → web app |
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [jhpyle/docassemble](https://github.com/jhpyle/docassemble) | **master** | MIT | Sistema experto libre para entrevistas guiadas y *document assembly*, basado en Python, YAML y Markdown. El estándar de facto en access-to-justice. **El documento sale de plantilla determinista, no de generación → patrón defendible ante un regulador.** | 1.015 | 2026-11-13 |
+| [SuffolkLITLab/docassemble-AssemblyLine](https://github.com/SuffolkLITLab/docassemble-AssemblyLine) | main | MIT | "Quickly go from a paper court form to a runnable, guided, step-by-step web application powered by Docassemble". Proyecto insignia: CourtFormsOnline.org. | 75 | 2026-11-20 |
 
 ## Datos legales abiertos (corpus para RAG y benchmarking)
 
-| Repo | Rama | Licencia (leída) | Descripción | Stars | ¿Base para AI? |
-|------|------|------------------|-------------|-------|----------------|
-| [openlegaldata/oldp](https://github.com/openlegaldata/oldp) | main | MIT | Plataforma de datos legales abiertos (sentencias y leyes) con API REST y búsqueda Elasticsearch. Django, Python 3.12. Demo y tema en alemán → datos legales alemanes. | 158 | ✅ **el único corpus-platform permisivo (MIT)** |
-| [freelawproject/courtlistener](https://github.com/freelawproject/courtlistener) | main | **AGPL-3.0** ⚠️ | "A fully-searchable and accessible archive of court data": opiniones, audios de alegatos, jueces, declaraciones financieras judiciales y expedientes federales (EE. UU.). 26.634 commits. | 1.1k | ⚠️ sí, pero ver nota AGPL |
-| [LexPredict/lexpredict-lexnlp](https://github.com/LexPredict/lexpredict-lexnlp) | **master** | **AGPL-3.0** ⚠️ | LexNLP: extracción de hechos legales (fechas, montos, cláusulas, definiciones, jurisdicciones) sobre texto legal. Base de ContraxSuite. | — | ⚠️ sí, pero ver nota AGPL |
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [openlegaldata/oldp](https://github.com/openlegaldata/oldp) | main | MIT | Plataforma de datos legales abiertos (sentencias y leyes) con API REST y búsqueda Elasticsearch. Django, Python 3.12. Datos legales alemanes. **El único corpus-platform permisivo (MIT).** | 164 | 2026-11-11 |
+| [General-Legal/legal-templates](https://github.com/General-Legal/legal-templates) | main | CC0-1.0 (7.048 B) | **Nuevo en esta KB y el mayor corpus de plantillas legales abierto que se encontró.** CC0 = dominio público, sin obligación de atribución: el único régimen que permite incorporar el texto en un entregable cerrado de cliente sin cadena de licencias. | **3.753** | 2026-09-22 |
+| [accordproject/template-archive](https://github.com/accordproject/template-archive) | main | Apache-2.0 (11.356 B) | Archivo de plantillas del **Accord Project** (Linux Foundation): contratos como plantillas con lógica ejecutable (*smart legal contracts*). **Nuevo en esta KB.** Gobernanza de fundación, no de autor individual — poco común en este sector. | 381 | 2026-10-20 |
+| [openlegaldata/awesome-legal-data](https://github.com/openlegaldata/awesome-legal-data) | **master** | **NONE** ⚠️ | Índice de fuentes de datos legales abiertos, del mismo equipo que OLDP. Útil para localizar corpus por país. ⚠️ Sin fichero de licencia: usar como *mapa*, no redistribuir su contenido. | 330 | 2026-10-20 |
+| [freelawproject/courtlistener](https://github.com/freelawproject/courtlistener) | main | **AGPL-3.0** ⚠️ (35.140 B en `LICENSE.txt`) | "A fully-searchable and accessible archive of court data": opiniones, audios de alegatos, jueces, declaraciones financieras judiciales y expedientes federales (EE. UU.). Muy activo. | 1.076 | 2026-11-20 |
+| [LexPredict/lexpredict-lexnlp](https://github.com/LexPredict/lexpredict-lexnlp) | **master** | **AGPL-3.0** ⚠️ | LexNLP: extracción de hechos legales (fechas, montos, cláusulas, definiciones, jurisdicciones). Base de ContraxSuite. 🪦 **30 meses sin commits** — medido por primera vez aquí. | 798 | 2024-05-27 |
 
 ## Índices de investigación
 
-| Repo | Rama | Licencia (leída) | Descripción | Stars |
-|------|------|------------------|-------------|-------|
-| [maastrichtlawtech/awesome-legal-nlp](https://github.com/maastrichtlawtech/awesome-legal-nlp) | **master** | MIT | Lista curada de recursos de Legal NLP. | — |
-| [chen-friedman/awesome-legaltech](https://github.com/chen-friedman/awesome-legaltech) | main | CC0-1.0 | Legal AI/LegalTech curado, **etiquetado por jurisdicción** — útil precisamente para colocar hallazgos por región. | — |
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [maastrichtlawtech/awesome-legal-nlp](https://github.com/maastrichtlawtech/awesome-legal-nlp) | **master** | MIT | Lista curada de recursos de Legal NLP. Académica (Maastricht). | 347 | 2025-10-14 |
+| [Vaquill-AI/awesome-legaltech](https://github.com/Vaquill-AI/awesome-legaltech) | main | **NONE** ⚠️ | Lista curada de LegalTech: plataformas open source, modelos AI, **servidores MCP**, empresas, datasets. **8× más grande que el índice que esta KB venía usando** — ver corrección abajo. ⚠️ Sin licencia. | 273 | 2026-10-26 |
+| [chen-friedman/awesome-legaltech](https://github.com/chen-friedman/awesome-legaltech) | main | CC0-1.0 | Legal AI/LegalTech curado, **etiquetado por jurisdicción**. Pequeño (34★) pero es el único de los tres índices con licencia limpia. | 34 | 2026-04-06 |
 
-**12 repos reales, los 12 vivos, las 12 licencias leídas del fichero.**
+**16 repos reales, los 16 verificados hoy, las 16 licencias comprobadas (12 leídas del fichero, 2 `NONE` confirmadas, 2 por SPDX de API coincidente con lectura previa).**
+
+## ⚠️ Corrección: el índice equivocado estaba coronado
+
+Esta KB usaba `chen-friedman/awesome-legaltech` (34★) como índice de referencia. Existe
+`Vaquill-AI/awesome-legaltech` (**273★**, activo 2026-10-26), **con el mismo nombre de repo**,
+ocho veces más grande y que además cubre servidores MCP — la categoría que más creció este pase.
+No es un renombrado: **son dos repos distintos con nombre idéntico**, y el pequeño ganó el puesto
+por llegar antes a los resultados de búsqueda.
+
+**Discriminador para no repetirlo:** cuando dos repos comparten nombre, **comparar estrellas y
+`pushed_at` antes de citar a uno como «el índice»**. Aquí la decisión no es obvia y se publican
+los dos a propósito: Vaquill es más completo pero **no tiene licencia**; chen-friedman es
+pequeño pero **CC0**. Para *consultar*, Vaquill. Para *derivar material de cliente*, chen-friedman.
+
+## ⚠️ Nota de licencia AGPL-3.0 — y una corrección al razonamiento publicado
+
+`courtlistener`, `lexnlp` y `mike` son **AGPL-3.0**, verificado leyendo el fichero. AGPL es
+copyleft **de red**: si el cliente expone el servicio por red, debe ofrecer el código fuente de la
+obra derivada. Para un entregable SaaS propietario esto es normalmente un **bloqueante
+contractual**, no un detalle. Alternativas permisivas: **OLDP (MIT)** para corpus-platform,
+**ContextGem (Apache-2.0)** y **CaseCite (Apache-2.0)** para extracción y research.
+
+> ⚠️ **Corrección de un razonamiento que esta KB publicó durante 16 días.** `repos/trending.md`
+> afirmaba que *«el payload AGPL es prácticamente constante porque no interpola ningún nombre»*,
+> y lo apoyaba en estas tres cifras: **35.140 B** (courtlistener), **34.519 B** (lexnlp) y
+> **34.523 B** (mike). **Las cifras refutan la afirmación en el mismo renglón:** courtlistener
+> difiere de los otros dos en **617 B**. Leído hoy, el motivo es que su fichero **sí lleva un
+> preámbulo de copyright antepuesto** (`"This software and any associated files are Copyright
+> 2010, Free Law Project."`) sobre el texto AGPL canónico de ~34.523 B.
+>
+> La licencia era correcta; **el razonamiento y el método no**. Y había un segundo error oculto:
+> la KB declaraba haber leído cada licencia desde `.../<rama>/LICENSE`, pero **courtlistener no
+> tiene `LICENSE`** — tiene **`LICENSE.txt`**, y `LICENSE` devuelve 404. El procedimiento
+> publicado no reproducía el resultado publicado.
+>
+> **Regla que se deriva (aplicable a cualquier KB de esta rotación):** las licencias tienen
+> longitudes canónicas — MIT/Expat 1.050–1.150, Apache-2.0 ~11.358, CC0 ~7.048, MPL-2.0 ~16.700,
+> AGPL-3.0 ~34.523, GPL-3.0 ~35.149. Una fila cuyos bytes caen fuera de la banda de su familia
+> **está mal clasificada o lleva texto añadido**. La regla es **asimétrica**: bytes *por encima*
+> ⇒ preámbulo o licencia compuesta (leer el fichero); bytes *muy por debajo* ⇒ **fichero puntero**
+> (seguir el puntero, nunca concluir «sin licencia»). Aplicada hoy a 12 licencias leídas:
+> **3 señaladas, 3 explicadas, 0 falsas alarmas** — ver la sección siguiente.
+
+## 🆕 Un modo de fallo de licencia propio de la industria legal: el grant partido código/corpus
+
+Este es el hallazgo metodológico más transferible del pase y **no aparece en ninguna otra KB de la
+rotación**, porque es específico de los sectores cuyo entregable incluye un *corpus*:
+
+**En legal, la licencia del repo frecuentemente NO cubre el texto legal que contiene.** Dos casos
+detectados hoy, los dos por la regla de bytes:
+
+1. **`lexifina/global-law`** (2.143★, activo hoy) — `LICENSE.md` de **935 B**, muy por debajo de
+   los ~7.048 B de CC0 ⇒ señalado como posible puntero. Leído: **es CC0 1.0 en forma corta**, y
+   lleva una sección explícita *«What this does not cover»*: la dedicación al dominio público
+   cubre el árbol de jurisdicciones, el manifiesto, las herramientas, los tests y la documentación
+   — **no la ley**. Cada país vive en su propio repo (`lexifina/<country>-law`) enlazado como
+   **submódulo git, con su propio LICENSE y su propio SOURCES.md**. La API, por su parte, reporta
+   `NOASSERTION`.
+2. **`mhfed/vn-law-check`** (508★) — `LICENSE` de **1.356 B**, ~200 B por encima de la banda MIT
+   ⇒ señalado. Leído: **MIT + una nota añadida** que dice que la licencia *«does not and cannot
+   license the underlying Vietnamese legal texts»*. (Dato de procedencia: su aviso de copyright
+   nombra *"Contributors to vn-web-compliance-audit"*, **un proyecto distinto del nombre del
+   repo** — señal de derivación o renombrado, sin confirmar.)
+
+**Consecuencia operativa, y es la que importa para un entregable:** en un engagement legal, decir
+«el repo es MIT» **no responde la pregunta que hace el cliente**, que es *¿puedo redistribuir el
+corpus?*. Son **dos licencias distintas** y hay que verificar las dos. Es el análogo exacto de la
+pregunta de los *pesos del modelo* que la KB de gaming dejó abierta: en ambos casos, **la mitad
+del entregable queda fuera de la licencia que se verificó**.
 
 ## Por qué estos repos
 
 ### La capa de parsing es el cuello de botella real, no el modelo
 En legal, el 80% del esfuerzo es convertir un PDF escaneado de 200 páginas en algo con estructura.
-**Docling** (MIT, 70.1k★) es hoy la entrada por defecto y además es el backend de lectura de
+**Docling** (MIT, 70.821★) es hoy la entrada por defecto y además es el backend de lectura de
 **ContextGem**, lo que hace que esos dos encajen sin pegamento.
 
-### ⚠️ Nota de licencia AGPL-3.0 — leer antes de proponer
-`courtlistener`, `lexnlp` y `mike` son **AGPL-3.0** (verificado leyendo el LICENSE: 35.140 B,
-34.519 B y 34.523 B respectivamente — el payload AGPL es constante porque no interpola nombre).
-AGPL es copyleft **de red**: si el cliente expone el servicio por red, debe ofrecer el código
-fuente de la obra derivada. Para un entregable SaaS propietario esto es normalmente un
-bloqueante contractual, no un detalle. Alternativas permisivas: **OLDP (MIT)** para
-corpus-platform, y **Blackstone (Apache-2.0)** + **ContextGem (Apache-2.0)** para extracción.
+### El corpus permisivo es más escaso que el código permisivo
+De los cinco repos de datos de arriba, **sólo dos tienen licencia que permita redistribuir**
+(OLDP MIT, legal-templates CC0). Dos son AGPL y uno no declara licencia. **En legal, la
+restricción suele estar en los datos, no en el software** — al contrario que en la mayoría de
+industrias de esta rotación.
 
-### Lo que se eliminó de este fichero y por qué
-La versión anterior (2026-07-02) listaba **mythril**, **heimdall-rs** y **solgraph** como
-repos fundacionales de legal. Son herramientas de análisis de bytecode **EVM / smart contracts**:
-entraron por la coincidencia léxica de "contract" y no tienen relación con servicios legales.
-También listaba `Paparusi/legal-ai-agent` (vivo, pero sin descripción ni señal). Retirados.
+### Lo que se mantuvo retirado de este fichero y por qué
+La versión de julio listaba **mythril**, **heimdall-rs** y **solgraph** como repos fundacionales
+de legal: son herramientas de análisis de bytecode **EVM / smart contracts**, entraron por la
+coincidencia léxica de "contract" y no tienen relación con servicios legales. Retirada confirmada.
 
 ---
-*Ver también: `verticals/solutions.md` para plataformas verticales completas. Verificado 2026-11-04.*
+*Ver también: `verticals/solutions.md` para plataformas verticales completas. Verificado 2026-11-20
+por doble canal. 16 filas reales, 0 placeholders.*
