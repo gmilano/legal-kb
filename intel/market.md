@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 🗺️ Mapa de mercado — Legal Services
@@ -80,6 +80,36 @@ pregunta. Usar el rango «~70–83%», nunca uno solo como si fuera el dato.
 >67% de los despachos Am Law 200 han desplegado o están pilotando alguna plataforma de AI legal.
 No se halló encuesta primaria. No usar en material de cliente.
 
+### 🆕 Mediciones añadidas en el pase 3 — y el retorno ya se declara
+
+| Dato | Valor | Fuente |
+|------|-------|--------|
+| Despachos **usando o explorando** GenAI | **94%** (desde 80% el año anterior) | ILTA, encuesta a **500 despachos** |
+| Profesionales legales con algún nivel de adopción | **85%** | Clio, Legal Trends Report 2026 |
+| AI **permitida y fomentada** por el despacho | **51%** | Clio, 2026 |
+| 🔑 **Impacto positivo en ingresos** (entre quienes usan AI) | **64%** (desde **36%** en 2025) | Clio, 2026 |
+| Despachos con **política de AI escrita y realmente aplicada** | 🔴 **9%** | encuesta 2026 |
+| Líderes preocupados internamente por fiabilidad y riesgo | **81%** | reportado 2026 |
+| Crecimiento de ingresos vía AI: solos y pequeños vs. los mayores | **<1/3** vs. **~60%** | Clio, 2026 |
+| Compromiso de inversión en AI de **A&O Shearman** (5 años) | **USD 1.100 M**, con **96%** de sus socios ya usando sus herramientas | reportado 2026 |
+
+🔑 **Lo que de verdad cambia en esta tabla es el salto 36% → 64% en impacto declarado sobre
+ingresos.** Es la primera vez que el sector reporta **retorno**, no sólo adopción. ⇒ **La objeción
+del cliente deja de ser «¿funciona?» y pasa a ser «¿por qué mi despacho no lo está capturando?»**
+— y la respuesta está en la fila siguiente.
+
+🔴 **Y el dato más vendible del pase: 94% usa o explora, 9% tiene política escrita y aplicada.**
+Esa brecha de **85 puntos** es la oferta. Nótese que el 9% **endurece** el 43–53% que la KB ya
+citaba: *no tener política formal* es frecuente; *tener una que además se aplique* es excepcional.
+⚠️ Las dos cifras no son comparables entre sí (miden cosas distintas: existencia vs. existencia +
+aplicación). **Usar el 9% sólo con la frase «escrita y activamente aplicada» pegada al número.**
+
+🔑 **Y la asimetría por tamaño es la que define a quién se le vende qué:** <1/3 de los pequeños
+captura ingresos frente a ~60% de los grandes. Los grandes ya tienen presupuesto y, como muestra
+A&O Shearman (USD 1.100 M), compran a escala de infraestructura; **los pequeños y medianos tienen
+la adopción pero no el retorno** — ahí lo que falta no es modelo, es **implantación y gobernanza**,
+que es exactamente un servicio, no un producto.
+
 ## Players globales
 
 | Empresa | Tipo | Fortaleza AI | Debilidad | Oportunidad Globant |
@@ -92,7 +122,9 @@ No se halló encuesta primaria. No usar en material de cliente.
 | **Ironclad / Agiloft** | CLM | CLM maduro | Lock-in, coste | OpenContracts + capa agéntica |
 | **Luminance** | Scale-up (Londres) | Revisión documental | Cerrado | Alternativa Docling+ContextGem |
 | **Clio** | Practice mgmt | SMB, datos de adopción | SaaS cerrado | El hueco de practice management permisivo |
-| **Microsoft (Copilot for Legal)** | Cloud | Distribución vía M365 | Requiere stack Microsoft | Globant como integrador neutral |
+| **Microsoft (Copilot for Legal)** | Cloud | **20+ skills legales dentro de Word** y Cowork (oct-2026); distribución vía M365 | Requiere stack Microsoft | Globant como integrador neutral; y el add-in permisivo (`ms-word-addin`) sólo cuando el cliente necesita control del canal |
+| 🆕 **Google (Gemini Enterprise for Legal)** | Cloud | Lanzado **25-ago-2026** en preview con Cleary, Freshfields, Weil y Williams & Connolly. Conectores a iManage, NetDocuments, DocuSign, Everlaw, RelativityOne, HighQ, **CourtListener**, Harvey y Legora | Plataforma gobernada, sin corpus jurisdiccional propio; disponibilidad general no declarada | **Integrar, no competir**: Globant aporta la jurisdicción y el corpus que la plataforma no trae |
+| 🆕 **OpenAI (Astra for Law)** | Modelo vertical | **sep-2026** (GPT-6 Astra), hoy GPT-6.2; abierto a **todos los clientes de ChatGPT Enterprise** (~18-nov-2026) | Reclama el mejor resultado en un benchmark **de Harvey** — afirmación de parte; sin corpus ni despliegue self-hosted | Evaluación independiente y capa de verificación de cita encima |
 | **Anthropic (`claude-for-legal`)** | Modelo + plugins open | **Apache-2.0, 10.054★**; dos vías de despliegue (plugin o Managed Agents API) | No es producto vertical ni tiene corpus | **Base técnica por defecto**: adaptarlo por jurisdicción y sector |
 | **mike (open-legal-products)** | Plataforma open | 4.504★, Harvey-style, self-hosted | **AGPL-3.0** | Benchmark competitivo; el cliente que lo evaluó ya está educado |
 | **Jimini AI / Lexroom.ai / Bayshore / Wordsmith AI** | Startups EMEA | Copilots, research, regtech | Early stage, nicho país | Co-build / white-label |
@@ -100,6 +132,38 @@ No se halló encuesta primaria. No usar en material de cliente.
 **Cambio de mapa respecto al pase anterior:** el open source legal dejó de ser marginal. Hay una
 plataforma open de 4.504★ (mike) y una suite de plugins de 10.054★ (claude-for-legal). En una
 conversación de cliente, **el incumbente ya no se compara sólo contra otro incumbente.**
+
+### 🔴 Cambio de mapa del pase 3: los CUATRO laboratorios frontera lanzaron vertical legal en SEIS MESES
+
+| Producto | Lab | Fecha | Repo open source |
+|----------|-----|-------|------------------|
+| Claude for Legal | Anthropic | **12-may-2026** | ✅ `anthropics/claude-for-legal`, **Apache-2.0, 10.054★** |
+| Gemini Enterprise for Legal | Google Cloud | **25-ago-2026** | ❌ |
+| Astra for Law | OpenAI | **sep-2026** | ❌ |
+| Copilot for Legal | Microsoft | **oct-2026** | ❌ |
+
+**Los cuatro tienen la misma arquitectura:** paquete de *skills/agentes legales* + *conectores*
+hacia los productos que el abogado ya usa. **Ninguno trae corpus jurisdiccional propio, y sólo uno
+es open source** — y resulta que el open source es el de Anthropic, que esta KB ya tiene fichado
+como base técnica por defecto.
+
+🔴 **La consecuencia estratégica, dicha sin adornos: «construimos un asistente legal con AI» dejó
+de ser una propuesta diferenciada en seis meses.** Los cuatro laboratorios lo incluyen en la
+licencia de empresa que el cliente probablemente ya paga. Una propuesta que se presente así en
+2027 compite contra algo gratuito para el cliente.
+
+✅ **Lo que los cuatro NO traen, y es donde esta KB tiene activos verificados:**
+
+| Lo que el cliente necesita y el lab no da | Activos verificados en esta KB |
+|---|---|
+| **Fuentes oficiales de SU jurisdicción** | `korean-law-mcp` (MIT, 2.905★), `mcp-legal-it` (Apache-2.0), `ayunis-legal-mcp` (MIT), `mcp-taiwan-legal-db` (MIT), `devnors-data-mcp` (MIT), `opencaselaw` (MIT+CC0) |
+| **Corpus que se puede redistribuir** | `legal-templates` (CC0), `opencaselaw` (CC0 datos), `oldp` (MIT) |
+| **Despliegue self-hosted con residencia de datos** | `CaseCite`, `stella`, `doc-haus`, `mike` (ref. arquitectónica) |
+| **Derecho no anglosajón y procedimiento local** | `claude-para-abogados` (ES), `claude-fuer-deutsches-recht` (DE), `lawglance` (IN), `Prism-Legal-OS` (IN), `fuzi.mingcha` (CN) |
+| **Ley como código auditable ante un regulador** | `betagouv/mon-entreprise` (MIT, mantenido por el Estado francés), `docassemble` (MIT) |
+
+⇒ **El posicionamiento que sobrevive a los cuatro lanzamientos no es «hacemos el asistente», es
+«hacemos que el asistente que ya tienes sea defendible en tu jurisdicción y con tus datos».**
 
 ## Opportunities by region
 
@@ -157,6 +221,55 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
 - 🆕 **Oferta técnica añadida esta región:** `JamesANZ/us-legal-mcp` (MIT) y, sobre todo,
   **`shmsoft/FreeEed` (Apache-2.0)** — e-discovery, la capa donde el mercado norteamericano ya
   gasta por volumen de datos y no por consejo jurídico.
+
+#### 🆕 Pase 3 (2026-11-21) — el eje regulatorio de EE. UU. se movió de DIVULGAR a VERIFICAR
+
+Esto es un cambio de requisito de producto, no un matiz jurídico. Las reglas estatales nuevas no
+preguntan *«¿usaste AI?»* sino *«¿comprobaste que la cita existe?»*:
+
+| Norma | Vigencia | Qué exige |
+|-------|----------|-----------|
+| **Connecticut, Practice Book § 4-9** | **23-jun-2026** | Quien use AI generativa al crear o editar un documento presentado al tribunal **debe verificar de forma independiente todas las citas, autoridades y pruebas** que produjo la AI. |
+| **Nueva York, Part 161** | **1-jun-2026** | Política estatal: **no prohíbe** el uso de AI **ni exige divulgarlo**. El deber se desplaza al contenido, no al anuncio. |
+| **Indiana, Trial Rule 11** | 1-ago-2026 | La **firma del abogado certifica que la autoridad citada es auténtica** (ya en la KB). |
+
+⇒ **Requisito de producto que se deriva:** lo que se vende en Norteamérica no es un banner de
+divulgación, es una **primitiva de verificación de cita ejecutable** — resolver la cita contra la
+fuente y devolver existe/no existe. La KB tiene tres piezas que lo hacen hoy: **`opencaselaw`**
+(`ocl citations resolve 'BGE 136 III 513'`), **`CaseCite`** (cada afirmación contra su pasaje) y
+**`korean-law-mcp`** (contrasta contra el texto oficial). Receta: `compose/patterns.md` → P10.
+
+**Movimientos federales y de colegios (pase 3):**
+- **El comité de Reglas Civiles federales consideró y RECHAZÓ** una regla específica sobre
+  alucinaciones. ⇒ **El vacío federal lo rellenan los distritos uno a uno**, así que la exposición
+  del cliente depende del foro concreto, no de una norma nacional. Circula un recuento de «15+
+  distritos federales con regla propia»: **fuente secundaria, no verificada — no usar como cifra.**
+- **Propuesta de Federal Rule of Evidence 707** sobre admisibilidad de **prueba generada por
+  máquina**: es el frente siguiente y afecta al peritaje, no sólo al escrito.
+- **California State Bar**: enmiendas a las reglas de conducta profesional con comentario público
+  cerrado el **4-may-2026**, **pendientes de aprobación** del Colegio y del Tribunal Supremo.
+  **Alabama**, Opinión Formal 2026-01: **no crea deberes nuevos.**
+- 🔴 **Colorado: la aplicación del Colorado AI Act (CAIA) está SUSPENDIDA por un tribunal federal**
+  a la espera de resolver la medida cautelar. ⇒ **Una propuesta que venda «cumplimiento del CAIA»
+  está vendiendo cumplimiento de una norma hoy inaplicable.** Es el recordatorio de que en EE. UU.
+  **el riesgo regulatorio también desaparece**, no sólo aparece.
+
+**🔢 La serie de alucinaciones, con la trampa de definición resuelta.** Esta KB cita un 17–33% de
+alucinación; la cifra de *casos* es más citable y hay que decir **qué población cuenta**:
+
+| Fecha | Población | Total | EE. UU. |
+|-------|-----------|------:|--------:|
+| 30-sep-2026 | todas las partes (incl. litigantes sin abogado y jueces) | 2.097 | — |
+| 19-oct-2026 | todas las partes | 2.202 | 1.501 |
+| 18-nov-2026 | todas las partes | **2.312** | **1.571** |
+| 19-nov-2026 | **sólo abogados** | **921** | **620** |
+
+🔴 **2.312 y 921 son ambas correctas y difieren 2,5×.** Quien cite «2.312 casos de abogados»
+exagera por 2,5. Las tres mediciones de la serie «todas las partes» son **monótonas y crecen
+~110/mes**, lo que **valida la serie**: la discrepancia es *definicional*, no un error.
+⚠️ Verificación limitada: la base primaria (`damiencharlotin.com`) **no es alcanzable desde esta
+sesión** (dominio fuera de la política de red); las cuatro cifras son de agregadores secundarios
+concordantes. **Citable con la fecha y la población siempre pegadas al número.**
 
 ### EMEA
 
@@ -232,6 +345,44 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   región con más fuentes legales oficiales accesibles por MCP**, y eso invierte el supuesto de que
   la soberanía del dato europea es sólo una restricción: también es un activo disponible.
 
+#### 🆕 Pase 3 (2026-11-21) — el Omnibus movió el PLAZO de alto riesgo, no la CLASIFICACIÓN
+
+Hay un desacuerdo real entre fuentes y conviene tenerlo a la vista, porque determina qué se le
+promete al cliente y para cuándo:
+
+| Obligación | Fecha que aplica | Estado de la fuente |
+|---|---|---|
+| **Art. 50 — transparencia** | **2-ago-2026, YA VIGENTE** | Concordante en todas las fuentes. |
+| **Art. 4 — alfabetización en AI** | **vigente** | Concordante. Es la base del argumento «la formación es compliance». |
+| Supervisión y enforcement (AI Office + autoridades nacionales) | **desde 2-ago-2026** | Comisión Europea. |
+| **Anexo III — alto riesgo** (incluye **administración de justicia**) | **dic-2027** tras el Omnibus (Anexo I: **ago-2028**), atado a estándares armonizados | ⚠️ **En conflicto**: algunas fuentes mantienen que el 2-ago-2026 sigue siendo vinculante. |
+
+🔑 **La lectura que resuelve el conflicto sin elegir bando:** lo que el Omnibus aplazó es **el
+plazo**, no **la clasificación**. La AI que **influye en una determinación jurídica** (no la que
+asiste a revisión humana) **sigue estando en el Anexo III** — eso no está en disputa en ninguna
+fuente. ⇒ **Para un cliente:**
+- **Hoy es exigible**: transparencia (Art. 50) y alfabetización (Art. 4).
+- **El diseño de conformidad del Anexo III hay que empezarlo ya** aunque la fecha sea dic-2027,
+  porque depende de estándares armonizados que todavía no existen; y **la clasificación no va a
+  mejorar**, sólo se corre la fecha.
+- **La frontera que decide si estás en el Anexo III es de diseño de producto, no jurídica:**
+  *¿el sistema influye en la determinación, o produce material que un humano revisa y firma?*
+  Herramientas ordinarias de gestión contractual quedan, según el consenso de las fuentes, **muy
+  por debajo** de ese umbral. ⇒ **Los human gates obligatorios de `lavern` y los deberes de
+  verificación de `CaseCite` no son adornos: son el argumento de clasificación.**
+
+⚠️ **Nota de coherencia entre KBs de la rotación:** la KB de gaming registró que sus fuentes
+**corroboran** el calendario post-Omnibus, mientras la de enterprise registró **conflicto**. Las
+fuentes legales de hoy **reproducen el conflicto**. ⇒ No es un error de ninguna KB: **el conflicto
+está en las fuentes publicadas**, y lo correcto es presentarlo como aquí (qué está vigente sin
+discusión / qué está en disputa), nunca como fecha única.
+
+**Alcance, que sigue siendo lo más subestimado del Act en el sector:** cubre a **deployers**, no
+sólo a desarrolladores — un despacho que *usa* AI para research, redacción, revisión,
+transcripción o traducción está en el ámbito — y es **extraterritorial**: un proveedor
+estadounidense cuya AI usan empresas europeas entra. ⇒ **Un engagement de Globant para un cliente
+de EE. UU. con operación europea es un engagement de EU AI Act.**
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -299,6 +450,34 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   adopción de AI por despachos ni reglas de colegios o tribunales** para Japón, Corea, Singapur o
   India. **La región está bien cubierta en regulación y mal cubierta en adopción**, y eso es un
   hueco de esta KB, no una señal de que no haya adopción.
+
+#### 🆕 Pase 3 (2026-11-21) — Singapur publicó guía ESPECÍFICA del sector legal; el resto de APAC regula la AI en general
+
+El hallazgo útil: en APAC casi toda la norma es **transversal** (AI en general), y **sólo Singapur
+ha escrito para el sector legal**. Eso cambia la conversación según el país.
+
+| Jurisdicción | Instrumento | Fecha | Naturaleza |
+|---|---|---|---|
+| 🇸🇬 **Singapur** | **Guía de AI generativa del Ministry of Law para el sector legal** — tres principios: **ética profesional, confidencialidad, transparencia** + **guía para usuarios de los tribunales** | **6-mar-2026** | **No vinculante**, pero es *el documento del sector* |
+| 🇰🇷 **Corea** | **AI Basic Act** — la única ley integral de la región | **22-ene-2026** | Vinculante |
+| 🇨🇳 **China** | Ley de Ciberseguridad reformada: **añade un artículo de AI, eleva sanciones y elimina el requisito de aviso previo** | **1-ene-2026** | Vinculante; enfoque de control de contenido e información (CAC) |
+| 🇮🇳 **India** | Sin ley integral; **reforma de las IT Rules sobre contenido sintético** | **20-feb-2026** | Vinculante y operativamente exigente |
+| 🇯🇵 **Japón** | **AI Promotion Act** — rechaza licencias centralizadas y prohibiciones penales amplias; *soft law* | ⚠️ fuentes discrepan (sep-2025 vs jun-2025) | Guías, no obligaciones de proveedor |
+
+⇒ **Consecuencia comercial:** en Corea y China se vende **cumplimiento**; en Japón, India y
+Singapur se vende **defensibilidad** (evaluación y evidencia propias), porque el Estado publica
+criterios pero no obliga al proveedor. La oferta de la KB encaja por país:
+`korean-law-mcp` (MIT, 2.905★) y `UpstageAI/korean-tax-mcp` para Corea; `devnors-data-mcp` y
+`fuzi.mingcha` para China; `lawglance` y 🆕 `Prism-Legal-OS` para India; `mcp-taiwan-legal-db`
+(MIT) para Taiwán; y 🆕 **`thunlp/CAIL`** como banco de evaluación en chino — el hueco de
+*evaluación* en APAC que la KB sólo tenía cubierto en inglés con LegalBench.
+
+🕳️ **Hueco declarado explícitamente (informado, no silencio).** Se buscó **cómo están adoptando AI
+los tribunales de China, India y Japón** y **las fuentes no lo cubren**: hay abundancia sobre
+regulación de la AI y escasez sobre la práctica judicial. ⇒ Para un engagement con un poder
+judicial de APAC **no hay base pública utilizable en esta KB**, y hay que tratarlo como
+investigación primaria a presupuestar, no como conocimiento disponible. (Singapur es la excepción:
+su guía para usuarios de los tribunales existe.)
 
 ### LATAM
 
@@ -394,6 +573,64 @@ conversación de cliente, **el incumbente ya no se compara sólo contra otro inc
   fuentes legales oficiales para ninguna jurisdicción LATAM.** El hueco es de **fuentes**, no de
   **flujos** — y la arquitectura a copiar ya está probada en `opencaselaw` (CH) y `korean-law-mcp`
   (KR). Ver `compose/patterns.md` → P12.
+
+#### 🆕 Pase 3 (2026-11-21) — en Brasil el límite no es técnico: el colegio de abogados está LITIGANDO contra la AI legal
+
+Es el hallazgo LATAM más importante del pase y cambia el diseño del producto, no sólo el discurso
+de riesgo.
+
+| Hecho | Fecha | Fuente |
+|---|---|---|
+| El **Consejo Federal de la OAB** autoriza por unanimidad demandar a empresas de AI que realicen **actos reservados a la abogacía** | **ago-2026** | reportado |
+| La **OAB de São Paulo presenta acción civil pública contra Talisman AI Ltda. («Enter»)** | **7-oct-2026** | reportado |
+| La empresa alega que su software **asiste** a abogados, no los sustituye | — | posición de parte |
+
+🔴 **Lectura para Globant: en Brasil, la restricción vinculante es el EJERCICIO NO AUTORIZADO DE LA
+PROFESIÓN, no la regulación de la AI.** Brasil no tiene ley general de AI, así que el riesgo no
+llega por la vía del «AI Act brasileño» que muchas propuestas anticipan: llega por **el estatuto de
+la abogacía, ya vigente, y con un litigio en curso que pone nombre al precedente.**
+
+⇒ **Consecuencia de arquitectura, concreta:** en Brasil el producto defendible **termina en un
+abogado identificado que firma**, y el sistema debe poder **demostrarlo** — no basta con
+declararlo. Eso convierte en requisitos de ingeniería tres cosas que la KB ya tiene:
+- **Human gates obligatorios** (`lavern`, Apache-2.0: los hallazgos críticos no se entregan sin
+  aprobación humana) — es la pieza que materializa «asiste, no sustituye».
+- **Registro de atribución por entregable** (quién revisó, qué cita se verificó): la prueba.
+- **Plantilla determinista en vez de generación libre** para el documento que sale al cliente
+  (`docassemble`, MIT) — el patrón que un regulador sabe auditar.
+🔴 **Y la contraindicación explícita: un producto de AI legal dirigido al cliente final en Brasil
+no es un riesgo teórico, es la conducta que la OAB está demandando hoy.** No proponerlo.
+
+**El tamaño del problema, con la cifra corregida.** La KB venía citando «80 M de litigios». Medido
+mejor: el Judiciario brasileño **resolvió 44,8 M de casos en 2024 frente a 80,6 M pendientes**.
+⇒ Los 80 M son **el stock pendiente**, no el flujo anual, y el ratio resuelto/pendiente (~0,56) es
+el argumento real: **el cuello de botella es estructural y la AI se vende al tribunal, no sólo al
+despacho**. Brasil tiene además **marco propio de AI para el Poder Judicial (CNJ)** — descrito por
+las fuentes como **uno de los instrumentos de gobernanza de AI más detallados en vigor en Brasil**,
+y es el documento con el que hay que alinear cualquier propuesta al sector público brasileño.
+
+**México (pase 3):**
+- **Sin marco integral de AI**; las **reformas de 2026** son **las primeras obligaciones
+  vinculantes** para empresas que operan allí, repartidas en **derechos de autor, laboral y penal**.
+- 🔑 **La Suprema Corte resolvió que el contenido generado por AI NO tiene derecho de autor**,
+  porque la autoría se limita a personas humanas. ⇒ **Un entregable generado por AI para un cliente
+  mexicano puede no ser protegible**: hay que decirlo en la propuesta y estructurar la aportación
+  humana para que el resultado sí lo sea. **Esto es materia contractual, no técnica**, y es el tipo
+  de detalle que distingue una propuesta informada.
+- **JulIA** (iniciativa judicial): las fuentes académicas le atribuyen **rendición de cuentas
+  limitada**. Cobertura de tribunales mexicanos **escasa** — hueco declarado.
+
+🔴 **Y la advertencia estructural sobre la propia etiqueta «LATAM»:** el campo `region` de esta KB
+es vocabulario cerrado y **LATAM es un bucket, no un mercado**. Las fuentes son explícitas: **el
+derecho procesal varía sustancialmente entre países y un producto construido para el proceso
+judicial mexicano no se traslada a Brasil ni a Colombia.** ⇒ Un engagement se vende **por
+jurisdicción** (BR, MX, CO, AR…), nunca «para LATAM», y la cobertura real medida en
+`legal-skills-open` lo confirma: **BR 15 plugins, AR 2, MX 2, CO 1, PE 1, DO 1** — asimetría de
+15× dentro del mismo bucket.
+
+**Señal de consolidación del mercado local:** **Jusbrasil adquirió MinutaIA** (plataforma de
+redacción con AI). El incumbente local está comprando capacidad de AI, lo que acorta la ventana
+para entrar como constructor neutral.
 
 ## Hueco de producto transversal (las cuatro regiones)
 

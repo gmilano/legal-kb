@@ -1,14 +1,80 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 📡 Tendencias — Legal Services
 
 > Última actualización: 2026-11-20
 
-## Las tendencias de este pase
+## 🆕 Tendencias del pase 3 (2026-11-21, auditoría)
+
+### A. La comoditización llegó por arriba: cuatro verticales legales de laboratorio en seis meses
+**Anthropic (12-may-2026) → Google (25-ago-2026) → OpenAI (sep-2026) → Microsoft (oct-2026).**
+Los cuatro con la misma arquitectura (skills legales + conectores a las herramientas del abogado)
+y **ninguno con corpus jurisdiccional propio**. Es la tendencia que reordena todas las demás:
+**«construimos un asistente legal» caducó como propuesta diferenciada**, porque los cuatro lo
+incluyen en una licencia de empresa que el cliente ya paga. Lo que no caducó, y es donde esta KB
+tiene activos verificados: **jurisdicción, corpus redistribuible, residencia de datos y
+defensibilidad**. Detalle y tabla de encaje en `intel/market.md`.
+
+Dos consecuencias que no son obvias:
+1. **Google integra `CourtListener` (AGPL-3.0) como conector de primera clase.** El corpus abierto
+   pasó de alternativa barata a **infraestructura dentro del producto del hiperescalador** — lo que
+   sube el valor de la capa de corpus de esta KB en vez de bajarlo.
+2. **Microsoft puso 20+ skills legales dentro de Word.** Esta KB sostiene desde el primer pase que
+   *el canal decisivo es Word*; la tesis se confirma y a la vez **el canal se ocupa**. La pieza
+   permisiva de la KB (`ms-word-addin`, Apache-2.0) sigue siendo la respuesta correcta sólo cuando
+   el cliente necesita **control del add-in y de los datos**, no cuando quiere la función.
+
+### B. El eje regulatorio de EE. UU. giró de DIVULGAR a VERIFICAR
+Connecticut (**§ 4-9, 23-jun-2026**) obliga a **verificar de forma independiente toda cita
+producida por AI**; Nueva York (**Part 161, 1-jun-2026**) **no exige divulgación** y desplaza el
+deber al contenido; Indiana (TR 11) hace que **la firma certifique la autenticidad de la
+autoridad**. ⇒ **El requisito de producto no es un banner de divulgación, es una primitiva
+ejecutable de verificación de cita.** Refuerza la tendencia nº 1 del pase 2 y le pone normas con
+fecha. Y el contrapeso: el comité federal de Reglas Civiles **rechazó** una regla sobre
+alucinaciones, así que **el deber concreto depende del foro**, no de una norma nacional.
+
+### C. El retorno se declara por primera vez, y abre la brecha de gobernanza de par en par
+**64% declara impacto positivo en ingresos, desde 36% en 2025** (Clio). Simultáneamente: **94% de
+los despachos usa o explora GenAI** (ILTA, 500 despachos) y **sólo 9% tiene una política escrita y
+realmente aplicada**. Una brecha de **85 puntos** entre uso y gobierno, con retorno ya demostrado
+⇒ **la venta deja de ser evangelización y pasa a ser implantación y control.** Y la asimetría por
+tamaño dice a quién: **<1/3 de los despachos pequeños captura ingresos frente a ~60% de los
+grandes**; a los pequeños no les falta modelo, les falta despliegue.
+
+### D. El formato nuevo del sector trae un déficit sistemático de licencia
+Los tres repos legales **nuevos** con más tracción **no tienen fichero de licencia**:
+`ai-legal-claude` (**1.852★**), `ai-legal-compliance-assistant` (342★), `contract-review-pro`
+(311★) — ≈**2.500★ de material jurídicamente inutilizable** (sin licencia expresa el default es
+*todos los derechos reservados*). Los tres son **skills/prompt packs**, no librerías: se publican
+como contenido, desde cuentas personales, sin el reflejo de añadir `LICENSE`. Junto con
+`awesome-legal-skills` (CC-BY-NC-ND, el peor régimen) y `legal-skills-open` (Apache-2.0 **sobre el
+contenido**, el mejor), son **tres regímenes para un mismo formato**. ⇒ En *skills*, **la licencia
+se comprueba antes que la calidad**, y **las estrellas no miden adoptabilidad**.
+
+### E. Ley como código, y mantenida por el Estado
+**`betagouv/mon-entreprise` (MIT, 337★, commit de hoy)**: el Gobierno francés mantiene derecho
+laboral, fiscal y societario como **reglas ejecutables** (`publicodes`), no como prompts. Es la
+prueba de existencia del argumento que esta KB defiende desde el principio — que lo defendible
+ante un regulador sale de una **regla determinista**, no de generación — y con la única fuente de
+autoridad que ningún modelo puede igualar. **Patrón a replicar por jurisdicción**, y el candidato
+natural para el hueco LATAM (ver P12).
+
+### F. En Brasil el límite de la AI legal no es la regulación de AI: es el colegio de abogados
+El **Consejo Federal de la OAB** autorizó en **ago-2026** demandar a empresas de AI que realicen
+actos reservados a la abogacía, y la **OAB-SP presentó acción civil pública contra «Enter»
+(Talisman AI) el 7-oct-2026**. Brasil **no tiene ley general de AI**, así que el riesgo no llega
+por donde las propuestas lo anticipan: llega por **el estatuto de la abogacía, ya vigente, con
+litigio en curso**. ⇒ El producto defendible **termina en un abogado identificado que firma, y el
+sistema debe poder demostrarlo**: human gates (`lavern`), registro de atribución y plantilla
+determinista (`docassemble`) pasan de buenas prácticas a **requisitos de ingeniería**.
+
+---
+
+## Las tendencias del pase 2 (conservadas; revalidadas en el pase 3)
 
 ### 1. La verificación de cita pasa de buena práctica a obligación con firma detrás
 Es el cambio más importante del pase. Con alucinación reportada del **17–33%** en research legal,

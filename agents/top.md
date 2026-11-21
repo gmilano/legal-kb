@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 🎯 Agentes AI — Legal Services
@@ -37,28 +37,90 @@ Ninguno basta solo. `freelawproject/courtlistener` y `OpenSignLabs/OpenSign` dev
 inversa, los dos renombrados de abajo son invisibles en `raw` (resuelve por redirección) y sólo
 aparecen en la API.
 
-### 🆕 Tercera divergencia de canal, medida hoy — y protege contra un borrado futuro
+### 🆕 Tercera divergencia de canal — DIAGNOSTICADA MAL EN EL PASE 2, RESUELTA EN EL PASE 3
 
-El pase anterior documentó que los canales discrepan en una dirección (`NOASSERTION` en la API con
-LICENSE legible, y renombrados invisibles en `raw`). **Hoy apareció la tercera, y es la peligrosa:**
+El pase 2 encontró un repo **ausente en la API de búsqueda pero con `raw` a 200** y concluyó:
+*«el repo existe, simplemente no está en el índice de búsqueda»*. **La conclusión era cómoda y
+falsa.** Medido hoy por un tercer canal:
 
-| Repo | API de búsqueda | `raw` | Lectura correcta |
-|------|-----------------|-------|------------------|
-| `lowtidebuild/contract-review-agent` | **ausente** (`repo:` no devuelve nada) | **200** en `README.md` y `LICENSE` | **El repo existe.** No está en el índice de búsqueda. |
+| Repo | API búsqueda | `raw` | `git ls-remote` HEAD | Lectura correcta |
+|------|--------------|-------|----------------------|------------------|
+| `lowtidebuild/contract-review-agent` (slug publicado) | **HTTP 422** | 200 | `e16315dd…` | **Slug obsoleto.** |
+| `lowtidebuild/contract-review` (canónico) | **total=1**, ★41, Apache-2.0, `pushed_at=2026-07-24` | 200 | `e16315dd…` | **Es el mismo repo: SHA idéntico.** |
 
-> 🔧 **Regla que esta KB adopta:** **ausente en la API de búsqueda ≠ inexistente.** Antes de
-> retirar una fila por «no encontrada», hay que **probar `raw`**. Un repo puede existir y no estar
-> indexado (recién creado, poca señal, o excluido del índice).
+> 🔧 **G-L1 — LA IDENTIDAD DE SHA ES LA ÚNICA PRUEBA DECISIVA DE RENOMBRADO, Y ES BARATA.**
+> `git ls-remote https://github.com/<slug> HEAD` **sigue la redirección de renombrado** y devuelve
+> el SHA. Si el slug viejo y el candidato nuevo devuelven **el mismo SHA**, son el mismo
+> repositorio, y eso es una prueba criptográfica, no un parecido.
 >
-> La inversa también sigue vigente: **existir en `raw` no acredita procedencia.** `raw` resuelve
-> por redirección, así que un slug renombrado devuelve 200 apuntando a otro sitio. Por eso esta
-> fila conserva su ⚠️ de procedencia: *está viva, pero no verificada en origen.*
+> Esto **sustituye** la prueba que esta KB usaba. El pase 2 acreditó el renombrado de Presidio con
+> *«LICENSE idéntico en ambos: 1.084 B, mismo MD5»*. **Un MD5 de LICENSE igual acredita que dos
+> repos usan la misma licencia, no que sean el mismo repo** — y como el texto MIT sólo varía en la
+> línea de copyright, miles de repos del mismo autor colisionan ahí. Reverificado hoy por SHA:
+> `microsoft/presidio` ≡ `data-privacy-stack/presidio` (ambos `da946811…`) y
+> `JSv4/OpenContracts` ≡ `Open-Source-Legal/OpenContracts` (ambos `56ca972a…`). **Los dos
+> renombrados del pase 2 son correctos; la prueba que se dio de ellos, no.**
 
-**Cómo se verificó todo lo nuevo de este pase:** los **16 repos añadidos** pasaron **los dos
-canales** (API de búsqueda para existencia/estrellas/`pushed_at`/`archived`/rama, y lectura byte a
-byte del LICENSE por `raw`). **Barrido completo del fichero: 65 URL únicas de GitHub comprobadas,
-62 resuelven en la API, 1 resuelve sólo por `raw` (arriba) y 2 son slugs obsoletos citados a
-propósito** en la tabla de renombrados de más abajo. **0 enlaces roto sin declarar.**
+> 🔧 **G-L2 — HTTP 422 NO SIGNIFICA «CANAL BLOQUEADO», SIGNIFICA «ESE SLUG NO ES BUSCABLE».**
+> La API no devuelve `total_count: 0` para un slug inexistente: devuelve **422 Validation Failed**
+> («the listed users and repositories cannot be searched…»). Con una consulta de control que
+> funciona en la misma llamada (`repo:torvalds/linux` → total=1), **un 422 es un dato sobre el
+> slug, no sobre el instrumento.** Es exactamente el error que llevó al pase del 2026-11-04 a
+> declarar la API «bloqueada por el proxy» y congelar una columna entera de esta KB durante un mes.
+
+> 🔧 **G-L3 — `gh api repos/<owner>/<name>` NO ES UN INSTRUMENTO DE EXISTENCIA EN ESTA SESIÓN.**
+> Devuelve **403 «GitHub access to this repository is not enabled for this session»** para
+> *cualquier* repo no adjunto, incluidos los que existen con certeza (se probó contra
+> `docling-project/docling`, 70.826★: también 403). **Un pase que lea ese 403 como «el repo ya no
+> existe» borraría filas vivas.** Canales válidos aquí: `search/repositories`, `raw` y
+> `git ls-remote`. (`curl` sobre `github.com` también da 403 del proxy, no del repo.)
+
+> 🔧 **G-L4 — CUANDO LA API HA PERDIDO EL SLUG, LA BÚSQUEDA DE CÓDIGO LO RECUPERA.**
+> `gh api -X GET search/code -f q='"<frase distintiva del README>"'` devolvió el slug canónico
+> (`lowtidebuild/contract-review`) que ninguna consulta `repo:` ni `user:` encontraba. Y el mismo
+> resultado trajo un segundo repo, `timc81/bridge`, **con la misma frase del README y un SHA
+> distinto** (`25947064…`): es una copia, no un renombrado. ⇒ **La misma consulta que recupera el
+> slug detecta copias sin atribución** — relevante porque el original es Apache-2.0, que exige
+> conservar aviso de copyright y NOTICE.
+
+> ⚠️ **Y lo que el diagnóstico equivocado costó, que es el verdadero motivo de esta sección.**
+> Al dar por bueno *«existe, sólo no está indexado»*, el pase 2 publicó la fila con el slug muerto,
+> con estrellas **«—»** (sin medir) y con liveness **«activo (raw)»**. Los tres campos eran
+> falsos o inciertos y hoy se miden: **★41** (no es un activo relevante por tracción) y
+> **`pushed_at` = 2026-07-24, es decir 4 meses dormido** — no «activo». `raw` devolvió 200 y de ahí
+> se infirió actividad: **`raw` sirve contenido de un repo abandonado exactamente igual que de uno
+> vivo. `raw` acredita existencia, nunca vitalidad.**
+
+> 🔴 **G-L5 — EL FALLO QUE NINGUNA VERIFICACIÓN DE LICENCIA NI DE ESTRELLAS DETECTA:
+> *BLANQUEO DE CATEGORÍA*.** Un artículo de prensa de este mes describe **`openclaw/openclaw`**
+> como *«un proyecto open source de AI legal»* que se habría convertido en el repo más estrellado
+> de GitHub. Medido: **existe, es MIT, y tiene 394.928★** — las tres comprobaciones que hace esta
+> KB **pasan limpias**. Su propia descripción es *«The AI that really does things. Any OS. Any
+> Platform. The lobster way. 🦞»*: **no contiene ni un término legal. Es un agente de propósito
+> general.** Si entrase, sería al instante la fila más prominente y más errónea de la KB, con
+> licencia y estrellas impecables.
+> ⇒ **La verificación de existencia no puede detectar un error de pertinencia.** Hace falta un
+> **canal de pertinencia** separado: leer la `description`/README del propio repo y exigir que el
+> vertical aparezca **en palabras del repo**, no del medio que lo cita. Nunca se admite una fila
+> por la categoría que le atribuye un tercero. Receta: `compose/patterns.md` → **P15**.
+
+**Barrido completo del pase 3 (auditoría del pase 2, no reescritura):** se reextrajeron **las 65
+URL únicas de GitHub** del conjunto de ficheros y se pasaron **las dos canales** más
+`git ls-remote`. Resultado: **62 resuelven en la API; 3 devuelven 422 y los 3 están explicados**
+— `microsoft/presidio` y `JSv4/OpenContracts` son slugs obsoletos citados a propósito en la tabla
+de renombrados, y `lowtidebuild/contract-review-agent` era un renombrado **no detectado**, ahora
+resuelto arriba. **0 enlaces roto sin declarar, 0 filas inventadas, 0 cabeceras como dato.**
+Las estrellas y `pushed_at` del pase 2 se revalidaron una por una y **coinciden** (desviación
+máxima +1★ por crecimiento de unas horas), de modo que **los datos del pase 2 se confirman; lo que
+se corrige es un slug, un diagnóstico de método y tres campos de una fila.**
+
+> 📌 **G-L6 — LAS ESTRELLAS SON MONÓTONAS, ASÍ QUE UN VALOR REGISTRADO POR ENCIMA DEL MEDIDO HOY
+> ES PRUEBA DE UN REGISTRO MALO, NO DE UNA CAÍDA.** Un repo no pierde estrellas en masa. El
+> registro de agosto de esta KB daba *«CourtListener (Apache-2.0, ~2.4k★)»*; medido hoy:
+> **1.076★ y AGPL-3.0**. Como 2.400 > 1.076 y eso es imposible, **la cifra de agosto estaba
+> inventada o copiada de otro proyecto** — y la licencia también estaba mal. El pase 2 ya lo había
+> corregido sin señalar *por qué* era detectable: queda señalado. Aplicar la comparación a
+> cualquier cifra heredada: **si bajó, no bajó; estaba mal.**
 
 ## Agentes y herramientas destacadas
 
@@ -75,7 +137,7 @@ propósito** en la tabla de renombrados de más abajo. **0 enlaces roto sin decl
 | LawGlance | [lawglance/lawglance](https://github.com/lawglance/lawglance) | Apache-2.0 (11.343 B, `LICENSE.md`) | India · APAC | Asistente legal RAG libre y open source. **Primer activo legal de la India en esta KB** y uno de los pocos no anglosajones con mantenimiento real. | 343 | 2026-09-21 |
 | lavern | [AnttiHero/lavern](https://github.com/AnttiHero/lavern) | Apache-2.0 | Global | "An agentic law firm. Yours." 67 agentes especialistas que revisan documentos mediante *evidence-backed debate*, con **human gates obligatorios** (los hallazgos críticos no se entregan sin aprobación humana) y pipeline de verificación de 10 pasos. TypeScript. | 326 | 2026-09-05 |
 | claude-legal-skill | [evolsb/claude-legal-skill](https://github.com/evolsb/claude-legal-skill) | MIT | Global | Skill de revisión de contratos con detección de riesgo basada en CUAD y benchmarking de mercado. **Primera medición de estrellas de esta fila**: el pase anterior la publicó con «—». | 518 | 2026-07-23 |
-| contract-review-agent | [lowtidebuild/contract-review-agent](https://github.com/lowtidebuild/contract-review-agent) | Apache-2.0 (11.284 B) | Global | Revisión de contratos local-first. Produce **DOCX con tracked changes** (redline interno, limpio externo y reporte), comentarios al margen y recomendaciones de negociación. Progresó de v1-beta a **v1.0.0**. ⚠️ Procedencia a confirmar — ver aviso abajo. | — | activo (raw) |
+| contract-review | [lowtidebuild/contract-review](https://github.com/lowtidebuild/contract-review) | Apache-2.0 (11.284 B) | Global | Revisión de contratos local-first. Produce **DOCX con tracked changes** (redline interno, limpio externo y reporte), comentarios al margen y recomendaciones de negociación. ⚠️ **SLUG CORREGIDO** en el pase 3: se publicaba como `…/contract-review-agent`, que es un renombrado (mismo HEAD `e16315dd…`). ⚠️ **Y NO ESTÁ «ACTIVO»**: 4 meses sin commits, 41★. Útil como referencia de *cómo* se emite un redline en DOCX, no como base mantenida. | 41 | **2026-07-24** 🪦 |
 | Claude para Abogados | [betobetico/claude-para-abogados](https://github.com/betobetico/claude-para-abogados) | Apache-2.0 (11.358 B) | **España** · EMEA | Adaptación declarada de `claude-for-legal` al **ordenamiento jurídico español y de la UE**: 20 módulos, 100 skills, 17 agentes, por área (mercantil, societario, laboral, IP, procesal, privacidad, consumo, regulatorio, gobernanza de AI, fiscal, concursal, familia…). Atribuye explícitamente el diseño a Anthropic. ⚠️ **Es derecho de España, NO de LATAM** — ver el hueco LATAM abajo. | 49 | 2026-09-30 |
 | mcp-legal-it | [capazme/mcp-legal-it](https://github.com/capazme/mcp-legal-it) | Apache-2.0 | **Italia** · EMEA | Servidor MCP + plugin de Claude para derecho italiano, 200+ herramientas con statutes verificados. Pequeño pero real y mantenido. | 33 | 2026-11-18 |
 | Blackstone | [ICLRandD/Blackstone](https://github.com/ICLRandD/Blackstone) | Apache-2.0 | Reino Unido · EMEA | Pipeline y modelo spaCy para NLP sobre texto legal no estructurado (rama `master`). Se declara *early prototype*. 🪦 **Sin commits desde 2024-07-16 — 28 meses.** Esta KB lo vendía como «base de NER legal» sin decirlo. | 702 | 2024-07-16 |
@@ -98,27 +160,48 @@ propósito** en la tabla de renombrados de más abajo. **0 enlaces roto sin decl
 | bettercallclaude | [fedec65/bettercallclaude](https://github.com/fedec65/bettercallclaude) | **AGPL-3.0** ⚠️ | **Suiza** · EMEA | Plugin de Claude Cowork Desktop para la práctica jurídica suiza. Par natural de `opencaselaw` (flujos + corpus). ⚠️ AGPL-3.0. | 47 | 2026-09-20 |
 | awesome-legal-skills | [lawve-ai/awesome-legal-skills](https://github.com/lawve-ai/awesome-legal-skills) | 🔴 **CC-BY-NC-ND 4.0** (19.122 B) | Global | Lista curada de Agent Skills para automatizar trabajo legal. 966★, el índice de skills legales más grande. 🔴 **NO USABLE POR GLOBANT TAL CUAL: NonCommercial + NoDerivatives.** Ver el aviso de licencia abajo: es el peor régimen de los que aparecen en esta KB y el que menos lo parece. | **966** | 2026-10-19 |
 
-**33 agentes reales, los 33 verificados hoy por API de búsqueda + lectura byte a byte de LICENSE. 0 filas de ejemplo, 0 placeholders.** (18 heredadas y revalidadas, 15 nuevas en este pase.)
+| 🔴 **ai-legal-claude** | [zubair-trabzada/ai-legal-claude](https://github.com/zubair-trabzada/ai-legal-claude) | 🔴 **NINGUNA** (no existe `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE` ni `COPYING`) | Global | **El segundo repo de agente legal más estrellado que existe tras `claude-for-legal`, y no se puede usar.** Skill de asistente legal para Claude Code: revisión de contratos, análisis de riesgo, generación de NDA y compliance. 🔴 **Sin fichero de licencia ⇒ «todos los derechos reservados» por defecto: sin licencia expresa no hay derecho de uso, copia ni derivado.** Se publica aquí **precisamente para que nadie lo vuelva a encontrar y lo adopte por las estrellas.** 🪦 8 meses sin commits. | **1.852** | 2026-03-27 |
+| 🆕 **stella** | [stella/stella](https://github.com/stella/stella) | Apache-2.0 (11.358 B) | Global | 🆕 **Workspace legal open source con commit de hoy mismo.** Permisivo, bajo nombre de organización propia (no de autor individual), lo que en este sector es señal de proyecto con intención de continuidad. Candidato directo a base de despliegue de cliente. Ver `verticals/solutions.md`. | 282 | **2026-11-20** |
+| 🆕 **Prism-Legal-OS** | [FuturixAI-and-Quantum-Works/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | **AGPL-3.0** ⚠️ (34.523 B) | India · APAC | 🆕 AI legal open source para **análisis de contratos, investigación jurídica y litigio** en un solo sistema. **Segundo activo legal de la India en esta KB** (con `lawglance`), y bastante más ambicioso en alcance. ⚠️ AGPL-3.0: copyleft de red, inviable para SaaS cerrado; válido como referencia de arquitectura y para despliegue interno. | 226 | 2026-10-03 |
+| 🆕 **judicex** | [JustVugg/judicex](https://github.com/JustVugg/judicex) | Apache-2.0 (11.357 B) | Global | 🆕 Workspace legal para **redacción fundada en evidencia, análisis de expediente y respuestas verificables** — el vocabulario exacto de la tendencia de verificación de cita, y con licencia permisiva. 🪦 Pero **6 meses sin commits**: patrón de referencia, no base mantenida. | 69 | 2026-05-16 |
+| 🆕 **hermes-legal** | [Lethe044/hermes-legal](https://github.com/Lethe044/hermes-legal) | MIT (1.065 B) | Global | 🆕 Análisis de contratos multi-proveedor: **puntúa riesgo, propone redlines y emite una recomendación de firmar/negociar**. Pequeño pero MIT limpio y con la decisión de negocio como salida, no sólo el análisis. | 26 | 2026-10-10 |
+| 🆕 contract-review-pro | [CSlawyer1985/contract-review-pro](https://github.com/CSlawyer1985/contract-review-pro) | 🔴 **NINGUNA** | China · APAC | 🆕 专业合同审核 Skill — revisión de contratos construida sobre metodología de auditoría contractual, para juristas chinos. 🔴 **Sin fichero de licencia: no adoptable.** Se registra por volumen de señal (311★) y como medida del tamaño del problema de licencias en APAC. | 311 | 2026-08-14 |
+| 🆕 legal-ai-agent | [Paparusi/legal-ai-agent](https://github.com/Paparusi/legal-ai-agent) | MIT (1.083 B) | Vietnam · APAC | 🆕 MIT limpio y 214★, pero **el repo no declara descripción ni alcance**: no se puede afirmar qué hace sin auditar el código. Se registra como **candidato a auditar**, no como recomendación. Ejemplo de por qué «licencia limpia + estrellas» no basta para recomendar. | 214 | 2026-03-21 |
+
+**40 agentes reales, los 40 verificados por API de búsqueda + lectura byte a byte de LICENSE. 0 filas de ejemplo, 0 placeholders.** (33 del pase 2, revalidadas una por una en el pase 3; 7 nuevas en el pase 3. De las 7 nuevas, **3 se publican como NO ADOPTABLES** — ver el clúster de licencias de abajo.)
+
+> 📌 **Cómo leer la columna «Último commit»:** es `pushed_at` medido, no una impresión. 🪦 marca
+> dormancia > 6 meses. Un repo dormido **no** se retira: sigue sirviendo como patrón y como corpus.
+> Lo que cambia es **qué se le promete a un cliente** — no se ofrece soporte sobre un repo que
+> nadie toca desde hace medio año.
 
 
-## ⚠️ Dos renombrados detectados hoy (y cómo se detectan)
+## ⚠️ TRES renombrados (el tercero se detectó en el pase 3) — ahora con prueba de SHA
 
-Esta KB llevaba meses apuntando a dos slugs que ya no son canónicos. **Ninguno es un 404**, y por
-eso el método anterior (sólo `raw`) no podía verlos:
+Esta KB apuntaba a slugs que ya no son canónicos. **Ninguno es un 404**, y por eso el método
+antiguo (sólo `raw`) no podía verlos. **Los tres están ahora probados por identidad de HEAD**, que
+es una prueba de que *es el mismo repositorio* y no sólo de que *se parece*:
 
-| Slug publicado (obsoleto) | Slug canónico hoy | Prueba |
-|---------------------------|-------------------|--------|
-| `microsoft/presidio` | **`data-privacy-stack/presidio`** | `LICENSE` idéntico en ambos: **1.084 B, mismo MD5 `edb1b1745226`**. 11.989★. |
-| `JSv4/OpenContracts` | **`Open-Source-Legal/OpenContracts`** | 1.550★ coincide con el «1.5k★» que esta KB atribuía al slug viejo. |
+| Slug publicado (obsoleto) | Slug canónico hoy | Prueba (HEAD vía `git ls-remote`) |
+|---------------------------|-------------------|-----------------------------------|
+| `microsoft/presidio` | **`data-privacy-stack/presidio`** | ambos `da946811…` ⇒ mismo repo. 11.990★, MIT 1.084 B. |
+| `JSv4/OpenContracts` | **`Open-Source-Legal/OpenContracts`** | ambos `56ca972a…` ⇒ mismo repo. 1.550★, MIT. |
+| 🆕 `lowtidebuild/contract-review-agent` | **`lowtidebuild/contract-review`** | ambos `e16315dd…` ⇒ mismo repo. 41★, Apache-2.0. **El owner no cambió; cambió el nombre del repo.** |
 
-**Firma del renombrado, idéntica en los dos casos:** `repo:<slug-viejo>` devuelve **HTTP 422**
-(«the listed users and repositories cannot be searched») **mientras `raw` sobre el slug viejo
-devuelve 200**, porque GitHub sirve el contenido por redirección. Mirando sólo `raw`, el
-renombrado es invisible; mirando sólo la API, el repo parece borrado. **Hacen falta los dos.**
+**Firma del renombrado, idéntica en los tres casos:** `repo:<slug-viejo>` devuelve **HTTP 422**
+mientras `raw` sobre el slug viejo devuelve **200**, porque GitHub sirve el contenido por
+redirección. Mirando sólo `raw`, el renombrado es invisible; mirando sólo la API, el repo parece
+borrado. **Hacen falta los dos — y `git ls-remote` para cerrar cuál es el canónico.**
 
-Tasa medida: **2 renombrados + 1 muerto en 31 URL = ~1 incidencia por 10 repos.** La KB de
-gaming midió ~1 por 21 y la de enterprise ~1 por 10. **Es una tasa, no una anomalía:** una KB que
-no revalida slugs acumula punteros muertos a ese ritmo.
+> ⚠️ **La prueba del pase 2 era insuficiente y se sustituye.** «Mismo MD5 de `LICENSE`» acredita
+> que dos repos llevan el mismo texto de licencia, no que sean el mismo repositorio: el texto MIT
+> sólo varía en la línea de copyright. Las dos conclusiones del pase 2 eran correctas; su prueba
+> no lo era. **Ahora lo son por SHA.**
+
+Tasa medida: **3 renombrados + 1 muerto en 65 URL = ~1 incidencia por 16 repos.** Gaming midió
+~1 por 21, enterprise ~1 por 10, legal ~1 por 16. **Es una tasa estable entre industrias, no una
+anomalía:** una KB que no revalida slugs acumula punteros muertos a ese ritmo, y el renombrado es
+**el modo dominante** (3 de 4 incidencias), no el borrado.
 
 ## 🪦 Mortalidad y dormancia — medidas por primera vez en esta KB
 
@@ -137,13 +220,62 @@ bloqueada). Resultados:
 - `lexpredict-lexnlp`: **30 meses** sin commits (ver `repos/foundations.md`).
 - Ningún repo de la tabla está `archived`. El 0-de-18 es un dato, no una omisión.
 
-## ⚠️ Procedencia a confirmar — contract-review-agent
-`lowtidebuild/contract-review-agent` **resuelve en `raw`** (README 17.409 B, `LICENSE` 11.284 B de
-texto Apache-2.0, `package.json` declara `"license": "Apache-2.0"`, versión 1.0.0) **pero
-`repo:` devuelve 422**, la misma firma que los dos renombrados. Su README no contiene ningún
-enlace a `github.com`, así que **no se pudo determinar el slug canónico actual**. Se publica con
-licencia verificada y con la advertencia: **el owner puede haber cambiado.** No se declara
-muerto —`raw` lo sirve— ni vivo-en-este-slug, porque ninguna de las dos cosas está probada.
+## ✅ Procedencia RESUELTA — contract-review (era «contract-review-agent»)
+
+El pase 2 dejó esta fila abierta: *«no se pudo determinar el slug canónico actual… el owner puede
+haber cambiado»*. **Cerrado en el pase 3, y el owner no había cambiado.**
+
+El README no contiene ningún enlace a `github.com`, así que la vía de los badges no servía. Lo que
+funcionó fue **buscar una frase distintiva del README en el índice de código**:
+
+```bash
+gh api -X GET search/code -f q='"AI-Powered Contract Review Workflow"'
+# -> lowtidebuild/contract-review   <- slug canónico
+# -> timc81/bridge                  <- copia (HEAD distinto)
+```
+
+- **Canónico: `lowtidebuild/contract-review`** — Apache-2.0 (11.284 B), **41★**, creado
+  2026-03-06, `pushed_at` **2026-07-24**, rama `main`. Mismo HEAD `e16315dd…` que el slug viejo.
+- **`timc81/bridge`** lleva la misma frase del README con HEAD `25947064…`: **es una copia, no un
+  renombrado.** El original es Apache-2.0, que **exige conservar el aviso de copyright y el
+  NOTICE**; si un cliente parte de `bridge` hereda una obligación de atribución cuyo origen no
+  está declarado en el propio repo. Anotado como riesgo de cadena de licencia, no como hallazgo.
+
+⇒ **El valor de la fila baja mucho al medirla bien**: 41★ y 4 meses dormido no es «la referencia
+de redline en DOCX», es **un ejemplo de referencia de cómo se emite un DOCX con tracked changes**.
+Para esa función con mantenimiento real, la KB tiene `doc-haus` (GPL-3.0) y
+`Vaquill-AI/ms-word-addin` (Apache-2.0).
+
+## 🔴 HALLAZGO AGREGADO DEL PASE 3: LOS REPOS LEGALES MÁS POPULARES *NUEVOS* NO TIENEN LICENCIA
+
+Buscando agentes legales por estrellas en el índice de GitHub (no en listicles), los tres
+candidatos nuevos con más tracción **no tienen ningún fichero de licencia**, verificado por dos
+canales (la API devuelve `license: null` **y** `raw` devuelve 404 sobre los cinco nombres
+canónicos `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING`):
+
+| Repo | Stars | Licencia | Qué es |
+|------|------:|----------|--------|
+| `zubair-trabzada/ai-legal-claude` | **1.852** | 🔴 ninguna | Skill de asistente legal para Claude Code |
+| `Ramseygithub/ai-legal-compliance-assistant` | 342 | 🔴 ninguna | Compliance de precios de bebidas alcohólicas (EE. UU.) |
+| `CSlawyer1985/contract-review-pro` | 311 | 🔴 ninguna | Revisión de contratos para juristas chinos |
+
+**≈2.500 estrellas de material legal aparentemente atractivo y jurídicamente inutilizable.** Sin
+licencia expresa, el default legal es **todos los derechos reservados**: no hay derecho de uso,
+copia ni obra derivada, y el hecho de estar publicado en GitHub no concede ninguno (los Términos
+de GitHub conceden al público ver y *hacer fork dentro de la plataforma*, nada más).
+
+**Por qué aparece justo en esta categoría y no es casualidad.** Las tres son *skills* y *prompt
+packs*, no librerías: se publican como contenido, desde una cuenta personal, sin el reflejo de
+añadir `LICENSE` que tiene quien publica código. **El formato nuevo del sector (SKILL.md, plugin,
+prompt pack) trae consigo un déficit sistemático de licencia.** La KB ya tenía dos piezas del
+mismo cuadro — `awesome-legal-skills` (CC-BY-NC-ND, el peor régimen) y
+`legal-skills-open` (Apache-2.0 **sobre el contenido**, el mejor). Tres regímenes, un mismo
+formato.
+
+⇒ 🔧 **Regla operativa:** para un activo de tipo *skill/plugin/prompt pack*, **la licencia se
+comprueba antes que la calidad**, porque la probabilidad previa de que no haya licencia es alta.
+Y **las estrellas no son señal de adoptabilidad en esta categoría**: el repo sin licencia más
+grande de la KB tiene 1.852★, más que 36 de las 40 filas de este fichero.
 
 ## 🆕 Dos modos de fallo de licencia nuevos — detectados hoy, ninguno visible en la API
 
@@ -312,9 +444,15 @@ ya probada de `opencaselaw` (26 cantones, 3 idiomas) y `korean-law-mcp` (42 APIs
   todos verificados hoy**, ninguno con señal. Se conservan en el histórico de `trending`, no aquí.
 
 ---
-*Verificado 2026-11-20 (pase 2 del día) por doble canal (API de búsqueda + lectura byte a byte de
-LICENSE). **33 filas reales, 0 placeholders** (18 heredadas y revalidadas + 15 nuevas). En este
-pase: 2 modos de fallo de licencia nuevos documentados (CC-BY-NC-ND y relicenciamiento ELv2 con
-frontera temporal), 1 hueco declarado parcialmente refutado con la causa del error a la vista, y el
-clúster de activos por jurisdicción pasa de 6 a 13. Pases anteriores: 2 renombrados corregidos,
-1 repo muerto retirado, 4 dormancias declaradas.*
+*Verificado 2026-11-20 (**pase 3: auditoría del pase 2**) por tres canales: API de búsqueda
+(existencia/★/`pushed_at`/`archived`/rama), lectura byte a byte de `LICENSE` por `raw`, y
+`git ls-remote` para identidad de HEAD. **40 filas reales, 0 placeholders, 0 cabeceras como dato.**
+Lo que el pase 3 cambió: **1 slug muerto corregido** (`contract-review-agent` → `contract-review`,
+probado por SHA), **1 diagnóstico de método refutado** («no indexado» era un renombrado), **3
+campos de esa fila corregidos** (★ y liveness falsos), **1 procedencia cerrada** por búsqueda de
+código, **7 filas nuevas** (3 de ellas marcadas NO ADOPTABLES por ausencia de licencia) y **5
+reglas de instrumento nuevas** (G-L1 identidad de SHA, G-L2 el 422, G-L3 `repos/` no es
+instrumento, G-L4 recuperación de slug por búsqueda de código, G-L5 blanqueo de categoría, G-L6
+monotonía de estrellas). **Las cifras del pase 2 se revalidaron una por una y se confirman.**
+Pases anteriores: 2 renombrados corregidos, 1 repo muerto retirado, 4 dormancias declaradas,
+2 modos de fallo de licencia documentados (CC-BY-NC-ND y relicenciamiento ELv2).*

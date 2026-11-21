@@ -1,13 +1,82 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 📈 Repos trending — Legal Services
 
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
+
+## 🆕 2026-11-21 (pase 3) — un Estado mantiene ley-como-código en MIT, y el checksum de licencias se confirma entre industrias
+
+**Divergencia mantenida:** este fichero cubre **repos e infraestructura**; los agentes y los
+movimientos de producto van en `agents/trending.md`.
+
+**Qué cambió respecto al pase de hace una hora:** el pase 2 cerró diciendo que *«el corpus
+permisivo es más escaso que el código permisivo»* y que el corpus abierto venía de voluntarios
+(`opencaselaw`) o de dominio público (`legal-templates`). **Hoy aparece una tercera fuente, y es
+la de mayor autoridad posible: el propio Estado.**
+
+### Repos de infraestructura nuevos (verificados 2026-11-20, pase 3)
+
+| Repo | Licencia (leída) | Stars | Último commit | Señal |
+|------|------------------|------:|---------------|-------|
+| [betagouv/mon-entreprise](https://github.com/betagouv/mon-entreprise) | MIT (1.074 B) | 337 | **2026-11-20** | **Ley como código, mantenida por el Gobierno francés** (beta.gouv.fr). Derecho laboral/fiscal/societario francés como **reglas ejecutables** (`publicodes`), no como prompts. MIT ⇒ incorporable. |
+| [thunlp/CAIL](https://github.com/thunlp/CAIL) | MIT (1.063 B) | 519 | 2019-05-13 🪦 | **Chinese AI & Law Challenge**: el benchmark fundacional de AI legal en chino. Cubre el hueco de evaluación en APAC (la KB sólo tenía LegalBench, en inglés). Entra **como dataset y definición de tarea**, no como código vivo. |
+| [stella/stella](https://github.com/stella/stella) | Apache-2.0 (11.358 B) | 282 | **2026-11-20** | Workspace legal permisivo con commit de hoy; ver `verticals/solutions.md`. |
+
+### 🧮 El checksum de bytes de licencia se corrobora ENTRE INDUSTRIAS ⇒ es una constante, no una heurística
+
+Esta familia de KBs lleva meses registrando el tamaño en bytes de cada licencia. El pase 3 lo usó
+como **checksum** sobre 7 licencias nuevas y no relacionadas: **7 dentro de banda, 0 fuera, 0
+falsas alarmas.** El resultado decisivo:
+
+> **`Prism-Legal-OS` mide 34.523 B de AGPL-3.0 — exactamente el mismo número que la KB de gaming
+> registró para `grafana` y que esta KB registró para `courtlistener`.** Tres repos sin relación,
+> tres industrias, un número idéntico ⇒ **la banda es la longitud del texto canónico de la FSF**,
+> no una estimación local. Coste de red adicional: **cero** (el fichero ya se descarga para leerlo).
+
+Bandas confirmadas: MIT/Expat **1.050–1.150** · CC0 **~7.048** · Apache-2.0 **~11.358** ·
+MPL-2.0 ~16.700 · CC-BY-NC-ND-4.0 ~19.122 · **AGPL-3.0 ~34.523** · GPL-3.0 ~35.149.
+Regla asimétrica: por encima de banda ⇒ licencia compuesta o preámbulo (**leer el fichero**); muy
+por debajo ⇒ **fichero puntero** (seguir el puntero, **nunca** concluir «sin licencia»).
+
+### 🔧 Instrumento nuevo del pase, aplicable a toda la rotación: identidad de HEAD por `git ls-remote`
+
+```bash
+# ¿El slug viejo y el nuevo son el mismo repo? Mismo SHA = sí, criptográficamente.
+git ls-remote https://github.com/<slug-viejo> HEAD
+git ls-remote https://github.com/<slug-nuevo> HEAD
+```
+
+`git ls-remote` **sigue la redirección de renombrado** y devuelve el SHA, así que cierra lo que ni
+la API ni `raw` pueden cerrar por separado. Resultados en este fichero y en `agents/top.md`:
+**3 renombrados probados por SHA** (incluido uno que el pase 2 había diagnosticado mal como «repo
+no indexado») y **3 slugs de `LawLink` probados como un único codebase espejado** (mismo HEAD
+`4736aa10…`, mismo titular de copyright), lo que **desbloquea** el único *practice management*
+permisivo de la KB.
+
+**Y lo que NO es un instrumento de existencia aquí:** `gh api repos/<owner>/<name>` devuelve **403
+«access not enabled for this session»** para cualquier repo no adjunto, **incluidos los que existen
+con certeza** (probado contra `docling-project/docling`, 70.826★). Un pase que lea ese 403 como
+«borrado» destruiría filas vivas. Canales válidos: `search/repositories`, `raw`, `git ls-remote`.
+
+### 📋 Barrido de integridad del pase 3
+
+- **65 URL de GitHub** reextraídas y comprobadas: **62 resuelven**, **3 devuelven 422 y los 3
+  están explicados** (2 slugs obsoletos citados a propósito + 1 renombrado no detectado, ya
+  corregido). **0 enlaces roto sin declarar.**
+- 🔧 **G-L7, hueco de método cerrado:** el barrido sólo miraba `github.com/...`, así que **28
+  slugs citados en backticks sin URL nunca se habían verificado** — entre ellos
+  **`lexifina/global-law`, de la que `repos/foundations.md` deriva toda la regla del grant partido
+  código/corpus**. Verificados los 28: 24 se confirman, 1 (`nlpaueb/legal-bert`) no existe como
+  repo y **la KB ya lo decía correctamente**, y 3 son los `LawLink`. La regla se sostuvo **por
+  suerte, no por método**; ahora el barrido incluye los slugs sin enlace.
+- Estrellas y `pushed_at` del pase 2: **revalidados uno por uno, coinciden** (máx. +1★).
+
+---
 
 ## 🆕 2026-11-20 (pase 2) — el corpus en dominio público existe, y la capa de e-discovery nunca se había mirado
 

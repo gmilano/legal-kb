@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 🏭 Verticales de partida — Legal Services
@@ -49,13 +49,45 @@ la firma se resuelve con un proveedor comercial por API, no con OpenSign forkead
 > licencia compuesta o no reconocida, **no una ausencia de licencia**. Publicar OpenSign como
 > «licencia sin determinar» habría escondido un copyleft de red en la capa de firma.
 
-### ⚠️ Aviso de procedencia — LawLink
-Existen al menos **tres copias casi idénticas** de LawLink en GitHub bajo cuentas distintas
-(`lawflow-boop/LawLink`, `azaj01/LawLink`, `xcxzzx-1/LawLink`), con la misma descripción y el
-README en chino. `lawflow-boop` declara `v2.0.0` y su LICENSE es MIT (1.072 B, leído; **en banda
-MIT**). **No está establecido cuál es el upstream canónico.** Antes de recomendarlo a un cliente
-hay que determinar la autoría real y el estado de mantenimiento. Se publica con el aviso en lugar
-de omitirlo, porque es la única opción permisiva de *practice management* hallada.
+### ✅ Procedencia de LawLink — MEDIDA EN EL PASE 3, Y EL RIESGO ERA MUCHO MENOR DEL PUBLICADO
+
+El pase 2 encontró **tres slugs casi idénticos** (`lawflow-boop/LawLink`, `azaj01/LawLink`,
+`xcxzzx-1/LawLink`) y concluyó: *«no está establecido cuál es el upstream canónico; antes de
+recomendarlo hay que determinar la autoría real»*. Eso dejó **la única opción permisiva de
+practice management de la KB aparcada detrás de una advertencia** — y la advertencia era más
+grande que el hecho. Medido:
+
+| Slug | HEAD (`git ls-remote`) | `LICENSE` | Titular del copyright |
+|------|------------------------|----------:|-----------------------|
+| `lawflow-boop/LawLink` (★110, el único indexado) | `4736aa10…` | 1.072 B MIT | 叶森 (Sen Ye) |
+| `azaj01/LawLink` | `4736aa10…` | 1.072 B MIT | 叶森 (Sen Ye) |
+| `xcxzzx-1/LawLink` | `4736aa10…` | 1.072 B MIT | 叶森 (Sen Ye) |
+
+**Los tres son el mismo árbol de commits, byte por byte, con el mismo titular declarado.** No son
+tres proyectos compitiendo ni una bifurcación divergente: es **un codebase espejado en tres
+cuentas**.
+
+⇒ **Lo que esto cambia en la práctica:**
+- **No hay riesgo técnico en la elección**: los bits son idénticos, se clone el que se clone.
+- **No hay riesgo de atribución**: MIT exige conservar el aviso de copyright, y el aviso **nombra
+  al mismo autor en los tres**, así que la obligación es cumplible sin resolver cuál es el espejo.
+- **El único riesgo que queda es de cadena de suministro, y es el que importa**: no se sabe qué
+  cuenta controla el autor, y por tanto **a quién se le está confiando el siguiente commit**.
+  ⇒ Mitigación estándar y suficiente: **fijar un tag/SHA** (no seguir `main`) y mirrorizar.
+
+> 📌 **Esto es el modo de fallo inverso al del `contract-review`, y conviene verlos juntos.** Allí
+> una advertencia *insuficiente* («activo») dejó pasar un repo dormido con el slug muerto. Aquí una
+> advertencia *excesiva* («autoría sin determinar») congeló un activo utilizable. **Una cautela mal
+> calibrada cuesta en las dos direcciones**, y las dos se corrigen con el mismo instrumento de
+> dos líneas: identidad de HEAD + titular del `LICENSE`.
+
+### 🆕 Plataformas añadidas en el pase 3
+
+| Plataforma | Licencia (leída) | URL | Stack | Caso de uso | Stars |
+|------------|------------------|-----|-------|-------------|-------|
+| 🆕 **stella** | Apache-2.0 (11.358 B) | [stella/stella](https://github.com/stella/stella) | Workspace legal | **El candidato permisivo más vivo del pase: commit de hoy mismo.** «Open-source legal workspace» bajo cuenta de organización, no de autor individual — en un sector donde casi todo es repo personal, eso es la señal de continuidad más fiable disponible. Entra como **candidato a base de despliegue de cliente**, pendiente de auditoría funcional. | 282 |
+| 🆕 **Prism-Legal-OS** | **AGPL-3.0** ⚠️ (34.523 B) | [FuturixAI-and-Quantum-Works/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | Plataforma legal integrada (India) | **Análisis de contratos + investigación jurídica + litigio en un solo sistema**, que es justo la forma de producto que el mercado está comprando (ver `intel/trends.md`). ⚠️ AGPL-3.0: **válida para despliegue interno en el cliente, bloqueante para producto cerrado redistribuido.** Referencia de arquitectura para APAC. | 226 |
+| 🆕 **mon-entreprise** | MIT (1.074 B) | [betagouv/mon-entreprise](https://github.com/betagouv/mon-entreprise) | `publicodes`, mantenido por el Estado francés | **Ley como código, no ley como prompt.** Derecho laboral/fiscal/societario francés en reglas ejecutables y auditables. **El patrón de referencia para cualquier cálculo normativo que tenga que ser defendible ante un regulador** — y la contraparte europea exacta del argumento «plantilla determinista» de docassemble. | 337 |
 
 ## 🔴 Hueco declarado — practice management permisivo (ahora con un candidato refutado)
 

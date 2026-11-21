@@ -1,13 +1,81 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 📈 Agentes trending — Legal Services
 
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
+
+## 🆕 2026-11-21 (pase 3) — los cuatro laboratorios frontera ya tienen vertical legal, y el repo legal nuevo más estrellado no tiene licencia
+
+**Este pase es una auditoría del pase 2, no una reescritura.** Las 33 filas del pase 2 se
+revalidaron una por una (★, `pushed_at`, `archived`, licencia byte a byte) y **se confirman**, con
+desviación máxima de +1★. Lo que cambia son **un slug muerto, un diagnóstico de método y tres
+campos de una fila** — más 7 filas nuevas. Detalle en `agents/top.md`.
+
+### 🔴 El movimiento de mercado del pase: cuatro verticales legales en seis meses
+
+| Producto | Lab | Fecha | Forma |
+|----------|-----|-------|-------|
+| **Claude for Legal** | Anthropic | **2026-05-12** | Suite de skills/plugins + despliegue por Managed Agents API. **Y es el único con repo open source: `anthropics/claude-for-legal`, Apache-2.0, 10.054★.** |
+| **Gemini Enterprise for Legal** | Google Cloud | **2026-08-25** (preview) | Plataforma gobernada. Clientes de lanzamiento: Cleary, Freshfields, Weil, Williams & Connolly. Integra iManage, NetDocuments, DocuSign, Everlaw, RelativityOne, HighQ, **CourtListener**, Harvey, Legora. |
+| **Astra for Law** | OpenAI | **sep-2026**, GPT-6 Astra → hoy GPT-6.2 | Abierto a **todos los clientes de ChatGPT Enterprise** (ampliación de ~18-nov-2026). Reclama la mejor puntuación en un benchmark de agentes legales **de Harvey** — es afirmación de parte, no resultado independiente. |
+| **Copilot for Legal** | Microsoft | **oct-2026** | **20+ skills legales dentro de Word** y Cowork: revisión de contratos, redacción, seguimiento de obligaciones. |
+
+**Los cuatro tienen la misma arquitectura:** un paquete de *skills/agentes legales* + un juego de
+*conectores* hacia los productos que el abogado ya usa. **Ninguno trae corpus jurisdiccional
+propio.**
+
+⇒ **Consecuencia directa para Globant, y es la lectura comercial más importante del pase:**
+«construimos un asistente legal» **dejó de ser diferenciador en seis meses** — los cuatro
+laboratorios lo regalan con la licencia de empresa. Lo que **no** traen, y es exactamente donde
+están los activos verificados de esta KB: **fuentes oficiales por jurisdicción** (`korean-law-mcp`,
+`mcp-legal-it`, `ayunis-legal-mcp`, `opencaselaw`, `devnors-data-mcp`, `mcp-taiwan-legal-db`),
+**despliegue self-hosted con residencia de datos** (`CaseCite`, `doc-haus`, `stella`) y **derecho
+no anglosajón**. Ver `intel/market.md` → posicionamiento.
+
+> 📌 **Dos señales dentro de la tabla que conviene no pasar por alto.**
+> 1. **Google integra `CourtListener`** — un proyecto AGPL-3.0 de esta misma KB — como conector de
+>    primera clase. El corpus abierto ya no es «la alternativa barata»: es **infraestructura dentro
+>    del producto del hiperescalador.**
+> 2. **Microsoft mete 20+ skills legales dentro de Word.** Esta KB sostiene desde el primer pase
+>    que *el canal decisivo es Word*; ahora el canal lo ocupa Microsoft en persona. La contraparte
+>    permisiva de la KB (`Vaquill-AI/ms-word-addin`, Apache-2.0, 81★) pasa de «cierra un hueco» a
+>    **«compite con el dueño del procesador de textos»**: sigue siendo la opción correcta cuando el
+>    cliente necesita control del add-in y de los datos, no cuando sólo quiere la función.
+
+### Agentes nuevos con señal real (verificados por los tres canales)
+
+| Agente | Licencia (leída) | Región | Señal | Stars |
+|--------|------------------|--------|-------|-------|
+| [stella/stella](https://github.com/stella/stella) | Apache-2.0 (11.358 B) | Global | Workspace legal permisivo **con commit de hoy**, bajo cuenta de organización. El candidato vivo del pase. | 282 |
+| [FuturixAI…/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | AGPL-3.0 ⚠️ (34.523 B) | India · APAC | Contratos + research + litigio en un sistema. 2.º activo legal de India en la KB. | 226 |
+| [JustVugg/judicex](https://github.com/JustVugg/judicex) | Apache-2.0 (11.357 B) | Global | «Respuestas verificables» y redacción fundada en evidencia — el vocabulario de la tendencia dominante, permisivo. 🪦 6 meses dormido. | 69 |
+| [Lethe044/hermes-legal](https://github.com/Lethe044/hermes-legal) | MIT (1.065 B) | Global | Puntúa riesgo y **emite recomendación de firmar/negociar**: la decisión de negocio como salida, no el análisis. | 26 |
+
+### 🔴 Y la advertencia del pase: ~2.500★ de material legal nuevo sin licencia
+
+Los tres repos legales **nuevos** con más tracción **no tienen fichero de licencia** (verificado
+por dos canales, cinco nombres de fichero):
+`zubair-trabzada/ai-legal-claude` (**1.852★**), `Ramseygithub/ai-legal-compliance-assistant` (342★)
+y `CSlawyer1985/contract-review-pro` (311★). Sin licencia expresa el default es **todos los
+derechos reservados**. Los tres son *skills/prompt packs*, no librerías: **el formato nuevo del
+sector trae un déficit sistemático de licencia**, y las estrellas no miden adoptabilidad.
+Detalle y regla operativa en `agents/top.md`.
+
+### ⚠️ Y un no-hallazgo que importa igual: `openclaw` NO es un proyecto legal
+Un medio de este mes describe `openclaw/openclaw` como *«proyecto open source de AI legal»* y el
+repo más estrellado de GitHub. **Existe, es MIT y tiene 394.928★ — las tres comprobaciones pasan
+limpias — y no es legal**: su propia descripción es *«The AI that really does things. Any OS. Any
+Platform. The lobster way. 🦞»*, sin un solo término jurídico. **Queda registrado como rechazo
+explícito** para que un pase futuro no lo «descubra» por las estrellas. La verificación de
+existencia no detecta errores de pertinencia: ver G-L5 en `agents/top.md` y **P15** en
+`compose/patterns.md`.
+
+---
 
 ## 🆕 2026-11-20 (pase 2) — el clúster por jurisdicción se vuelve medible, y dos licencias mienten
 

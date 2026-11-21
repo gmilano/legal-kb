@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 🧩 Patrones de composición — Legal Services
@@ -493,6 +493,184 @@ proveedor de firma que ya use el cliente y dejar OpenSign fuera del entregable.
 
 **Por qué importa:** es el **primer camino de punta a punta de esta KB en el que todo lo que se
 redistribuye es MIT/Apache-2.0** y el entregable aterriza donde el abogado ya trabaja.
+
+## 🆕 P15 — Gate de PERTINENCIA: el control que ninguna verificación de licencia ni de estrellas sustituye
+
+**Problema que resuelve.** Un repo puede existir, tener licencia MIT impecable y 394.928★ **y no
+pertenecer a la industria**. Caso real del pase 3: un medio describió `openclaw/openclaw` como
+*«proyecto open source de AI legal»*. Las tres comprobaciones de esta KB (existencia, licencia,
+estrellas) **pasan limpias**; su propia descripción es *«The AI that really does things. Any OS.
+Any Platform. The lobster way. 🦞»* — **cero términos jurídicos**. Habría entrado como la fila más
+prominente y más errónea de la KB. **La verificación de existencia no detecta errores de
+pertinencia: son canales distintos y hacen falta los dos.**
+
+```bash
+#!/usr/bin/env bash
+# relevance-gate.sh — ¿este repo habla de MI industria, en SUS propias palabras?
+# Uso: ./relevance-gate.sh owner/repo "legal|law|contract|court|jurisprud|compliance"
+# NO -e: grep sin match y curl con SIGPIPE son RESULTADOS, no fallos del script.
+set -uo pipefail
+SLUG="$1"; TERMS="$2"
+
+DESC=$(gh api -X GET search/repositories -f q="repo:$SLUG" \
+         --jq '.items[0] | "\(.description // "") \(.topics|join(" "))"' 2>/dev/null || true)
+README=$(curl -sL --max-time 25 "https://raw.githubusercontent.com/$SLUG/HEAD/README.md" || true)
+
+# (1) \b: palabra completa. Sin esto, "openclaw" contiene "law" y pasa el gate.
+# (2) El NOMBRE del repo se excluye a proposito: es donde viven esas colisiones.
+hits() { printf '%s' "$1" | grep -ioE "\\b(${TERMS})\\b" | tr 'A-Z' 'a-z' | sort -u | tr '\n' ' '; }
+DHITS=$(hits "$DESC"); RHITS=$(hits "${README:0:4000}")
+NDESC=$(printf '%s' "$DHITS" | wc -w)
+
+# (3) >=2 terminos distintos en description/topics: una sola mencion suele ser incidental
+#     ("Legal free LLM APIs" en un repo de coding).
+if [ "$NDESC" -ge 2 ]; then
+  echo "OK       $SLUG — $NDESC terminos en description/topics: $DHITS"; exit 0
+elif [ "$NDESC" -eq 1 ] || [ -n "$RHITS" ]; then
+  echo "REVISAR  $SLUG — senal debil (desc:[$DHITS] readme:[$RHITS]) -> leer antes de admitir"
+  echo "         description propia: ${DESC:-<vacia>}"; exit 2
+else
+  echo "RECHAZAR $SLUG — ningun termino de la industria como palabra completa"
+  echo "         description propia: ${DESC:-<vacia>}"; exit 1
+fi
+```
+
+**Salida medida hoy (el gate se probó, no se propuso):**
+
+```
+RECHAZAR docling-project/docling   — ningun termino como palabra completa   (correcto: es infra horizontal)
+REVISAR  openclaw/openclaw         — desc:[] readme:[contract]              (correcto: no se admite solo)
+REVISAR  mvalentsev/awesome-free-ai-coding — desc:[legal]                   (correcto: "Legal free LLM APIs")
+OK       thomasunise/casecite      — 3 terminos: caselaw law legal
+OK       stella/stella             — 2 terminos: law legal
+```
+
+**Las tres decisiones de diseño, y cada una salió de un fallo real al probarlo:**
+
+1. 🔴 **`\b` (palabra completa) es obligatorio: sin él, el gate aprueba justo el caso que lo
+   motiva.** La primera versión de este script **aceptó `openclaw`** — porque la cadena
+   `openc·law` **contiene «law»**. Un gate de pertinencia que valida por subcadena se rompe con
+   los nombres de proyecto, que es precisamente donde viven las colisiones. Por eso el script
+   **excluye el nombre del repo** y sólo mira `description` y `topics`.
+2. **Se exigen ≥2 términos distintos en `description`/`topics`.** Con uno solo, `grep` acierta y
+   el sentido falla: `awesome-free-ai-coding` dice *«**Legal** free LLM APIs»* — término correcto,
+   industria equivocada. Dos términos distintos es la frontera que separó limpiamente los 6 casos
+   probados.
+3. **Tres salidas, no dos** (`OK` / `REVISAR` / `RECHAZAR`, exit 0/2/1). El gate **no decide**:
+   descarta lo evidente y **pone la `description` del propio repo delante de quien decide**. Con
+   la descripción de openclaw a la vista (*«The AI that really does things… The lobster way 🦞»*)
+   el rechazo cuesta dos segundos; sin ella, 394.928★ invitan a buscarle un hueco.
+
+⚠️ **Modos de falso negativo conocidos — por eso este gate filtra ALTAS, nunca poda filas vivas:**
+- **Palabras compuestas.** `betagouv/mon-entreprise` sale `REVISAR` con un solo término porque su
+  topic es **`legaltech`**, y `\blegal\b` no casa dentro de `legaltech`. ⇒ La cobertura del gate
+  **es exactamente la calidad de la lista de términos**; incluir las formas compuestas
+  (`legaltech`, `legal-ai`, `caselaw`).
+- **Infraestructura horizontal admitida a propósito.** `docling` sale `RECHAZAR` y **está bien
+  que salga así**: entró en la KB como capa de parsing, no como activo legal. Aplicar el gate a
+  **una fila que se presenta como activo del vertical**, no a la infraestructura transversal.
+- **Repos sin descripción.** `Paparusi/legal-ai-agent` (MIT, 214★) no declara descripción: el gate
+  no puede pronunciarse y la fila entra como **candidato a auditar**, nunca como recomendación.
+
+4. **Registrar el rechazo con su motivo** (como se hizo con `openclaw` en `agents/trending.md`),
+   porque si no, el siguiente pase lo «descubre» otra vez por las estrellas.
+
+---
+
+## 🆕 P16 — Resolver procedencia: renombrado, copia o espejo (identidad de HEAD)
+
+**Problema que resuelve.** Tres preguntas que ni la API de búsqueda ni `raw` responden por
+separado: *¿este slug sigue siendo el canónico?*, *¿estos dos repos parecidos son el mismo?*,
+*¿cuál de las N copias es el original?* En el pase 3 este patrón corrigió un slug muerto que el
+pase 2 había dado por bueno y **desbloqueó** un activo que una cautela excesiva había congelado.
+
+```bash
+#!/usr/bin/env bash
+# provenance.sh — identidad de HEAD + titular del copyright
+# Uso: ./provenance.sh owner/repo-a owner/repo-b [owner/repo-c ...]
+set -uo pipefail
+for SLUG in "$@"; do
+  SHA=$(GIT_TERMINAL_PROMPT=0 timeout 60 git ls-remote "https://github.com/$SLUG" HEAD 2>/dev/null | cut -f1)
+  if [ -z "$SHA" ]; then printf '%-40s NO EXISTE (o es privado)\n' "$SLUG"; continue; fi
+  API=$(gh api -X GET search/repositories -f q="repo:$SLUG" \
+          --jq '"\(.items[0].stargazers_count)* \(.items[0].license.spdx_id) push=\(.items[0].pushed_at[0:10])"' 2>/dev/null)
+  # gh escribe el cuerpo del error en STDOUT: sin esto, un 422 vuelca 300 B de JSON en la columna.
+  case "$API" in ''|*'Validation Failed'*) API="no-buscable(422)";; esac
+  L=""
+  for F in LICENSE LICENSE.md LICENSE.txt LICENCE COPYING; do
+    L=$(curl -sfL --max-time 20 "https://raw.githubusercontent.com/$SLUG/HEAD/$F" || true)
+    [ -n "$L" ] && break
+  done
+  # OJO: $(...) se come el \n final, asi que estos bytes son 1 menos que `wc -c < fichero`.
+  # OJO: en Apache-2.0 la primera linea "Copyright" es BOILERPLATE, no el titular:
+  #      el titular va en NOTICE. Este campo solo identifica autor en MIT/BSD/ISC.
+  printf '%-40s %s  %-30s %6sB  %s\n' "$SLUG" "${SHA:0:10}" "$API" \
+    "$(printf '%s' "$L" | wc -c)" "$(printf '%s' "$L" | grep -i -m1 -o 'Copyright.*' | head -c 40)"
+done
+```
+
+**Cómo se lee la salida:**
+
+| Observación | Conclusión |
+|---|---|
+| Dos slugs, **mismo SHA** | **Es el mismo repositorio**: renombrado o espejo. Prueba criptográfica, no parecido. |
+| Dos slugs, **SHA distinto**, misma frase de README | **Copia/fork divergente.** Si el original es Apache-2.0/MIT, hay **obligación de atribución** que el derivado puede no estar declarando. |
+| Slug viejo **422 en API + 200 en `raw` + SHA = al del nuevo** | **Renombrado.** No es «repo no indexado» — ese diagnóstico costó al pase 2 un slug muerto con liveness falsa. |
+| `git ls-remote` **vacío** + `raw` 404 | **No existe.** (`gh api repos/<slug>` **no** vale: da 403 para todo repo no adjunto, incluso existiendo.) |
+| N slugs, mismo SHA, **mismo titular de copyright** | **Un codebase espejado por un autor.** Riesgo de licencia ≈ 0; el riesgo real es **de cadena de suministro** (¿quién controla el próximo commit?) ⇒ **fijar tag/SHA y mirrorizar**, no descartar. |
+
+> 📌 **Por qué importa calibrar la cautela en las dos direcciones.** El pase 2 produjo los dos
+> errores simétricos: una advertencia **insuficiente** («activo») que dejó pasar un repo dormido
+> con slug muerto, y una advertencia **excesiva** («autoría sin determinar») que congeló el único
+> *practice management* permisivo de la KB. **Las dos se resuelven con este mismo script de dos
+> llamadas.** Una cautela mal calibrada no es gratis: cuesta credibilidad en un sentido y
+> oportunidad en el otro.
+
+---
+
+## 🆕 P17 — Arquitectura defendible en Brasil: el límite es el ejercicio de la profesión, no el AI Act
+
+**Problema que resuelve.** En Brasil **no hay ley general de AI**, así que el riesgo no llega por
+donde casi toda propuesta lo anticipa. Llega por el **estatuto de la abogacía**: el Consejo Federal
+de la **OAB** autorizó en **ago-2026** demandar a empresas de AI que realicen **actos reservados a
+la abogacía**, y la **OAB-SP presentó acción civil pública contra «Enter» (Talisman AI) el
+7-oct-2026**. ⇒ El requisito no es «cumplir una norma de AI»: es **poder demostrar que un abogado
+identificado ejerce el juicio profesional y firma**.
+
+**Receta — tres obligaciones de ingeniería, con los repos de esta KB:**
+
+1. **Gate humano no evitable antes de cualquier entrega** —
+   [`AnttiHero/lavern`](https://github.com/AnttiHero/lavern) (Apache-2.0, 326★): los hallazgos
+   críticos **no se entregan sin aprobación humana**. Es la pieza que materializa «asiste, no
+   sustituye» en código y no en marketing. Configurar el gate como **bloqueante por tipo de
+   documento**, no como aviso descartable.
+2. **Registro de atribución por entregable** — quién revisó, cuándo, qué citas se resolvieron y
+   contra qué fuente. Usar la verificación ejecutable de **P10** y persistir **el resultado**
+   (cita → fuente → veredicto → revisor → timestamp). **La prueba es el log, no la política.**
+3. **Documento final desde plantilla determinista, no desde generación libre** —
+   [`jhpyle/docassemble`](https://github.com/jhpyle/docassemble) (MIT, 1.015★). El documento sale
+   de una plantilla auditable; la AI prepara insumos y el abogado decide. Es el patrón que un
+   regulador sabe inspeccionar. Para el cálculo normativo, el modelo a imitar es
+   [`betagouv/mon-entreprise`](https://github.com/betagouv/mon-entreprise) (MIT): **reglas
+   ejecutables**, mantenidas por el propio Estado.
+
+**Capa de datos (no portable entre países, y esto es lo que más se subestima):** el derecho
+procesal **varía sustancialmente** entre Brasil, México y Colombia, así que el corpus y el flujo se
+construyen **por jurisdicción**. Cobertura real medida en `legal-skills-open` (Apache-2.0 **sobre
+el contenido**): **BR 15 plugins, AR 2, MX 2, CO 1, PE 1, DO 1** — asimetría de 15× dentro del
+mismo bucket «LATAM». Plantilla para construir la pieza que falta: **P12**.
+
+🔴 **Contraindicación explícita, y es la parte que hay que decirle al cliente:** un producto de AI
+legal **dirigido al cliente final** en Brasil no es un riesgo teórico — **es la conducta que la OAB
+está demandando ahora mismo**. El producto se dirige **al abogado o al tribunal**, nunca al
+justiciable sin abogado en medio.
+
+⚠️ **Y en México, un punto contractual que no es técnico:** la **Suprema Corte resolvió que el
+contenido generado por AI no tiene derecho de autor** (la autoría se limita a personas humanas).
+Un entregable generado por AI **puede no ser protegible**: estructurar y documentar la aportación
+humana para que el resultado sí lo sea, y decirlo en la propuesta.
+
+---
 
 ## Nota sobre este fichero
 

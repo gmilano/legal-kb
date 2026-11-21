@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 # 🏗️ Repos fundacionales — Legal Services
@@ -47,6 +47,22 @@ updated: 2026-11-20
 | [LexPredict/lexpredict-lexnlp](https://github.com/LexPredict/lexpredict-lexnlp) | **master** | **AGPL-3.0** ⚠️ | LexNLP: extracción de hechos legales (fechas, montos, cláusulas, definiciones, jurisdicciones). Base de ContraxSuite. 🪦 **30 meses sin commits** — medido por primera vez aquí. | 798 | 2024-05-27 |
 | [jonashertner/opencaselaw](https://github.com/jonashertner/opencaselaw) | main | **MIT código (1.069 B) + CC0 datos** | 🆕 **Resuelve el problema que este fichero lleva declarando desde el primer pase: el corpus permisivo es más escaso que el código permisivo.** Corpus legal suizo: **1M+ sentencias de los 26 cantones (1875–hoy)**, 21k leyes, **grafo de citas de 10M de aristas**, en alemán, francés e italiano. Se consume por **MCP (42 herramientas), REST, CLI o descarga Parquet**. CC0 sobre los datos = dominio público: el texto entra en un entregable cerrado de cliente sin cadena de licencias. Incluye `ocl citations resolve`, que comprueba si una cita existe. | 80 | 2026-11-20 |
 | [DevnorsAI/devnors-data-python](https://github.com/DevnorsAI/devnors-data-python) | main | MIT (1.064 B) | 🆕 SDK Python sobre datos legales y corporativos chinos: sentencias (**裁判文书**), leyes y articulado (**法律法规/法条**), registro mercantil, cuentas anuales, datos fiscales y listas de morosos judiciales (**失信核查/被执行人**). Par del servidor MCP del mismo equipo. **El primer acceso programático a fuentes legales chinas en esta KB.** | 867 | 2026-09-15 |
+
+## 🆕 Ley como código, y el benchmark fundacional que faltaba (pase 3)
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [betagouv/mon-entreprise](https://github.com/betagouv/mon-entreprise) | main | MIT (1.074 B) | 🆕 **El activo más inesperado del pase 3 y el único mantenido por un Estado.** «L'assistant officiel des entrepreneurs» de **beta.gouv.fr (Gobierno francés)**: codifica derecho laboral, fiscal y societario francés como **reglas ejecutables** (motor `publicodes`), no como prompts. MIT, con commits de hoy. **Es la prueba de existencia de la tesis que este fichero defiende** — que el documento/cálculo salga de una regla determinista y no de generación — y además con una fuente de autoridad que ningún LLM puede igualar: **el propio Estado la mantiene**. | 337 | **2026-11-20** |
+| [thunlp/CAIL](https://github.com/thunlp/CAIL) | main | MIT (1.063 B) | 🆕 **Chinese AI & Law Challenge** (THUNLP) — el benchmark fundacional de AI legal en chino: predicción de sentencia, recuperación de jurisprudencia y QA legal. **Cubre el hueco de evaluación en APAC** que esta KB sólo tenía cubierto para inglés (LegalBench) . 🪦 **Sin commits desde 2019-05-13: 7 años.** Se incorpora **como dataset y como definición de tarea**, que no caducan, explícitamente **no** como código mantenido. | 519 | 2019-05-13 🪦 |
+
+> 📌 **Por qué un repo de 2019 entra en «foundations» mientras un repo dormido de 6 meses se
+> marca 🪦 en `agents/top.md`.** Porque **la dormancia significa cosas distintas según el tipo de
+> activo**: un *dataset* o una *definición de benchmark* no se degrada con el tiempo — CAIL define
+> tareas y reparte etiquetas, y eso sigue siendo válido y citable. Un *agente* dormido sí se
+> degrada, porque depende de APIs de modelos, de SDKs y de formatos de skill que cambian cada mes.
+> ⇒ **Regla: aplicar el umbral de dormancia al código ejecutable, no al corpus ni al benchmark.**
+> Esta KB venía aplicando un único umbral a todo, que es lo que hacía parecer «muertos» activos de
+> datos perfectamente utilizables (y lo que, al revés, dejaba pasar agentes dormidos como vivos).
 
 ## 🆕 E-discovery — una capa que esta KB no tenía en ningún fichero
 
@@ -149,6 +165,47 @@ detectados hoy, los dos por la regla de bytes:
 corpus?*. Son **dos licencias distintas** y hay que verificar las dos. Es el análogo exacto de la
 pregunta de los *pesos del modelo* que la KB de gaming dejó abierta: en ambos casos, **la mitad
 del entregable queda fuera de la licencia que se verificó**.
+
+## 🆕 PASE 3 — DOS RESULTADOS DE MÉTODO SOBRE ESTE FICHERO
+
+### 1. El checksum de bytes se corrobora **entre industrias**, lo que lo convierte en una constante
+Este fichero publicó bandas canónicas de longitud de licencia (MIT 1.050–1.150, Apache-2.0
+~11.358, CC0 ~7.048, AGPL-3.0 ~34.523, GPL-3.0 ~35.149). El pase 3 leyó licencias de repos
+**nuevos y no relacionados** y cayeron todas dentro de la banda, al byte en varios casos:
+
+| Repo leído en el pase 3 | Familia declarada | Bytes medidos | Banda | ¿Dentro? |
+|---|---|---:|---|---|
+| `stella/stella` | Apache-2.0 | 11.358 | ~11.358 | ✅ exacto |
+| `JustVugg/judicex` | Apache-2.0 | 11.357 | ~11.358 | ✅ (−1 B, salto de línea final) |
+| `FuturixAI…/Prism-Legal-OS` | AGPL-3.0 | **34.523** | ~34.523 | ✅ **exacto** |
+| `betagouv/mon-entreprise` | MIT | 1.074 | 1.050–1.150 | ✅ |
+| `Lethe044/hermes-legal` | MIT | 1.065 | 1.050–1.150 | ✅ |
+| `thunlp/CAIL` | MIT | 1.063 | 1.050–1.150 | ✅ |
+| `Paparusi/legal-ai-agent` | MIT | 1.083 | 1.050–1.150 | ✅ |
+
+**El dato fuerte: `Prism-Legal-OS` mide 34.523 B de AGPL-3.0, exactamente el mismo número que la
+KB de gaming registró para `grafana` y que esta KB registró para `courtlistener`.** Tres repos sin
+relación, tres industrias, un número idéntico ⇒ **la banda no es una heurística de esta KB: es la
+longitud del texto canónico de la FSF.** Eso la vuelve utilizable como **checksum**, con un coste
+de red nulo adicional (el fichero ya se descarga para leerlo). **7 licencias nuevas señaladas: 0
+fuera de banda, 0 falsas alarmas.**
+
+### 2. 🔧 G-L7 — UN SLUG CITADO SIN URL NO PASA POR EL BARRIDO DE URLs
+El barrido de verificación de esta KB extrae `github.com/<owner>/<repo>` de los ficheros. **Pero
+este fichero y otros citan repos en `código entre comillas` sin enlace**, y esos **no los ve el
+barrido**. Extraídos aparte en el pase 3: **28 slugs citados sin URL**, varios de ellos
+*portadores de conclusiones*. El caso límite: **`lexifina/global-law`, de la que este fichero
+deriva toda la regla del «grant partido código/corpus», no estaba en la lista de URLs
+verificadas.** Verificada ahora: **existe, ★2.146 (eran 2.143: creció 3), `pushed_at` hoy** — la
+regla se sostiene. Pero **se sostuvo por suerte, no por método.**
+
+Verificados los 28 en el pase 3: **24 existen y se confirman**; `nlpaueb/legal-bert` **no existe
+como repo** (la KB ya lo declaraba ABSENT correctamente — es un modelo de HuggingFace, acierto del
+pase 2); y los tres `LawLink` se resuelven abajo.
+
+⇒ **Regla: el barrido de verificación extrae `github.com/...` Y ADEMÁS los slugs en backticks con
+forma `owner/repo`.** Un slug sin enlace es igual de citable y por tanto igual de falsable; que no
+sea clicable no lo exime.
 
 ## Por qué estos repos
 
