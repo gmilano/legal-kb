@@ -9,6 +9,62 @@ updated: 2026-11-21
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-21 (pase 6, 21:40 UTC) — el caudal no estaba seco: estaba **en portugués**
+
+El pase 5 midió que el flujo de repos legales nuevos se había secado (`legal AI
+created:>2026-09-01 stars:>=40` ⇒ `total_count=4`) y concluyó, con razón para lo que medía, que
+una pasada horaria ya no puede producir activos nuevos. **Este pase incorpora 6 activos nuevos sin
+que esa medición fuera incorrecta** — y la diferencia explica el resto del pase:
+
+> La consulta del pase 5 pedía `stars:>=40` **en el índice de GitHub, en inglés**. Los cuatro MCP
+> de fuentes oficiales LATAM tienen **4, 2, 71 y 0 estrellas** y tres se describen en portugués.
+> Ninguno habría aparecido. **No era caudal seco: era un instrumento que no apuntaba ahí.**
+> Distinguir «flujo de creación» de «deuda de descubrimiento» (pase 5) sigue siendo correcto; lo
+> que faltaba es que **la deuda de descubrimiento tiene idioma**.
+
+### Repos de infraestructura nuevos (licencia leída byte a byte, 2026-11-21)
+
+| Repo | Licencia (leída) | Capa | Por qué entra | ★ |
+|------|------------------|------|---------------|---|
+| [matematicsolutions/br-eli-mcp](https://github.com/matematicsolutions/br-eli-mcp) | Apache-2.0 (11.358 B) | Fuentes oficiales 🇧🇷 | 8 APIs **sin clave**: Câmara, Congresso (+DOU), `normas.leg.br`, DataJud/CNJ, STJ, CARF, TST, TCU. No scrapea Planalto. | 4 |
+| [mazulo/leis-mcp](https://github.com/mazulo/leis-mcp) | MIT (1.071 B) | Legislación 🇧🇷 | **1.218.990 normas** + avisos de revogação + validación de vigencia. | **71** |
+| [ivancaron/jurismcp](https://github.com/ivancaron/jurismcp) | MIT (1.078 B) | Jurisprudencia 🇧🇷 | STJ/STF/TST/TJES/LexML/BNP-CNJ/TNU/TRF4. Separa portal oficial de agregador. | 2 |
+| [BEG-lag/mcp-dof](https://github.com/BEG-lag/mcp-dof) | MIT (1.082 B) | Boletín oficial 🇲🇽 | **DOF** vía API oficial **SIDOF**. Primer activo mexicano de fuente oficial en esta KB. | **0** |
+| [daniel-filius/awesome-mcp-brasil](https://github.com/daniel-filius/awesome-mcp-brasil) | **CC0-1.0** (7.048 B) | Índice + canal | 13 entradas *Jurídico/Legislativo* entre 8 secciones. **Dominio público** ⇒ derivable sin atribución. | 0 |
+| [rohasnagpal/legal-ai-skills](https://github.com/rohasnagpal/legal-ai-skills) | MIT (1.069 B) | Skills | 244 skills, 17 especialistas + router; India/EE. UU./RU/**Singapur**. Alternativa permisiva a la lista CC-BY-NC-ND. | **214** |
+
+### 🧮 El checksum de licencias (932-G1) rindió 7/7 — y afinó **dos** bandas
+
+- **CC0-1.0 es exacta, no aproximada:** `awesome-mcp-brasil`, `chen-friedman/awesome-legaltech` y
+  `General-Legal/legal-templates` miden **7.048 B los tres**. CC0 no lleva línea de titular, así
+  que no tiene dispersión ⇒ **cualquier desvío del 7.048 indica fichero modificado**.
+- **Apache-2.0 tolera cola, no cabecera:** `apache/ofbiz-framework` mide **11.906 B**, +548 sobre
+  la banda, porque incorpora el `NOTICE` **dentro** del fichero. La banda sigue siendo válida como
+  clasificador; el desvío por arriba hay que leerlo como *licencia + apéndice*, no como otra
+  licencia.
+- **Y una refutación de fuente indexada:** una fuente afirma que **iDURAR ERP/CRM** es «fully
+  open-source under the MIT license». Es **AGPL-3.0**: `LICENSE` mide **34.230 B**, banda AGPL
+  (~34.500). El checksum lo predijo antes de leer el encabezado. Ver `verticals/solutions.md`.
+
+### 🔌 El juego de canales cambió respecto del pase 5, y eso invalida dos instrumentos prescritos
+
+| Canal | Pase 5 | Pase 6 (medido con par conocido-bueno/conocido-malo) |
+|-------|--------|------------------------------------------------------|
+| `gh api search/repositories` | ✅ ★+SPDX+`pushed_at` | 🔴 **422** salvo repos de la sesión |
+| `git ls-remote` (existencia + **renombrado**) | ✅ oráculo prescrito para toda la rotación | 🔴 **0 refs para todo**, repos vivos incluidos |
+| `raw.githubusercontent.com/.../HEAD/<f>` | ✅ | ✅ confirmado — oráculo **positivo** (200 = existe; 404 = no concluyente) |
+| WebFetch sobre `github.com/<slug>` | no usado | ✅ **★ + licencia + README**: el sustituto de `search/repositories` |
+
+⇒ **Consecuencia honesta para este pase: 83/83 URLs resuelven, pero los renombrados NO están
+comprobados** y no hay `pushed_at` para las filas nuevas (van con `n/d ⚠️`, no con fecha
+inventada). **Regla:** ningún pase hereda el juego de canales del anterior; se sondea primero.
+
+### ✅ Barrido de integridad del pase 6
+
+83/83 URLs resuelven (0 bajas) · **91 bloques de tabla, 0 defectos** (`P22`/G-L11 aguanta tras
++9 filas) · 7/7 licencias en banda · 0 filas repintadas por deriva de ★ · append-only respetado en
+los dos ficheros de tendencias.
+
 ## 🆕 2026-11-21 (pase 5, 01:38 UTC) — el caudal de repos legales nuevos se ha secado, y es medible
 
 **Instrumento del pase, barato y reproducible:** en vez de preguntar «¿qué hay de nuevo?» (que

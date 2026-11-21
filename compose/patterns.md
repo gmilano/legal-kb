@@ -400,13 +400,60 @@ corpus completo (**% de volumen eliminado sin revisión humana**) y es verificab
 la calidad del modelo. **Todo el pipeline es MIT/Apache-2.0: entregable cerrado sin cadena de
 licencias.**
 
-## 🆕 P12 — El primer MCP de fuentes legales oficiales de LATAM (el hueco real, con plantilla probada)
+## 🆕 P12 — La capa de fuentes legales oficiales de LATAM: **qué adoptar, qué endurecer y qué construir** · ♻️ **REESCRITO EN EL PASE 6 (2026-11-21)**
 
-**El hueco, verificado por doble canal:** existen MCP de fuentes oficiales para EE. UU., Alemania,
-Suiza, Italia, Taiwán (×2), Corea y China. **Para Brasil, México, Argentina, Chile, Colombia y
-Perú: ninguno.** Y lo que **sí** existe para LATAM son *flujos*:
-`ThomasMoreAI/legal-skills-open` (Apache-2.0) con `br/` 15 plugins, `ar/` 2, `mx/` 2, `co/` 1,
-`pe/` 1, `do/` 1. **Hay con qué razonar y no hay contra qué verificar.**
+> 🔴 **Este patrón estaba construido sobre una premisa falsa.** Decía: *«existen MCP de fuentes
+> oficiales para EE. UU., Alemania, Suiza, Italia, Taiwán, Corea y China. Para Brasil, México,
+> Argentina, Chile, Colombia y Perú: ninguno»*, y proponía 4–8 semanas para construir **el
+> primero**. Existen cuatro, con licencia leída byte a byte, y uno de ellos es **exactamente** el
+> ejemplo que el patrón ponía como cosa a construir (el DOF mexicano). El fallo fue de
+> **independencia de canal**, no de rigor: ver `agents/top.md` → **G-L12**. El patrón se conserva
+> con el mismo número porque la *arquitectura* era correcta; lo que cambia es **el punto de
+> partida**, que ya no es un folio en blanco.
+
+### Estado real de la capa (medido 2026-11-21)
+
+| País | Legislación | Jurisprudencia | Boletín oficial | Estado |
+|------|-------------|----------------|-----------------|--------|
+| 🇧🇷 Brasil | `leis-mcp` (MIT, 1,21 M normas, avisos de revogação) · `br-eli-mcp` (Apache-2.0, `normas.leg.br` a nivel de artículo) | `jurismcp` (MIT: STJ, STF, TST, TJES, LexML, **BNP/CNJ**, TNU, TRF4) · `br-eli-mcp` (STJ, TST, TCU, CARF, DataJud/CNJ) | `br-eli-mcp` (publicación en **DOU** vía Congresso) | 🟢 **Cubierto — adoptar y endurecer** |
+| 🇲🇽 México | — | — | `mcp-dof` (MIT, API oficial **SIDOF**) | 🟡 **Medio — falta SCJN/jurisprudencia** |
+| 🇦🇷 🇨🇱 🇨🇴 🇵🇪 | — | — | — | 🔴 **Vacío — aquí sí se construye** |
+
+### Lo que hay que hacer, en orden, y ya no es «empezar»
+
+1. **ADOPTAR (días, no semanas).** Para Brasil, los tres servidores se montan en paralelo: no
+   compiten, se complementan. `leis-mcp` da texto de norma **con aviso de revogação**,
+   `br-eli-mcp` da articulado + fiscal (CARF) + control externo (TCU) **sobre API, sin scraping**,
+   y `jurismcp` da jurisprudencia. Licencias MIT/Apache-2.0 en los tres ⇒ **sin fricción entre
+   ellos ni con `legal-skills-open/br/` (Apache-2.0)**.
+2. **ENDURECER — y esto es lo facturable.** Las tres debilidades están declaradas por los propios
+   repos y son exactamente lo que un despacho no puede arreglar solo:
+   - `jurismcp` usa **navegador headless y scraping HTML** para STF, TST, TNU y TRF4 ⇒ se rompe con
+     cada rediseño de portal. Migrar a API donde exista, y donde no, **contrato de prueba que falle
+     ruidosamente** en vez de devolver vacío (un `resolver_cita` que calla es peor que uno que
+     falla).
+   - `leis-mcp` advierte de **errores de conversión/OCR** y de que su búsqueda sin norma concreta
+     **sólo cubre lo cacheado** ⇒ hace falta la marca de procedencia OCR del patrón `P21`
+     (`kancelaria-lex`) y una política de caché explícita.
+   - `mcp-dof` depende de una **API oficial no documentada** mapeada por sondeo ⇒ monitor de
+     contrato y pruebas de regresión contra endpoints reales.
+3. **SEPARAR FUENTE OFICIAL DE AGREGADOR, por contrato.** `jurismcp` ya lo hace (marca
+   Jurisprudencias.ai como agregador de terceros y lo deja **opt-in**) y `mcp-dir/jusbrasil-mcp`
+   (MIT) es el caso contrario: agregador bien posicionado en buscadores que **parece** la capa
+   oficial. ⇒ Toda herramienta MCP devuelve un campo `fonte: oficial | agregador` y el *gate* de
+   citación **rechaza** lo que no sea `oficial`.
+4. **CONSTRUIR sólo donde falta: AR, CL, CO, PE** — copiando `mcp-dof`, que ya resolvió el patrón
+   duro «boletín oficial LATAM con API no documentada». **Perú primero**, porque es donde los
+   *human gates* son **reglamentarios** (Ley 31814 + reglamento vigente 22-ene-2026, deberes por
+   fases sectoriales desde sep-2026) y por tanto el entregable tiene criterio de aceptación
+   escrito. **Argentina con cuidado:** la obligación allí es **subnacional** (Santa Fe Decreto
+   2726/2025, Prov. Buenos Aires Resolución 4/2025), así que el perímetro es provincial.
+5. **CONTRIBUIR de vuelta** la profundidad de `br/`, `mx/`, `ar/` en `legal-skills-open`: Colombia,
+   Perú y Rep. Dominicana están a **1 plugin** frente a los 44 de EE. UU. y Alemania.
+
+**Y lo que ya no hace falta prometer:** el inventario de accesibilidad por fuente oficial (que el
+patrón anterior ponía como primer sprint) **está hecho para Brasil y México** — lo hicieron estos
+cuatro repos, y las fuentes que usan son públicas y sin clave. Queda por hacer para AR/CL/CO/PE.
 
 **Plantilla a copiar, dos implementaciones de referencia:**
 
@@ -429,9 +476,12 @@ Perú: ninguno.** Y lo que **sí** existe para LATAM son *flujos*:
    jurisdicción, y Colombia/Perú/Rep. Dominicana están a **1 plugin** frente a los 44 de EE. UU. y
    Alemania.
 
-⚠️ **Antes de prometerlo:** la disponibilidad y los términos de uso de cada fuente oficial LATAM
-**no se verificaron en este pase** — sólo se verificó que **no existe el servidor**. El primer
-sprint es un **inventario de accesibilidad y licencia por fuente**, no código.
+⚠️ **Antes de prometerlo (actualizado en el pase 6):** para **Brasil y México** la accesibilidad
+está demostrada por implementación — los cuatro repos consumen fuentes públicas sin clave. Para
+**AR/CL/CO/PE** sigue valiendo la advertencia original: el primer sprint es **inventario de
+accesibilidad y términos de uso por fuente**, no código. Y una advertencia nueva, que es la lección
+del pase: **antes de declarar que algo no existe, búsquese fuera del índice de GitHub y en el
+idioma del país** (`legislação`, `jurisprudência`, `Diario Oficial`), no sólo en inglés.
 
 ## 🆕 P13 — Gate de licencia por *tag* (amplía P9, y P9 por sí solo ya no basta)
 
@@ -976,3 +1026,94 @@ electrónica, confirmado abierto sobre los tres mayores). **Los huecos declarado
 `repos/foundations.md` e `intel/trends.md` siguen redactados en la forma fuerte y están pendientes
 de rerevisión con P23** — en particular el de **MCP de fuentes oficiales LATAM**, que es el más
 citado de esta KB y nunca se buscó fuera de GitHub.
+
+---
+
+## 🆕 P24 — **Sonda de canal**: el control que va *antes* de todos los demás (gratis, 6 llamadas)
+
+**El problema que resuelve.** Esta KB prescribió en el pase 3 `git ls-remote` como oráculo de
+existencia y de renombrado «para toda la rotación», y en el pase 5 `gh api search/repositories`
+como fuente de ★/SPDX/`pushed_at`. **Hoy los dos están muertos** (0 refs para todo; HTTP 422), y un
+canal muerto **no devuelve un error legible: devuelve «no existe» para todo**. Un pase que herede
+los canales del anterior sin sondearlos convierte un fallo de infraestructura en una tabla de
+hallazgos. Es el mismo error que G-L12, un nivel más abajo: allí el canal estaba *sesgado*, aquí
+está *roto*.
+
+**La regla:** todo canal se sonda con un **par conocido-bueno / conocido-malo** antes de usarse. El
+conocido-malo es un slug **inventado** (no un repo archivado: un repo archivado existe).
+
+```bash
+#!/usr/bin/env bash
+# P24 — sonda de canal. GOOD debe existir; BAD debe ser inventado.
+GOOD="suffolkLITLab/docassemble-AssemblyLine"
+BAD="gmilano/definitely-not-a-real-repo-xyz"
+
+probe_raw(){ for f in README.md LICENSE .gitignore; do
+    c=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 \
+        "https://raw.githubusercontent.com/$1/HEAD/$f")
+    [ "$c" = 200 ] && { echo 200; return; }; done; echo 404; }
+
+echo "raw        good=$(probe_raw "$GOOD")  bad=$(probe_raw "$BAD")"
+echo "ls-remote  good=$(git ls-remote "https://github.com/$GOOD" 2>/dev/null | wc -l)" \
+     "bad=$(git ls-remote "https://github.com/$BAD" 2>/dev/null | wc -l)"
+echo "search     good=$(gh api -X GET search/repositories -f q="repo:$GOOD" \
+        --jq '.total_count' 2>/dev/null || echo ERR)"
+echo "curl -sI   good=$(curl -sI -o /dev/null -w '%{http_code}' "https://github.com/$GOOD")" \
+     "bad=$(curl -sI -o /dev/null -w '%{http_code}' "https://github.com/$BAD")"
+```
+
+**Lectura del resultado — y sólo hay tres casos:**
+
+| Patrón | Diagnóstico | Qué hacer |
+|--------|-------------|-----------|
+| `good` ≠ `bad` | 🟢 El canal **discrimina** | Usable como oráculo |
+| `good` = `bad` = negativo | 🔴 **Canal ciego** (403/0 refs para todo) | **Inusable.** No escribir «no existe» con él |
+| `good` = `bad` = positivo | 🔴 Canal **permisivo** (todo 200) | Inusable: confirmaría repos inventados |
+
+**Resultado medido el 2026-11-21 en esta sesión** (la tabla cambia entre sesiones, que es el punto):
+`raw` 200/404 🟢 · `ls-remote` 0/0 🔴 · `search/repositories` 422 🔴 · `curl -sI` 403/403 🔴 ·
+**WebFetch sobre `github.com/<slug>` 🟢** (da ★ + licencia + README: es el sustituto de
+`search/repositories` cuando éste cae).
+
+**Consecuencias que hay que escribir en el fichero, no sólo saber:**
+
+1. `raw.githubusercontent.com` es un oráculo **positivo**: 200 prueba existencia, **404 no prueba
+   inexistencia** (puede faltar ese fichero). Para negar, hacen falta varios nombres **y** un
+   segundo canal.
+2. **`raw` sigue los redirects de renombrado** ⇒ con `ls-remote` caído, **no hay oráculo de
+   renombrado**. Entonces se escribe *«83/83 vivas, renombrados no comprobados»*, no *«83/83
+   verificadas»*. La diferencia es la *promoción de suplente* que costó un líder de categoría
+   entero en la KB de gaming.
+3. Sin `search/repositories` **no hay `pushed_at`** ⇒ la columna de último commit va `n/d ⚠️`.
+   **Nunca una fecha inferida.**
+
+## 🆕 P25 — Matriz de descubrimiento **trilingüe por categoría** (la que habría evitado G-L12)
+
+**El problema.** «Buscar también en español» no basta, y esta KB es la prueba: buscó *flujos* en
+portugués (`agente jurídico`, `assistente`) y encontró cuatro repos LATAM reales; buscó *fuentes*
+sólo en inglés (`legal MCP`, `official sources`) y declaró un cero que era falso por cuatro. **El
+sesgo de idioma no es regional, es por categoría de activo.**
+
+**La matriz.** Eje vertical = **categoría de activo**; eje horizontal = **idioma**. Se ejecuta
+completa, y **cada celda vacía se escribe como cero medido, con su consulta**:
+
+| Categoría | EN | ES | **PT** |
+|-----------|----|----|--------|
+| Fuentes oficiales / boletín | `official gazette MCP` | `Diario Oficial MCP`, `boletín oficial API` | `Diário Oficial MCP`, `DOU API` |
+| Legislación | `statute corpus` | `legislación MCP`, `normas API` | **`legislação MCP`**, `normas.leg.br` |
+| Jurisprudencia | `case law MCP` | `jurisprudencia MCP`, `sentencias API` | **`jurisprudência MCP`**, `acórdãos` |
+| Flujos / agentes | `legal agent` | `agente jurídico`, `asistente legal` | `agente jurídico`, `assistente jurídico` |
+| Práctica / expediente | `practice management` | `gestión de expedientes` | `gestão de processos` |
+
+**Y la regla de canal que la acompaña (G-L12):** un enunciado de **cobertura** («no existe X»)
+exige al menos un canal **fuera** del sistema que indexa X — búsqueda web, directorio de MCP,
+agregador, registro de paquetes. Un enunciado de **propiedad** («X es Apache-2.0») no lo exige:
+ahí el fichero de licencia es la verdad. **Esta KB aplicaba el protocolo de propiedad a enunciados
+de cobertura, y lo llamaba «doble canal».**
+
+**Dónde aplicarlo ya, en las 12 industrias:** toda frase de la forma *«no existe ningún X
+permisivo para LATAM»* está pendiente de re-test. Canal externo mínimo y gratuito que funcionó
+hoy: **una búsqueda web con el sustantivo en portugués**, más el directorio
+[`daniel-filius/awesome-mcp-brasil`](https://github.com/daniel-filius/awesome-mcp-brasil) (CC0,
+8 secciones, 13 entradas jurídico/legislativo), que es ahora un canal de descubrimiento de esta KB
+y no sólo una fila.

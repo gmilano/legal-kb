@@ -9,6 +9,66 @@ updated: 2026-11-21
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-21 (pase 6, 21:40 UTC) — cuatro MCP de fuentes oficiales LATAM que esta KB declaraba inexistentes, y el motivo del falso negativo
+
+**El pase 5 cerró escribiendo qué faltaba hacer:** *«STILL PENDING: el hueco más citado de esta KB,
+"no LATAM official-source MCP", nunca se buscó fuera de GitHub.»* Se buscó hoy. **El hueco no
+existía.** Cuatro activos permisivos, licencia leída byte a byte, en **una sola búsqueda**:
+
+| Activo | Licencia (leída) | País | Qué cubre | ★ |
+|--------|------------------|------|-----------|---|
+| [matematicsolutions/br-eli-mcp](https://github.com/matematicsolutions/br-eli-mcp) | Apache-2.0 (11.358 B) | 🇧🇷 Brasil | 8 APIs oficiales **sin clave**: Câmara, Congresso (+ publicación en DOU), `normas.leg.br`, **DataJud/CNJ**, **STJ**, **CARF**, **TST**, **TCU** | 4 |
+| [mazulo/leis-mcp](https://github.com/mazulo/leis-mcp) | MIT (1.071 B) | 🇧🇷 Brasil | **1.218.990 normas** con fuente oficial y **avisos de revogação**; valida vigencia contra normas.leg.br + Senado | **71** |
+| [ivancaron/jurismcp](https://github.com/ivancaron/jurismcp) | MIT (1.078 B) | 🇧🇷 Brasil | **Jurisprudencia**: STJ, STF, TST, TJES, **LexML** (`urn:lex`), **BNP/CNJ**, TNU, TRF4 | 2 |
+| [BEG-lag/mcp-dof](https://github.com/BEG-lag/mcp-dof) | MIT (1.082 B) | 🇲🇽 **México** | **Diario Oficial de la Federación** sobre la **API oficial SIDOF**: ediciones diarias, decretos íntegros, FIX/UDIS/TIIE | **0** |
+
+Y dos más del mismo barrido:
+
+| Activo | Licencia (leída) | Por qué entra | ★ |
+|--------|------------------|---------------|---|
+| [daniel-filius/awesome-mcp-brasil](https://github.com/daniel-filius/awesome-mcp-brasil) | **CC0-1.0** (7.048 B) | Directorio auto-verificado de MCP y skills **de Brasil**: *Jurídico/Legislativo* **13 entradas**, Dados públicos 24, Fiscal 7, Pix 8, Eleições 7, Skills BR 5, Guias PT 6. **CC0 = dominio público: derivable para material de cliente sin atribución.** Es, además, **un canal de descubrimiento** que esta KB no tenía. | 0 |
+| [rohasnagpal/legal-ai-skills](https://github.com/rohasnagpal/legal-ai-skills) | MIT (1.069 B) | **244 skills legales permisivas** bajo 17 especialistas + Managing Partner que enruta; *Jurisdiction Counsel* para India, EE. UU., RU y **Singapur (18 skills locales)**. Alternativa usable a `lawve-ai/awesome-legal-skills` (CC-BY-NC-ND, 966★). | **214** |
+
+### 🔴 El hallazgo del pase: el fallo no fue de rigor, fue de **independencia de canal** (G-L12)
+
+Esta KB escribió «verificado por los dos canales». Los dos canales eran `search/repositories`
+(índice de GitHub) y lectura de `LICENSE` en `raw.githubusercontent.com` (ficheros de GitHub).
+**Para descubrir, son un solo canal.** Dos consultas al mismo índice comparten su sesgo de idioma
+y dan un falso negativo con la misma confianza que una.
+
+Y la causa concreta **no es la tracción**: `leis-mcp` tiene **71★**, más que 9 filas que esta KB ya
+recomendaba. Es el **idioma del sustantivo**: la KB buscó los *flujos* en portugués (*agente
+jurídico*, *assistente*) pero las *fuentes* sólo en inglés. Faltaban `legislação`,
+`jurisprudência`, `Diario Oficial`. Detalle completo y las dos reglas nuevas en `agents/top.md`
+→ PASE 6.
+
+### 🟡 Y el que se registra para que no se confunda con los cuatro
+
+[mcp-dir/jusbrasil-mcp](https://github.com/mcp-dir/jusbrasil-mcp) (MIT, 1.093 B) es un **agregador
+de terceros** — se describe como «alternativa a Escavador y Jusbrasil» — **no fuentes oficiales**.
+Su posicionamiento lo pone primero en cualquier búsqueda de «MCP jurídico Brasil», así que un pase
+futuro lo encontrará **antes** que a los oficiales. Para citación defendible no sirve. Nótese que
+`jurismcp` hace esta misma distinción por su cuenta: marca Jurisprudencias.ai como agregador y lo
+deja **opt-in**.
+
+### ⚠️ Lo que este pase NO pudo medir, y hay que decirlo
+
+- **Renombrados: no comprobados.** El oráculo que el pase 3 prescribió para toda la rotación
+  (identidad de HEAD por `git ls-remote`) **devuelve 0 refs para todo en esta sesión**, y
+  `search/repositories` responde **422**. Las 83 URLs resuelven, pero `raw` sigue redirects de
+  renombrado ⇒ **vivas sí, comprobadas contra renombrado no.**
+- **`pushed_at`: no medido.** Sin `search/repositories` no hay fecha de último commit para las
+  filas nuevas; van con `n/d ⚠️` en vez de con una fecha inventada.
+- ⇒ **Regla nueva:** el juego de canales **cambia entre sesiones**. Primera acción de cada pase:
+  sondear cada canal con un par conocido-bueno / conocido-malo. Tabla comparativa pase 5 vs pase 6
+  en `agents/top.md`.
+
+### ✅ Integridad
+
+83/83 URLs resuelven · 86→88 bloques de tabla, **0 defectos** (`P22` aguanta) · 7/7 lecturas de
+licencia dentro de banda del checksum 932-G1 · 0 filas repintadas por deriva de estrellas
+(anti-churn del pase 5) · append-only respetado.
+
 ## 🆕 2026-11-21 (pase 5, 01:38 UTC) — tres agentes MIT nuevos, y el hueco que esta KB declaraba abierto estaba cerrado desde el 1 de noviembre
 
 **Quinto pase sobre `legal` en 28 horas** (22:01, 22:55, 00:01, 00:53 y este). Los cuatro anteriores

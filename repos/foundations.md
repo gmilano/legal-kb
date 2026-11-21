@@ -94,6 +94,7 @@ updated: 2026-11-21
 | [maastrichtlawtech/awesome-legal-nlp](https://github.com/maastrichtlawtech/awesome-legal-nlp) | **master** | MIT | Lista curada de recursos de Legal NLP. Académica (Maastricht). | 347 | 2025-10-14 |
 | [Vaquill-AI/awesome-legaltech](https://github.com/Vaquill-AI/awesome-legaltech) | main | **NONE** ⚠️ | Lista curada de LegalTech: plataformas open source, modelos AI, **servidores MCP**, empresas, datasets. **8× más grande que el índice que esta KB venía usando** — ver corrección abajo. ⚠️ Sin licencia. | 273 | 2026-10-26 |
 | [chen-friedman/awesome-legaltech](https://github.com/chen-friedman/awesome-legaltech) | main | CC0-1.0 | Legal AI/LegalTech curado, **etiquetado por jurisdicción**. Pequeño (34★) pero es el único de los tres índices con licencia limpia. | 34 | 2026-04-06 |
+| 🆕 [daniel-filius/awesome-mcp-brasil](https://github.com/daniel-filius/awesome-mcp-brasil) | main | **CC0-1.0** (7.048 B) | 🆕 **El primer índice LATAM de esta KB, y el primero que es también un canal de descubrimiento.** Directorio auto-verificado de servidores MCP y agent skills **brasileños**: *Jurídico/Legislativo* **13 entradas** (DataJud/PJe, Câmara…), Dados públicos 24, Fiscal/Tributário 7, Comércio & SaaS BR 17, Pix 8, Eleições/Governo 7, Skills & prompts BR 5, Guias em português 6. **CC0 = dominio público**, el mismo régimen que `chen-friedman` y `General-Legal/legal-templates` (7.048 B exactos, los tres ⇒ banda CC0 confirmada por triplicado). | 0 | n/d ⚠️ |
 
 **16 repos reales, los 16 verificados hoy, las 16 licencias comprobadas (12 leídas del fichero, 2 `NONE` confirmadas, 2 por SPDX de API coincidente con lectura previa).**
 
@@ -353,3 +354,41 @@ fichero**; los bytes dicen de antemano qué se va a encontrar (puntero por debaj
 compuesta por encima). El descarte legítimo es **la ausencia del fichero**, que es otra medición:
 `raw` devuelve 404 en `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE` y `COPYING`, en `HEAD`,
 `main` y `master`.
+
+---
+
+## 🆕 PASE 6 (2026-11-21) — la capa que faltaba no faltaba: **fuentes legales oficiales de LATAM**
+
+Este fichero declaraba desde el pase 1 que *«el corpus permisivo es más escaso que el código
+permisivo»* y que para LATAM no había **nada**. La segunda mitad de esa frase es falsa. Cuatro
+servidores MCP, todos permisivos, todos sobre **fuentes oficiales de Estado**, licencia leída byte
+a byte:
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| 🟢 [matematicsolutions/br-eli-mcp](https://github.com/matematicsolutions/br-eli-mcp) | HEAD | Apache-2.0 (11.358 B) | 🇧🇷 **La base fundacional de la capa.** 8 APIs de datos abiertos **sin clave ni registro**: Câmara (proyectos federales), Congresso (normas promulgadas + **publicación en Diário Oficial** + histórico de enmiendas), `normas.leg.br` (texto a nivel de **artículo**), **DataJud/CNJ** (metadatos procesales, no texto), **STJ** (íntegro + ementas desde may-2022), **CARF** (fiscal federal, sólo por número), **TST** (íntegro, búsqueda libre + número CNJ), **TCU**. Declara citas verificables y **no hace scraping del HTML de Planalto** — es decir, se apoya en API, no en maquetación. | 4 | n/d ⚠️ |
+| 🟢 [mazulo/leis-mcp](https://github.com/mazulo/leis-mcp) | HEAD | MIT (1.071 B) | 🇧🇷 **1.218.990 normas** brasileñas (CF, CLT, CDC, Código Civil, LGPD…) citando fuente oficial (`normas.leg.br`, LexML) y emitiendo **avisos de revogação**; valida vigencia contra normas.leg.br y datos abiertos del Senado. ⚠️ Dos límites declarados por el propio README: el texto convertido puede traer errores de conversión/OCR y **no sustituye la publicación en el Diário Oficial**; la búsqueda sin norma concreta sólo cubre lo ya cacheado. Lee de `ctresb/leis`. | **71** | n/d ⚠️ |
+| 🟢 [ivancaron/jurismcp](https://github.com/ivancaron/jurismcp) | HEAD | MIT (1.078 B) | 🇧🇷 **La mitad jurisprudencial.** Portales judiciales oficiales: STJ (POST directo), STF y TST (navegador headless), TJES (REST pública), **LexML** (federado, resuelve `urn:lex`), **BNP/CNJ** (`pangeabnp.pdpj.jus.br`, registro de precedentes), TNU y TRF4 (formularios eproc). Marca Jurisprudencias.ai como **agregador de terceros, no portal oficial**, y lo deja opt-in. ⚠️ El headless/scraping es frágil ante rediseños: es la pieza a endurecer. | 2 | n/d ⚠️ |
+| 🟢 [BEG-lag/mcp-dof](https://github.com/BEG-lag/mcp-dof) | HEAD | MIT (1.082 B) | 🇲🇽 **El primer activo mexicano de fuentes oficiales de esta KB.** **Diario Oficial de la Federación** sobre la **API oficial SIDOF** (`sidof.segob.gob.mx`): ediciones diarias, texto íntegro de decretos, búsqueda por título, indicadores FIX/UDIS/TIIE. Python 3.12+. ⚠️ **La API oficial no está documentada**: los endpoints (`/notas/{fecha}`, `/notas/nota/{id}`, `/indicadores/...`) se mapearon por sondeo manual ⇒ deuda de mantenimiento real, y a la vez **el patrón reutilizable** para los boletines oficiales de AR/CL/CO/PE. | **0** | n/d ⚠️ |
+
+### Por qué esta capa cambia la propuesta, no sólo la tabla
+
+1. **Pasa de «construir» a «extender».** P12 pedía 4–8 semanas para *el primer* MCP oficial LATAM.
+   Ya hay cuatro: el trabajo es endurecer `jurismcp` (headless → API donde exista), ampliar
+   cobertura a tribunales estatales y replicar `mcp-dof` en los otros cuatro países.
+2. **La pieza de citación defendible ya existe en portugués y castellano.** `leis-mcp` emite
+   avisos de revogação y `br-eli-mcp` arrastra la publicación en DOU: es *provenance*, que es
+   exactamente lo que la obligación de verificar citas exige en las tres regiones.
+3. **El hueco real queda acotado a cuatro países:** **Argentina, Chile, Colombia y Perú**. Es un
+   hueco de cuatro jurisdicciones, no de una región — y el de Perú es el más vendible, porque allí
+   los *human gates* son **reglamentarios** (Ley 31814 + reglamento vigente 22-ene-2026), no buena
+   práctica.
+
+### 🧮 Banda CC0 confirmada por triplicado
+
+`awesome-mcp-brasil` **7.048 B** = `chen-friedman/awesome-legaltech` **7.048 B** =
+`General-Legal/legal-templates` **7.048 B**. Tres repos sin relación, idéntico byte a byte ⇒ la
+banda CC0-1.0 del checksum 932-G1 es **exacta**, no aproximada. Las bandas MIT (1.062–1.093 B en
+7 lecturas) y Apache-2.0 (11.314–11.358 B) tienen dispersión por la línea de copyright; CC0 no la
+tiene porque **no lleva titular**. Útil: en CC0, cualquier desvío del 7.048 significa fichero
+modificado.

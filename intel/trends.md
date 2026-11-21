@@ -458,3 +458,100 @@ puntero **Apache-2.0** genuino) y **OpenSign** (35.051 B ⇒ **AGPL-3.0 compuest
 no es la clasificación del proveedor, es **la ausencia medida del fichero** (404 en `LICENSE`,
 `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING` × `HEAD`/`main`/`master`). **Aplicar en las 12
 industrias: toda fila descartada por `NOASSERTION` sin abrir el fichero debe revisarse.**
+
+---
+
+## 🆕 PASE 6 (2026-11-21) — seis tendencias, y una de ellas invierte quién es el comprador
+
+### T-P6-1 — El turno agéntico dejó de ser pronóstico: **15% ya lo usa**, y la gobernanza no va detrás
+
+Thomson Reuters mide **15% de profesionales legales usando ya AI agéntica**, con **41% de despachos
+en AI generativa (desde 28%)**. El dato que lo vuelve urgente no es el 15%, es el que va al lado:
+el **8am *2026 Legal Industry Report*** mide **54% de despachos sin ninguna formación en AI** y sólo
+**46% con AI de propósito general implantada**, frente a **69% de ejercientes individuales que ya
+la usan**. ⇒ **La adopción individual va por delante de la institucional, y la formación va por
+detrás de las dos.** Un agente que actúa (no que sugiere) dentro de una organización que no ha
+formado a nadie es el perfil de riesgo que las sanciones de 2026 ya están castigando. **Para
+Globant: el entregable que se vende aquí no es el agente, es el *gate* + la formación + el
+inventario de herramientas aprobadas.**
+
+### T-P6-2 — 🔴 **El tribunal se convierte en comprador**, y compra algo distinto de lo que compra el despacho
+
+Es la novedad estructural del pase. Hasta ahora esta KB mapeaba dos compradores: despacho e
+in-house. Aparece un tercero, con presupuesto y mandato propios:
+
+- **Nueva York:** política interina del sistema judicial que **obliga a formación en AI a todos los
+  jueces y al personal** y **restringe la AI generativa a herramientas aprobadas**.
+- **Indiana, Trial Rule 11 (1-ago-2026):** la firma del escrito **certifica que la autoridad citada
+  es auténtica**, con cobertura expresa de los escritos asistidos por AI.
+
+⇒ El poder judicial no compra productividad: compra **lista de herramientas aprobadas, formación y
+trazabilidad**. Es un comprador que exige **evaluación y documentación**, no demos — y es
+precisamente lo que un benchmark permisivo (`LegalBench`, `legal-agent-workshop`) y un `resolver_cita`
+auditable sirven. **Y es un comprador al que la hipótesis «el competidor es ChatGPT» no aplica**:
+ahí el genérico está directamente prohibido.
+
+### T-P6-3 — El perímetro de cumplimiento se fragmenta **por debajo del Estado**, en dos continentes a la vez
+
+Dos mediciones independientes del mismo fenómeno:
+
+- **Argentina:** sin ley nacional, la obligación llegó **subnacional y administrativa** — **Santa
+  Fe, Decreto 2726/2025** y **Provincia de Buenos Aires, Resolución 4/2025**.
+- **EE. UU.:** el mosaico estatal (Colorado — con exigibilidad movida al **30-jun-2026** y alcance
+  que **incluye decisiones sobre servicios legales** —, Texas TRAIGA **1-ene-2026**, California
+  SB 942) y ahora **el conflicto federal-estatal litigado**: orden ejecutiva instruyendo al DOJ y
+  **Artificial Intelligence Litigation Task Force creada el 9-ene-2026**.
+
+⇒ **Consecuencia de arquitectura, no de *compliance*:** la política no puede estar cableada a un
+país. Tiene que ser **configuración por jurisdicción, hasta nivel provincial/estatal, con fecha de
+entrada en vigor como dato**. Es la generalización del patrón «plantilla por jurisdicción» (T4) de
+la capa de contenido a la capa de política. Y en EE. UU. hay que añadir una variable que esta KB no
+tenía: **qué norma estatal sobrevivirá al litigio** — Colorado ya se movió una vez.
+
+### T-P6-4 — En Brasil cambió **el ejecutor**, no la ley de AI
+
+**PL 2338/2023 sigue trabado** en la Cámara (aprobado en Senado dic-2024), y eso llevaba a esta KB
+a leer Brasil como «regulación pendiente». Falso: **el 25-feb-2026 la ANPD pasó a agencia
+reguladora plena**, con más autonomía técnica, administrativa y financiera. ⇒ **El riesgo exigible
+hoy en Brasil llega por datos personales (LGPD), con un regulador que acaba de ganar estatuto**, no
+por una futura ley de AI. Súmese el eje electoral, que sigue siendo el más rápido y vinculante de
+la región (prohibición de que la AI recomiende candidatos o señale preferencia de voto + divulgación
+obligatoria de contenido de campaña generado con AI). **Regla general que se confirma por segundo
+año: en LATAM, antes de preguntar por la ley de AI, pregúntese quién puede sancionar hoy.**
+
+### T-P6-5 — El precio se desacopla del asiento
+
+Varias previsiones del sector coinciden en que los proveedores de AI legal **abandonan el SaaS por
+asiento hacia modelos por uso**. Es coherente con T-P6-1: un agente que ejecuta tareas consume de
+forma muy desigual entre usuarios, y el asiento deja de medir valor. ⚠️ **Es una previsión, no una
+medición** — se registra como tal. Pero tiene una consecuencia inmediata y poco obvia para un
+engagement: **si el cliente va a pagar por uso, la eficiencia de *tokens* del diseño pasa a ser un
+requisito contractual**, y eso favorece arquitecturas con recuperación dirigida (MCP de fuente
+oficial, que trae el artículo exacto) frente a RAG de contexto ancho.
+
+### T-P6-6 — Europa es la región de **mayor adopción del mundo**, y la brecha genérico/especializado es el mercado
+
+Dos encuestas independientes, y juntas confirman por tercera vez el reencuadre del pase 5:
+
+- **ACC/Everlaw:** **61% de juristas in-house europeos** usan AI — **la tasa más alta del mundo,
+  por delante de EE. UU.** Se acabó el supuesto de que la regulación frena la adopción europea.
+- **Wolters Kluwer/Legisway:** **56%** de los departamentos legales europeos usan herramientas
+  **generales** (ChatGPT y similares); **sólo 14%** ha implantado **AI legal especializada**.
+
+⇒ **La brecha 56/14 en la única región donde el Art. 50 ya es exigible** es la formulación más
+limpia del argumento comercial de esta KB: el valor se está capturando **con herramientas no
+defendibles**, y ahí no hay que convencer a nadie de adoptar AI. Coincide con APAC (**94% alguna AI
+vs 46% especializada**, LexisNexis n=1.715) y con NA (**41% despachos vs 54% sin formación**).
+**Tres regiones, tres encuestas, el mismo hueco.** Y el requisito operativo en EMEA lo está
+escribiendo el **colegio profesional**, más rápido que el legislador: guía del **CCBE** (oct-2025),
+directrices de la **OVB** (Flandes) y la **NOvA** (Países Bajos).
+
+### ⚠️ Discrepancia de fuentes que este pase deja registrada en vez de resolver
+
+Sobre el **Omnibus** del AI Act: un rastreador lo da por promulgado como **Reglamento (UE)
+2026/1744** (lo que esta KB publica desde el pase 3), otras fuentes lo describen como **acuerdo
+político del 7-may-2026 pendiente de adopción formal y publicación en el DOUE**. El calendario de
+esta KB **no cambia** (Art. 50 vigente 2-ago-2026 · Anexo III dic-2027 · Anexo I ago-2028) y es la
+tercera corroboración tras gaming y enterprise. **Pero un cliente que lea otra fuente verá otro
+calendario**, así que el argumento de venta no debe depender de cuál tiene razón: véndase el
+**inventario fechado** (patrón ya adoptado en la KB de gaming), que es correcto en ambos mundos.

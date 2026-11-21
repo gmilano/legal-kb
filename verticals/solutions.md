@@ -264,3 +264,44 @@ negocio, no técnica.
 ---
 *Verificado 2026-11-20 por doble canal (API de búsqueda + lectura de LICENSE). 9 filas reales,
 0 placeholders. 2 huecos declarados con lo que se buscó y qué faltó.*
+
+---
+
+## 🆕 PASE 6 (2026-11-21) — la vía «Odoo»: bases ERP/CRM permisivas para construir el despacho encima
+
+Este fichero ha buscado siempre **plataformas legales** permisivas, y el pase 5 cerró el hueco de
+*practice management* con `boyeesu/Kourti` (MIT, 1★, sin contabilidad fiduciaria ni control de
+conflictos). Falta la otra vía, la que el resto de la rotación usa de serie: **no buscar la
+plataforma vertical, sino una base ERP/CRM horizontal madura y poner el vertical legal encima** —
+el patrón Odoo/OpenMRS/Moodle. Medido este pase:
+
+| Plataforma | Licencia (leída) | URL | Stack | Caso de uso legal | Stars |
+|------------|------------------|-----|-------|-------------------|-------|
+| 🟢 **Apache OFBiz** | Apache-2.0 (**11.906 B**, incluye `NOTICE` en el fichero) | [apache/ofbiz-framework](https://github.com/apache/ofbiz-framework) | Java, entidad-motor + motor de servicios | 🟢 **La base más defendible de las tres, y la menos cómoda.** Framework de automatización empresarial de la **Apache Software Foundation**: gobernanza de fundación, no de autor individual — en este sector eso es la señal de continuidad que casi ningún activo legal tiene. Su modelo de datos genérico (partes, acuerdos, facturación por tiempo) mapea bien a *matter / cliente / contrato / horas*. Coste real: hay que construir el vertical legal entero. | n/d |
+| 🟢 **Krayin CRM** | MIT (1.078 B) | [krayin/laravel-crm](https://github.com/krayin/laravel-crm) | Laravel + PHP, MySQL | 🟢 **La vía corta para el lado cliente del despacho**, no para el expediente. MIT limpio (Webkul): leads, contactos, actividades, presupuestos, flujos de trabajo. Sirve como capa de **CRM de despacho e intake** — y el *intake* es precisamente donde Clio mide que **46% de los consumidores consultaría una AI antes de llamar a un abogado**. No tiene ni expediente ni plazos procesales: eso se añade. | n/d |
+| 🔴 **iDURAR ERP/CRM** | **AGPL-3.0** ⚠️ (**34.230 B**) | [idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm) | MERN (Node + React + Mongo) | 🔴 **SE REGISTRA COMO CORRECCIÓN, NO COMO RECOMENDACIÓN.** Una fuente indexada lo describe como *«fully open-source under the MIT license»*. **Es AGPL-3.0**, leído byte a byte: 34.230 B, banda AGPL (~34.500), encabezado `GNU AFFERO GENERAL PUBLIC LICENSE Version 3`. El checksum 932-G1 lo predijo **antes** de abrir el encabezado. Copyleft de red ⇒ inviable como base de SaaS cerrado. | n/d |
+
+### Lo que esta vía cambia, y lo que no
+
+- **Sí resuelve** la objeción de madurez: OFBiz y Krayin tienen años de producción y comunidad, al
+  contrario que los activos legales verticales permisivos de esta KB, que son casi todos de un solo
+  autor y pocas estrellas.
+- **No resuelve** lo específicamente legal: ni plazos procesales, ni **contabilidad fiduciaria**
+  (*trust accounting*), ni control de conflictos de interés, ni privilegio abogado-cliente en el
+  modelo de permisos. Esas cuatro son las que hacen que un ERP genérico no sea un sistema de
+  despacho, y las cuatro siguen siendo trabajo de Globant en cualquiera de las dos vías.
+- **Recomendación:** para un engagement de despacho, **Krayin (MIT) para intake/CRM + Kourti (MIT)
+  para expediente + la capa MCP de fuentes oficiales** del país (ver `repos/foundations.md` → pase
+  6) es hoy la combinación permisiva de punta a punta más corta. OFBiz sólo se justifica si el
+  cliente ya es Java y quiere un único ERP.
+
+### 🗑️ Descartado en esta capa, con la medición
+
+- `createrivabu/Iuris-Soft` (26★) — sistema de gestión legal con el alcance correcto (contactos,
+  societario, litigios, documentos, tareas, facturación, contratos) y **sin licencia**: 404 medido
+  en `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING`, `LICENSE-MIT` sobre `HEAD`, y
+  sin entrada *License* en la barra lateral. Sin licencia expresa no hay derecho de uso ni
+  derivado. **Es el candidato a vigilar**: si publica MIT/Apache, entra directo.
+- `j-lawyer` — descrito por una fuente indexada como practice management libre (Alemania, EMEA).
+  **Ningún slug verificable:** `j-lawyer-org/j-lawyer` y `j-lawyer-org/j-lawyer-server` dan 404.
+  No entra sin slug.

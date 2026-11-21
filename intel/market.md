@@ -344,6 +344,56 @@ concordantes. **Citable con la fecha y la población siempre pegadas al número.
   que se vende es **verificación + política + registro de auditoría**, no un copiloto más.
   Ver `compose/patterns.md` → P10.
 
+#### 🆕 Pase 6 (2026-11-21) — el eje de EE. UU. añade un tercer movimiento: de DIVULGAR → VERIFICAR → **LITIGAR QUIÉN MANDA**
+
+El pase 3 registró el giro de *divulgar* a *verificar*. Lo nuevo de este pase es que **el conflicto
+federal-estatal dejó de ser doctrinal y pasó a ser un litigio con unidad dedicada**, lo que
+convierte el calendario de cumplimiento en EE. UU. en una variable, no en un dato:
+
+- **Orden ejecutiva (dic-2025)** que instruye al *attorney general* a **impugnar leyes estatales de
+  AI** que choquen con un «marco nacional mínimamente gravoso», y **el DOJ creó una *Artificial
+  Intelligence Litigation Task Force* el 9-ene-2026**. ⇒ Para un cliente multiestado, la pregunta
+  de arquitectura ya no es «¿qué exige Colorado?» sino **«¿qué exige Colorado y sobrevivirá?»**.
+- **Colorado AI Act:** la fecha de exigibilidad **se movió del 1-feb-2026 al 30-jun-2026**, y su
+  ámbito de alto riesgo **incluye decisiones sobre servicios legales**. Es la norma estatal que más
+  directamente toca esta industria y la que más se ha retrasado.
+- **Texas (TRAIGA): en vigor desde el 1-ene-2026.** **California:** varias en vigor, entre ellas la
+  **AI Transparency Act (SB 942)**, que obliga a divulgar contenido generado por AI.
+- **Federal:** sigue sin ley general. La **TAKE IT DOWN Act** se describe como el único estatuto
+  federal autónomo que regula sustantivamente sistemas de AI hasta ahora.
+
+**Y el eje de verificación se endurece por donde esta KB predijo — el tribunal, no el legislador:**
+
+- 🔴 **Indiana, Trial Rule 11, en vigor el 1-ago-2026:** la firma del escrito **certifica que toda
+  autoridad legal citada es auténtica**, y la regla **cubre expresamente los escritos asistidos por
+  AI**. Es la obligación en su forma más dura: no «declara que usaste AI», sino **«responde de que
+  la cita existe»**. Confirma la tendencia 1 de `intel/trends.md` con un instrumento nuevo.
+- **Nueva York:** el sistema judicial adoptó una política interina que **obliga a formación en AI a
+  todos los jueces y al personal** y **limita la AI generativa a herramientas aprobadas**. ⇒ se abre
+  un comprador que esta KB no tenía mapeado: **el propio poder judicial**, y lo que compra es
+  *lista de herramientas aprobadas* + formación, no un copiloto.
+- Las sanciones por citas inventadas siguen escalando y ya alcanzan al **Quinto Circuito**.
+
+**Adopción, con dos fuentes nuevas y un dato que es la oportunidad comercial entera:**
+
+| Medición | Valor | Fuente |
+|----------|-------|--------|
+| Despachos que usan AI generativa | **41%** (desde 28% el año anterior) | Thomson Reuters |
+| Profesionales que ya usan **AI agéntica** | **15%** | Thomson Reuters |
+| Ejercientes individuales que usan AI | **69%** | 8am *2026 Legal Industry Report* |
+| Despachos que han implantado AI de propósito general | **46%** | 8am *2026 Legal Industry Report* |
+| 🔴 **Despachos que NO dan ninguna formación en AI** | **54%** | 8am *2026 Legal Industry Report* |
+
+⇒ **El 54% sin formación, junto al mandato de formación de los tribunales de NY y a la
+certificación de autenticidad de Indiana, es la oportunidad más limpia de la región**: no hay que
+convencer a nadie de adoptar AI (ya la usan), hay que **hacerla defendible ante una firma que ahora
+responde de la cita**. Eso se vende como *gate* de verificación + formación + inventario de
+herramientas aprobadas, no como modelo.
+
+**Canadá:** se espera que **AIDA** avance en 2026; un cliente continental tendrá que reconciliarla
+con el mosaico estatal de EE. UU. ⚠️ Varias de las fuentes de este bloque son de principios de 2026
+y el conflicto federal-estatal está vivo: **la fecha de Colorado ya se movió una vez.**
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -494,6 +544,51 @@ de EE. UU. con operación europea es un engagement de EU AI Act.**
   `internal: true`). **Es la pieza que convierte el argumento de soberanía EMEA en una
   demostración**, no en una diapositiva.
 
+#### 🆕 Pase 6 (2026-11-21) — la UE es la región de **mayor adopción del mundo**, y el competidor sigue siendo ChatGPT
+
+**La inversión que conviene tener delante en una reunión europea:** el supuesto habitual es que
+Europa va detrás por la regulación. Las dos mediciones nuevas de este pase dicen lo contrario.
+
+| Medición | Valor | Fuente |
+|----------|-------|--------|
+| Juristas **in-house** europeos que usan AI | **61% — la tasa más alta del mundo, por delante de EE. UU.** | ACC / Everlaw |
+| Departamentos legales europeos que usan herramientas **generales** (ChatGPT y similares) | **56%** | Wolters Kluwer / Legisway |
+| 🔴 Departamentos legales europeos que han implantado **AI legal especializada** | **14%** | Wolters Kluwer / Legisway |
+
+⇒ **Segunda confirmación independiente del reencuadre del pase 5**, y la más nítida hasta ahora: la
+brecha **56% genérico vs 14% especializado** dice que el valor ya se está capturando con
+herramientas **no defendibles** — en la única región donde el Art. 50 ya es exigible. El competidor
+no es Harvey ni Legora: es el ChatGPT que el departamento legal ya tiene abierto. **Y aquí esa
+brecha no es sólo riesgo de calidad: es exposición regulatoria.**
+
+**Lo nuevo en el plano regulatorio, y una discrepancia que hay que dejar a la vista:**
+
+- **Desde el 2-ago-2026 la AI Office y las autoridades nacionales están *ejecutando* el AI Act**
+  (no sólo está en vigor). La fase de «preparar» terminó.
+- **Omnibus:** acuerdo político el **7-may-2026** que posterga las obligaciones de alto riesgo del
+  **Anexo III a dic-2027**. ⚠️ **Las fuentes discrepan sobre su estado formal**: un rastreador lo da
+  por promulgado como **Reglamento (UE) 2026/1744** — que es exactamente lo que esta KB publica
+  desde el pase 3 — mientras otras lo describen como pendiente de adopción formal y publicación en
+  el DOUE. **El calendario de esta KB se mantiene** (Art. 50 vigente desde 2-ago-2026, Anexo III
+  dic-2027, Anexo I ago-2028): es la tercera corroboración, tras gaming y enterprise. Pero
+  **regístrese la discrepancia**: un cliente que lea otra fuente verá un calendario distinto, y el
+  argumento de venta no puede depender de cuál tiene razón.
+- **Los colegios profesionales se han convertido en la fuente de requisitos operativa**, más rápida
+  que el legislador: guía del **CCBE** sobre AI generativa para abogados (**oct-2025**), y
+  directrices propias de la **OVB** (Flandes) y la **NOvA** (Países Bajos) en 2025. ⇒ En EMEA el
+  pliego técnico sale del colegio, no del AI Act.
+- **La regulación como *driver* de adopción, no como freno** (Legartis): el AI Act da a un
+  departamento legal la claridad de **qué está permitido**, y eso es lo que permite justificar la
+  inversión. Es el argumento que convierte el trabajo de cumplimiento en presupuesto.
+
+**El hueco de mercado, dicho por un actor local:** los grandes globales —Harvey, Blue J, Legora—
+**«no están construyendo para Bélgica»**, y las herramientas que cubren derecho fiscal belga
+concreto están **emergiendo ahora**. Es la tesis de localización de esta KB (plantilla por
+jurisdicción) formulada por el propio mercado, y aplicable igual a Portugal, Grecia o los nórdicos:
+**jurisdicciones demasiado pequeñas para el roadmap de un unicornio y demasiado reguladas para el
+genérico.** Ahí el activo de referencia sigue siendo `opencaselaw` (26 cantones, 3 idiomas) y el
+patrón de soberanía impuesta por red es `P21`.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -639,6 +734,47 @@ es lo que devuelven todas las consultas genéricas.
   exactamente el punto de entrada de un *human gate* como producto.
 - **Australia** es, según Chambers, el mercado que lidera AI en la región.
 
+#### 🆕 Pase 6 (2026-11-21) — la taxonomía que vuelve vendible el mosaico de APAC, y Singapur como mercado de los *skills* abiertos
+
+El problema comercial de APAC en esta KB era que «cada país regula distinto» no es un argumento:
+es una queja. Este pase incorpora **una taxonomía de tres regímenes** (Latham & Watkins) que sí es
+accionable, porque cada régimen implica **una arquitectura distinta**:
+
+| Régimen | Países | Qué implica para la arquitectura |
+|---------|--------|----------------------------------|
+| **Ley integral** | **Corea del Sur**, **Vietnam** | Obligaciones transversales ⇒ el *gate* de cumplimiento es un **componente del producto**, con aviso previo al usuario |
+| **Reglas específicas por salida** | **China** | **Registro obligatorio + etiquetado de contenido** por tipo de salida (recomendación algorítmica, deepfakes, AI generativa) ⇒ el cumplimiento es **por *feature***, no por sistema |
+| **Guía y marcos voluntarios** | **Japón**, **Singapur**, **Australia**, **Nueva Zelanda** | No hay estatuto vinculante ⇒ lo que se compra es **evidencia**: *testing*, documentación, auditoría |
+
+**Fechas que fijan el calendario regional:**
+
+- **Corea del Sur — AI Basic Act en vigor el 22-ene-2026**, y exige **avisar previamente al usuario**
+  cuando interviene AI de alto impacto o generativa. (Esta KB ya tenía su alcance extraterritorial;
+  lo nuevo es la obligación de aviso previo, que es un requisito de **interfaz**, no de modelo.)
+- **Vietnam — ley de AI autónoma en vigor el 1-mar-2026**: **el primer régimen integral y autónomo
+  del Sudeste Asiático.** Relevante porque el único activo legal vietnamita de esta KB
+  (`Paparusi/legal-ai-agent`, MIT, 214★) sigue sin declarar alcance: hay regulación antes que
+  ecosistema.
+- **Singapur:** sin estatuto vinculante; **Model AI Governance Framework** + el *toolkit* de pruebas
+  **AI Verify**. ⇒ Es la jurisdicción donde un entregable de Globant puede **certificarse contra un
+  instrumento público** sin esperar a una ley.
+- **Nueva Zelanda** se posiciona como *«sophisticated adopter»*: actualiza privacidad y consumo en
+  vez de legislar AI. **India:** etiquetado de AI dentro de reglas sectoriales ya existentes.
+- ⚠️ **Sin verificar:** una fuente sitúa la aprobación de la *AI Basic Act* de **Taiwán en dic-2025**.
+  Una sola fuente secundaria ⇒ no se incorpora al calendario de esta KB hasta contrastarlo.
+
+**La frase que resume la región, y es una oportunidad invertida:** APAC tiene **la mayor velocidad
+de adopción de AI legal del mundo y los marcos de gobernanza más débiles**. Junto a la medición del
+pase 5 (LexisNexis APAC, n=1.715: **94% usa alguna AI, 46% AI legal especializada**), el patrón es
+idéntico al europeo pero con menos red de seguridad: **se compra gobernanza retroactiva**.
+
+**Señal de mercado nueva, y viene del lado open source:** `rohasnagpal/legal-ai-skills` (MIT, 214★)
+tiene *Jurisdiction Counsel* para India, EE. UU., RU y **añadió Singapur como cuarta jurisdicción,
+con 18 skills locales**. Que el cuarto mercado al que un proyecto permisivo indio dedica trabajo
+local sea Singapur —y no Australia ni Japón— dice dónde está hoy la demanda pagadora de la región.
+⇒ **Entrada recomendada en APAC: Singapur (AI Verify como criterio de aceptación) o India (skills
+permisivas ya existentes), y Corea/Vietnam sólo con el *gate* de aviso previo ya construido.**
+
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -678,10 +814,15 @@ es lo que devuelven todas las consultas genéricas.
   permiso de licencia y con el diseño atribuido a Anthropic. Y existe un patrón paralelo de
   **servidor MCP que envuelve las fuentes legales oficiales de un país**: Corea (2.904★), Italia,
   Singapur, EE. UU.
-  **No existe ninguno para Brasil ni para México.** Ni adaptación de plugins, ni MCP de
-  jurisdicción, ni corpus. Verificado hoy con vocabulario es/pt (4 búsquedas).
-  ⇒ Es una oportunidad con **plantilla, licencia y techo de esfuerzo conocidos**, no un proyecto
-  de investigación. Ver `compose/patterns.md`, receta 7.
+  🔴 ~~**No existe ninguno para Brasil ni para México.**~~ **CORREGIDO EN EL PASE 6
+  (2026-11-21): existen cuatro, y tres son brasileños.** `br-eli-mcp` (Apache-2.0), `leis-mcp`
+  (MIT), `jurismcp` (MIT) y **`mcp-dof` (MIT) para el DOF mexicano**. La verificación «con
+  vocabulario es/pt (4 búsquedas)» de este párrafo **buscó los flujos en portugués pero las
+  fuentes sólo en inglés**: faltaban los sustantivos `legislação`, `jurisprudência` y
+  `Diario Oficial`. Ver `agents/top.md` → G-L12.
+  ⇒ La oportunidad sigue existiendo pero **cambia de naturaleza**: no es construir la primera capa,
+  es **extenderla y endurecerla**, y construirla sólo donde falta (AR, CL, CO, PE). Ver
+  `compose/patterns.md`, recetas 7 y **P12 reescrito**.
 - 🔴 **Huecos declarados:**
   - **No se hallaron datos de adopción de AI por despachos o departamentos legales en LATAM**
     (tercer pase consecutivo). Las búsquedas devuelven regulación y protección de datos, nada de
@@ -729,10 +870,14 @@ es lo que devuelven todas las consultas genéricas.
   ninguna adaptación por jurisdicción para Brasil ni México. **`ThomasMoreAI/legal-skills-open`
   (Apache-2.0) tiene Brasil 15 plugins, Argentina 2, México 2, Colombia 1, Perú 1, Rep. Dominicana
   1.** Brasil es la 9.ª jurisdicción del repo, por delante de Francia, Reino Unido, Italia y España.
-  **Lo que sigue vacío, verificado por doble canal, es otra cosa: no existe ningún servidor MCP de
-  fuentes legales oficiales para ninguna jurisdicción LATAM.** El hueco es de **fuentes**, no de
-  **flujos** — y la arquitectura a copiar ya está probada en `opencaselaw` (CH) y `korean-law-mcp`
-  (KR). Ver `compose/patterns.md` → P12.
+  ~~**Lo que sigue vacío, verificado por doble canal, es otra cosa: no existe ningún servidor MCP
+  de fuentes legales oficiales para ninguna jurisdicción LATAM.**~~ 🔴 **FALSO, CORREGIDO EN EL
+  PASE 6.** Y el «doble canal» es precisamente el motivo del error: los dos canales eran el índice
+  de GitHub y los ficheros de GitHub, es decir **un solo canal para efectos de descubrimiento**
+  (G-L12). Existen cuatro MCP de fuentes oficiales LATAM, los cuatro permisivos. **El hueco
+  verdadero, ya acotado: Argentina, Chile, Colombia y Perú.** La arquitectura a copiar sigue siendo
+  `opencaselaw` (CH) y `korean-law-mcp` (KR), **más `mcp-dof` (MX), que es ahora el ejemplo LATAM
+  nativo.** Ver `compose/patterns.md` → P12 (reescrito).
 
 #### 🆕 Pase 3 (2026-11-21) — en Brasil el límite no es técnico: el colegio de abogados está LITIGANDO contra la AI legal
 
@@ -852,6 +997,62 @@ fechado:**
 > favor de empezar por Brasil**, lo cual es lo contrario de como se suele secuenciar un rollout.
 > ⚠️ Vale para el **sector público / Poder Judicial**, que es donde aplica la Resolución. Para
 > despacho privado el límite sigue siendo el del **ejercicio de la profesión** — ver `compose/patterns.md` → **P17**.
+
+#### 🆕 Pase 6 (2026-11-21) — **la capa de fuentes oficiales ya existe**, el regulador brasileño tiene dientes y el mapa gana tres países
+
+**El cambio de fondo de este pase es el de producto, y contradice lo que esta KB publicaba en este
+mismo fichero:** *«no existe ningún servidor MCP de fuentes legales oficiales para ninguna
+jurisdicción LATAM… no existe ninguno para Brasil ni para México»*. **Existen cuatro**, permisivos,
+licencia leída byte a byte (detalle en `repos/foundations.md` → pase 6):
+
+| Activo | Licencia | País | Fuente oficial |
+|--------|----------|------|----------------|
+| `matematicsolutions/br-eli-mcp` | Apache-2.0 | 🇧🇷 | 8 APIs sin clave: Câmara, Congresso (+DOU), `normas.leg.br`, **DataJud/CNJ**, STJ, CARF, TST, TCU |
+| `mazulo/leis-mcp` | MIT | 🇧🇷 | 1.218.990 normas + avisos de revogação (`normas.leg.br`, LexML, Senado) |
+| `ivancaron/jurismcp` | MIT | 🇧🇷 | STJ, STF, TST, TJES, LexML (`urn:lex`), **BNP/CNJ**, TNU, TRF4 |
+| `BEG-lag/mcp-dof` | MIT | 🇲🇽 | **Diario Oficial de la Federación** vía API oficial **SIDOF** |
+
+⇒ **La oportunidad LATAM se reformula y mejora.** Ya no es «construir la primera capa de fuentes»
+(4–8 semanas de riesgo técnico puro, difícil de vender): es **integrar una capa que ya cita fuente
+oficial y arrastra provenance**, y cobrar por lo que falta, que es exactamente lo que un despacho
+no puede hacer solo: endurecer `jurismcp` (hoy *headless* y frágil), ampliar a tribunales
+estatales, y **replicar `mcp-dof` en los cuatro países sin cobertura — Argentina, Chile, Colombia y
+Perú**. El hueco es **de cuatro países, no de una región**, y `mcp-dof` ya resolvió el patrón duro
+(«API oficial sin documentar, mapeada por sondeo») para un boletín oficial LATAM.
+
+**Regulación — tres incorporaciones y un regulador que cambia de categoría:**
+
+- 🔴 **Brasil: la ANPD pasó a ser agencia reguladora plena el 25-feb-2026**, con mayor autonomía
+  técnica, administrativa y financiera. Es el cambio más relevante de la región para un
+  engagement: mientras **PL 2338/2023** sigue trabado en la Cámara (aprobado en Senado dic-2024),
+  **el ejecutor de LGPD ya tiene estatuto de agencia**. ⇒ En Brasil el riesgo exigible hoy llega
+  por **datos personales**, no por ley de AI, y tiene un regulador con dientes nuevos.
+- 🆕 **Colombia: PL 025/2026**, de enfoque basado en riesgo, **pendiente de primer debate** en
+  Cámara. Primera vez que Colombia entra en este mapa con un instrumento concreto.
+- 🆕 **Argentina: no hay ley nacional, y la obligación llegó por vía subnacional y administrativa**
+  — **Santa Fe, Decreto 2726/2025** y **Provincia de Buenos Aires, Resolución 4/2025**. Es un
+  patrón que esta KB no tenía registrado en ninguna región: **mandatos de AI de alcance
+  provincial**. Para un cliente argentino, el perímetro de cumplimiento es *por jurisdicción
+  provincial*.
+- **Perú sigue siendo el más avanzado de lo *vigente*** — Ley 31814 (publicada 5-jul-2023),
+  reglamento aprobado 9-sep-2025 **y en vigor desde el 22-ene-2026**, con prohibiciones explícitas
+  y categorías de alto riesgo. 🆕 **Y el detalle nuevo que importa para planificar: sus deberes
+  entran por fases sectoriales a partir de sep-2026.** Ahí los *human gates* son **reglamentarios**.
+- **Uruguay:** primer país de la región en firmar el **Convenio Marco del Consejo de Europa** sobre
+  AI y derechos humanos (2025). **México:** sin estatuto; varias iniciativas federales en curso.
+
+**Y lo que sigue siendo el instrumento más rápido y vinculante de la región: el electoral.** De
+cara a las elecciones de 2026 el tribunal electoral brasileño **prohibió que sistemas de AI
+recomienden candidatos o señalen preferencia de voto** y **obliga a divulgar contenido de campaña
+generado con AI**. Confirma la tendencia 15 de esta KB (*en LATAM la obligación llega por el juez,
+no por el legislador*) con el mismo mecanismo y un segundo año de vigencia.
+
+**El argumento transferible, ahora con respaldo académico:** la literatura comparada describe
+abiertamente lo que hacen estos países como **trasplante legal del AI Act europeo**. ⇒ El trabajo
+de cumplimiento europeo **se reutiliza** en LATAM, y eso es vendible como ahorro, no como teoría.
+⚠️ Contrapeso honesto, ya registrado en el pase 5 y no desmentido: el BID sitúa la difusión de AI
+en LAC como temprana pero acelerando en finanzas, salud, educación y **gobierno** — **legal no
+aparece en esa lista**. Es un argumento de *timing*, no de ausencia de demanda.
 
 ## Hueco de producto transversal (las cuatro regiones)
 
