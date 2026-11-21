@@ -344,3 +344,35 @@ licencia leída del fichero:
 ACC/Everlaw, Bloomberg Law, Comisión Europea (AI Office, CNIL), Latham & Watkins (APAC),
 Baker Botts, Baker Donelson, MoFo, Atlantic Council, xenoss/CASRAI (LATAM), y verificación
 directa por API de GitHub + lectura de LICENSE para cada repo citado.*
+
+
+## 🆕 PASE 4 (2026-11-21) — tres tendencias que el pase 3 no registró
+
+### T-P4-1 — La categoría de compra ya se llama «legal LLM», y se define por el corpus
+El **Legal LLM Market Report 2026** (18-nov-2026) proyecta **55,67 B USD en 2030** y nombra
+**Thomson Reuters, LexisNexis, Harvey AI e Ironclad**. Que exista un informe de analista con ese
+recorte significa que hay **presupuesto con ese nombre**, y la composición de la lista —dos
+incumbentes de *datos jurídicos* y dos nativos de AI— confirma que **la categoría se define por
+quién tiene el corpus, no por quién tiene el modelo**. Encaja exactamente con lo que esta KB midió
+en el pase 3: los cuatro laboratorios frontera lanzaron vertical legal y **ninguno trae corpus
+jurisdiccional propio**. ⇒ **El activo defendible de un engagement es el corpus de la
+jurisdicción**, no la capa de agente, que es commodity a doce meses.
+
+### T-P4-2 — La gobernanza de agentes se está escribiendo en APAC, no en la UE
+El **IMDA de Singapur** lanzó el **Model AI Governance Framework for Agentic AI (22-ene-2026)**:
+el primer marco dirigido a sistemas que **actúan**, no a modelos que generan ni a contenido que se
+etiqueta. El EU AI Act regula por *riesgo de la aplicación* y el Anexo III legal no muerde hasta
+dic-2027; Japón e India no tienen nada vinculante de propósito general. ⇒ **Para documentar un
+despliegue agéntico hoy, el único marco de referencia disponible es singapurense y voluntario** —
+lo que lo convierte en **plantilla de diseño sin coste de cumplimiento**, utilizable en cualquier
+jurisdicción. **Tendencia a vigilar: que los reguladores que sí sancionan adopten su estructura.**
+
+### T-P4-3 — Las estrellas de GitHub se están contaminando como señal: el repo como gancho comercial
+Medido en esta KB este pase (`agents/top.md` → **G-L8**): el segundo repo de agente legal más
+estrellado, **1.852★**, **declara en su propia `description` que es la captación de una comunidad
+de pago**, no tiene fichero de licencia y lleva 8 meses sin commits. No es un caso aislado de un
+vertical: el patrón **repo-como-gancho** es independiente de la industria. ⇒ **Consecuencia para
+toda la rotación: a partir de este pase, «muchas estrellas» deja de ser una señal de adopción y
+pasa a ser una pregunta — *¿por qué tiene estas estrellas?*.** El discriminador barato es leer la
+`description` completa buscando llamada a la acción comercial, y el patrón firma es
+**estrellas altas + sin licencia + dormido**.

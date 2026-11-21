@@ -9,6 +9,44 @@ updated: 2026-11-21
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-21 (pase 4) — las 7 filas del pase 3 resisten la auditoría, y aparece un modo de fallo que los tres controles de esta KB no ven
+
+**Este pase audita al pase 3, que a su vez auditaba al pase 2.** Y encuentra la asimetría
+estructural de la rotación: **cada pase revalida al anterior y publica sin revalidar lo que añade.**
+Las **7 filas nuevas del pase 3 no las había comprobado nadie.** Comprobadas hoy por los dos
+canales: **7/7 confirmadas, 0 errores de dato.** Primer pase de esta KB que audita y no corrige
+nada — la señal de que el método de dos canales ya está estabilizado.
+
+### 🔴 Lo que sí aparece: *embudo de venta* (G-L8)
+
+`zubair-trabzada/ai-legal-claude`, **1.852★**, era *«el segundo repo de agente legal más estrellado
+tras `claude-for-legal`»*. Su `description` **termina en** *«If you want to learn how to sell this
+to real businesses, check out the **Skool community**»*: **el repo es el gancho de captación de una
+comunidad de pago.** Sin fichero de licencia, 8 meses sin commits.
+
+**Lo que esto obliga a cambiar:** el embudo **pasa los tres controles que esta KB ya tiene**
+(existencia ✓, pertinencia ✓ —habla de contratos y NDAs en sus propias palabras—, estrellas ✓).
+Falta un **cuarto**: *¿por qué tiene estas estrellas?* ⇒ Leer la `description` **completa** buscando
+llamada a la acción comercial; el patrón firma es **estrellas altas + sin licencia + dormido**.
+**No tiene nada de legal: aplicar en todas las industrias de la rotación.**
+
+### Mediciones del pase (todas por `search/repositories` + lectura de LICENSE)
+
+| Repo | Medido hoy | Cambio desde el pase 3 |
+|------|-----------|------------------------|
+| `anthropics/claude-for-legal` | Apache-2.0, **10.054★**, 2026-11-19 | sin cambio |
+| `stella/stella` | Apache-2.0 (11.358 B ✓ banda), ★282, **`pushed_at` 2026-11-21** | **commit de hoy otra vez** — segundo día consecutivo |
+| `open-legal-products/mike` | AGPL-3.0, **4.504★**, 2026-11-19 | sin cambio |
+| `Lethe044/hermes-legal` | MIT, ★26, 2026-10-10 | **dato nuevo**: corre con *free tiers* de Groq/Gemini **o totalmente offline, sin API key** |
+| `Paparusi/legal-ai-agent` | MIT, ★214, 2026-03-21 | **`description` vacía confirmada por API**: la cautela del pase 3 era correcta |
+| `CSlawyer1985/contract-review-pro` | **NONE**, ★311, 2026-08-14 | sin licencia confirmado |
+| `FuturixAI…/Prism-Legal-OS` · `JustVugg/judicex` | AGPL-3.0 ★226 · Apache-2.0 ★69 🪦 | sin cambio |
+
+**Ningún agente legal nuevo relevante entró esta hora.** Las consultas globales de agentes
+devolvieron **listas de agentes de propósito general** (OpenClaw, OpenHands, CrewAI, LangChain,
+OpenCode) — el mismo ruido de categoría que el pase 3 nombró como *blanqueo de categoría* (G-L5).
+**Se registra como medición, no como ausencia de búsqueda.**
+
 ## 🆕 2026-11-21 (pase 3) — los cuatro laboratorios frontera ya tienen vertical legal, y el repo legal nuevo más estrellado no tiene licencia
 
 **Este pase es una auditoría del pase 2, no una reescritura.** Las 33 filas del pase 2 se

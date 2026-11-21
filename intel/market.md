@@ -52,6 +52,23 @@ las dos cosas en las que las fuentes **sí** coinciden:
   caso de uso**, y es exactamente donde esta KB tiene más activos verificados (ContextGem,
   OpenContracts, contract-review-agent, doc-haus, ms-word-addin, contract-review 中文).
 
+### 🆕 Medición añadida en el pase 4 — el segmento se mide ya como «legal LLM», no como «legal tech»
+
+**Legal Large Language Model (LLM) Market Report 2026** (publicado **2026-11-18**): el segmento
+llega a **55,67 B USD en 2030**, y nombra como players de referencia a **Thomson Reuters,
+LexisNexis, Harvey AI e Ironclad**.
+
+⇒ **Lo relevante no es la cifra, es el recorte.** Que una casa de análisis publique un informe de
+«legal LLM» como categoría propia —y no como línea dentro de «legal tech»— significa que el
+comprador ya tiene **presupuesto con ese nombre**. Y la lista de players lo confirma: **dos
+incumbentes de datos jurídicos (Thomson Reuters, LexisNexis) junto a dos nativos de AI (Harvey,
+Ironclad)**, es decir la categoría se define por *quién tiene el corpus*, no por quién tiene el
+modelo — que es exactamente la tesis que esta KB sostiene en `## Players globales` (los cuatro
+laboratorios frontera no traen corpus jurisdiccional propio).
+
+⚠️ Fuente secundaria (nota de prensa del propio informe), **no verificable contra el informe
+completo**: citar con fecha y con la palabra «proyección» pegada.
+
 ## Adopción — la señal más sólida
 
 | Dato | Valor | Fuente |
@@ -383,6 +400,25 @@ transcripción o traducción está en el ámbito — y es **extraterritorial**: 
 estadounidense cuya AI usan empresas europeas entra. ⇒ **Un engagement de Globant para un cliente
 de EE. UU. con operación europea es un engagement de EU AI Act.**
 
+- 🆕 **PASE 4 — tercera corroboración independiente del calendario post-Omnibus, y la cuarta
+  región que lo confirma.** Dos fuentes nuevas de este pase dan **exactamente 2-dic-2027 (Anexo III)
+  y 2-ago-2028 (Anexo I)**, y añaden que **la AI Office y las autoridades nacionales empezaron a
+  hacer cumplir el Act el 2-ago-2026** — es decir el *enforcement* lleva **~3,5 meses vivo** a día
+  de hoy. ⇒ **El conflicto marcado arriba se debilita otra vez:** las KBs de gaming y legal ya
+  corroboraban, y la de enterprise registraba conflicto; con dos fuentes más del lado del
+  aplazamiento, **la hipótesis a revisar es la de enterprise, no la de aquí.** (Sigue marcado como
+  conflicto: no se cierra un conflicto por conteo de fuentes secundarias, se cierra con el texto.)
+- 🆕 **PASE 4 — la adopción europea es ANCHA Y POCO PROFUNDA, y es el dato comercial que faltaba.**
+  **Wolters Kluwer / Legisway (2025): el 56% de los departamentos legales europeos usa herramientas
+  generalistas (tipo ChatGPT), y sólo el 14% ha implantado AI legal especializada.**
+  **ACC/Everlaw (2025): 61% de los abogados in-house europeos**, por **encima** de sus homólogos
+  estadounidenses.
+  ⇒ **La brecha 56 → 14 es un factor de 4, y es el hueco de esta KB en EMEA**: el cliente europeo
+  **ya está usando AI, sin herramienta especializada y sin gobernanza**, justo mientras el
+  enforcement del Act lleva 3,5 meses activo. **No hay que venderle adopción: hay que venderle
+  sustitución del shadow-IT por algo defendible.** Es la lectura inversa a la de North America,
+  donde el problema es la ausencia de política (43%), no la ausencia de herramienta.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -478,6 +514,35 @@ regulación de la AI y escasez sobre la práctica judicial. ⇒ Para un engageme
 judicial de APAC **no hay base pública utilizable en esta KB**, y hay que tratarlo como
 investigación primaria a presupuestar, no como conocimiento disponible. (Singapur es la excepción:
 su guía para usuarios de los tribunales existe.)
+
+- 🆕 **PASE 4 — Singapur publicó el primer marco de gobernanza del mundo dirigido a sistemas
+  *agénticos*, y es justo lo que construye esta KB.** El **IMDA** lanzó el **Model AI Governance
+  Framework for Agentic AI el 2026-01-22**. Singapur **no tiene ley de AI**: las reglas vinculantes
+  llegan por reguladores sectoriales (el banco central publicó **guías de riesgo de AI para
+  entidades financieras en oct-2026**).
+  ⇒ **Por qué es el dato APAC más accionable de este fichero:** todo lo demás que esta KB registra
+  en la región regula *modelos* o *contenido*; esto regula **agentes que actúan**, que es la forma
+  de producto de `lavern`, `due-diligence-agents` o cualquier composición de `compose/patterns.md`.
+  Y por ser **voluntario**, funciona como **plantilla de diseño sin coste de cumplimiento**: se
+  puede adoptar su estructura para documentar un despliegue en cualquier jurisdicción, incluidas
+  las que sí sancionan. **Es el artefacto de gobernanza más reutilizable que hay en APAC.**
+- 🆕 **PASE 4 — Japón, confirmado como el polo opuesto:** la **AI Promotion Act no tiene multas ni
+  prohibiciones** (promoción primero); **AI Basic Plan del Gabinete el 2025-12-23** y **segunda
+  fase el 2026-07-14**; la autoridad de privacidad ha **propuesto multas administrativas bajo la
+  APPI, previsiblemente hacia 2027**. ⚠️ Las fuentes **discrepan sobre la fecha de entrada en
+  vigor** de la Act (sep-2025 vs jun-2025): **sin resolver, comprobar texto primario.**
+- 🆕 **PASE 4 — India:** **sin ley de AI**; las **AI Governance Guidelines (2025-11-05) no son
+  vinculantes**, pero las **reglas de etiquetado de contenido sintético sí lo son** — asimetría
+  que importa para cualquier entregable que genere texto jurídico.
+
+🔴 **HUECO DECLARADO DEL PASE 4, escrito porque el silencio parece cobertura.** Las búsquedas de
+este pase para APAC devolvieron **regulación general de AI y nada de sector legal**: cero datos de
+adopción por despachos y cero cuota de mercado de legal-tech para **Japón, India y Singapur**. Lo
+que esta KB tiene de APAC es **código** (`korean-law-mcp`, `tw-legal-rag`, `mcp-taiwan-legal-db`,
+`devnors-data-mcp`, `Prism-Legal-OS`, `lawglance`, `DISC-LawLLM`, `fuzi.mingcha`) y **no medición
+de mercado**. ⇒ **Instrucción para el próximo pase: buscar despliegues de AI en despachos por país
+y startups de legal-tech por país, NO regulación** — la regulación ya está saturada en esta KB y
+es lo que devuelven todas las consultas genéricas.
 
 ### LATAM
 
@@ -631,6 +696,48 @@ jurisdicción** (BR, MX, CO, AR…), nunca «para LATAM», y la cobertura real m
 **Señal de consolidación del mercado local:** **Jusbrasil adquirió MinutaIA** (plataforma de
 redacción con AI). El incumbente local está comprando capacidad de AI, lo que acorta la ventana
 para entrar como constructor neutral.
+
+### 🆕 PASE 4 — Brasil: el instrumento que esta KB citaba sin nombrar, ahora con número, mecanismo y plazo VENCIDO
+
+Este fichero decía que Brasil *«tiene marco propio de AI para el Poder Judicial (CNJ), descrito por
+las fuentes como uno de los instrumentos de gobernanza de AI más detallados en vigor»*. **Nombrado y
+fechado:**
+
+- **Resolução CNJ nº 615/2025.** Clasifica las aplicaciones de AI judicial en **alto riesgo / bajo
+  riesgo**, con **prohibiciones absolutas** para usos que **impidan la supervisión humana**.
+- **Período de adaptación de 12 meses que terminó en marzo de 2026**, y los tribunales tenían que
+  **registrar los sistemas ya en uso**.
+- **CNJ (investigación de 2024): 178 iniciativas de AI** en los tribunales brasileños, en su mayoría
+  **predictivas o analíticas**.
+- **OAB** (Consejo Federal): tras las recomendaciones sobre AI generativa de 2024, lanzó en
+  **junio de 2026** un **Plan Nacional de Integración de la AI en la abogacía**.
+- **Justicia electoral:** reglas específicas para contenido **sintético y generado con AI** en las
+  **elecciones de 2026**.
+- Ley general **todavía pendiente**: el **PL 6.237/2025 se adjuntó al PL 2.338/2023 en marzo de
+  2026**, y propone un Sistema Nacional de desarrollo, regulación y gobernanza de la AI.
+
+> 🟢 **LA INVERSIÓN ESTRATÉGICA DEL PASE 4, Y ES EL ARGUMENTO LATAM MÁS FUERTE DE ESTA KB.**
+> Puestos los tres relojes uno al lado del otro:
+>
+> | Región | Obligación vinculante sobre AI en función jurisdiccional | Cuándo muerde |
+> |--------|----------------------------------------------------------|---------------|
+> | **LATAM (Brasil)** | Resolución CNJ 615/2025: clasificar, registrar, garantizar supervisión humana | **ya venció — marzo de 2026** |
+> | **EMEA (UE)** | «administración de justicia» como alto riesgo del Anexo III | **2 de diciembre de 2027** |
+> | **North America** | ninguna: **43% de los despachos sin política de AI y sin planes de tenerla** | — |
+>
+> ⇒ **En gobernanza vinculante de AI judicial, LATAM va POR DELANTE de NA y EMEA**, y es la única
+> región donde el entregable (**expediente de clasificación y registro**) está **vencido en lugar de
+> anticipado**. Eso convierte el pitch de un *gap* de cumplimiento en un *pasivo* de cumplimiento,
+> que es una venta distinta y más corta.
+>
+> 🔑 **Y es un argumento ESTRUCTURAL, no de coste.** Esta KB —y la rotación entera— vende LATAM
+> normalmente por precio o por volumen de litigio (los 80 M de causas pendientes). Esto es
+> diferente: **Brasil exige antes y exige más**, así que el trabajo de gobernanza hecho para un
+> cliente brasileño es **reutilizable hacia arriba** (sirve para el Anexo III europeo de 2027),
+> mientras que lo hecho para un cliente estadounidense no sirve para Brasil. **La asimetría va a
+> favor de empezar por Brasil**, lo cual es lo contrario de como se suele secuenciar un rollout.
+> ⚠️ Vale para el **sector público / Poder Judicial**, que es donde aplica la Resolución. Para
+> despacho privado el límite sigue siendo el del **ejercicio de la profesión** — ver `compose/patterns.md` → **P17**.
 
 ## Hueco de producto transversal (las cuatro regiones)
 

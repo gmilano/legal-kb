@@ -160,7 +160,7 @@ se corrige es un slug, un diagnóstico de método y tres campos de una fila.**
 | bettercallclaude | [fedec65/bettercallclaude](https://github.com/fedec65/bettercallclaude) | **AGPL-3.0** ⚠️ | **Suiza** · EMEA | Plugin de Claude Cowork Desktop para la práctica jurídica suiza. Par natural de `opencaselaw` (flujos + corpus). ⚠️ AGPL-3.0. | 47 | 2026-09-20 |
 | awesome-legal-skills | [lawve-ai/awesome-legal-skills](https://github.com/lawve-ai/awesome-legal-skills) | 🔴 **CC-BY-NC-ND 4.0** (19.122 B) | Global | Lista curada de Agent Skills para automatizar trabajo legal. 966★, el índice de skills legales más grande. 🔴 **NO USABLE POR GLOBANT TAL CUAL: NonCommercial + NoDerivatives.** Ver el aviso de licencia abajo: es el peor régimen de los que aparecen en esta KB y el que menos lo parece. | **966** | 2026-10-19 |
 
-| 🔴 **ai-legal-claude** | [zubair-trabzada/ai-legal-claude](https://github.com/zubair-trabzada/ai-legal-claude) | 🔴 **NINGUNA** (no existe `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE` ni `COPYING`) | Global | **El segundo repo de agente legal más estrellado que existe tras `claude-for-legal`, y no se puede usar.** Skill de asistente legal para Claude Code: revisión de contratos, análisis de riesgo, generación de NDA y compliance. 🔴 **Sin fichero de licencia ⇒ «todos los derechos reservados» por defecto: sin licencia expresa no hay derecho de uso, copia ni derivado.** Se publica aquí **precisamente para que nadie lo vuelva a encontrar y lo adopte por las estrellas.** 🪦 8 meses sin commits. | **1.852** | 2026-03-27 |
+| 🔴 **ai-legal-claude** | [zubair-trabzada/ai-legal-claude](https://github.com/zubair-trabzada/ai-legal-claude) | 🔴 **NINGUNA** (no existe `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE` ni `COPYING`) | Global | **El segundo repo de agente legal más estrellado que existe tras `claude-for-legal`, y no se puede usar.** Skill de asistente legal para Claude Code: revisión de contratos, análisis de riesgo, generación de NDA y compliance. 🔴 **Sin fichero de licencia ⇒ «todos los derechos reservados» por defecto: sin licencia expresa no hay derecho de uso, copia ni derivado.** Se publica aquí **precisamente para que nadie lo vuelva a encontrar y lo adopte por las estrellas.** 🆕 **PASE 4 — y las estrellas tienen una causa medible: su propia `description` termina en *«If you want to learn how to sell this to real businesses, check out the Skool community»*, es decir el repo es el gancho de una comunidad de pago.** Ver el modo de fallo *embudo de venta* abajo. 🪦 8 meses sin commits. | **1.852** | 2026-03-27 |
 | 🆕 **stella** | [stella/stella](https://github.com/stella/stella) | Apache-2.0 (11.358 B) | Global | 🆕 **Workspace legal open source con commit de hoy mismo.** Permisivo, bajo nombre de organización propia (no de autor individual), lo que en este sector es señal de proyecto con intención de continuidad. Candidato directo a base de despliegue de cliente. Ver `verticals/solutions.md`. | 282 | **2026-11-20** |
 | 🆕 **Prism-Legal-OS** | [FuturixAI-and-Quantum-Works/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | **AGPL-3.0** ⚠️ (34.523 B) | India · APAC | 🆕 AI legal open source para **análisis de contratos, investigación jurídica y litigio** en un solo sistema. **Segundo activo legal de la India en esta KB** (con `lawglance`), y bastante más ambicioso en alcance. ⚠️ AGPL-3.0: copyleft de red, inviable para SaaS cerrado; válido como referencia de arquitectura y para despliegue interno. | 226 | 2026-10-03 |
 | 🆕 **judicex** | [JustVugg/judicex](https://github.com/JustVugg/judicex) | Apache-2.0 (11.357 B) | Global | 🆕 Workspace legal para **redacción fundada en evidencia, análisis de expediente y respuestas verificables** — el vocabulario exacto de la tendencia de verificación de cita, y con licencia permisiva. 🪦 Pero **6 meses sin commits**: patrón de referencia, no base mantenida. | 69 | 2026-05-16 |
@@ -456,3 +456,55 @@ instrumento, G-L4 recuperación de slug por búsqueda de código, G-L5 blanqueo 
 monotonía de estrellas). **Las cifras del pase 2 se revalidaron una por una y se confirman.**
 Pases anteriores: 2 renombrados corregidos, 1 repo muerto retirado, 4 dormancias declaradas,
 2 modos de fallo de licencia documentados (CC-BY-NC-ND y relicenciamiento ELv2).*
+
+
+## 🆕 PASE 4 (2026-11-21) — auditoría de las 7 filas que el pase 3 añadió y nadie había auditado
+
+El pase 3 se describió a sí mismo como *«auditoría del pase 2, no reescritura»* y revalidó las 33
+filas del pase 2 una por una. **Pero sus propias 7 filas nuevas quedaron sin auditar**, que es la
+asimetría estructural de esta rotación: cada pase comprueba el anterior y **publica sin comprobar
+lo que añade**. Auditadas hoy por los dos canales:
+
+| Fila del pase 3 | Veredicto del pase 4 | Medición |
+|-----------------|----------------------|----------|
+| `stella/stella` | ✅ **confirmada, y mejor de lo publicado** | Apache-2.0 **11.358 B** (dentro de la banda 11.300–11.400 ✓), ★282, `archived=false`, **`pushed_at` = 2026-11-21: commit de hoy otra vez**. Y pasa el **gate de pertinencia (P15)**: su `description` es literalmente *«Open-source legal workspace»* — el vertical está **en palabras del repo**, no de un tercero. |
+| `FuturixAI-and-Quantum-Works/Prism-Legal-OS` | ✅ confirmada | AGPL-3.0, ★226, `pushed_at` 2026-10-03, `archived=false`. |
+| `JustVugg/judicex` | ✅ confirmada, dormancia confirmada | Apache-2.0, ★69, `pushed_at` **2026-05-16** ⇒ 🪦 6 meses, como se publicó. |
+| `Lethe044/hermes-legal` | ✅ confirmada **y subvendida** | MIT, ★26, `pushed_at` 2026-10-10. La `description` añade un dato operativo que la fila no recogía: **funciona con los *free tiers* de Groq/Gemini o totalmente offline, sin API key.** Para una prueba de concepto sin coste ni fuga de datos, eso es lo relevante, no las 26★. |
+| `CSlawyer1985/contract-review-pro` | ✅ confirmada (no adoptable) | ★311, **`license: NONE`** confirmado por API, `pushed_at` 2026-08-14. |
+| `Paparusi/legal-ai-agent` | ✅ confirmada (candidato a auditar) | MIT, ★214, `pushed_at` **2026-03-21** ⇒ 🪦 8 meses. **`description` vacía confirmada por API** (`NO-DESC`): la cautela del pase 3 era correcta. |
+| `anthropics/claude-for-legal` | ✅ confirmada | Apache-2.0, **★10.054**, `pushed_at` 2026-11-19, `archived=false`, `default_branch=main`. |
+
+**7/7 confirmadas. 0 correcciones de licencia, 0 renombrados nuevos, 0 filas retiradas.** Es el
+primer pase de esta KB que audita al anterior y **no encuentra ningún error de dato** — lo que dice
+que el método de los dos canales, ya estabilizado, está funcionando. Lo que sí encuentra es un
+**modo de fallo nuevo** y una **prueba de procedencia incompleta** (abajo y en `verticals/`).
+
+### 🔴 G-L8 — MODO DE FALLO NUEVO: *EMBUDO DE VENTA*. LAS ESTRELLAS TIENEN UNA CAUSA, Y A VECES LA CAUSA ESTÁ ESCRITA EN EL REPO
+
+Esta KB ya sabe que las estrellas son un **stock** y no miden vitalidad (G-L6, 932-G6). Falta la
+pregunta anterior: **¿miden adopción?** `zubair-trabzada/ai-legal-claude` tiene **1.852★** y era
+*«el segundo repo de agente legal más estrellado tras `claude-for-legal`»*. Su `description`
+completa termina así:
+
+> *«…negotiation strategy, and PDF reports — 14 skills, 5 parallel agents. **If you want to learn
+> how to sell this to real businesses, check out the Skool community**»*
+
+⇒ **El repo es el gancho de captación de una comunidad de pago.** Las 1.852★ miden el alcance de
+una campaña de marketing, no el uso por profesionales. Y encaja con el resto de la medición: **sin
+fichero de licencia** (⇒ todos los derechos reservados) y **8 meses sin commits** — un activo que
+se vende no necesita mantenerse.
+
+**Discriminadores, baratos y en este orden:**
+1. Leer la `description` **completa** y buscar llamada a la acción comercial (`Skool`, `course`,
+   `community`, `DM me`, `newsletter`, enlace de pago).
+2. **Estrellas altas + sin licencia + dormido** es el patrón firma: un proyecto con adopción real
+   acaba recibiendo issues y PRs que fuerzan a declarar licencia.
+3. Contrastar con el líder de categoría: `claude-for-legal` tiene 10.054★ **y** commit de anteayer
+   **y** Apache-2.0. Esa es la forma de una fila con adopción.
+
+> ⚠️ **Y la razón por la que esto importa más que una fila:** el embudo de venta **pasa los tres
+> controles que esta KB ya tiene** (existencia ✓, pertinencia ✓ — habla de contratos y NDAs en sus
+> propias palabras —, estrellas ✓). Es el **cuarto** control que falta: *¿por qué tiene estas
+> estrellas?* **Aplicar en todas las industrias de la rotación**: el patrón repo-como-gancho no
+> tiene nada de legal.

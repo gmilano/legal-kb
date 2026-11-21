@@ -684,3 +684,127 @@ porque los tres LLM chinos sobre los que se construía están dormidos 16–27 m
 Project; **P2 se reencuadra por calendario** porque el plazo de marcado del EU AI Act está a 12
 días; y se añaden **P7** (la plaza vacía de jurisdicción en LATAM), **P8** (citation integrity como
 producto) y **P9** (la auditoría de licencia mecánica que produjo las correcciones de este pase).
+
+
+## 🆕 P18 — Censo de clúster de nombre: contar ANTES de escribir «el» repo
+
+**Problema que resuelve.** P16 contesta *¿estos N slugs son el mismo repo?* pero **no** contesta
+*¿cuántos repos se llaman así?*, y esa es la pregunta que decide si el nombre identifica algo. En
+este pase el censo devolvió **113 repositorios llamados `LawLink`** — el pase 3 había razonado sobre
+**tres**, sacados de una sola búsqueda web, y publicó «procedencia resuelta».
+
+```bash
+#!/usr/bin/env bash
+# name-census.sh — ¿cuántos repos comparten este nombre, y cuál es el único con señal?
+# Uso: ./name-census.sh LawLink
+set -uo pipefail
+NAME="$1"
+TOTAL=$(gh api -X GET search/repositories -f q="$NAME in:name" --jq '.total_count' 2>/dev/null)
+echo "=== '$NAME' in:name  ->  total_count = ${TOTAL:-ERROR}"
+# Regla: >1 obliga a llevar siempre el owner. >20 es un comunal: el nombre no identifica nada.
+gh api -X GET search/repositories -f q="$NAME in:name" -f per_page=30 \
+  --jq '.items[] | [.full_name, (.stargazers_count|tostring)+"*",
+                    (.license.spdx_id // "NONE"), .pushed_at[0:10]] | @tsv' 2>/dev/null |
+while IFS=$'\t' read -r SLUG STARS LIC PUSHED; do
+  # El filtro que importa: licencia Y estrellas Y actividad. Los tres a la vez.
+  FLAG="   "
+  [ "$LIC" != "NONE" ] && [ "${STARS%\*}" -ge 10 ] && [ "$PUSHED" \> "2026-05-01" ] && FLAG=">>>"
+  printf '%s %-42s %-8s %-12s %s\n' "$FLAG" "$SLUG" "$STARS" "$LIC" "$PUSHED"
+done
+```
+
+**Lectura del resultado.** `>>>` marca candidatos con las tres señales. En `LawLink` **sólo
+`lawflow-boop/LawLink` queda marcado** de 30 inspeccionados; la única otra con licencia
+(`NovaLynk/LawLink`, MIT) está muerta desde 2023-12-01 y el resto son 0–1★ sin licencia.
+
+**Cómo se combina con los patrones que ya existen — el orden importa y es este:**
+
+| Orden | Patrón | Pregunta que cierra |
+|------:|--------|---------------------|
+| 1 | **P18** (este) | ¿cuántos repos se llaman así? ⇒ ¿puedo decir «el» X? |
+| 2 | **P15** gate de pertinencia | ¿habla de mi industria en *sus* palabras? |
+| 3 | **P16** identidad de HEAD | ¿estos slugs concretos son el mismo árbol? |
+| 4 | **P9/P13** gate de licencia | ¿puedo distribuirlo, en el tag que voy a fijar? |
+
+**Ejecutar P18 primero no es cosmético:** P16 sobre un conjunto incompleto **produce una conclusión
+verdadera sobre los slugs que recibió y falsa sobre el proyecto**, y se publica con la misma
+confianza. Fue lo que pasó: el cuarto slug (`appleoppa/LawLink`, HEAD `535a3531…`) **es una
+bifurcación divergente real** y refuta la frase «ni una bifurcación divergente» del pase 3.
+
+### 🔴 Y el control que refuta la lectura ingenua de este patrón (medido en el mismo pase)
+
+Antes de dar por bueno «muchos repos con el nombre ⇒ nombre inútil», se corrió P18 sobre un
+**flagship** de esta KB:
+
+```
+docassemble in:name  →  total_count = 1444      (!!)
+LawLink    in:name   →  total_count =  113
+```
+
+**1.444 > 113, y `docassemble` es el estándar de facto de access-to-justice.** Si `total_count`
+alto significara «nombre que no identifica nada», este patrón acabaría descalificando al mejor
+activo del fichero. **Hay que mirar la FORMA del resultado, no el número.** Medida:
+
+| | `LawLink` (113) | `docassemble` (1.444) |
+|---|---|---|
+| Quién tiene el nombre **desnudo** | **muchos**, todos ~0★ | **uno**: `jhpyle/docassemble`, **1.015★** |
+| Cómo se llaman los demás | **`LawLink` otra vez**, idéntico | **`docassemble-<extensión>`**: `-AssemblyLine`, `-ALWeaver`, `-docusign`, `-MAEvictionDefense`… |
+| Qué es | **comunal de nombre**: reimplementaciones independientes de un nombre genérico | **ecosistema de paquetes**: un proyecto más sus extensiones |
+| Qué dice el `total_count` | el nombre **no identifica nada** | el nombre identifica **muchísimo** |
+
+> 🔧 **DISCRIMINADOR MECÁNICO, Y ES EL VERDADERO CONTENIDO DE P18.** `total_count` alto tiene **dos
+> significados opuestos** y se distinguen sin leer código:
+> 1. **¿Hay un repo que tenga el nombre DESNUDO con estrellas dominantes?** Sí ⇒ ecosistema. No ⇒ comunal.
+> 2. **¿Los demás repiten el nombre EXACTO, o lo extienden con separador (`-`, `_`)?** Repiten ⇒ comunal. Extienden ⇒ ecosistema.
+>
+> **Un `total_count` alto con forma de ecosistema es una señal de SALUD** —mide el tamaño de la
+> comunidad de extensiones— **y debería subir la confianza en el activo, no bajarla.** Es el único
+> patrón de este fichero donde la misma medición, según su forma, apoya conclusiones contrarias.
+
+> ⚠️ **Caveat asimétrico, para no sobrecorregir.** Un `total_count` alto **no** desacredita al
+> candidato: `lawflow-boop/LawLink` sigue siendo MIT, con 110★ y commits de noviembre. Lo que
+> desacredita es **haber escrito «el» sin haber contado.** Y al revés, `total_count=1` es una
+> señal fuerte y gratuita de nombre propio defendible.
+
+---
+
+## 🆕 P19 — Expediente de clasificación y registro CNJ 615/2025 (Brasil, y el plazo ya venció)
+
+**Problema que resuelve.** Un tribunal o un órgano público brasileño que ya usa AI está **fuera de
+plazo**: la **Resolução CNJ nº 615/2025** dio **12 meses de adaptación que terminaron en marzo de
+2026** con obligación de **registrar los sistemas en uso**. Esto no es un *gap* anticipado como el
+Anexo III europeo de dic-2027: es un **pasivo vencido**, y el entregable es un expediente, no una
+hoja de ruta. Complementa **P17** (que cubre el despacho privado, donde el límite es el ejercicio
+de la profesión) y **P2** (asistente defendible bajo EU AI Act).
+
+**Composición, toda con piezas que ya están en esta KB:**
+
+1. **Inventario de sistemas** — un sistema por ficha: finalidad, datos de entrada, salida y **si la
+   salida influye en una determinación jurídica o sólo asiste a revisión humana**. Esa frontera es
+   literalmente la misma que separa el Anexo III europeo, así que **la ficha se escribe una vez y
+   sirve para las dos jurisdicciones** (ver la tabla de relojes en `intel/market.md` → LATAM).
+2. **Clasificación alto/bajo riesgo** según la Resolución, y **descarte explícito** de todo uso que
+   **impida la supervisión humana** — que la Resolución **prohíbe en absoluto**, no regula.
+3. **Supervisión humana como mecanismo, no como declaración** — `AnttiHero/lavern` (Apache-2.0):
+   *human gates* obligatorios, los hallazgos críticos no se entregan sin aprobación. Es la pieza que
+   convierte «hay supervisión humana» en un artefacto auditable: **un log de aprobaciones**.
+4. **Verificación de cita ejecutable** — `jonashertner/opencaselaw` (MIT + CC0) como **plantilla** de
+   `resolve` de citas, y el MCP de la fuente oficial de la jurisdicción. Toda afirmación del sistema
+   que cite jurisprudencia tiene que poder contrastarse contra el texto. Ver **P10**.
+5. **Anonimización antes de cualquier llamada externa** — `data-privacy-stack/presidio` (MIT).
+6. **Trazabilidad de la extracción** — `shcherbak-ai/contextgem` (Apache-2.0): devuelve el párrafo
+   de origen, que es lo que hace revisable la ficha del punto 1.
+7. **Gate de licencia sobre todo el árbol entregado** — **P9** y, si se fijan tags, **P13**. Un
+   expediente de cumplimiento entregado con una dependencia AGPL mal declarada es un hallazgo.
+
+**Por qué este patrón se vende solo y por qué conviene secuenciarlo primero.** El trabajo 1–3 es
+reutilizable **hacia arriba**: sirve para el Anexo III europeo de dic-2027. Lo hecho para un cliente
+de North America **no** sirve para Brasil (allí no hay obligación vinculante que obligue a producir
+nada: 43% de los despachos ni siquiera tiene política de AI). ⇒ **La asimetría favorece empezar por
+Brasil**, que es lo contrario de como se suele secuenciar un rollout regional.
+
+**Dónde está el riesgo de este patrón, dicho antes de que lo diga el cliente.** La Resolución aplica
+al **Poder Judicial**, no al despacho privado; y **178 iniciativas de AI** ya censadas por el CNJ en
+2024 son **mayoritariamente predictivas o analíticas**, no generativas — así que el inventario del
+punto 1 va a encontrar sistemas **anteriores** a la ola de LLMs, que son los que peor documentados
+están y los que más probablemente caigan en «influye en una determinación».

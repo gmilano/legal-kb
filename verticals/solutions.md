@@ -75,6 +75,67 @@ cuentas**.
   cuenta controla el autor, y por tanto **a quién se le está confiando el siguiente commit**.
   ⇒ Mitigación estándar y suficiente: **fijar un tag/SHA** (no seguir `main`) y mirrorizar.
 
+
+### 🔴 CORRECCIÓN DEL PASE 4 — SÍ EXISTE UNA BIFURCACIÓN DIVERGENTE, Y EL NOMBRE ES UN COMUNAL DE 113 REPOS
+
+El párrafo de arriba afirma, en palabras del pase 3: *«No son tres proyectos compitiendo **ni una
+bifurcación divergente**: es un codebase espejado en tres cuentas.»* **Las dos mitades de esa frase
+se han medido hoy por separado y una es falsa.**
+
+**(a) Hay un cuarto slug, y es el único que NO es el mismo repo.**
+
+| Slug | HEAD (`git ls-remote`) | `LICENSE` | Titular | En índice de búsqueda |
+|------|------------------------|----------:|---------|-----------------------|
+| `lawflow-boop/LawLink` | `4736aa10…` | 1.072 B MIT | 叶森 (Sen Ye) | **sí** — ★110, MIT, `pushed_at` 2026-11-02 |
+| `azaj01/LawLink` | `4736aa10…` | 1.072 B MIT | 叶森 (Sen Ye) | no |
+| `xcxzzx-1/LawLink` | `4736aa10…` | 1.072 B MIT | 叶森 (Sen Ye) | no |
+| 🔴 **`appleoppa/LawLink`** | **`535a3531…`** ⇒ **ÁRBOL DISTINTO** | 1.072 B MIT | 叶森 (Sen Ye) | no |
+
+`appleoppa/LawLink` **no apareció en el pase 3 y es precisamente el caso interesante**: mismo
+titular y misma licencia, **pero otro HEAD**, así que es una **bifurcación real con código que
+nadie de esta KB ha leído**. Las fuentes secundarias la describen como *«un fork que añade
+integraciones opcionales»* — es decir, **el repo del que un lector se sentiría tentado de partir
+es justo el que no está medido**: sin índice, no tiene estrellas, ni `archived`, ni `pushed_at`.
+⇒ **Adoptable en licencia (MIT 1.072 B legible, titular conservado), no evaluable en vitalidad.**
+
+**(b) Y el hallazgo que cambia el método: `LawLink` no es un nombre, es un comunal.**
+
+```
+gh api -X GET search/repositories -f q='LawLink in:name' --jq '.total_count'
+→ 113
+```
+
+**113 repositorios independientes se llaman LawLink.** De los 20 primeros por relevancia:
+`lawflow-boop/LawLink` es **el único con licencia Y estrellas Y actividad**; el resto son 0–1★ sin
+fichero de licencia (proyectos de bootcamp y TFG: `Mayank-Arya`, `dvjsharma`, `chitrakshtarun`,
+`haxybaxy`, `Smokehim`, `AditiDhoni`, `SoumithReddy7`, `Paras2611`, `salvationchinedu`…). La única
+otra con licencia, **`NovaLynk/LawLink` (MIT, 1★)**, está **muerta desde 2023-12-01**.
+
+⇒ **Dos poblaciones distintas, y hacen falta dos instrumentos distintos:**
+
+| Población | Qué comparten | Único instrumento que las encuentra |
+|-----------|---------------|-------------------------------------|
+| **Comunal de nombre** (113) | el **nombre**, nada más | `q='<nombre> in:name'` + `total_count` |
+| **Alias del repo real** (4) | el **HEAD** (o divergen de él) | `git ls-remote` (P16) |
+
+**P16 responde a la segunda y es ciego a la primera.** El pase 3 alimentó P16 con **tres slugs
+sacados de una sola búsqueda web** y concluyó «procedencia resuelta». Era una conclusión sobre los
+tres slugs que tenía, presentada como una conclusión sobre LawLink. ⇒ Receta nueva:
+`compose/patterns.md` → **P18**.
+
+> 🔧 **G-L7 — UNA PRUEBA DE PROCEDENCIA SÓLO ES TAN COMPLETA COMO EL CONJUNTO DE CANDIDATOS QUE SE
+> LE PASA, Y EL CONJUNTO NO SE OBTIENE DE UNA BÚSQUEDA WEB: SE CENSA.** Antes de escribir «**el**»
+> seguido de un nombre de repo, correr el censo. `total_count = 113` significa que **el nombre
+> desnudo no identifica nada** y no debe aparecer nunca sin su owner. Y el corolario asimétrico:
+> un `total_count` alto **no** desacredita al candidato — `lawflow-boop/LawLink` sigue siendo un
+> activo MIT legítimo —, lo que desacredita es **haber dicho «el» LawLink sin haber contado**.
+
+**Lo que NO cambia:** LawLink sigue siendo la única opción de *practice management* con licencia
+permisiva de esta KB, con 110★ y en estado temprano declarado. La mitigación del pase 3 (**fijar
+tag/SHA y mirrorizar, no seguir `main`**) era correcta y ahora está **mejor fundada**: con una
+bifurcación divergente confirmada en circulación, clonar «el LawLink» sin fijar owner+SHA puede
+traer un árbol distinto del que se auditó.
+
 > 📌 **Esto es el modo de fallo inverso al del `contract-review`, y conviene verlos juntos.** Allí
 > una advertencia *insuficiente* («activo») dejó pasar un repo dormido con el slug muerto. Aquí una
 > advertencia *excesiva* («autoría sin determinar») congeló un activo utilizable. **Una cautela mal

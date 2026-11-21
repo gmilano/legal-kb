@@ -228,3 +228,100 @@ coincidencia léxica de "contract" y no tienen relación con servicios legales. 
 ---
 *Ver también: `verticals/solutions.md` para plataformas verticales completas. Verificado 2026-11-20
 por doble canal. 16 filas reales, 0 placeholders.*
+
+
+## 🆕 PASE 4 (2026-11-21) — el censo de nombre aplicado a esta misma tabla: eran CINCO, no dos
+
+La corrección de arriba dice: *«No es un renombrado: **son dos repos distintos con nombre
+idéntico**»*. Correcto, e **incompleto por el mismo motivo que la procedencia de LawLink**: se
+razonó sobre los candidatos que trajo una búsqueda, no sobre un censo. Aplicado el instrumento
+nuevo (**P18**):
+
+```
+gh api -X GET search/repositories -f q='awesome-legaltech in:name' --jq '.total_count'  →  5
+```
+
+| Repo | Licencia | Stars | `pushed_at` | Lectura |
+|------|----------|------:|-------------|---------|
+| `Vaquill-AI/awesome-legaltech` | **NONE** ⚠️ | 273 | 2026-10-26 | el más grande, no adoptable |
+| `chen-friedman/awesome-legaltech` | CC0-1.0 | 34 | 2026-04-06 | limpio, pequeño, **7 meses dormido** |
+| 🆕 **`apiotrowski-afk/awesome-legaltech-pl`** | **CC-BY-4.0** (17.023 B) | 14 | **2026-11-20** | **el más activo de los cinco. Ver abajo.** |
+| `JSv4/awesome-legaltech` | NONE | 4 | **2022-11-21** 🪦 | 🔴 **VACÍO, no muerto: `size=0`, cero refs en `ls-remote`, `raw` 404.** Creado y nunca empujado (`created_at` y `pushed_at` distan **1 segundo**). **`JSv4` es el owner antiguo de `OpenContracts`.** Ver **G-L9** abajo. |
+| `mrtonyirving/awesome-legaltech` | NONE | 0 | 2026-06-29 | ruido |
+
+### 🆕 Activo nuevo: `apiotrowski-afk/awesome-legaltech-pl` — **Polonia**, y es el único índice legal de esta KB que Globant puede derivar
+
+- **Licencia leída: CC-BY-4.0, 17.023 B.** Primera línea: *«Creative Commons Attribution 4.0
+  International»*. **Permite uso comercial y obras derivadas con atribución** ⇒ es el **único**
+  índice legal de esta KB que se puede *derivar* para material de cliente. Compárese:
+  `Vaquill-AI` **sin licencia** (todos los derechos reservados), `lawve-ai/awesome-legal-skills`
+  **CC-BY-NC-ND** (ni comercial ni derivados), `chen-friedman` **CC0** (derivable, pero dormido
+  desde abril).
+- **Contenido — «Prawo w kodzie» (derecho en código):** catálogo de herramientas, datos y modelos
+  jurídicos polacos: **APIs del Sejm/ELI, SAOS, CBOSA**, jurisprudencia, **servidores MCP**, skills
+  de AI y **anonimización de documentos**. `topics`: `legal-ai`, `legal-tech`, `mcp`, `open-data`,
+  `poland`, `polish-law`, `prawo` ⇒ **pasa el gate de pertinencia (P15) por `description` y por
+  `topics`.**
+- **Jurisdicción nueva en esta KB: Polonia** — hasta hoy la KB sólo tocaba Polonia a través de
+  `ContextGem` (que es una herramienta, no una fuente jurídica polaca). Y ahora **EMEA tiene cinco
+  jurisdicciones con activo propio**: Alemania, España, Italia, Suiza y **Polonia**.
+- 🔑 **Y lo más interesante del repo no es el contenido, es su método:** se declara *«ze skalą
+  otwartości i automatyczną kontrolą świeżości»* — **con escala de apertura y control automático de
+  frescura**. Es decir: **automatiza exactamente las dos cosas que esta KB hace a mano en cada
+  pase** (graduar la licencia y medir si el repo está vivo). ⇒ **Merece una lectura de su
+  implementación en el próximo pase**, no como fuente sino como **par metodológico**: si su control
+  de frescura funciona, es un patrón adoptable para toda la rotación.
+
+### ⚠️ Corrección a la tabla de bandas del checksum de licencias (932-G1)
+
+La banda heredada para **CC-BY-4.0** es *«~18.650 B»*. Este fichero mide **17.023 B** y es
+CC-BY-4.0 **confirmado por lectura de la primera línea**. ⇒ **La banda estaba demasiado estrecha y
+habría marcado un falso positivo.** Corregida a **CC-BY-4.0 ≈ 17.000–18.700 B**. Es la primera
+corrección a la tabla de bandas desde que se importó, y confirma su propio caveat: **los bytes
+MARCAN, la lectura DECIDE.** Propagar la banda corregida a las demás KBs de la rotación.
+
+### 🔴 G-L9 — SIGNATURA DE CANAL NUEVA, DESCUBIERTA EN LA VERIFICACIÓN FINAL DE ESTE PASE: **EL REPOSITORIO VACÍO**
+
+`JSv4/awesome-legaltech` se publicó arriba (antes de la verificación final) como «4 años muerto»,
+leyendo su `pushed_at` de 2022. **Es peor que muerto: está vacío, y nunca tuvo contenido.** Medido:
+
+| Canal | `JSv4/awesome-legaltech` | Control (`chen-friedman/awesome-legaltech`) |
+|-------|--------------------------|---------------------------------------------|
+| API búsqueda | **presente**: 4★, `archived=false`, `disabled=false`, `default_branch=main` | presente |
+| **`size`** | **0** | **88** |
+| `git ls-remote` (todas las refs) | **exit 0, CERO refs** | exit 0, **33 refs** |
+| `raw` cualquier ruta | **404** | 200 |
+| `created_at` vs `pushed_at` | **2022-11-21T15:43:19Z vs :20Z — UN SEGUNDO** | separados por meses |
+
+**Es un repo creado desde la web y al que nunca se hizo push.** El `updated_at` de 2026-06-15 es
+sólo metadato (alguien le dio una estrella).
+
+> 🔧 **LAS DOS TRAMPAS, Y LAS DOS AFECTAN A INSTRUMENTOS QUE ESTA KB YA USA.**
+>
+> **1. `pushed_at` miente aquí, y es el campo en el que esta KB más ha confiado.** Reporta un push
+> que **no llevó contenido**. Un pase que mida sólo los tres campos de 932-G6
+> (★ / `pushed_at` / `archived`) publica *«dormido desde 2022»* — y «dormido» **implica que hay algo
+> que revivir o forkear**. No hay nada. ⇒ **Los tres campos no bastan: hace falta `size`**, que
+> viene **en el mismo payload** que la KB ya descarga, gratis, y que nadie estaba leyendo. Es el
+> mismo error de forma que 932-G1 (los bytes de licencia llevaban meses registrados sin usarse).
+>
+> **2. `git ls-remote` devuelve EXIT 0.** No es un error: es un éxito con cero refs, así que es
+> **invisible a cualquier comprobación de error**. Y el script de **P16** hace
+> `if [ -z "$SHA" ]; then ... "NO EXISTE (o es privado)"`, que aquí es **falso en las dos ramas**:
+> el repo existe y no es privado. **P16 confunde TRES estados en una rama**: *no existe*, *es
+> privado* y *está vacío*. Corregir P16 añadiendo la distinción por conteo de refs + `size`.
+>
+> **Discriminador, gratis y decisivo: `size == 0` y `created_at == pushed_at` (al segundo).**
+> Taxonomía completa de estados que esta KB ya sabe distinguir, ahora con el quinto:
+>
+> | Estado | API | `size` | refs | `raw` |
+> |--------|-----|-------:|-----:|-------|
+> | vivo | presente | >0 | >0 | 200 |
+> | dormido | presente | >0 | >0 | 200 |
+> | **archivado** | presente, `archived=true` | >0 | >0 | 200 |
+> | **renombrado** | **422** en el slug viejo | — | >0 (redirección) | **200** |
+> | 🆕 **vacío** | **presente**, `archived=false` | **0** | **0** | **404** |
+> | borrado | 422 / NOT_FOUND | — | — | 404 |
+>
+> **Aplicar en todas las industrias de la rotación:** un `size: 0` en una fila publicada es una
+> fila que promete un codebase inexistente, y pasa todos los controles actuales menos este.

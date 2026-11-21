@@ -9,6 +9,82 @@ updated: 2026-11-21
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-21 (pase 4) — el censo de nombre: `LawLink` son 113 repos, `docassemble` son 1.444, y significan lo contrario
+
+**Instrumento nuevo de este pase** (`compose/patterns.md` → **P18**): contar cuántos repos comparten
+un nombre **antes** de escribir «**el**» seguido de ese nombre.
+
+```
+LawLink     in:name → 113        docassemble in:name → 1.444
+awesome-legaltech in:name → 5    OpenContracts in:name → 17
+```
+
+**Y el control es el hallazgo, no el censo.** `docassemble` tiene **más** homónimos que `LawLink` y
+es el mejor activo del fichero. La diferencia está en la **forma**: en `docassemble` **un solo repo
+tiene el nombre desnudo con 1.015★** y los 1.443 restantes son **`docassemble-<extensión>`**
+(`-AssemblyLine`, `-ALWeaver`, `-docusign`…) ⇒ **ecosistema de paquetes, señal de salud**. En
+`LawLink` **muchos repos tienen el nombre idéntico y todos ~0★** ⇒ **comunal de nombre, el nombre no
+identifica nada**. Un `total_count` alto **sube** la confianza en el primer caso y la **destruye** en
+el segundo. Tabla del discriminador en P18.
+
+### Lo que el censo corrigió en esta KB, en dos sitios a la vez
+
+1. **`verticals/solutions.md`** — el pase 3 escribió que los tres slugs de LawLink eran *«un
+   codebase espejado en tres cuentas, ni una bifurcación divergente»*. Hay un **cuarto**:
+   **`appleoppa/LawLink`, HEAD `535a3531…` ≠ `4736aa10…`** ⇒ **bifurcación divergente real**, MIT
+   1.072 B, mismo titular (叶森 / Sen Ye), **ausente del índice de búsqueda** ⇒ sin estrellas, sin
+   `archived`, sin `pushed_at`: **adoptable en licencia, no evaluable en vitalidad.** Y es
+   precisamente la que las fuentes secundarias recomiendan («un fork que añade integraciones»).
+2. **`repos/foundations.md`** — el pase 3 escribió que `awesome-legaltech` eran *«dos repos distintos
+   con nombre idéntico»*. **Son cinco**, y el tercero es un activo nuevo de verdad (abajo).
+
+> 🔧 **G-L7 — una prueba de procedencia sólo es tan completa como el conjunto de candidatos que se
+> le pasa, y ese conjunto no sale de una búsqueda web: se censa.** **P16 (identidad de HEAD) es
+> ciego al comunal de nombre; P18 (censo) es ciego a los alias no indexados.** Hacen falta los dos,
+> y en ese orden.
+
+### Repo nuevo del pase: `apiotrowski-afk/awesome-legaltech-pl` (Polonia)
+
+**CC-BY-4.0 leída, 17.023 B · 14★ · `pushed_at` 2026-11-20** — el más activo de los cinco
+`awesome-legaltech`. «Prawo w kodzie»: APIs del **Sejm/ELI, SAOS, CBOSA**, jurisprudencia, servidores
+**MCP**, skills de AI y anonimización. **Polonia es jurisdicción nueva en esta KB** (sólo estaba vía
+`ContextGem`, que es herramienta, no fuente) ⇒ **EMEA pasa a cinco jurisdicciones con activo propio:
+DE, ES, IT, CH, PL.**
+
+**Y es el único índice legal de esta KB que Globant puede derivar:** CC-BY-4.0 permite **uso
+comercial y derivados con atribución**, frente a `Vaquill-AI/awesome-legaltech` (**sin licencia**,
+273★), `lawve-ai/awesome-legal-skills` (**CC-BY-NC-ND**, 966★) y `chen-friedman` (CC0 pero dormido
+desde abril). 🔑 **Se declara con «escala de apertura y control automático de frescura»: automatiza
+las dos cosas que esta KB hace a mano cada pase.** Leer su implementación el próximo pase como
+**par metodológico**, no como fuente.
+
+### 🔴 G-L9 — el repositorio **VACÍO**: una signatura de canal que ningún control de esta KB detectaba
+
+Descubierto en la verificación final de este pase, sobre una fila que este mismo pase acababa de
+publicar como «4 años muerto»: **`JSv4/awesome-legaltech` no está muerto, está vacío.**
+**API presente** (4★, `archived=false`, `disabled=false`) · **`size=0`** · **`git ls-remote`
+exit 0 con CERO refs** · **`raw` 404** · **`created_at` y `pushed_at` separados por 1 SEGUNDO**.
+Creado desde la web, nunca empujado.
+
+**Las dos trampas, en instrumentos que esta KB ya usa:**
+1. **`pushed_at` reporta un push que no llevó contenido.** Los tres campos de 932-G6
+   (★/`pushed_at`/`archived`) lo publican como *«dormido»*, y dormido **implica algo que forkear**.
+   ⇒ **Hace falta `size`, que viaja en el mismo payload y nadie leía** — exactamente el mismo
+   patrón de desperdicio que 932-G1 con los bytes de licencia.
+2. **`ls-remote` devuelve EXIT 0**, así que es invisible a toda comprobación de error. El script de
+   **P16** lo clasifica como *«NO EXISTE (o es privado)»*: **falso en las dos ramas**, y P16
+   confunde **tres** estados (inexistente / privado / vacío) en una sola.
+
+**Discriminador gratis: `size == 0` + `created_at == pushed_at`.** Taxonomía de seis estados y
+corrección de P16 en `repos/foundations.md` → **G-L9**. **Aplicar en toda la rotación.**
+
+### ⚠️ Corrección a la tabla de bandas del checksum de licencias (932-G1), la primera desde que se importó
+
+La banda heredada de **CC-BY-4.0** era *«~18.650 B»*; este fichero mide **17.023 B** y es CC-BY-4.0
+**confirmado por lectura**. ⇒ Banda corregida a **17.000–18.700 B**. Era demasiado estrecha y
+**habría producido un falso positivo.** Confirma el caveat del propio método: **los bytes MARCAN, la
+lectura DECIDE.** **Propagar a las demás KBs de la rotación.**
+
 ## 🆕 2026-11-21 (pase 3) — un Estado mantiene ley-como-código en MIT, y el checksum de licencias se confirma entre industrias
 
 **Divergencia mantenida:** este fichero cubre **repos e infraestructura**; los agentes y los
