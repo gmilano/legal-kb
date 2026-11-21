@@ -33,6 +33,9 @@ updated: 2026-11-21
 | 🆕 **Vaquill MS Word add-in** | Apache-2.0 (11.340 B) | [Vaquill-AI/ms-word-addin](https://github.com/Vaquill-AI/ms-word-addin) | Office.js task pane | **Revisión de contratos dentro de Word, con licencia permisiva.** Playbooks, redacción e investigación legal en el task pane. Cierra con Apache-2.0 el canal que esta KB declara decisivo para la adopción: el abogado no cambia de herramienta. | 81 |
 | 🆕 doc-haus | **GPL-3.0** ⚠️ (35.149 B) | [sure-scale/doc-haus](https://github.com/sure-scale/doc-haus) | Fork de OpenCode (rama **`dochaus`**) | **Redline local con tracked changes reales en Word**, sin que el documento salga del disco. Fork de OpenCode. ⚠️ GPL-3.0: viable para despliegue interno en el cliente, bloqueante para producto cerrado redistribuido. | 83 |
 | 🆕 mcp-taiwan-legal-db | MIT (1.092 B) | [lawchat-oss/mcp-taiwan-legal-db](https://github.com/lawchat-oss/mcp-taiwan-legal-db) | Servidor MCP | **Fuentes oficiales de una jurisdicción como backend de agente.** Sentencias del Yuan Judicial + base nacional de normativa de Taiwán. La opción **permisiva** frente a `tw-legal-rag` (ELv2 en v2+) para la misma jurisdicción. | 234 |
+| 🆕 **Kourti Legal** | **MIT** (1.069 B) | [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | React + Node + **PostgreSQL**, `docker compose` | 🆕 **La primera base permisiva de *practice management* de esta KB: matters, documentos, clientes y plazos.** Cierra el hueco que el pase 4 declaraba abierto (y que concluyó erróneamente que no existía — ver abajo). CI, `SECURITY.md`, guía de self-hosting con endurecimiento explícito. ⚠️ **1★: proyecto joven, se forkea y se asume mantenimiento.** Sin trust accounting ni control de conflictos. | 1 |
+| 🆕 **kancelaria-lex** | **MIT** (1.069 B) | [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | Docker (4 segmentos, 3 `internal: true`) + Tesseract | 🆕 **Expedientes judiciales con localidad IMPUESTA POR ARQUITECTURA y verificación de cita por construcción** (comparación carácter a carácter contra el documento fuente; 0 citas inconsistentes en todas las corridas, >80% de precisión). Polonia, pero el patrón es replicable a cualquier jurisdicción. **El mejor candidato de esta KB para un despliegue EMEA soberano.** | 60 |
+| 🆕 **Mayan EDMS** | **Apache-2.0** (⚠️ puntero de **586 B**) | [mayan-edms/Mayan-EDMS](https://github.com/mayan-edms/Mayan-EDMS) | Django/Python | 🆕 DMS libre: almacenamiento, metadatos, OCR y **estados de workflow** — capa de gestión documental bajo un flujo legal, no un CLM. 🧮 **GitHub dice `NOASSERTION` y se equivoca:** su LICENSE son 586 B, muy por debajo de la banda Apache (11.300–11.400), porque es un **puntero** («Licensed under the Apache License, Version 2.0»), no el texto completo. La regla 932-G1 lo predijo. ⚠️ Es un **espejo** (sin PRs ni issues) y 🪦 **6 meses sin push** (2026-05-23). | 850 |
 
 **9 plataformas reales, las 9 verificadas hoy, las 9 licencias comprobadas.**
 
@@ -150,18 +153,52 @@ traer un árbol distinto del que se auditó.
 | 🆕 **Prism-Legal-OS** | **AGPL-3.0** ⚠️ (34.523 B) | [FuturixAI-and-Quantum-Works/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | Plataforma legal integrada (India) | **Análisis de contratos + investigación jurídica + litigio en un solo sistema**, que es justo la forma de producto que el mercado está comprando (ver `intel/trends.md`). ⚠️ AGPL-3.0: **válida para despliegue interno en el cliente, bloqueante para producto cerrado redistribuido.** Referencia de arquitectura para APAC. | 226 |
 | 🆕 **mon-entreprise** | MIT (1.074 B) | [betagouv/mon-entreprise](https://github.com/betagouv/mon-entreprise) | `publicodes`, mantenido por el Estado francés | **Ley como código, no ley como prompt.** Derecho laboral/fiscal/societario francés en reglas ejecutables y auditables. **El patrón de referencia para cualquier cálculo normativo que tenga que ser defendible ante un regulador** — y la contraparte europea exacta del argumento «plantilla determinista» de docassemble. | 337 |
 
-## 🔴 Hueco declarado — practice management permisivo (ahora con un candidato refutado)
+## 🟢 HUECO CERRADO EN EL PASE 5 — practice management permisivo, y **corrigiendo la conclusión del pase 4**
 
-Se volvió a buscar hoy: `legal practice management self-hosted matters invoicing MIT`,
-`open source platform legal practice management ERP CRM MIT Apache`, y una búsqueda nominal del
-único candidato prometedor.
+> 🔴 **Corrección a lo que este fichero afirmaba hace una hora.** Decía, en negrita:
+> *«**«Kourti Legal» no existe.** (…) **No hay tal repo.** Bajo ese nombre: `boyeesu/Kourti` (MIT,
+> **1★**) (…) El dato de la fuente **no se sostiene**; no se publica como hallazgo.»*
+> **El repo existe, es MIT, y tiene código real.** El pase 4 lo tuvo delante —lo citó por su slug
+> exacto y leyó su licencia— y concluyó «no existe» **a partir del contador de estrellas**.
 
-**El hueco sigue abierto, y ahora está mejor caracterizado:**
+**Lo medido en el pase 5 sobre `boyeesu/Kourti`:**
 
-- ⚠️ **«Kourti Legal» no existe.** Una fuente lo describía como plataforma de practice management
-  legal **MIT y self-hostable** — exactamente lo que falta. **No hay tal repo.** Bajo ese nombre:
-  `boyeesu/Kourti` (MIT, **1★**), `kourti2026/kourti` (0★) y cuatro cuentas personales homónimas.
-  El dato de la fuente **no se sostiene**; no se publica como hallazgo.
+| Comprobación | Canal | Resultado |
+|---|---|---|
+| Existencia | `git ls-remote` | **524 refs** (ramas `chore/oss-release-prep`, `agent/codeql-remediation`, `386i4l-codex/update-supabase-query-for-cases-and-contracts`) |
+| Licencia | `raw` byte a byte | **MIT, 1.069 B** — dentro de la banda MIT (1.050–1.150) del checksum 932-G1 |
+| Alcance | lectura del README | «The open-source workspace for **matters, documents, clients, and deadlines**» |
+| Stack | README | React + API Node + **PostgreSQL**, `docker compose up --build`, healthcheck en `/health`, CI en GitHub Actions, `SECURITY.md` |
+| Self-hosting | README | documentado, con advertencia de endurecimiento: `AUTH_MODE=custom`, secretos JWT distintos, TLS, CORS restringido, BD y almacenamiento de objetos de producción |
+| Aviso profesional | README | «Kourti Legal is software, not legal advice. AI-generated content can be inaccurate and must be reviewed by a qualified professional» |
+| Tracción | API de búsqueda | **1★**, `pushed_at` 2026-11-01, **sin `description` ni `topics`** |
+
+**Por qué el pase 4 se equivocó, y es un error de clase, no de dato.** Confundió *«no tiene señal
+social»* con *«no existe el artefacto»*. El escepticismo hacia el **agregador** estaba justificado
+—presentaba Kourti como producto consolidado, lo cual es falso— pero la afirmación verificable que
+ese agregador hacía (**código fuente MIT en GitHub**) era **cierta**, y se descartó junto con el
+resto. Ver `agents/top.md` → **G-L10**.
+
+⇒ **El «Odoo de los despachos legales» con licencia permisiva ya tiene un candidato real.** Lo que
+hay que decirle a un cliente, sin adornos:
+
+- ✅ **Licencia limpia** (MIT genuino, verificado byte a byte) y **alcance correcto** (matters,
+  documentos, clientes, plazos — el vocabulario de practice management, no de DMS genérico).
+- ✅ **Arranca**: stack contenedorizado y documentado, sin pasos manuales de reconstrucción.
+- ⚠️ **Proyecto joven y sin comunidad**: 1★. No hay ecosistema, ni releases que fijar con
+  confianza, ni garantía de continuidad. **Se forkea y se asume mantenimiento** — es una base de
+  partida, no un proveedor.
+- ⚠️ **Sin auditar**: este pase verificó licencia, existencia y alcance. **No** auditó seguridad,
+  calidad del código ni cobertura de tests. Antes de una propuesta, auditar (hay rama
+  `agent/codeql-remediation`, señal de que el propio autor pasó CodeQL).
+
+**Lo que sigue abierto, ahora acotado de verdad:** no existe practice management permisivo con
+**trust accounting** ni **control de conflictos de interés** — las dos piezas que un colegio de
+abogados mira primero. `Kourti` cubre el workspace; esas dos no las declara. El candidato con
+trust accounting (**Kosmos**) es **AGPL-3.0**.
+
+**Candidatos revalidados y descartados** (se mantienen, seguían siendo correctos):
+
 - **Litigious** — AGPL-3.0 (según su propio sitio). Sin repo GitHub localizable por búsqueda.
 - **J-lawyer** — se describe como open source para despachos, pero **ninguna fuente consultable
   declara su licencia** y no aparece en la búsqueda de GitHub.
@@ -172,21 +209,37 @@ Se volvió a buscar hoy: `legal practice management self-hosted matters invoicin
   (MIT), iDURAR ERP/CRM (MIT), Dolibarr (GPL). Adaptables a flujos de despacho, **pero ninguno
   conoce el dominio legal**: matters, conflictos de interés, trust accounting, plazos procesales.
 
-**Conclusión, que es un hallazgo y no una ausencia de búsqueda: no existe hoy un «Odoo de los
-despachos legales» con licencia permisiva y gobernanza clara.** Dado que Clio publica adopción de
-AI del 75–86% en despachos pequeños y medianos, **el segmento existe y no tiene base abierta.**
-Es la oportunidad de producto más clara de esta KB (ver `intel/market.md`).
-
 ## 🟢 Hueco cerrado este pase: e-discovery
 
 Los pases anteriores no declararon este hueco porque **no se había mirado la capa**. Queda
 cerrado con `FreeEed` (Apache-2.0, activo). Se deja constancia de que el hueco existió sin
 declararse: *una capa que nadie buscó se parece mucho a una capa que no hace falta.*
 
-## 🔴 Segundo hueco: firma electrónica permisiva
-Lo único relevante que apareció es OpenSign, y es AGPL. **No se encontró ninguna plataforma de
-e-signature open source con licencia MIT/Apache/BSD.** Para un entregable cerrado, esta capa hoy
-se compra; no se forkea.
+## 🔴 Segundo hueco: firma electrónica permisiva — **CONFIRMADO, y ahora medido en los tres mayores**
+
+El pase 4 lo declaró sobre un solo candidato. El pase 5 lo midió sobre **los tres proyectos de
+e-signature open source más grandes que existen**, y el resultado es unánime:
+
+| Plataforma | Repo | Licencia (medida) | Stars | Último push |
+|---|---|---|---|---|
+| DocuSeal | [docusealco/docuseal](https://github.com/docusealco/docuseal) | **AGPL-3.0** | **19.110** | 2026-11-19 |
+| Documenso | [documenso/documenso](https://github.com/documenso/documenso) | **AGPL-3.0** | **15.841** | 2026-11-20 |
+| OpenSign | [OpenSignLabs/OpenSign](https://github.com/OpenSignLabs/OpenSign) | **AGPL-3.0 + carve-out** (GitHub: `NOASSERTION`) | 7.316 | 2026-11-20 |
+| LibreSign | — | **AGPL-3.0** | — | sólo dentro de Nextcloud |
+
+🧮 **Y OpenSign corrobora la regla asimétrica del checksum 932-G1, por el lado «por arriba».** Su
+LICENSE mide **35.051 B**, por encima de la banda AGPL-3.0 (~34.500). La regla dice: *bytes por
+encima de la banda ⇒ licencia compuesta, hay que leerla*. Se leyó, y **es compuesta**: el texto
+AGPL va precedido de tres cláusulas que excluyen el directorio
+`apps/OpenSignServer/cloud/customRoute` (licencia propia) y los componentes de terceros. Por eso
+GitHub no puede clasificarla y devuelve `NOASSERTION`. **La regla predijo «compuesta» antes de
+abrir el fichero.**
+
+⇒ **Conclusión reforzada, no cambiada: no existe e-signature open source permisiva.** Los tres
+líderes son copyleft de red, lo que para un SaaS cerrado es inviable. **Para un entregable cerrado
+esta capa se compra; para un despliegue interno del cliente, DocuSeal o Documenso son viables**
+(AGPL no contamina si no hay distribución ni servicio a terceros). La decisión es de modelo de
+negocio, no técnica.
 
 ## Cómo customizar con AI
 

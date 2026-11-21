@@ -325,3 +325,31 @@ sólo metadato (alguien le dio una estrella).
 >
 > **Aplicar en todas las industrias de la rotación:** un `size: 0` en una fila publicada es una
 > fila que promete un codebase inexistente, y pasa todos los controles actuales menos este.
+
+---
+
+## 🆕 PASE 5 (2026-11-21) — dos activos fundacionales nuevos y una práctica de descarte que hay que revisar
+
+### Activos incorporados
+
+| Repo | Licencia (leída) | Capa | Por qué es fundacional | Stars | Push |
+|---|---|---|---|---:|---|
+| [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | **MIT** (1.069 B) | Expediente local + verificación de cita | **Es la primera implementación de referencia, con licencia permisiva, de las DOS exigencias que esta KB declara no negociables a la vez**: (a) **soberanía del dato impuesta por arquitectura** — 4 segmentos Docker, 3 con `internal: true`, sin ruta a la pasarela, no una promesa de README; y (b) **integridad de cita por construcción** — el código reconstruye el texto desde el documento fuente y compara **carácter a carácter**, de modo que una cita fabricada no sobrevive al verificador. Declara **0 citas inconsistentes con la fuente en todas las corridas** y >80% de precisión, contra el **17–34%** de fabricación medido en herramientas comerciales. | 60 | 2026-08-23 |
+| [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | **MIT** | Enablement / arquitectura de verificación | **La capa de verificación como código de formación, no como diagrama.** El kit construye el agente y luego **los dos controles que corren FUERA del control del agente** (checklist contra la verdad de base del expediente + reglas del memo), más rechazos, escalado, liberación de evidencia nueva, reanudación y **firma del abogado**. Es el patrón que `compose/patterns.md` describe en P2/P8/P10, en forma ejecutable y con caso de trabajo. | 73 | 2026-11-06 |
+
+### 🧮 Revisión de práctica: `NOASSERTION` **no** es «sin licencia»
+
+Este pase encontró **dos** repos que GitHub clasifica como `NOASSERTION` y que, leídos, son
+**perfectamente adoptables**:
+
+| Repo | Bytes de LICENSE | Banda | Lectura real | ¿Adoptable? |
+|---|---:|---|---|---|
+| [mayan-edms/Mayan-EDMS](https://github.com/mayan-edms/Mayan-EDMS) | **586** | muy por debajo de Apache (11.300–11.400) ⇒ **puntero** | puntero **Apache-2.0** genuino | ✅ sí (⚠️ espejo, 🪦 6 meses sin push) |
+| [OpenSignLabs/OpenSign](https://github.com/OpenSignLabs/OpenSign) | **35.051** | por encima de AGPL (~34.500) ⇒ **compuesta** | **AGPL-3.0** + carve-out de `apps/OpenSignServer/cloud/customRoute` + terceros | ⚠️ sí para despliegue interno; no para SaaS cerrado |
+
+⇒ **Regla, y corrige una práctica de esta KB:** `NOASSERTION` significa «el clasificador de GitHub
+no pudo», no «no hay licencia». **Nunca se descarta una fila por `NOASSERTION` sin abrir el
+fichero**; los bytes dicen de antemano qué se va a encontrar (puntero por debajo de la banda,
+compuesta por encima). El descarte legítimo es **la ausencia del fichero**, que es otra medición:
+`raw` devuelve 404 en `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE` y `COPYING`, en `HEAD`,
+`main` y `master`.

@@ -9,6 +9,80 @@ updated: 2026-11-21
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-21 (pase 5, 01:38 UTC) — tres agentes MIT nuevos, y el hueco que esta KB declaraba abierto estaba cerrado desde el 1 de noviembre
+
+**Quinto pase sobre `legal` en 28 horas** (22:01, 22:55, 00:01, 00:53 y este). Los cuatro anteriores
+no avanzaron `rotation.json`, así que la rotación reincidió cinco veces en la misma industria.
+**Corregido en este pase.** Consecuencia metodológica: las métricas tenían **una hora** de vida, así
+que este pase **no las reescribió** — las midió, confirmó que no había deriva, y gastó el
+presupuesto en lo que faltaba.
+
+### 📏 Primero, la medición que justifica no haber reescrito nada
+
+Barrido completo de las **75 URLs de GitHub** de la KB por `search/repositories`:
+
+| Resultado | Cuenta |
+|---|---:|
+| Resuelven con metadatos frescos | **72** |
+| Devuelven 422 (y los 3 son los renombrados ya documentados: `microsoft/presidio`, `JSv4/OpenContracts`, `lowtidebuild/contract-review-agent`) | **3** |
+| Filas de la tabla actual con deriva de estrellas **> +1** | **0** |
+| Repos marcados `archived` | **0** |
+
+⇒ **Confirma las mediciones del pase 4 una hora después.** La deriva máxima observada en filas
+vigentes fue **+1★** (6 filas). Reescribir 6 números para sumar 1 estrella cada uno habría sido
+churn: *un pase que sólo repinta cifras frescas no añade información, y oculta que no añadió nada.*
+
+### Agentes nuevos con señal real (los tres MIT, verificados por los dos canales)
+
+| Agente | Repo | Licencia (leída) | Región | Por qué entra | Stars |
+|---|---|---|---|---|---:|
+| **kancelaria-lex** | [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | **MIT** (1.069 B) | **Polonia** · EMEA | **El mejor activo del pase.** Localidad **impuesta por arquitectura** (4 segmentos Docker, 3 con `internal: true`: no hay ruta a la pasarela) + **integridad de cita por construcción** (reconstrucción del texto desde el documento fuente y comparación **carácter a carácter**). Declara **0 citas inconsistentes con la fuente en todas las corridas** y >80% de precisión, contra el **17–34%** de fabricación de las comerciales. | 60 |
+| **Kourti Legal** | [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | **MIT** (1.069 B) | **Nigeria** · EMEA | **Cierra el hueco de practice management permisivo** y es el **primer activo africano** de esta KB. 524 refs, React+Node+PostgreSQL, CI, self-hosting documentado. ⚠️ 1★. | 1 |
+| **legal-agent-workshop** | [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | **MIT** | Global | **Enablement ejecutable**: construye un agente legal y luego **la capa de verificación que corre FUERA del control del agente** (checklist contra verdad de base + reglas del memo), con rechazos, escalado y **firma del abogado**. Caso de trabajo incluido. | 73 |
+
+### 🔴 El hallazgo del pase: el pase 4 declaró inexistente un repo que existe, y el hueco llevaba 20 días cerrado
+
+El pase 4 escribió, en negrita: *«**«Kourti Legal» no existe.** (…) **No hay tal repo.**»* — citando
+a la vez el slug correcto, `boyeesu/Kourti`, y su licencia MIT. **El repo existe desde antes del
+1-nov-2026.** Lo que el pase 4 midió fue **1★**, y de ahí concluyó inexistencia.
+
+| Canal | Qué dice de `boyeesu/Kourti` |
+|---|---|
+| Contador de estrellas | 1★ ⇒ *parece* nada |
+| `git ls-remote` | **524 refs**, ramas de release y de remediación CodeQL ⇒ código real |
+| `raw` + bytes | MIT, **1.069 B** ⇒ licencia genuina |
+| README | matters, documentos, clientes, plazos; React+Node+PostgreSQL; `docker compose`; `SECURITY.md` |
+
+⇒ **G-L10, y aplica a toda la rotación:** las estrellas y la `description` son filtros de
+**precisión**, no de **cobertura**. Usarlos para decidir *qué mirar* produce falsos negativos
+silenciosos; usarlos para *declarar un hueco* convierte un falso negativo en una conclusión
+publicada. **Todo hueco de la forma «no existe X permisivo» debe releerse como «no existe X
+permisivo con señal social».** El gate de pertinencia **P15** de esta KB **rechaza** a `Kourti`,
+porque el repo no tiene `description` ni `topics`: el control más citado de esta KB es el que lo
+habría descartado.
+
+### 🧮 Dos corroboraciones del checksum de licencias (932-G1), una por cada lado de la regla asimétrica
+
+| Repo | Licencia declarada | Bytes | Lado de la regla | Qué se encontró al leerla |
+|---|---|---:|---|---|
+| [OpenSignLabs/OpenSign](https://github.com/OpenSignLabs/OpenSign) | GitHub: `NOASSERTION` | **35.051** | **por encima** de la banda AGPL (~34.500) ⇒ «compuesta» | ✅ **Compuesta**: AGPL-3.0 + carve-out de `apps/OpenSignServer/cloud/customRoute` + terceros |
+| [mayan-edms/Mayan-EDMS](https://github.com/mayan-edms/Mayan-EDMS) | GitHub: `NOASSERTION` | **586** | **muy por debajo** de la banda Apache (11.300–11.400) ⇒ «puntero, sigue el puntero» | ✅ **Puntero Apache-2.0** genuino. **GitHub se equivoca; la regla acierta.** |
+
+**La regla predijo el contenido de los dos ficheros antes de abrirlos, y en los dos casos corrigió
+la clasificación de GitHub.** Vale la pena repetirlo porque es el lado útil: `NOASSERTION` **no**
+significa «sin licencia», significa «el clasificador no pudo».
+
+### ⚠️ Un no-hallazgo que sigue haciendo falta registrar: la desinformación sobre `openclaw` ya está indexada
+
+El pase 3 descartó `openclaw` como proyecto **no legal** (colisión de substring: «openc-**law**»).
+Hoy, una búsqueda de «github trending legal AI 2026» devuelve un artículo de prensa tecnológica que
+afirma que **openclaw es un proyecto de legal AI open source que desbancó a React como repo más
+estrellado de GitHub**. **Es falso en la parte legal.** ⇒ El descarte del pase 3 no sólo sigue
+vigente: **ahora hay una fuente indexada que empujaría a cualquier pase futuro a readoptarlo.**
+El gate de pertinencia P15 se queda.
+
+---
+
 ## 🆕 2026-11-21 (pase 4) — las 7 filas del pase 3 resisten la auditoría, y aparece un modo de fallo que los tres controles de esta KB no ven
 
 **Este pase audita al pase 3, que a su vez auditaba al pase 2.** Y encuentra la asimetría

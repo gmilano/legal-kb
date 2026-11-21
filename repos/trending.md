@@ -9,6 +9,95 @@ updated: 2026-11-21
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-21 (pase 5, 01:38 UTC) — el caudal de repos legales nuevos se ha secado, y es medible
+
+**Instrumento del pase, barato y reproducible:** en vez de preguntar «¿qué hay de nuevo?» (que
+devuelve lo que el ranking quiera), preguntar **cuántos activos legales nuevos han superado un
+umbral de señal en una ventana datada**:
+
+```bash
+gh api -X GET search/repositories -f q='legal AI created:>2026-09-01 stars:>=40' \
+  -f sort=stars -f order=desc --jq '.total_count'
+```
+
+**Resultado, 2026-11-21: `total_count = 4`.** Y al leer los cuatro, sólo **dos son legales**:
+
+| Repo | Licencia | Stars | Creado/push | ¿Legal? |
+|---|---|---:|---|---|
+| [FuturixAI-and-Quantum-Works/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | AGPL-3.0 | 226 | 2026-10-03 | ✅ sí — **ya estaba en esta KB** desde el pase 3 |
+| [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | **MIT** | 73 | 2026-11-06 | ✅ sí — **nuevo, se incorpora** |
+| [paveldevyatov/refund-anything-ai-prompt](https://github.com/paveldevyatov/refund-anything-ai-prompt) | MIT | 104 | 2026-10-06 | ❌ no — reclamaciones de consumo, no práctica jurídica |
+| [msmahdinejad/iran-bourse-mcp](https://github.com/msmahdinejad/iran-bourse-mcp) | MIT | 42 | 2026-11-15 | ❌ no — bolsa de Teherán; entra por la palabra «legal» en otro contexto |
+
+⇒ **En once semanas, UN solo repo legal nuevo cruzó los 40★.** Compárese con los pases 2 y 3 de
+anteayer, que incorporaron 7 filas nuevas cada uno — pero **de repos preexistentes que la KB no
+había encontrado**, no de repos nuevos. **Son dos fenómenos distintos y la KB los estaba
+confundiendo:** *caudal de creación* (se ha secado) vs *deuda de descubrimiento* (era enorme y se
+está pagando). Que los pases encuentren muchas filas nuevas **no** significa que el ecosistema
+crezca rápido; significa que la KB venía con retraso.
+
+**Implicación para la rotación, y es la que importa:** una vez pagada la deuda de descubrimiento,
+**un pase horario sobre la misma industria no puede producir activos nuevos** — el caudal real es
+de ~1 repo relevante al mes. La frecuencia útil de repaso de `agents/top.md` y
+`repos/foundations.md` es **semanal o mensual**, no horaria. Lo que sí rinde en cada pase es
+**verificación, corrección y cierre de huecos**, que es a lo que este pase dedicó el presupuesto.
+
+### Repos nuevos incorporados en este pase
+
+| Repo | Licencia (leída) | Stars | Push | Capa |
+|---|---|---:|---|---|
+| [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | **MIT** (1.069 B) | 60 | 2026-08-23 | **Expedientes judiciales locales con verificación de cita por construcción** (Polonia). Localidad impuesta por red: 4 segmentos Docker, 3 con `internal: true`. OCR con **marcador permanente** — cada cita derivada de escaneo se muestra como `z OCR`, porque «apunta a un carácter del expediente» y «apunta a un carácter de **la lectura** del expediente» no son lo mismo. **Ninguna otra fila de esta KB hace esa distinción de procedencia.** |
+| [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | **MIT** (1.069 B) | 1 | 2026-11-01 | **Practice management permisivo** — cierra el hueco (ver `verticals/solutions.md`). React + Node + PostgreSQL. |
+| [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | **MIT** | 73 | 2026-11-06 | **Enablement**: capa de verificación ejecutada *fuera* del control del agente, con firma del abogado. |
+| [mayan-edms/Mayan-EDMS](https://github.com/mayan-edms/Mayan-EDMS) | **Apache-2.0** (puntero 586 B) | 850 | 2026-05-23 🪦 | DMS con estados de workflow. **Espejo** (sin PRs/issues). |
+
+### 🧮 El checksum de licencias (932-G1) corrigió a GitHub **dos veces en el mismo pase**, una por cada lado de la regla
+
+| Repo | GitHub dice | Bytes | Predicción de la regla | Lectura real |
+|---|---|---:|---|---|
+| OpenSign | `NOASSERTION` | **35.051** | por encima de la banda AGPL ⇒ **compuesta** | ✅ AGPL-3.0 + carve-out `customRoute` + terceros |
+| Mayan EDMS | `NOASSERTION` | **586** | muy por debajo de la banda Apache ⇒ **puntero** | ✅ puntero Apache-2.0 genuino |
+
+**`NOASSERTION` no significa «sin licencia»: significa «el clasificador de GitHub no pudo».** En
+los dos casos la licencia era perfectamente utilizable y los bytes lo dijeron antes de leer nada.
+🔴 **Esto cambia una práctica de esta KB:** las filas que se descartaron por `NOASSERTION` sin
+abrir el fichero deben revisarse. En este pase se revisaron las dos que había, y **las dos eran
+adoptables** (una AGPL con carve-out, una Apache-2.0 limpia).
+
+### 🔧 G-L11 — barrido de **estructura** de tabla, no de filas: 86 bloques, 2 defectos
+
+Control nuevo, mecánico y sin red. Los controles de esta KB validan *filas*; ninguno validaba la
+**tabla**. Encontró que la tabla principal de `agents/top.md` estaba **partida en dos** por una
+línea en blanco, dejando **7 filas sin cabecera** — las mismas 7 que el pase 4 auditó una por una
+y declaró correctas. Lo eran: *el defecto estaba en el carácter que las separaba de su cabecera.*
+
+```bash
+# exige, por cada bloque de lineas que empiezan por '|':
+#   (1) fila separadora |---| en la 2.a posicion   -> si falta, es tabla sin cabecera
+#   (2) numero de columnas constante en todo el bloque
+python3 - <<'PY'
+import re,glob
+for f in sorted(glob.glob('*/*.md')):
+    L=open(f,encoding='utf-8').read().split('\n'); i=0
+    while i<len(L):
+        if L[i].lstrip().startswith('|'):
+            s=i; blk=[]
+            while i<len(L) and L[i].lstrip().startswith('|'): blk.append(L[i]); i+=1
+            sep=len(blk)>1 and re.match(r'^\|[\s:|-]+\|?\s*$',blk[1].strip())
+            n=[len(re.split(r'(?<!\\)\|',b.strip().strip('|'))) for b in blk]
+            if not sep or len(set(n)-{n[0]})>0: print(f'{f}:{s+1} sep={bool(sep)} cols={n}')
+        else: i+=1
+PY
+```
+
+**Resultado tras la reparación: 86 bloques, separadora presente en todos, 0 mismatches de
+columnas.** (El propio P22, al ejecutarse sobre esta KB, encontró **2** defectos: la tabla partida
+de `agents/top.md` y —al redactar el cuadro que la documenta— una **barra vertical sin escapar
+dentro de *inline code***, que en GFM también parte la celda. Documentar el fallo lo reprodujo.) ⇒ **Correr esto en las 12 industrias**: es gratis y detecta pérdida silenciosa de
+entidades.
+
+---
+
 ## 🆕 2026-11-21 (pase 4) — el censo de nombre: `LawLink` son 113 repos, `docassemble` son 1.444, y significan lo contrario
 
 **Instrumento nuevo de este pase** (`compose/patterns.md` → **P18**): contar cuántos repos comparten

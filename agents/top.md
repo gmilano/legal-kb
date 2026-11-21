@@ -159,7 +159,6 @@ se corrige es un slug, un diagnóstico de método y tres campos de una fila.**
 | doc-haus | [sure-scale/doc-haus](https://github.com/sure-scale/doc-haus) | **GPL-3.0** ⚠️ (35.149 B) · rama **`dochaus`** | Global | "The open-source legal AI agent": los documentos **no salen del disco** y los redlines llegan a Word como **tracked changes**. Fork de OpenCode. ⚠️ GPL-3.0: copyleft fuerte: contamina el derivado distribuido. Para despliegue interno de cliente es viable; para producto cerrado no. | 83 | 2026-11-14 |
 | bettercallclaude | [fedec65/bettercallclaude](https://github.com/fedec65/bettercallclaude) | **AGPL-3.0** ⚠️ | **Suiza** · EMEA | Plugin de Claude Cowork Desktop para la práctica jurídica suiza. Par natural de `opencaselaw` (flujos + corpus). ⚠️ AGPL-3.0. | 47 | 2026-09-20 |
 | awesome-legal-skills | [lawve-ai/awesome-legal-skills](https://github.com/lawve-ai/awesome-legal-skills) | 🔴 **CC-BY-NC-ND 4.0** (19.122 B) | Global | Lista curada de Agent Skills para automatizar trabajo legal. 966★, el índice de skills legales más grande. 🔴 **NO USABLE POR GLOBANT TAL CUAL: NonCommercial + NoDerivatives.** Ver el aviso de licencia abajo: es el peor régimen de los que aparecen en esta KB y el que menos lo parece. | **966** | 2026-10-19 |
-
 | 🔴 **ai-legal-claude** | [zubair-trabzada/ai-legal-claude](https://github.com/zubair-trabzada/ai-legal-claude) | 🔴 **NINGUNA** (no existe `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE` ni `COPYING`) | Global | **El segundo repo de agente legal más estrellado que existe tras `claude-for-legal`, y no se puede usar.** Skill de asistente legal para Claude Code: revisión de contratos, análisis de riesgo, generación de NDA y compliance. 🔴 **Sin fichero de licencia ⇒ «todos los derechos reservados» por defecto: sin licencia expresa no hay derecho de uso, copia ni derivado.** Se publica aquí **precisamente para que nadie lo vuelva a encontrar y lo adopte por las estrellas.** 🆕 **PASE 4 — y las estrellas tienen una causa medible: su propia `description` termina en *«If you want to learn how to sell this to real businesses, check out the Skool community»*, es decir el repo es el gancho de una comunidad de pago.** Ver el modo de fallo *embudo de venta* abajo. 🪦 8 meses sin commits. | **1.852** | 2026-03-27 |
 | 🆕 **stella** | [stella/stella](https://github.com/stella/stella) | Apache-2.0 (11.358 B) | Global | 🆕 **Workspace legal open source con commit de hoy mismo.** Permisivo, bajo nombre de organización propia (no de autor individual), lo que en este sector es señal de proyecto con intención de continuidad. Candidato directo a base de despliegue de cliente. Ver `verticals/solutions.md`. | 282 | **2026-11-20** |
 | 🆕 **Prism-Legal-OS** | [FuturixAI-and-Quantum-Works/Prism-Legal-OS](https://github.com/FuturixAI-and-Quantum-Works/Prism-Legal-OS) | **AGPL-3.0** ⚠️ (34.523 B) | India · APAC | 🆕 AI legal open source para **análisis de contratos, investigación jurídica y litigio** en un solo sistema. **Segundo activo legal de la India en esta KB** (con `lawglance`), y bastante más ambicioso en alcance. ⚠️ AGPL-3.0: copyleft de red, inviable para SaaS cerrado; válido como referencia de arquitectura y para despliegue interno. | 226 | 2026-10-03 |
@@ -167,8 +166,11 @@ se corrige es un slug, un diagnóstico de método y tres campos de una fila.**
 | 🆕 **hermes-legal** | [Lethe044/hermes-legal](https://github.com/Lethe044/hermes-legal) | MIT (1.065 B) | Global | 🆕 Análisis de contratos multi-proveedor: **puntúa riesgo, propone redlines y emite una recomendación de firmar/negociar**. Pequeño pero MIT limpio y con la decisión de negocio como salida, no sólo el análisis. | 26 | 2026-10-10 |
 | 🆕 contract-review-pro | [CSlawyer1985/contract-review-pro](https://github.com/CSlawyer1985/contract-review-pro) | 🔴 **NINGUNA** | China · APAC | 🆕 专业合同审核 Skill — revisión de contratos construida sobre metodología de auditoría contractual, para juristas chinos. 🔴 **Sin fichero de licencia: no adoptable.** Se registra por volumen de señal (311★) y como medida del tamaño del problema de licencias en APAC. | 311 | 2026-08-14 |
 | 🆕 legal-ai-agent | [Paparusi/legal-ai-agent](https://github.com/Paparusi/legal-ai-agent) | MIT (1.083 B) | Vietnam · APAC | 🆕 MIT limpio y 214★, pero **el repo no declara descripción ni alcance**: no se puede afirmar qué hace sin auditar el código. Se registra como **candidato a auditar**, no como recomendación. Ejemplo de por qué «licencia limpia + estrellas» no basta para recomendar. | 214 | 2026-03-21 |
+| 🆕 **kancelaria-lex** | [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | MIT (1.069 B) | **Polonia** · EMEA | 🆕 **El mejor activo nuevo del pase 5, y el que mejor encarna la tendencia nº1 de esta KB.** AI **totalmente local** para analizar expedientes judiciales polacos. **La localidad está impuesta por arquitectura, no prometida en el README:** cuatro segmentos Docker, **tres con `internal: true`**, así que no existe ruta hacia la pasarela. **Integridad de cita por construcción:** el código reconstruye el texto desde el documento fuente y lo compara **carácter a carácter**; una cita fabricada no puede sobrevivir al verificador. Declara **0 citas inconsistentes con la fuente en todas las corridas de medición** y precisión de cita **>80%**, contra el **17–34% de citas fabricadas** de las herramientas comerciales (el mismo estudio de Stanford que cita esta KB). **Y distingue la procedencia del OCR:** lo leído con Tesseract lleva **marcador permanente** y cada cita muestra `z OCR`, porque «la cita apunta a un carácter exacto del expediente» y «…de **la lectura de un escaneo**» no son la misma afirmación. Perfiles locales con TOTP. MIT explícito: «úsalo, vende servicios alrededor, bifúrcalo». | 60 | 2026-08-23 |
+| 🆕 **Kourti Legal** | [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | MIT (1.069 B) | **Nigeria** (Lagos) · EMEA | 🆕 **CIERRA EL HUECO DE *PRACTICE MANAGEMENT* PERMISIVO QUE ESTA KB DECLARABA ABIERTO DESDE EL PASE 1** — y es el **primer activo africano** de esta KB. Workspace para **expedientes, documentos, clientes y plazos**: React + API Node + PostgreSQL, `docker compose up` y listo, workflow de CI, `SECURITY.md`, documentación de self-hosting y aviso explícito de que el contenido AI debe revisarlo un profesional. **524 refs** en `ls-remote` (ramas `chore/oss-release-prep`, `agent/codeql-remediation`): código real, no un esqueleto. ⚠️ **1★ y sin `description` ni `topics` en GitHub** — invisible para los tres controles de descubrimiento de esta KB. Ver el hallazgo G-L10 abajo. | 1 | 2026-11-01 |
+| 🆕 **legal-agent-workshop** | [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | MIT | Global | 🆕 **El activo de *enablement* que esta KB no tenía: el patrón de verificación como material de formación ejecutable.** Dos sesiones: (1) construir el agente legal — bucle agéntico en SDK de OpenAI en Python, una herramienta por fichero, lectura de documentos por Files API, gestión de expediente con hechos *quote-checked*, y termina en un memo **sin verificar**; (2) **hacerlo confiable** — se construyen los dos controles de la capa de verificación (checklist contra la verdad de base del expediente, y reglas del memo) **que el kit ejecuta FUERA del control del agente**, más rechazos, escalado, liberación de evidencia nueva, reanudación y **firma del abogado**. Incluye caso de trabajo (`northbridge-v-caldera`) y consola de ejecución en vivo. | 73 | 2026-11-06 |
 
-**40 agentes reales, los 40 verificados por API de búsqueda + lectura byte a byte de LICENSE. 0 filas de ejemplo, 0 placeholders.** (33 del pase 2, revalidadas una por una en el pase 3; 7 nuevas en el pase 3. De las 7 nuevas, **3 se publican como NO ADOPTABLES** — ver el clúster de licencias de abajo.)
+**43 agentes reales, los 43 verificados por API de búsqueda + lectura byte a byte de LICENSE. 0 filas de ejemplo, 0 placeholders.** (33 del pase 2, revalidadas una por una en el pase 3; 7 nuevas en el pase 3. De las 7 nuevas, **3 se publican como NO ADOPTABLES** — ver el clúster de licencias de abajo.) 🆕 **PASE 5 (2026-11-21): +3 filas** (`kancelaria-lex`, `Kourti Legal`, `legal-agent-workshop`), las tres MIT y verificadas por los dos canales. **Y una reparación estructural: esta tabla estaba PARTIDA EN DOS** — una línea en blanco dejaba 7 filas sin cabecera. Ver abajo.
 
 > 📌 **Cómo leer la columna «Último commit»:** es `pushed_at` medido, no una impresión. 🪦 marca
 > dormancia > 6 meses. Un repo dormido **no** se retira: sigue sirviendo como patrón y como corpus.
@@ -508,3 +510,62 @@ se vende no necesita mantenerse.
 > propias palabras —, estrellas ✓). Es el **cuarto** control que falta: *¿por qué tiene estas
 > estrellas?* **Aplicar en todas las industrias de la rotación**: el patrón repo-como-gancho no
 > tiene nada de legal.
+
+---
+
+## 🆕 PASE 5 (2026-11-21, 01:38 UTC) — una reparación estructural y un modo de fallo de *descubrimiento*
+
+Este pase es el quinto sobre `legal` en 28 horas (pases a las 22:01, 22:55, 00:01, 00:53 y este).
+Los cuatro anteriores dejaron `rotation.json` sin avanzar, así que la rotación volvió a caer en
+`legal` cinco veces seguidas. **Eso se corrige en este pase** (ver nota al pie). Dado que los
+números tenían una hora de vida, este pase **no reescribió métricas**: midió, comprobó que no
+había deriva, y gastó el presupuesto en lo que no estaba hecho.
+
+### 🔧 G-L11 — LA TABLA PRINCIPAL DE ESTE FICHERO ESTABA **PARTIDA EN DOS**, Y DOS AUDITORÍAS NO LO VIERON
+
+Una **línea en blanco** entre la fila `awesome-legal-skills` y la fila `ai-legal-claude` dejaba las
+**7 filas que añadió el pase 3** formando una **segunda tabla sin cabecera**.
+
+| Aspecto | Qué pasó |
+|---|---|
+| Consecuencia para el compilador | En Markdown, una línea en blanco **termina** la tabla. Las 7 filas siguientes son otra tabla cuya **primera fila es la cabecera**. O se pierden 7 entidades, o `ai-legal-claude` **se compila como nombre de columna** — exactamente el fallo «cabecera como dato» que el brief prohíbe. |
+| Por qué nadie lo vio | El pase 4 **auditó esas 7 filas una por una** (contenido, licencia, estrellas, procedencia) y las declaró correctas. Lo eran. **El defecto no estaba en ninguna fila: estaba en el carácter que las separaba de su cabecera.** |
+| Por qué el control no lo detectó | Los controles de esta KB (licencia, pertinencia, censo de nombre, checksum de bytes) validan **filas**. Ninguno valida la **estructura de la tabla que las contiene**. |
+| Detección | Mecánica y sin red: recorrer bloques de líneas que empiezan por barra vertical y exigir fila separadora en la 2.ª posición + número de columnas constante. Ver `compose/patterns.md` → **P22**. |
+| 🆕 Hallazgo lateral | Al **escribir** este cuadro el propio P22 detectó un segundo defecto: una barra vertical dentro de *inline code* **también parte la celda** en GFM si no se escapa como `\|`. Es decir: documentar el fallo lo reprodujo. |
+
+⇒ **Regla nueva, para toda la rotación: un pase que añade filas debe reimprimir el bloque de tabla
+y verificar separadora + columnas constantes.** Verificado en este pase sobre los 8 ficheros:
+**86 bloques de tabla, 2 defectos encontrados y reparados, 0 mismatches de columnas.** (El segundo defecto apareció al redactar el cuadro de arriba — ver «hallazgo lateral».)
+
+### 🔴 G-L10 — EL ACTIVO PERMISIVO **INVISIBLE**: LOS TRES CONTROLES DE DESCUBRIMIENTO TIENEN UN FALSO NEGATIVO
+
+`boyeesu/Kourti` (Kourti Legal) **cierra el hueco de practice management permisivo** que esta KB
+declaraba abierto desde el pase 1. Es MIT (LICENSE **1.069 B**, dentro de la banda MIT), con stack
+real (React + Node + PostgreSQL, `docker compose`, CI, `SECURITY.md`, **524 refs**). Y **ninguno de
+los canales con los que esta KB descubre activos lo habría encontrado nunca**:
+
+| Control de esta KB | Qué le hace a `Kourti` | Por qué falla |
+|---|---|---|
+| Ranking por estrellas (`sort=stars`) | lo entierra | **1★** |
+| Gate de pertinencia **P15** | **lo RECHAZA** | exige ≥2 términos de industria en `description`/`topics`; el repo **no tiene ni `description` ni `topics`** |
+| `legal AI` en la query de búsqueda | no lo devuelve | la búsqueda de GitHub puntúa sobre metadatos que el repo deja vacíos |
+| Checksum de bytes **932-G1** | ✅ lo valida | 1.069 B ⇒ MIT genuino |
+| `git ls-remote` (G-L1) | ✅ lo valida | 524 refs ⇒ código real, no esqueleto |
+
+**El canal que sí lo encontró es el único que esta KB no usaba: un directorio de terceros**
+(listado de agregador surgido en búsqueda web), **que además mentía en los detalles** — presentaba
+Kourti como proyecto consolidado y «código fuente MIT en GitHub» sin mencionar que el repo tiene
+1★. La afirmación de licencia resultó **cierta y verificable**; la de tracción, engañosa.
+
+⇒ **Asimetría operativa, y es la lección transferible a toda la rotación:** las estrellas y la
+`description` son **filtros de PRECISIÓN** (sirven para descartar ruido) y esta KB los estaba usando
+como **filtros de COBERTURA** (para decidir qué mirar). Para **declarar un hueco abierto** no basta
+no haber encontrado nada con ellos: hay que buscar por **función** fuera de GitHub y verificar
+después en GitHub. Los huecos de esta KB declarados «no existe X permisivo» deben releerse como
+**«no existe X permisivo *con señal social*»**, que es una afirmación mucho más débil.
+
+> ⚠️ **Lo que NO se afirma:** que `Kourti` sea maduro o esté listo para producción. 1★ y un commit
+> de 2026-11-01 significan proyecto joven y sin comunidad. Lo que se afirma es lo verificado: **MIT
+> genuino, código real y alcance funcional de practice management** — es decir, **una base de
+> partida legítima donde esta KB afirmaba que no había ninguna.**

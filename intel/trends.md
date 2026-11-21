@@ -376,3 +376,85 @@ toda la rotación: a partir de este pase, «muchas estrellas» deja de ser una s
 pasa a ser una pregunta — *¿por qué tiene estas estrellas?*.** El discriminador barato es leer la
 `description` completa buscando llamada a la acción comercial, y el patrón firma es
 **estrellas altas + sin licencia + dormido**.
+
+---
+
+## 🆕 PASE 5 (2026-11-21) — cinco tendencias, cuatro de ellas medidas en más de una región
+
+### T-P5-1 — El caudal de activos legales nuevos **se ha secado**, y lo que los pases anteriores medían era otra cosa
+
+Query datada y reproducible: `legal AI created:>2026-09-01 stars:>=40` → **`total_count = 4`**, y al
+leer los cuatro **sólo dos son legales**, de los cuales **uno ya estaba en esta KB**. ⇒ **En once
+semanas, UN repo legal nuevo cruzó los 40★.**
+
+Esto obliga a separar dos fenómenos que esta KB venía confundiendo:
+
+| | Qué es | Estado medido |
+|---|---|---|
+| **Caudal de creación** | repos legales **nuevos** con señal | **~1/mes. Seco.** |
+| **Deuda de descubrimiento** | repos **preexistentes** que la KB no había encontrado | **Era enorme** (los pases 2 y 3 añadieron 7 filas cada uno, casi todas de repos antiguos) y **se está pagando** |
+
+🔑 **Consecuencia operativa para la rotación entera:** que un pase añada muchas filas **no** indica
+un ecosistema en expansión — indica que la KB venía con retraso. Una vez pagada la deuda, **un pase
+horario sobre la misma industria no puede producir activos nuevos.** La cadencia útil para
+`agents/top.md` y `repos/foundations.md` es **semanal o mensual**; lo que rinde cada hora es
+**verificación, corrección y cierre de huecos.**
+
+### T-P5-2 — 🔑 El competidor no es Harvey: es **ChatGPT dentro del despacho**
+
+La herramienta de AI más usada en despachos **de todos los tamaños** sigue siendo la **genérica**
+(ChatGPT, Microsoft Copilot): **43–48%** (Clio 2026). En APAC, **94%** usa alguna AI pero sólo
+**46%** usa AI legal especializada (LexisNexis, n=1.715, 10 mercados). **La brecha entre esas dos
+cifras es el mercado**, y está ocupada hoy por herramientas **sin trazabilidad, sin verificación de
+cita y sin registro de auditoría**.
+
+Y se cierra con los otros dos datos del pase: **64%** de los despachos que usan AI declara **efecto
+positivo en ingresos** (Clio) **mientras** las sanciones por citas alucinadas se intensifican en
+número y severidad, con **descalificación, revocación de *pro hac vice* y traslado al colegio**
+(ABA). ⇒ **El valor ya se está capturando con herramientas que no son defendibles.** Ése es el
+argumento comercial completo, y no requiere convencer a nadie de que adopte AI.
+
+### T-P5-3 — «Adoption is near universal, governance is not» aparece **en las cuatro regiones a la vez**
+
+Por primera vez esta KB puede documentar el mismo diagnóstico, en el mismo trimestre, con fuentes
+independientes por región:
+
+| Región | Formulación medida | Fuente |
+|---|---|---|
+| **APAC** | el titular literal: *«adoption is near universal, governance is not»* | LexisNexis, n=1.715 |
+| **EMEA** | adopción casi universal en UK&I, con **integración y gobernanza responsable** como el problema pendiente | Clio UK&I 2026 |
+| **North America** | los 40 despachos de ≥500 abogados usan AI legal, y **no todos tienen política de uso**; *vetting*, formación y gobernanza son lo que **frena** el despliegue | Bloomberg Law |
+| **LATAM** | difusión temprana pero acelerando, con marcos regulatorios **en construcción** y obligaciones que llegan por vía **sectorial y judicial** | BID, FPF, IBA |
+
+⇒ **Deja de ser una hipótesis de posicionamiento y pasa a ser un hecho replicado.** La gobernanza
+es el cuello de botella en los cuatro mercados simultáneamente, lo que significa que **el mismo
+entregable se vende en los cuatro**, cambiando sólo el instrumento normativo que lo justifica
+(Art. 50 en la UE, reglas procesales y colegiales en EE. UU., ley coreana en APAC, juez y colegio
+en LATAM).
+
+### T-P5-4 — El punto de entrada se desplaza del despacho **al consumidor**
+
+**46% de los consumidores consultaría a una AI antes de contactar a un abogado** (Clio 2026). Es la
+cifra con más consecuencias estratégicas del pase: parte de la demanda **ya no entra por el
+despacho**. Y es la única tendencia de esta KB cuya base abierta está **madura y permisiva**:
+`docassemble` (MIT, 200+ instalaciones, Suffolk LIT Lab) nació precisamente ahí. Ver P3.
+
+### T-P5-5 — La ausencia de e-signature permisiva es **estructural**, no un hueco de búsqueda
+
+Medido sobre los **tres proyectos más grandes** del segmento: DocuSeal **AGPL-3.0** (19.110★),
+Documenso **AGPL-3.0** (15.841★), OpenSign **AGPL-3.0 + carve-out** (7.316★); LibreSign AGPL-3.0.
+**Cuatro de cuatro copyleft de red.** Con esa unanimidad, la explicación no es casualidad: en firma
+electrónica el valor está en la **confianza y el cumplimiento normativo**, y el copyleft de red es
+precisamente la licencia que protege a un proveedor SaaS de que le forkeen el producto. ⇒ **Para un
+entregable cerrado, esta capa se compra. Para un despliegue interno del cliente, DocuSeal o
+Documenso son viables** (AGPL no contamina sin distribución ni servicio a terceros). **Es una
+decisión de modelo de negocio, no técnica**, y conviene decírselo al cliente así.
+
+### T-P5-6 — `NOASSERTION` de GitHub **no** significa «sin licencia» (y esta KB lo estaba tratando así)
+
+Dos casos en un solo pase, uno por cada lado de la regla de bytes 932-G1: **Mayan EDMS** (586 B ⇒
+puntero **Apache-2.0** genuino) y **OpenSign** (35.051 B ⇒ **AGPL-3.0 compuesta** con carve-out).
+**Los dos eran adoptables y los dos los clasifica GitHub como `NOASSERTION`.** El descarte legítimo
+no es la clasificación del proveedor, es **la ausencia medida del fichero** (404 en `LICENSE`,
+`LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING` × `HEAD`/`main`/`master`). **Aplicar en las 12
+industrias: toda fila descartada por `NOASSERTION` sin abrir el fichero debe revisarse.**

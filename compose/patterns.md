@@ -808,3 +808,171 @@ al **Poder Judicial**, no al despacho privado; y **178 iniciativas de AI** ya ce
 2024 son **mayoritariamente predictivas o analíticas**, no generativas — así que el inventario del
 punto 1 va a encontrar sistemas **anteriores** a la ola de LLMs, que son los que peor documentados
 están y los que más probablemente caigan en «influye en una determinación».
+
+---
+
+## 🆕 P20 — Despacho permisivo de punta a punta (la receta que **no se podía escribir** hasta este pase)
+
+**Por qué es nueva:** esta KB declaraba abierto el hueco de *practice management* permisivo, así
+que todas las recetas anteriores empezaban en el documento. Con `Kourti` (MIT) verificado, la
+receta puede empezar en **el expediente y el plazo**, que es donde empieza el despacho.
+
+| Paso | Pieza | Licencia | Qué aporta |
+|---|---|---|---|
+| 1 | [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | **MIT** | Columna vertebral: **matters, documentos, clientes, plazos**. React + Node + PostgreSQL, `docker compose up --build`. |
+| 2 | [docling-project/docling](https://github.com/docling-project/docling) | MIT | Ingesta y parsing (el cuello de botella real, ver `repos/foundations.md`). |
+| 3 | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT | **De-identificar PII antes de cualquier egreso** a un LLM externo. Sin esto no hay despliegue defendible bajo GDPR/LGPD. |
+| 4 | [shcherbak-ai/contextgem](https://github.com/shcherbak-ai/contextgem) | Apache-2.0 | Extracción tipada (*aspects/concepts*) **con trazabilidad al párrafo de origen**. |
+| 5 | [thomasunise/casecite](https://github.com/thomasunise/casecite) | Apache-2.0 | Cada afirmación contrastada contra el pasaje que cita + *tabular review*. |
+| 6 | [Vaquill-AI/ms-word-addin](https://github.com/Vaquill-AI/ms-word-addin) | Apache-2.0 | El canal que decide la adopción: **Word**, con redline y playbooks. |
+| 7 | [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | **MIT** | Patrón de la **capa de verificación fuera del control del agente** + firma del abogado. Se copia la arquitectura, no el caso. |
+
+**Cableado concreto.** `Kourti` es el sistema de registro y **dueño del `matter_id`**. Todo lo demás
+cuelga de ese id:
+
+```
+Kourti (matter_id, cliente, plazo)
+  └─ docling  ──► texto + estructura        [por documento del matter]
+       └─ presidio ──► texto de-identificado   [ANTES de salir del perímetro]
+            └─ contextgem ──► conceptos tipados + offset de origen
+                 └─ casecite ──► cada claim atado a su pasaje
+                      └─ verificación (patrón legal-agent-workshop):
+                           corre FUERA del agente; si un claim no resuelve ──► no se entrega
+                                └─ Word add-in ──► redline al abogado ──► firma  ──► Kourti
+```
+
+⚠️ **Las tres advertencias que hay que decirle al cliente, no esconder:**
+1. **`Kourti` tiene 1★.** Se forkea, se fija el commit y **se asume mantenimiento**. Es base de
+   partida, no proveedor.
+2. **No trae trust accounting ni control de conflictos de interés** — las dos cosas que un colegio
+   de abogados mira primero. Hay que construirlas o integrarlas (el único candidato con trust
+   accounting, **Kosmos**, es AGPL-3.0).
+3. **Auditar antes de proponer.** Este pase verificó licencia, existencia y alcance; **no** auditó
+   seguridad ni calidad de código.
+
+## 🆕 P21 — Soberanía del dato **impuesta por la red**, no prometida en el README (patrón `kancelaria-lex`)
+
+**El problema:** «on-premise» y «local-first» son afirmaciones de marketing que un auditor no puede
+verificar. Bajo EU AI Act / GDPR / LGPD lo que hay que poder demostrar es que **no existe ruta** de
+salida, no que nadie la use.
+
+**La implementación de referencia, permisiva y legible:**
+[AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) (**MIT**, 1.069 B).
+
+| Control | Cómo lo hace | Por qué es auditable |
+|---|---|---|
+| **Sin egreso** | **cuatro segmentos Docker, tres con `internal: true`** | `internal: true` elimina la ruta al gateway **a nivel de red**. Se verifica leyendo el compose, no confiando en el código. |
+| **Cita verificada por construcción** | el código **reconstruye el texto desde el documento fuente** y compara **carácter a carácter** | una cita fabricada **no puede** pasar el verificador. Declara **0 inconsistencias en todas las corridas**, >80% de precisión (vs **17–34%** de fabricación en comerciales). |
+| **Procedencia del OCR** | Tesseract local, **marcador permanente**, cada cita derivada muestra `z OCR` | distingue *«apunta a un carácter del expediente»* de *«apunta a un carácter de **la lectura de un escaneo**»*. **Ninguna otra pieza de esta KB hace esta distinción.** |
+| **Identidad** | perfiles locales con contraseña y **TOTP** opcional | control de acceso sin IdP externo. |
+
+**Receta de reutilización** (el patrón es replicable a cualquier jurisdicción; sólo el corpus es
+polaco):
+
+```bash
+# 1. El control que hace defendible todo lo demás: verificar que NO hay ruta de salida.
+#    Si un servicio que toca texto de cliente no esta en un segmento internal, el diseño miente.
+docker compose config | python3 -c "
+import sys,yaml
+c=yaml.safe_load(sys.stdin)
+nets=c.get('networks',{}) or {}
+internal={n for n,v in nets.items() if (v or {}).get('internal')}
+print('segmentos internal:', sorted(internal) or 'NINGUNO  <-- BANDERA ROJA')
+for svc,v in (c.get('services') or {}).items():
+    sn=set((v.get('networks') or {})) or {'<default>'}
+    fuera=sn-internal
+    print(f'{svc:28s} redes={sorted(sn)}  {\"EGRESO POSIBLE <--\" if fuera else \"sin egreso\"}')
+"
+# 2. Sustituir el corpus jurisdiccional, conservando el verificador:
+#    PL -> korean-law-mcp (KR) / opencaselaw (CH) / ayunis-legal-mcp (DE) / mcp-legal-it (IT)
+#    LATAM: no existe todavia ningun MCP de fuentes oficiales -> ver P12 (ese es el hueco real)
+```
+
+⇒ **Esto es lo que convierte el argumento de soberanía EMEA en una demostración de 10 minutos**
+delante de un DPO, en vez de una diapositiva.
+
+## 🆕 P22 — Barrido de **estructura** de tabla (G-L11): el control que ningún pase tenía, y es gratis
+
+**El fallo que detecta:** una línea en blanco dentro de una tabla Markdown la **parte en dos**. Las
+filas de abajo quedan **sin cabecera**, así que el compilador o las pierde o **convierte la primera
+fila en nombres de columna** — el fallo «cabecera como dato» que el brief prohíbe explícitamente.
+
+**Por qué los controles existentes no lo ven:** todos (licencia, pertinencia P15, censo de nombre
+P18, checksum 932-G1) validan **filas**. Ninguno valida **la tabla que las contiene**. En este pase
+el defecto estaba en las 7 filas que el pase 4 **auditó una por una y declaró correctas** — y lo
+eran: *el defecto estaba en el carácter que las separaba de su cabecera.*
+
+```bash
+# table-structure.sh — 0 llamadas de red. Correr en las 12 industrias antes de cada commit.
+python3 - <<'PY'
+import re,glob,sys
+bad=0; tot=0
+for f in sorted(glob.glob('*/*.md')):
+    L=open(f,encoding='utf-8').read().split('\n'); i=0
+    while i<len(L):
+        if L[i].lstrip().startswith('|'):
+            s=i; blk=[]
+            while i<len(L) and L[i].lstrip().startswith('|'): blk.append(L[i]); i+=1
+            tot+=1
+            sep=len(blk)>1 and re.match(r'^\|[\s:|-]+\|?\s*$',blk[1].strip())
+            cols=[len(re.split(r'(?<!\\)\|',b.strip().strip('|'))) for b in blk]
+            data=[c for c,b in zip(cols,blk) if not re.match(r'^\|[\s:|-]+\|?\s*$',b.strip())]
+            if not sep:
+                print(f'{f}:{s+1}  SIN FILA SEPARADORA -> tabla sin cabecera ({len(blk)} filas huerfanas)'); bad+=1
+            elif len(set(data))>1:
+                print(f'{f}:{s+1}  COLUMNAS INCONSISTENTES: {sorted(set(data))}'); bad+=1
+        else: i+=1
+print(f'--- {tot} bloques de tabla, {bad} defectos ---')
+sys.exit(1 if bad else 0)
+PY
+```
+
+**Resultado en esta KB tras la reparación: 86 bloques, separadora en todos, 0 mismatches.**
+⚠️ **Y una trampa que este script encontró en su propia documentación:** una barra vertical dentro
+de *inline code* (`` `|` ``) **parte la celda igual** en GFM. En una celda de tabla hay que
+escaparla como `\|`.
+
+## 🆕 P23 — Descubrimiento **sin falso negativo**: dejar de usar filtros de precisión como filtros de cobertura
+
+**El fallo que corrige (G-L10):** el pase 4 declaró *««Kourti Legal» no existe»* sobre un repo que
+existe, es MIT y tiene 524 refs. Vio **1★** y concluyó inexistencia. El gate de pertinencia **P15**
+de esta KB **también** lo rechaza, porque el repo no tiene `description` ni `topics`.
+
+🔑 **La distinción que hay que internalizar:**
+
+| Filtro | Para qué **sirve** | Para qué **no sirve** |
+|---|---|---|
+| Estrellas, `description`, `topics`, ranking de búsqueda | **PRECISIÓN**: descartar ruido de una lista ya obtenida | **COBERTURA**: decidir qué mirar, o concluir que algo no existe |
+| `git ls-remote` (refs), bytes de LICENSE, lectura del README | **EXISTENCIA y NATURALEZA** del artefacto | medir tracción o madurez |
+
+```bash
+# discover.sh — buscar por FUNCION, no por popularidad. Uso: ./discover.sh "practice management" "matters|deadlines|trust accounting"
+set -u
+FUNC="$1"; TERMS="$2"
+# (1) Candidatos SIN umbral de estrellas y SIN sort=stars (el ranking es el sesgo).
+gh api -X GET search/repositories -f q="$FUNC" -f per_page=100 \
+  --jq '.items[] | [.full_name, (.stargazers_count|tostring), ((.license.spdx_id)//"NONE")] | @tsv' > /tmp/cand.tsv
+# (2) Y el canal que esta KB no usaba: directorios de terceros. Dan nombres, no verdades.
+echo "MANUAL: buscar '$FUNC open source self-hosted' en agregadores; extraer NOMBRES, verificar aqui."
+# (3) Verificar cada candidato por EXISTENCIA, no por senal social.
+while IFS=$'\t' read -r slug stars lic; do
+  refs=$(git ls-remote "https://github.com/$slug" 2>/dev/null | wc -l)
+  [ "$refs" -eq 0 ] && continue                       # no existe de verdad
+  rm -f /tmp/L; code=$(curl -sL -o /tmp/L -w '%{http_code}' --max-time 20 \
+      "https://raw.githubusercontent.com/$slug/HEAD/LICENSE")
+  bytes=$([ "$code" = 200 ] && wc -c < /tmp/L || echo 0)
+  readme=$(curl -sL --max-time 20 "https://raw.githubusercontent.com/$slug/HEAD/README.md" || true)
+  # pertinencia por el README (NO por description/topics: ahi viven los falsos negativos)
+  hits=$(printf '%s' "$readme" | grep -ioE "$TERMS" | sort -u | wc -l)
+  printf '%-45s %5s★ lic=%-12s bytes=%-6s refs=%-5s terminos=%s\n' "$slug" "$stars" "$lic" "$bytes" "$refs" "$hits"
+done < /tmp/cand.tsv
+```
+
+⇒ **Y la regla de redacción que se deriva:** un hueco sólo puede declararse como *«no existe X
+permisivo»* si se buscó por función fuera de GitHub. En otro caso se escribe **«no existe X
+permisivo con señal social»**, que es lo que realmente se midió. En el pase 5 se reescribieron en
+ese sentido **los dos huecos de `verticals/solutions.md`** (practice management, cerrado; firma
+electrónica, confirmado abierto sobre los tres mayores). **Los huecos declarados en `agents/top.md`,
+`repos/foundations.md` e `intel/trends.md` siguen redactados en la forma fuerte y están pendientes
+de rerevisión con P23** — en particular el de **MCP de fuentes oficiales LATAM**, que es el más
+citado de esta KB y nunca se buscó fuera de GitHub.
