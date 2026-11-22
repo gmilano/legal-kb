@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🗺️ Mapa de mercado — Legal Services
@@ -394,6 +394,59 @@ herramientas aprobadas, no como modelo.
 con el mosaico estatal de EE. UU. ⚠️ Varias de las fuentes de este bloque son de principios de 2026
 y el conflicto federal-estatal está vivo: **la fecha de Colorado ya se movió una vez.**
 
+
+#### 🆕 Pase 7 (2026-11-22) — el eje federal cambió de *regular* a **litigar contra los estados**
+
+Esta KB venía midiendo la regulación de EE. UU. estado por estado. Lo que se mide hoy es que
+**existe un frente federal cuyo objeto es anular esa capa estatal**, y eso cambia el riesgo de
+cualquier entregable de compliance anclado a **una sola** ley estatal:
+
+| Hecho | Fecha | Por qué importa para un engagement |
+|---|---|---|
+| **TAKE IT DOWN Act** — único estatuto federal autónomo que regula sustantivamente sistemas de AI | cumplimiento **19-may-2026** | Deepfakes. Es el suelo federal, y es estrecho: todo lo demás sigue siendo estatal. |
+| **Orden ejecutiva** que instruye al Fiscal General a impugnar leyes estatales de AI que choquen con un marco nacional «mínimamente gravoso» | dic-2025 | Convierte la fragmentación estatal en **materia en litigio**. |
+| **DOJ AI Litigation Task Force** | creada **9-ene-2026** | Le da órgano permanente a esa impugnación. |
+| **TRAIGA (Texas)** en vigor | **1-ene-2026** | Alcanza a *developers* **y** *deployers* que hagan negocio en Texas: un despliegue de cliente puede caer dentro sin tener sede allí. |
+| **Colorado AI Act** — ejecución aplazada de 1-feb a **30-jun-2026** | 2026 | ⚠️ **Conflicto entre KB detectado hoy:** la KB de *gaming* (pase de 20-nov-2026) registró que *«Colorado fue litigada hasta desaparecer antes de entrar en vigor»*. Las fuentes de este pase la describen **viva, con ejecución aplazada**. Se publican **las dos lecturas** y se marca como **punto a resolver contra fuente primaria** (texto de la norma en la legislatura de Colorado) en el próximo pase. Ninguna de las dos se da por buena. |
+
+> 🎯 **Lo vendible, y es una inversión del argumento habitual:** cuando el marco al que un cliente
+> ancló su compliance puede ser impugnado por el propio gobierno federal, **lo que conserva valor
+> no es el mapeo normativo sino la evidencia**: trazas de qué modelo produjo qué, con qué fuente y
+> quién lo aprobó. La capa de verificación de esta KB (`kancelaria-lex`, `legal-agent-workshop`,
+> `harvey-labs`) **sobrevive a un cambio de régimen; un checklist por estado, no.**
+
+#### 🆕 Y el giro que ya es vinculante y nadie puede impugnar: **la firma del abogado**
+
+**Indiana, desde el 1-ago-2026: la firma de un escrito certifica que la autoridad citada es
+auténtica, y la regla cubre expresamente los escritos asistidos por AI.**
+
+Es el punto más accionable de la región, porque **no regula la AI: regula al abogado.** No depende
+de que sobreviva ninguna ley estatal de AI ni de cómo acabe el litigio federal. Y convierte la
+verificación de cita de *buena práctica* en **contenido de una certificación firmada**.
+
+En paralelo, los tribunales legislan por su cuenta: el **Unified Court System de Nueva York**
+adoptó una política interina que **exige formación en AI a jueces y personal** y limita la AI
+generativa **a herramientas aprobadas** — es decir, una lista de herramientas admitidas, que es
+precisamente donde un despliegue self-hosted y auditable compite bien.
+
+#### 📊 El coste del fallo, medido (y con el canal declarado)
+
+La base de datos de referencia (Charlotin) registra ~**712** resoluciones judiciales sobre
+contenido alucinado en todo el mundo, **~90% de ellas escritas en 2025**. Composición y severidad:
+
+- **El error se desplazó al profesional**: en un mes reciente, profesionales del derecho fueron
+  responsables en al menos **13 de 23** casos, frente a **7 de 10** casos de litigantes *pro se*
+  en 2023.
+- **Sanciones económicas**: rango habitual **1.500–5.000 USD**, en ascenso. Casos medidos:
+  **>55.000 USD** en costas a la contraparte (Alabama) y **15.000 USD punitivos por cada abogado**.
+- **Y las no económicas, que son las caras**: remisión a disciplina, orden de **presentar la
+  resolución en todos los demás procedimientos del abogado**, y **denegación del nombramiento como
+  class counsel**. Esta última es pérdida directa de mandato.
+
+> ⚠️ **Canal declarado:** `www.damiencharlotin.com` **no resuelve** desde esta sesión (fuera de los
+> dominios permitidos). El contador de ~712 llega por **prensa secundaria**, no por la fuente
+> primaria, y las cifras de composición proceden de un único reportaje. Se publica con esa marca:
+> es un **orden de magnitud verificado por varias fuentes secundarias**, no una lectura directa.
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -589,6 +642,53 @@ jurisdicción) formulada por el propio mercado, y aplicable igual a Portugal, Gr
 genérico.** Ahí el activo de referencia sigue siendo `opencaselaw` (26 cantones, 3 idiomas) y el
 patrón de soberanía impuesta por red es `P21`.
 
+
+#### 🔴 Pase 7 (2026-11-22) — **quedan 10 días** para la obligación de marcado legible por máquina
+
+| Hito del AI Act | Fecha | Estado |
+|---|---|---|
+| **Art. 50** (transparencia) aplicable | **2-ago-2026** | ✅ en vigor |
+| 🔴 **Sistemas de AI generativa YA en el mercado: marcado legible por máquina del contenido generado** | **2-dic-2026** | ⏳ **a 10 días de hoy** |
+| Anexo III (alto riesgo) | **2-dic-2027** | tras el *Digital Omnibus*, publicado en el DOUE el **24-jul-2026** |
+| Anexo I (alto riesgo) | **2-ago-2028** | — |
+| Multas | hasta **35 M€ o el 7%** de la facturación mundial | AI Office + autoridades nacionales ya pueden ejecutar |
+
+> **Cuarta corroboración independiente del calendario post-Omnibus** que esta KB publica (tras
+> *gaming*, *enterprise* y el propio pase 6 de *legal*). El calendario de esta KB **es correcto** y
+> ya no necesita re-verificarse cada pase: se da por estable y se vigila sólo el hito siguiente.
+
+**Lo accionable de aquí al 2 de diciembre** no es un proyecto de compliance: es un **inventario**.
+Qué sistemas generativos del cliente ya están en el mercado, cuál de ellos emite contenido que
+llega a un tercero, y si ese contenido sale marcado. Diez días no dan para más, y es exactamente lo
+que el pase 6 ya había formulado como receta (`P2`).
+
+#### 🆕 Fragmentación nacional: el AI Act es uno, los ejecutores no
+
+- **Italia** repartió la supervisión del AI Act **entre varios organismos** — para un despacho
+  italiano la pregunta «quién me inspecciona» ya no tiene respuesta única.
+- **Hungría**: decreto de supervisión de AI **en vigor desde el 1-sep-2026**.
+- **ChatGPT designado VLOSE (motor de búsqueda muy grande) bajo la DSA el 31-ago-2026** — régimen
+  de obligaciones **adicional y distinto** al del AI Act sobre la misma herramienta que el 43-48%
+  de los profesionales del derecho usa a diario.
+
+> 🎯 **Y esto es la venta de `P21`, no una curiosidad regulatoria:** cuando la herramienta genérica
+> que el despacho ya usa queda designada bajo la DSA, la alternativa que gana no es «otra
+> herramienta en la nube», es **la que no manda el expediente a ningún sitio**. `kancelaria-lex`
+> impone esa localidad **por topología de red** (tres de cuatro segmentos Docker con
+> `internal: true`), y eso se demuestra ante un DPO en diez minutos con un `docker compose config`.
+
+#### 🆕 El lado de la inversión, que esta KB sólo tenía por el lado de la obligación
+
+- **CADA — Cloud and AI Development Act**, propuesto el **3-jun-2026**, pieza central del eje de
+  competitividad: refuerzo del ecosistema europeo de nube e AI.
+- **Convocatoria de 10.000 M€** para consorcios de *AI Gigafactories*, abierta.
+- El **Código de Buenas Prácticas de GPAI** lo firman Amazon, Anthropic, Google, IBM, Microsoft,
+  **Mistral AI** y OpenAI.
+
+Para Globant en EMEA eso significa que el argumento no es sólo «te evito la multa», sino **«hay
+dinero público persiguiendo despliegues europeos»** — y un stack permisivo y self-hosted
+(`opencaselaw` CH, `ayunis-legal-mcp` DE, `mcp-legal-it` IT, `kancelaria-lex` PL) es exactamente la
+forma que ese dinero busca financiar.
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -775,6 +875,49 @@ local sea Singapur —y no Australia ni Japón— dice dónde está hoy la deman
 ⇒ **Entrada recomendada en APAC: Singapur (AI Verify como criterio de aceptación) o India (skills
 permisivas ya existentes), y Corea/Vietnam sólo con el *gate* de aviso previo ya construido.**
 
+
+#### 🆕 Pase 7 (2026-11-22) — la brecha de gobernanza ahora tiene **numerador y denominador**
+
+El pase 6 publicó la encuesta de **LexisNexis APAC** como *«94% usa AI, 46% usa AI legal
+especializada»*. La medición que importa comercialmente es otra, y es la que se añade hoy:
+
+> **94% usa AI — y sólo el 58% trabaja bajo una política de AI.**
+
+Es decir: **el 36% de los profesionales del derecho de APAC usa AI sin política que lo cubra.** Esa
+diferencia es el producto, y es la misma tesis que esta KB sostiene globalmente («el competidor es
+ChatGPT genérico dentro del despacho»), ahora con la brecha **cuantificada en un solo par de
+números comparables**.
+
+#### 🆕 Taiwán entra en el mapa regulatorio — y esta KB ya tenía dos activos allí sin saberlo
+
+| Jurisdicción | Instrumento | En vigor | Nota |
+|---|---|---|---|
+| **Taiwán** | **AI Basic Act** | **14-ene-2026** | 🆕 **Nuevo en esta KB.** Y es la jurisdicción donde la KB ya tiene **dos** filas: `aa0101181514/tw-legal-rag` (⚠️ Elastic License 2.0) y `lawchat-oss/mcp-taiwan-legal-db` (MIT, 234★). |
+| **Corea del Sur** | AI Basic Act | 22-ene-2026 | 🆕 **Matiz nuevo y decisivo:** 2026 es **periodo piloto con un año de gracia en sanciones**. La ventana de implantación sin riesgo sancionador **se cierra a principios de 2027**. |
+| **Vietnam** | Ley de AI | 1-mar-2026 | Plazos de cumplimiento escalonados **hasta 2027**. |
+| **Japón** | Enfoque **basado en principios** | — | Sin ley horizontal vinculante. |
+| **Australia · Nueva Zelanda · Malasia** | Reglas **sectoriales** | — | Sin ley autónoma de AI. |
+| **Singapur** | **AI Verify** (toolkit de gobernanza) | — | Gobernanza por herramienta, no por estatuto. |
+
+> 🎯 **La lectura de negocio es el calendario, no el mapa.** Corea tiene gracia sancionadora hasta
+> principios de 2027 y Taiwán acaba de entrar en vigor: **2026 es la ventana barata** para implantar
+> gobernanza en ambas. En Japón, Australia, Nueva Zelanda, Malasia y Singapur **no hay estatuto que
+> vender**, así que allí la venta es por **riesgo profesional y contractual**, no por cumplimiento.
+
+#### 🆕 Qué trabajo legal genera esto hoy
+
+**Chambers**: la mayor parte del trabajo legal de AI en APAC es **consultivo** — redacción de
+contratos de AI y políticas internas — y el contencioso **llegará cuando empiece la ejecución**.
+Áreas de riesgo: IP, deepfakes y salidas no fiables.
+
+Eso encaja con la gracia coreana y con la entrada en vigor taiwanesa: **el contencioso de APAC está
+calendarizado, no ausente**, y empieza a partir de 2027.
+
+> ⚠️ **Dato registrado como NO corroborado.** Una guía para GCs de APAC cita un informe de
+> FTI Consulting/Relativity con **adopción de GenAI entre GCs del 87%, frente al 44% en 2025**. El
+> artículo que lo transporta contiene además pasajes **confusos y verificablemente poco fiables**.
+> Se publica **marcado**: la cifra es plausible y coherente con el 94% de LexisNexis, pero **no se
+> apoya ninguna recomendación en ella** hasta leer el informe original.
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -1054,6 +1197,64 @@ de cumplimiento europeo **se reutiliza** en LATAM, y eso es vendible como ahorro
 en LAC como temprana pero acelerando en finanzas, salud, educación y **gobierno** — **legal no
 aparece en esa lista**. Es un argumento de *timing*, no de ausencia de demanda.
 
+
+#### 🆕 Pase 7 (2026-11-22) — la regulación que ya alcanza al abogado latinoamericano **no es una ley de AI**
+
+El pase 6 cerró con una observación del BID: en su lista de difusión de AI en América Latina
+(finanzas, salud, educación, gobierno) **el sector legal no aparece**. Este pase encuentra por qué
+esa ausencia engaña, y dónde está realmente la norma vinculante:
+
+| Jurisdicción | Instrumento que **ya** alcanza al ejercicio profesional | Estado medido |
+|---|---|---|
+| 🇲🇽 **México** | **Barra Mexicana de Abogados** — guías formales de uso responsable de AI en la práctica jurídica | ✅ publicadas a **finales de 2025**. Las fuentes las describen como **las primeras de la región**. |
+| 🇧🇷 **Brasil** | **OAB** — provimento sobre AI generativa | 🔴 **NO EXISTÍA a julio de 2026.** Las sanciones por jurisprudencia inventada se han apoyado en el **Estatuto da Advocacia** y en las reglas de **litigância de má-fé**, no en norma de AI. |
+| 🇧🇷 **Brasil** | **PL 2.338/2023** | Aprobado por el Senado (dic-2024), **pendiente en la Cámara**. Sin cambio respecto del pase 6. |
+| 🇲🇽 **México** | Ley general de AI | 🔴 **No existe.** Deloitte (jul-2026): la regulación avanza por **parches sectoriales**. |
+
+> 🎯 **Y aquí está el argumento comercial, que es más fuerte que el regulatorio:** en Brasil **no
+> hace falta esperar a la ley de AI**. El abogado ya responde por la cita falsa bajo el Estatuto da
+> Advocacia y la litigância de má-fé — normas de **décadas**. La verificación de cita no se vende
+> en LATAM como preparación para una norma futura: se vende como **cobertura de una responsabilidad
+> que ya existe y ya se está ejerciendo**. Es el argumento que no depende de ningún calendario
+> legislativo, y es el único de los cuatro regiones que no lo necesita.
+>
+> La pieza que lo ejecuta ya está en esta KB y es permisiva: `jurismcp` + `leis-mcp` + `br-eli-mcp`
+> resuelven la cita **contra portal oficial**, y `kancelaria-lex` aporta el verificador carácter a
+> carácter. La receta está en `compose/patterns.md` (`P20`).
+
+#### 📏 Y la capa LATAM **está viva** — medido hoy, no inferido
+
+El pase 6 incorporó los MCP de fuentes oficiales LATAM pero **no pudo medir su actividad**. Medido:
+
+| Repo | País | Estrellas | Último commit | |
+|---|---|---|---|---|
+| `matematicsolutions/br-eli-mcp` | 🇧🇷 | **4** | **2026-11-21** | commit de ayer |
+| `BEG-lag/mcp-dof` | 🇲🇽 | **0** | **2026-11-17** | 5 días |
+| `mazulo/leis-mcp` | 🇧🇷 | **71** | **2026-11-13** | 9 días |
+
+**75 estrellas entre los tres; los tres tocados en los últimos nueve días.** Un repositorio de
+**cero estrellas** mantenido semanalmente sobre la API oficial del **DOF** mexicano es
+infraestructura, no un experimento — y es invisible para cualquier ranking por popularidad.
+
+> 📌 **La consecuencia para la propuesta LATAM:** la ventaja no es que Globant construiría algo que
+> no existe. Es que **existe, está mantenido y no lo conoce nadie** — 75 estrellas en toda la capa
+> de fuentes legales oficiales de las dos mayores economías de la región. Integrarlo y sostenerlo
+> es trabajo de semanas, no de trimestres, y **el coste de descubrimiento ya está pagado en esta KB**.
+
+#### ⚠️ Un patrón de desinformación que esta KB debe registrar, porque se repetirá
+
+Al buscar el estado de la regulación brasileña, **un blog de cumplimiento describe el PL 2.338 como
+norma ya vigente, con multas de hasta el 2% de la facturación en Brasil.** Es **falso**, y lo
+contradicen el resto de fuentes del mismo barrido.
+
+La posición de esta KB (aprobado en Senado, pendiente en Cámara) **era y sigue siendo la correcta**.
+Lo que se registra no es la corrección, es **la forma del error**: contenido SEO de compliance que
+**adelanta la entrada en vigor** de un proyecto de ley y le adosa una cifra de multa concreta —
+porque una multa concreta vende servicios. Es el mismo patrón que el pase 6 documentó con
+`openclaw` (prensa técnica indexada afirmando que era un proyecto legal). **Dos pases seguidos, dos
+fuentes indexadas que un pase futuro encontrará antes que la verdad.** Regla: para estado
+legislativo en LATAM, **sólo cuenta la cámara correspondiente** (Senado/Câmara, DOF/Cámara de
+Diputados) o la orden profesional (OAB, Barra Mexicana). Un blog de compliance **no es un canal**.
 ## Hueco de producto transversal (las cuatro regiones)
 
 No existe un **"Odoo de los despachos legales"**: no se halló plataforma de *practice management*

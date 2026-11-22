@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🏭 Verticales de partida — Legal Services
@@ -305,3 +305,52 @@ el patrón Odoo/OpenMRS/Moodle. Medido este pase:
 - `j-lawyer` — descrito por una fuente indexada como practice management libre (Alemania, EMEA).
   **Ningún slug verificable:** `j-lawyer-org/j-lawyer` y `j-lawyer-org/j-lawyer-server` dan 404.
   No entra sin slug.
+
+
+## 🆕 PASE 7 (2026-11-22) — la capa vertical no cambió; lo que cambió es **qué se puede prometer sobre ella**
+
+Este pase no añade plataformas: el barrido de creación (`legal AI created:>2026-08-01 stars:>=25`)
+dio **10 repos en cuatro meses** y **ninguno** es una plataforma vertical nueva. Lo que sí se midió
+es la **actividad** de todo lo que ya estaba, y eso cambia la conversación con el cliente.
+
+### ✅ Las 14 plataformas de esta capa, verificadas hoy por doble canal
+
+**93 slugs citados en los ocho ficheros de esta KB → 93 resuelven, 0 archivados, 0 inexistentes,
+3 renombrados (los tres ya documentados).** Ninguna de las plataformas de esta capa ha muerto,
+cambiado de nombre ni sido archivada desde el pase 6.
+
+### 📏 Y la medición que importa para una propuesta: **estrellas y actividad son ejes distintos**
+
+| Plataforma | Licencia | Stars | Último commit | Qué se puede prometer |
+|---|---|---|---|---|
+| [stella/stella](https://github.com/stella/stella) | Apache-2.0 | 282 | **2026-11-22** | Commit **de hoy**. Base de despliegue de cliente con mantenimiento demostrable. |
+| [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | MIT | **1** | 2026-11-01 | *Practice management* permisivo. **1 estrella y 3 semanas desde el último commit**: viable como base a bifurcar, **no** como producto con comunidad detrás. La promesa es «lo mantenemos nosotros», no «lo mantiene el upstream». |
+| [jhpyle/docassemble](https://github.com/jhpyle/docassemble) | MIT | 1.016 | 2026-11-13 | El maduro de la capa, y sigue vivo. |
+| [SuffolkLITLab/docassemble-AssemblyLine](https://github.com/SuffolkLITLab/docassemble-AssemblyLine) | MIT | 75 | 2026-11-20 | 75★ y commit de hace dos días: **bajo en señal social, alto en actividad.** |
+| [mayan-edms/Mayan-EDMS](https://github.com/mayan-edms/Mayan-EDMS) | NOASSERTION → **puntero Apache-2.0** (586 B) | 850 | 2026-05-23 | 🪦 **6 meses sin commits.** Sigue siendo el EDMS de referencia, pero no se ofrece soporte apoyado en el upstream. |
+| [OpenSignLabs/OpenSign](https://github.com/OpenSignLabs/OpenSign) | NOASSERTION → **AGPL-3.0 + carve-out** (35.051 B) | **7.320** | 2026-11-20 | Firma electrónica. ⚠️ AGPL: despliegue interno de cliente sí, producto SaaS cerrado no. |
+| [docusealco/docuseal](https://github.com/docusealco/docuseal) · [documenso/documenso](https://github.com/documenso/documenso) | **AGPL-3.0** ⚠️ | 19.118 · 15.862 | 2026-11-19 · 2026-11-22 | Las dos mayores de firma electrónica, **las dos AGPL**. |
+
+> 🔴 **El hueco de firma electrónica permisiva sigue CONFIRMADO, y ahora con la cuarta medición
+> consecutiva:** DocuSeal **19.118★ AGPL-3.0**, Documenso **15.862★ AGPL-3.0**, OpenSign
+> **7.320★ AGPL-3.0 + carve-out**, LibreSign AGPL-3.0. **4 de 4 copyleft de red.** Esto es
+> **estructural, no accidental**: en firma electrónica el valor es la confianza y el cumplimiento,
+> y la AGPL es exactamente lo que impide que un proveedor SaaS te bifurque el producto. No esperar
+> que aparezca una alternativa MIT; **planificar el despliegue interno o la licencia comercial.**
+
+### 🎯 Y la consecuencia comercial del eje de actividad (`G-L14`)
+
+Esta capa tiene plataformas de **7.320★ paradas desde mayo** y plataformas de **1★ tocadas este
+mes**. Para una propuesta eso se traduce en **dos frases distintas, y hay que elegir la correcta**:
+
+- **Alta señal + alta actividad** (`stella`, `docassemble`, `documenso`): *«partimos de una base
+  con comunidad; el upstream absorbe parte del mantenimiento»*.
+- **Baja señal + alta actividad** (`Kourti`, `AssemblyLine`, los MCP de LATAM): *«partimos de una
+  base viva pero poco conocida; el mantenimiento lo asumimos nosotros, y a cambio no hay
+  competidor que haya partido de aquí»*. **Esta es la posición más defendible comercialmente** —
+  ventaja de entrada real, sin esperar a que nadie construya nada.
+- **Alta señal + baja actividad** (`Mayan-EDMS`, y en `agents/top.md` `lawyer-llama` con 1.003★ y
+  dos años parado): *«lo usamos como patrón o como corpus, no como dependencia mantenida»*.
+
+**La columna que decide qué se promete es `pushed_at`. Las estrellas sólo deciden el orden en que
+se lee la lista.**

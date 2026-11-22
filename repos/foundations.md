@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🏗️ Repos fundacionales — Legal Services
@@ -392,3 +392,107 @@ banda CC0-1.0 del checksum 932-G1 es **exacta**, no aproximada. Las bandas MIT (
 7 lecturas) y Apache-2.0 (11.314–11.358 B) tienen dispersión por la línea de copyright; CC0 no la
 tiene porque **no lleva titular**. Útil: en CC0, cualquier desvío del 7.048 significa fichero
 modificado.
+
+
+## 🔴 PASE 7 (2026-11-22) — **LA CAPA DE EVALUACIÓN DE ESTA KB ESTABA MAL ATRIBUIDA DESDE EL PRIMER PASE**
+
+Esta KB cita **LegalBench** en tres ficheros (`intel/market.md`, `intel/trends.md`,
+`repos/trending.md`) como su base de evaluación en inglés, y los pases 3 y 4 lo registraron en el
+histórico de rotación como **«LegalBench (MIT, ~1.8k★, 162 tareas, Stanford)»**.
+
+**No tenía fila. No tenía URL. Y por tanto nunca pasó por el barrido de URLs ni por la lectura de
+licencia** — es el modo de fallo `G-L7` que esta misma KB documentó («un slug citado sin URL no
+pasa por el barrido»), aplicado al activo del que cuelga todo el argumento de evaluación.
+
+Medido hoy, por los dos canales:
+
+| Afirmación publicada por esta KB | Medición de hoy (2026-11-22) |
+|---|---|
+| Licencia **MIT** | 🔴 **FALSO.** `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING` → **404 los cinco**. SPDX de la API: **`NOASSERTION`**. |
+| `~1.8k★` | 🔴 **663★** medidas |
+| `162 tareas` | ✅ **162** — lo único correcto |
+| «Stanford» | ⚠️ El repo canónico es **`HazyResearch/legalbench`**; `stanford-crfm/legalbench` da **422** |
+
+### 🧭 G-L15 / CANAL 5 — EN UN REPO DE **DATOS**, LA LICENCIA NO ESTÁ EN EL REPO: ESTÁ **POR ÍTEM**
+
+El `README` de LegalBench no omite la licencia por descuido. **Dice explícitamente dónde está:**
+
+> *«LegalBench is a mix of created and transformed datasets. We ask that you follow the license of
+> the dataset creator. Please see the task page for a list of tasks and licenses.»*
+
+Eso **no es una concesión de derechos, es una instrucción de enumerar**. Así que se enumeró: se
+leyó la línea `**License**:` de **las 162 tareas**.
+
+| Licencia de la tarea | Tareas | ¿Uso comercial? |
+|---|---|---|
+| CC BY 4.0 | **124** | ✅ sí, con atribución |
+| MIT | 4 | ✅ sí |
+| CC BY-SA 4.0 | 2 | ⚠️ sí, pero **share-alike** sobre el derivado |
+| CC BY-NC-SA 4.0 | 16 | 🔴 **no** |
+| «Creative Commons Attribution-NonCommercial License» | 9 | 🔴 **no** |
+| CC BY-NC 4.0 | 4 | 🔴 **no** |
+| CC BY-NC 3.0 | 1 | 🔴 **no** |
+| Sin línea de licencia | 2 | 🔴 **no** (sin concesión expresa) |
+
+**30 tareas son NonCommercial y 2 no tienen concesión: 32 de 162 (19,8%) no son utilizables en un
+entregable comercial.** Las 130 restantes sí.
+
+Las familias NC están **agrupadas por prefijo**, que es lo que hace la exclusión barata y auditable:
+
+```
+# Excluir de cualquier corrida que sustente un entregable de cliente (32 tareas):
+learned_hands_*            # 16 · CC BY-NC-SA 4.0
+opp115_*                   #  9 · CC BY-NC
+textualism_tool_*          #  2 · CC BY-NC 4.0
+canada_tax_court_outcomes  #  1 · CC BY-NC 4.0
+consumer_contracts_qa      #  1 · CC BY-NC 4.0
+privacy_policy_entailment  #  1 · CC BY-NC 3.0
+abercrombie, rule_qa       #  2 · sin línea de licencia
+```
+
+> **Y el propio repo lo anticipó**: incluye `UsingLegalBench.ipynb`, descrito en el README como
+> *«an example of how to select tasks based on license information»*. El filtro por licencia **es
+> una función del dataset**, no un parche nuestro. Lo que faltaba no era la herramienta: era que
+> alguien la usara antes de escribir «MIT» en una KB.
+
+**La regla, para las doce industrias:** cuando la fila es un **dataset o un corpus**, la licencia
+tiene una quinta ubicación posible —**dentro del árbol de datos, una por ítem**— y la respuesta a
+nivel de repo puede ser legítimamente *«depende de cada ítem»*. Ese `NOASSERTION` **no es un
+clasificador que falla**, es la respuesta correcta. Enumerar es obligatorio, y es barato: 162
+`curl` a `raw.githubusercontent.com` y un `grep`. Receta ejecutable en `compose/patterns.md`, `P26`.
+
+### ✅ Y la sustitución permisiva existe, la publica el líder comercial, y lleva seis meses fuera
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|---|---|---|---|---|---|
+| [harveyai/harvey-labs](https://github.com/harveyai/harvey-labs) | `main` | **MIT (1.067 B)** | 🆕 **Harvey LAB — «Legal Agent Benchmark»: el banco de pruebas de agentes legales que publica Harvey, la empresa de 11.000 M USD contra la que esta KB se posiciona, y lo publica en MIT a nivel de repositorio.** No es sólo un dataset: son **2.010 tareas** sobre **24 áreas de práctica + contratación in-house** (instrucciones, documentos y **rúbricas**) **más un harness de ejecución** con adaptadores de modelo (Anthropic, OpenAI, Google, Meta, xAI, Mistral opcional), *sandbox*, *grader* por rúbrica con juez LLM, informes y *sweeps*. Se instala como librería (`lab-core`, wheel por release). | **1.668** | **2026-11-12** |
+| [HazyResearch/legalbench](https://github.com/HazyResearch/legalbench) | `main` | 🔴 **NOASSERTION — y es correcto**: sin fichero de licencia (5/5 → 404). Licencia **por tarea**: 124 CC BY 4.0 · 4 MIT · 2 CC BY-SA · **30 NC** · 2 sin concesión | Benchmark de razonamiento jurídico en modelos fundacionales, **162 tareas**. Sigue siendo la referencia académica de la industria y se mantiene en esta KB **como corpus**, pero **sólo utilizable sobre el subconjunto de 130 tareas filtrado por licencia** (ver arriba). **No es MIT y nunca lo fue.** | 663 | 2026-03-30 |
+
+### 🔗 Cierre de dependencias aplicado a `harvey-labs` (regla de la KB de *gaming*, `channel 4`)
+
+Se resolvió cada dependencia que el repo declara, porque un proyecto no es más libre que la menos
+libre de las que te manda instalar:
+
+- **`pyproject.toml`** — 12 dependencias declaradas, **todas permisivas**: `pdfplumber`,
+  `markitdown`, `openpyxl`, `python-pptx` (MIT), `httpx`, `pandas`, `seaborn` (BSD), `anthropic`,
+  `openai`, `google-genai` (MIT/Apache-2.0), `matplotlib` (PSF-like), `mistralai` (opcional).
+- **🟡 Y una que no está en `pyproject.toml`**: el README exige la **CLI `pandoc` ≥ 3.5** para
+  puntuar salidas `.docx`. **`jgm/pandoc` es GPL-2.0.** Declarada **sólo en prosa y en un
+  comentario**, exactamente la signatura que predice la regla.
+- **Y aquí la distinción que importa, porque cambia la conclusión:** `lab_core/sandbox/install_pandoc.sh`
+  **descarga** el binario de pandoc 3.11 desde el release oficial (con verificación SHA-256) y lo
+  instala en `/usr/local/bin` **en tiempo de instalación**. El repositorio **no redistribuye código
+  GPL**, así que `harvey-labs` es MIT limpio. ⚠️ **Lo que sí redistribuye GPL-2.0 es la imagen de
+  contenedor que Globant construya con pandoc dentro**, y esa imagen arrastra la obligación de
+  oferta de fuentes. Mitigación trivial: pandoc sólo hace falta para puntuar `.docx`; una corrida
+  que evalúe texto o `.xlsx`/`.pptx` no lo carga.
+- ⚖️ **Sesgo declarado, y hay que decirlo al cliente:** `LawNext` (mayo-2026) observó que LAB es
+  *«un benchmark construido por un participante del mercado»* — las tareas y las rúbricas definen
+  «buen trabajo legal» según el equipo de Harvey. Se usa como **banco común de comparación**, no
+  como definición neutral de calidad. Por eso **conviven** en esta KB con `legalbench` (académico,
+  filtrado) y `thunlp/CAIL` (chino): tres definiciones de la tarea, no una.
+
+> 📈 **Y la curva de tamaño es medible, lo que la vuelve un indicador y no una anécdota:**
+> **>1.200** tareas al lanzamiento (mayo-2026) → **1.749** (leaderboard de Mercor) → **2.010** hoy.
+> Un benchmark que crece un 67% en seis meses es un **compromiso sostenido**, no un lanzamiento de
+> marketing. Esta KB lo había perdido durante **seis pases**: se publicó en mayo y nadie lo citó.

@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🧩 Patrones de composición — Legal Services
@@ -935,7 +935,9 @@ for svc,v in (c.get('services') or {}).items():
 "
 # 2. Sustituir el corpus jurisdiccional, conservando el verificador:
 #    PL -> korean-law-mcp (KR) / opencaselaw (CH) / ayunis-legal-mcp (DE) / mcp-legal-it (IT)
-#    LATAM: no existe todavia ningun MCP de fuentes oficiales -> ver P12 (ese es el hueco real)
+#    LATAM -> leis-mcp + br-eli-mcp (BR, legislacion) / jurismcp (BR, jurisprudencia) / mcp-dof (MX)
+#    [CORREGIDO EN EL PASE 7: esta linea decia que no existia ninguno. Lo desmintio el PASE 6,
+#     en este mismo fichero, y la afirmacion sobrevivio DENTRO del bloque de codigo. Ver G-L16.]
 ```
 
 ⇒ **Esto es lo que convierte el argumento de soberanía EMEA en una demostración de 10 minutos**
@@ -1117,3 +1119,125 @@ hoy: **una búsqueda web con el sustantivo en portugués**, más el directorio
 [`daniel-filius/awesome-mcp-brasil`](https://github.com/daniel-filius/awesome-mcp-brasil) (CC0,
 8 secciones, 13 entradas jurídico/legislativo), que es ahora un canal de descubrimiento de esta KB
 y no sólo una fila.
+
+## 🆕 P26 — Correr un benchmark legal **filtrado por licencia** (la receta que convierte `LegalBench` en utilizable)
+
+**Problema que resuelve.** `LegalBench` no tiene licencia a nivel de repositorio: la tiene **por
+tarea**, y **30 de sus 162 tareas son NonCommercial** más 2 sin concesión. Correrlo entero para
+sustentar un entregable de cliente usa datos NC con fines comerciales. Correrlo **filtrado** es
+legítimo, y el propio repo trae el utilitario para hacerlo (`UsingLegalBench.ipynb`).
+
+```bash
+#!/usr/bin/env bash
+# P26 — censo de licencias por tarea + lista de exclusion. ~162 GET a raw, 0 autenticacion.
+# Generaliza a CUALQUIER repo de datos cuyo README diga "follow the license of the dataset creator".
+set -euo pipefail
+SLUG=${1:-HazyResearch/legalbench}
+DIR=${2:-tasks}
+WORK=$(mktemp -d); trap 'rm -rf "$WORK"' EXIT
+
+# (1) Enumerar los items SIN descargar los datos (clone sin blobs: arbol solamente).
+git clone -q --depth 1 --filter=blob:none --no-checkout "https://github.com/$SLUG" "$WORK/r"
+git -C "$WORK/r" ls-tree --name-only HEAD "$DIR/" | sed "s|$DIR/||" > "$WORK/items.txt"
+echo "items: $(wc -l < "$WORK/items.txt")"
+
+# (2) Leer la linea de licencia de cada item (en paralelo; es lo unico que cuesta red).
+mkdir -p "$WORK/md"
+xargs -P 10 -I{} sh -c \
+  "curl -s -m 20 'https://raw.githubusercontent.com/$SLUG/HEAD/$DIR/{}/README.md' -o '$WORK/md/{}.md'" \
+  < "$WORK/items.txt"
+
+# (3) Censo + lista de exclusion. NC y "sin linea de licencia" se excluyen por igual:
+#     el segundo no es un descuido, es AUSENCIA DE CONCESION.
+: > "$WORK/exclude.txt"
+for f in "$WORK"/md/*.md; do
+  item=$(basename "$f" .md)
+  lic=$(grep -m1 -oiE '\*\*License\*\*:.*' "$f" | sed 's/.*\*\*[Ll]icense\*\*: *//; s/\[//g; s/\].*//; s/ *$//')
+  [ -z "$lic" ] && { echo "$item"$'\t'"(SIN LINEA DE LICENCIA)" >> "$WORK/exclude.txt"; continue; }
+  case "$lic" in *NC*|*NonCommercial*|*noncommercial*) echo "$item"$'\t'"$lic" >> "$WORK/exclude.txt";; esac
+  printf '%s\n' "$lic"
+done | sort | uniq -c | sort -rn
+
+echo; echo "=== EXCLUIR ($(wc -l < "$WORK/exclude.txt") items) ==="; cat "$WORK/exclude.txt"
+```
+
+**Salida medida sobre `HazyResearch/legalbench` el 2026-11-22:**
+
+```
+124 CC BY 4.0        ->  usable con atribucion
+  4 MIT              ->  usable
+  2 CC BY-SA 4.0     ->  usable, pero share-alike sobre el derivado
+ 16 CC BY-NC-SA 4.0  ->  EXCLUIR (familia learned_hands_*)
+  9 CC BY-NC         ->  EXCLUIR (familia opp115_*)
+  4 CC BY-NC 4.0     ->  EXCLUIR (textualism_tool_* , canada_tax_court_outcomes, consumer_contracts_qa)
+  1 CC BY-NC 3.0     ->  EXCLUIR (privacy_policy_entailment)
+  2 sin linea        ->  EXCLUIR (abercrombie, rule_qa)
+=== 130 de 162 utilizables en un entregable comercial ===
+```
+
+**Cómo se cablea con lo que esta KB ya tiene** — evaluación de tres fuentes, declarando cuál se usó:
+
+1. **`harvey-labs`** (MIT, 2.010 tareas, 24 áreas + contratación): banco principal. Instalar
+   `lab-core` desde el wheel del release y apuntar `LAB_ROOT` al checkout de tareas.
+   ⚠️ Para puntuar `.docx` hace falta la CLI **`pandoc` (GPL-2.0)**: si se empaqueta en una imagen
+   de contenedor, **esa imagen redistribuye GPL-2.0**. Evaluar texto / `.xlsx` / `.pptx` no la carga.
+2. **`legalbench`**, subconjunto de 130 tareas de este script: contraste académico independiente.
+3. **`thunlp/CAIL`** (MIT): contraste en chino, para engagements de APAC.
+
+Y el resultado se reporta **siempre** con la frase que lo hace defendible: *«medido sobre
+`harvey-labs` v1.4.0 (benchmark de un participante del mercado) y sobre el subconjunto permisivo de
+130/162 tareas de LegalBench»*. Un número de benchmark sin su procedencia **no es un dato, es una
+afirmación de marketing** — incluida la nuestra.
+
+## 🆕 P27 — G-L16: barrer las **afirmaciones obsoletas dentro de bloques de código**
+
+**El defecto, encontrado hoy en este mismo fichero.** El `P21` del pase 6 llevaba, en el comentario
+de su bloque de código:
+
+```
+#    LATAM: no existe todavia ningun MCP de fuentes oficiales -> ver P12 (ese es el hueco real)
+```
+
+**El pase 6 desmintió esa frase en el mismo pase y en los mismos ficheros** — incorporó cuatro MCP
+de fuentes oficiales de Brasil y México. La afirmación sobrevivió **porque estaba dentro de un
+bloque de código**, y todos los controles de esta familia de KBs (censo de licencias, de URLs, de
+nombres, de estructura de tabla `P22`) **leen filas y prosa, nunca comentarios de código**.
+
+Es la misma clase de fallo que `G-L11` — el defecto no estaba en el dato, estaba **en dónde vivía**:
+
+| Control | Qué mira | Ciego a |
+|---|---|---|
+| Censo de licencias / URLs | celdas de tabla | prosa y código |
+| `P22` estructura de tabla | separadores y columnas | contenido |
+| `G-L7` | slugs **con** URL | slugs citados sin URL |
+| 🆕 **`P27`** | **comentarios dentro de ``` ```** | — |
+
+```bash
+#!/usr/bin/env bash
+# P27 — afirmaciones de AUSENCIA dentro de bloques de codigo. 0 llamadas de red.
+# Correr en las 12 industrias antes de cada commit, junto con P22.
+awk '
+  /^[[:space:]]*```/ { inblk = !inblk; next }
+  inblk && tolower($0) ~ /no existe|inexistente|no hay ning|todavia ning|aun no|hueco real|falta un/ {
+    printf "%s:%d: %s\n", FILENAME, FNR, $0
+  }
+' */*.md
+```
+
+> ⚠️ **Este patrón se marca a sí mismo, y es correcto que lo haga.** La cita textual del defecto
+> (tres párrafos más arriba) y el propio regex del script contienen las cadenas que el barrido
+> busca, así que `P27` saldrá siempre con **dos positivos en `compose/patterns.md` que son la
+> evidencia y la herramienta, no el defecto**. Es exactamente lo que le pasó al pase 5 al
+> documentar el bug del `|` dentro de una celda: *describir el fallo lo reproduce.* **No los
+> borres**: sin la cita no queda prueba de qué se corrigió.
+
+**Resultado en esta KB el 2026-11-22:** 7 líneas marcadas, **6 falsos positivos** (son cadenas que
+el propio script *imprime*: `RECHAZAR ... ningun termino`, `NO EXISTE (o es privado)`,
+`NINGUNO <-- BANDERA ROJA`) y **1 defecto real**, corregido. Tasa de falsos positivos alta y coste
+cero: se revisa a ojo en diez segundos.
+
+> **La regla generalizable, que es la que hay que copiar a las doce industrias:** *un pase que
+> refuta una afirmación debe buscarla **donde no la busca ningún control**: comentarios de código,
+> texto dentro de bloques, notas al pie y encabezados.* Refutar un hueco en la tabla y dejarlo
+> afirmado en una receta no lo cierra — **deja dos respuestas contradictorias en la misma KB, y la
+> que el siguiente lector copie y pegue será la del bloque de código.**

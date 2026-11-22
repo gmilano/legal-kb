@@ -1,13 +1,57 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 📈 Agentes trending — Legal Services
 
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
+
+## 🆕 2026-11-22 (pase 7) — el líder comercial publicó su banco de pruebas en MIT, y esta KB lo tenía perdido desde mayo
+
+**`harveyai/harvey-labs` — Harvey LAB, «Legal Agent Benchmark». MIT (1.067 B byte a byte), 1.668★,
+último commit 2026-11-12, 258 refs.** Lo publica **Harvey**, la compañía de 11.000 M USD que esta
+KB usa como referencia del competidor cerrado. Contiene **2.010 tareas** sobre **24 áreas de
+práctica + contratación in-house**, con rúbricas, **más el harness de ejecución** (sandbox,
+adaptadores de Anthropic/OpenAI/Google/Meta/xAI, *grader* con juez LLM, informes y *sweeps*),
+empaquetado como librería `lab-core`.
+
+Lo relevante como *trending* no es la novedad —se lanzó en **mayo de 2026**— sino **la velocidad
+y el hecho de que seis pases de esta KB no lo vieran**:
+
+| Hito | Tareas | Fuente |
+|---|---|---|
+| Lanzamiento (mayo-2026) | >1.200 · 24 áreas · >75.000 criterios de rúbrica | anuncio de Harvey |
+| Leaderboard de Mercor | 1.749 · +100.000 criterios | Mercor APEX |
+| **Medido hoy (2026-11-22)** | **2.010** | badge del `README` del repo |
+
+**+67% de tareas en seis meses.** Un benchmark que crece así es infraestructura mantenida.
+
+### 🔴 Y el hallazgo que lo acompaña: la capa de evaluación que esta KB **sí** citaba estaba mal atribuida
+
+`LegalBench` aparecía en tres ficheros como base de evaluación «MIT». **No lo es:** no tiene
+fichero de licencia (5/5 → 404) y la licencia va **por tarea**. Enumeradas las 162: **124 CC BY
+4.0, 4 MIT, 2 CC BY-SA, 30 NonCommercial y 2 sin concesión** ⇒ **32 tareas (19,8%) no son
+utilizables en un entregable comercial**. Detalle, lista de exclusión por prefijo y receta
+reproducible en `repos/foundations.md` y `compose/patterns.md` (`P26`).
+
+### 🗑️ Candidatos descartados este pase, con la medición que lo justifica
+
+| Candidato | Medición | Por qué no entra |
+|---|---|---|
+| [`sdpong/legal-debate-agents`](https://github.com/sdpong/legal-debate-agents) | **0★**, NOASSERTION, 2026-09-23 | Apareció en un agregador (Trendshift) como legal-AI trending. Sistema de debate multi-modelo con cadena de auditoría sobre reglas de disputas de la OMC: **temáticamente encaja**, pero **0 estrellas y sin concesión de licencia**. Se registra como candidato a re-test, no como fila. |
+| `coasty-ai/coasty-legal-docket-research` | **422** en `search/repositories` | Citado por un agregador. 422 **no distingue** renombrado de inexistente, y no hay slug canónico que verificar. Sin segundo canal, no entra. |
+| [`mattwang1230/legal-paper-framework-humanizer-zh`](https://github.com/mattwang1230/legal-paper-framework-humanizer-zh) | 53★, MIT, 2026-08-18 | MIT limpio, pero su función es **quitar «sabor AI» a artículos académicos de derecho en chino**. Es escritura académica, no trabajo jurídico: lo rechaza la puerta de relevancia `P15`. |
+| [`cakho6179/AI_RAG_LEGAL`](https://github.com/cakho6179/AI_RAG_LEGAL) | 71★, **NOASSERTION**, 2026-08-10, **sin `description`** | Tracción real pero **sin descripción declarada**: no se puede afirmar qué hace. Candidato a auditar (mismo tratamiento que `Paparusi/legal-ai-agent`). |
+
+> ⚠️ **Nota de método sobre los agregadores.** Tres de los cuatro candidatos de arriba llegaron por
+> agregadores de *trending*, y **tres de los cuatro no pasaron la verificación**. El pase 6 añadió
+> los agregadores como canal independiente y acertó; este pase mide su **precisión**: dan nombres
+> útiles, y **la tasa de acierto es baja**. Son un canal de *cobertura*, nunca de *verdad*.
+
+---
 
 ## 🆕 2026-11-21 (pase 6, 21:40 UTC) — cuatro MCP de fuentes oficiales LATAM que esta KB declaraba inexistentes, y el motivo del falso negativo
 

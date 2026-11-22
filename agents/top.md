@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🎯 Agentes AI — Legal Services
@@ -166,12 +166,12 @@ se corrige es un slug, un diagnóstico de método y tres campos de una fila.**
 | 🆕 **hermes-legal** | [Lethe044/hermes-legal](https://github.com/Lethe044/hermes-legal) | MIT (1.065 B) | Global | 🆕 Análisis de contratos multi-proveedor: **puntúa riesgo, propone redlines y emite una recomendación de firmar/negociar**. Pequeño pero MIT limpio y con la decisión de negocio como salida, no sólo el análisis. | 26 | 2026-10-10 |
 | 🆕 contract-review-pro | [CSlawyer1985/contract-review-pro](https://github.com/CSlawyer1985/contract-review-pro) | 🔴 **NINGUNA** | China · APAC | 🆕 专业合同审核 Skill — revisión de contratos construida sobre metodología de auditoría contractual, para juristas chinos. 🔴 **Sin fichero de licencia: no adoptable.** Se registra por volumen de señal (311★) y como medida del tamaño del problema de licencias en APAC. | 311 | 2026-08-14 |
 | 🆕 legal-ai-agent | [Paparusi/legal-ai-agent](https://github.com/Paparusi/legal-ai-agent) | MIT (1.083 B) | Vietnam · APAC | 🆕 MIT limpio y 214★, pero **el repo no declara descripción ni alcance**: no se puede afirmar qué hace sin auditar el código. Se registra como **candidato a auditar**, no como recomendación. Ejemplo de por qué «licencia limpia + estrellas» no basta para recomendar. | 214 | 2026-03-21 |
-| 🟢 **br-eli-mcp** | [matematicsolutions/br-eli-mcp](https://github.com/matematicsolutions/br-eli-mcp) | Apache-2.0 (11.358 B) | **Brasil · LATAM** | 🟢 **EL ACTIVO QUE REFUTA EL HUECO MÁS CITADO DE ESTA KB.** Servidor MCP de **fuentes legales oficiales brasileñas**, 8 APIs de datos abiertos **sin clave ni registro**: Câmara (proyectos), Congresso (normas promulgadas + publicación en Diário Oficial + histórico de enmiendas), `normas.leg.br` (texto a nivel de artículo), **DataJud/CNJ** (metadatos procesales), **STJ** (texto íntegro + ementas desde may-2022), **CARF** (fiscal federal), **TST** (texto íntegro, búsqueda libre + número CNJ), **TCU**. Declara citas verificables y **no hace scraping del HTML de Planalto**. | 4 | n/d ⚠️ |
-| 🟢 **mcp-dof** | [BEG-lag/mcp-dof](https://github.com/BEG-lag/mcp-dof) | MIT (1.082 B) | **México · LATAM** | 🟢 **ES, LITERALMENTE, LO QUE ESTA KB PEDÍA CONSTRUIR.** MCP del **Diario Oficial de la Federación** sobre la **API oficial SIDOF** (`sidof.segob.gob.mx`): ediciones diarias, texto íntegro de decretos, búsqueda por título, e indicadores FIX/UDIS/TIIE. Python 3.12+. ⚠️ La API oficial **no está documentada**: el repo mapeó los endpoints (`/notas/{fecha}`, `/notas/nota/{id}`, `/indicadores/...`) por sondeo manual — eso es deuda de mantenimiento, no defecto de licencia. | **0** | n/d ⚠️ |
-| 🟢 **leis-mcp** | [mazulo/leis-mcp](https://github.com/mazulo/leis-mcp) | MIT (1.071 B) | **Brasil · LATAM** | 🟢 **El de más tracción de los cuatro, y el que desmonta la explicación fácil.** MCP de legislación brasileña: **1.218.990 normas** (CF, CLT, CDC, Código Civil, LGPD…) con cita de fuente oficial (`normas.leg.br`, LexML) y **avisos de revogação**; valida vigencia contra normas.leg.br y datos abiertos del Senado. ⚠️ El README advierte de errores de conversión/OCR y de que **no sustituye la publicación en el Diário Oficial**; la búsqueda sin norma concreta sólo cubre lo ya cacheado. | **71** | n/d ⚠️ |
-| 🟢 **jurismcp** | [ivancaron/jurismcp](https://github.com/ivancaron/jurismcp) | MIT (1.078 B) | **Brasil · LATAM** | 🟢 **Jurisprudencia, no legislación — la mitad que faltaba.** Consulta **portales judiciales oficiales**: STJ (POST directo), STF y TST (navegador headless), TJES (REST pública), **LexML** (federado, resuelve `urn:lex`), **BNP/CNJ** (registro de precedentes `pangeabnp.pdpj.jus.br`), TNU y TRF4 (formularios eproc). **Marca explícitamente Jurisprudencias.ai como agregador de terceros, no portal oficial, y es opt-in** — hace por su cuenta la distinción que esta KB necesita. ⚠️ Scraping/headless ⇒ frágil ante cambios de portal. | 2 | n/d ⚠️ |
-| 🟡 **jusbrasil-mcp** | [mcp-dir/jusbrasil-mcp](https://github.com/mcp-dir/jusbrasil-mcp) | MIT (1.093 B) | Brasil · LATAM | 🟡 **SE REGISTRA PARA QUE NO SE CONFUNDA CON LOS CUATRO DE ARRIBA.** MIT limpio, pero es un **agregador de terceros** (se describe como «alternativa a Escavador y Jusbrasil»), **no fuentes oficiales**: busca procesos por nombre/CPF/CNPJ y arma un «X-ray» consolidado. Su posicionamiento SEO lo pone primero en cualquier búsqueda de «MCP jurídico Brasil» ⇒ **un pase futuro lo encontrará antes que a los oficiales y puede darlo por oficial.** Para citación defendible **no sirve**; para triage comercial, sí. | n/d | n/d ⚠️ |
-| 🟢 **legal-ai-skills** | [rohasnagpal/legal-ai-skills](https://github.com/rohasnagpal/legal-ai-skills) | MIT (1.069 B) | India · APAC (+ EE. UU., RU, Singapur) | 🟢 **La alternativa PERMISIVA al índice de skills que esta KB marca como no usable.** 244 skills legales (revisión de contratos, investigación, due diligence, análisis de evidencia, redacción) organizadas bajo **17 «abogados» especialistas + un Managing Partner que enruta** el asunto. Jurisdicciones con *Jurisdiction Counsel* propio: India, EE. UU., RU y **Singapur (18 skills locales, la cuarta añadida)**; el resto, neutras. Frente a `lawve-ai/awesome-legal-skills` (CC-BY-NC-ND, 966★): **un tercio de las estrellas y todos los derechos que hacen falta.** ⚠️ El propio README advierte que sus salidas no garantizan exactitud. | **214** | n/d ⚠️ |
+| 🟢 **br-eli-mcp** | [matematicsolutions/br-eli-mcp](https://github.com/matematicsolutions/br-eli-mcp) | Apache-2.0 (11.358 B) | **Brasil · LATAM** | 🟢 **EL ACTIVO QUE REFUTA EL HUECO MÁS CITADO DE ESTA KB.** Servidor MCP de **fuentes legales oficiales brasileñas**, 8 APIs de datos abiertos **sin clave ni registro**: Câmara (proyectos), Congresso (normas promulgadas + publicación en Diário Oficial + histórico de enmiendas), `normas.leg.br` (texto a nivel de artículo), **DataJud/CNJ** (metadatos procesales), **STJ** (texto íntegro + ementas desde may-2022), **CARF** (fiscal federal), **TST** (texto íntegro, búsqueda libre + número CNJ), **TCU**. Declara citas verificables y **no hace scraping del HTML de Planalto**. | 4 | **2026-11-21** |
+| 🟢 **mcp-dof** | [BEG-lag/mcp-dof](https://github.com/BEG-lag/mcp-dof) | MIT (1.082 B) | **México · LATAM** | 🟢 **ES, LITERALMENTE, LO QUE ESTA KB PEDÍA CONSTRUIR.** MCP del **Diario Oficial de la Federación** sobre la **API oficial SIDOF** (`sidof.segob.gob.mx`): ediciones diarias, texto íntegro de decretos, búsqueda por título, e indicadores FIX/UDIS/TIIE. Python 3.12+. ⚠️ La API oficial **no está documentada**: el repo mapeó los endpoints (`/notas/{fecha}`, `/notas/nota/{id}`, `/indicadores/...`) por sondeo manual — eso es deuda de mantenimiento, no defecto de licencia. | 0 | **2026-11-17** |
+| 🟢 **leis-mcp** | [mazulo/leis-mcp](https://github.com/mazulo/leis-mcp) | MIT (1.071 B) | **Brasil · LATAM** | 🟢 **El de más tracción de los cuatro, y el que desmonta la explicación fácil.** MCP de legislación brasileña: **1.218.990 normas** (CF, CLT, CDC, Código Civil, LGPD…) con cita de fuente oficial (`normas.leg.br`, LexML) y **avisos de revogação**; valida vigencia contra normas.leg.br y datos abiertos del Senado. ⚠️ El README advierte de errores de conversión/OCR y de que **no sustituye la publicación en el Diário Oficial**; la búsqueda sin norma concreta sólo cubre lo ya cacheado. | **71** | **2026-11-13** |
+| 🟢 **jurismcp** | [ivancaron/jurismcp](https://github.com/ivancaron/jurismcp) | MIT (1.078 B) | **Brasil · LATAM** | 🟢 **Jurisprudencia, no legislación — la mitad que faltaba.** Consulta **portales judiciales oficiales**: STJ (POST directo), STF y TST (navegador headless), TJES (REST pública), **LexML** (federado, resuelve `urn:lex`), **BNP/CNJ** (registro de precedentes `pangeabnp.pdpj.jus.br`), TNU y TRF4 (formularios eproc). **Marca explícitamente Jurisprudencias.ai como agregador de terceros, no portal oficial, y es opt-in** — hace por su cuenta la distinción que esta KB necesita. ⚠️ Scraping/headless ⇒ frágil ante cambios de portal. | 2 | 2026-09-30 |
+| 🟡 **jusbrasil-mcp** | [mcp-dir/jusbrasil-mcp](https://github.com/mcp-dir/jusbrasil-mcp) | MIT (1.093 B) | Brasil · LATAM | 🟡 **SE REGISTRA PARA QUE NO SE CONFUNDA CON LOS CUATRO DE ARRIBA.** MIT limpio, pero es un **agregador de terceros** (se describe como «alternativa a Escavador y Jusbrasil»), **no fuentes oficiales**: busca procesos por nombre/CPF/CNPJ y arma un «X-ray» consolidado. Su posicionamiento SEO lo pone primero en cualquier búsqueda de «MCP jurídico Brasil» ⇒ **un pase futuro lo encontrará antes que a los oficiales y puede darlo por oficial.** Para citación defendible **no sirve**; para triage comercial, sí. | 6 | 2026-08-30 |
+| 🟢 **legal-ai-skills** | [rohasnagpal/legal-ai-skills](https://github.com/rohasnagpal/legal-ai-skills) | MIT (1.069 B) | India · APAC (+ EE. UU., RU, Singapur) | 🟢 **La alternativa PERMISIVA al índice de skills que esta KB marca como no usable.** 244 skills legales (revisión de contratos, investigación, due diligence, análisis de evidencia, redacción) organizadas bajo **17 «abogados» especialistas + un Managing Partner que enruta** el asunto. Jurisdicciones con *Jurisdiction Counsel* propio: India, EE. UU., RU y **Singapur (18 skills locales, la cuarta añadida)**; el resto, neutras. Frente a `lawve-ai/awesome-legal-skills` (CC-BY-NC-ND, 966★): **un tercio de las estrellas y todos los derechos que hacen falta.** ⚠️ El propio README advierte que sus salidas no garantizan exactitud. | **215** | **2026-11-12** |
 | 🆕 **kancelaria-lex** | [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | MIT (1.069 B) | **Polonia** · EMEA | 🆕 **El mejor activo nuevo del pase 5, y el que mejor encarna la tendencia nº1 de esta KB.** AI **totalmente local** para analizar expedientes judiciales polacos. **La localidad está impuesta por arquitectura, no prometida en el README:** cuatro segmentos Docker, **tres con `internal: true`**, así que no existe ruta hacia la pasarela. **Integridad de cita por construcción:** el código reconstruye el texto desde el documento fuente y lo compara **carácter a carácter**; una cita fabricada no puede sobrevivir al verificador. Declara **0 citas inconsistentes con la fuente en todas las corridas de medición** y precisión de cita **>80%**, contra el **17–34% de citas fabricadas** de las herramientas comerciales (el mismo estudio de Stanford que cita esta KB). **Y distingue la procedencia del OCR:** lo leído con Tesseract lleva **marcador permanente** y cada cita muestra `z OCR`, porque «la cita apunta a un carácter exacto del expediente» y «…de **la lectura de un escaneo**» no son la misma afirmación. Perfiles locales con TOTP. MIT explícito: «úsalo, vende servicios alrededor, bifúrcalo». | 60 | 2026-08-23 |
 | 🆕 **Kourti Legal** | [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | MIT (1.069 B) | **Nigeria** (Lagos) · EMEA | 🆕 **CIERRA EL HUECO DE *PRACTICE MANAGEMENT* PERMISIVO QUE ESTA KB DECLARABA ABIERTO DESDE EL PASE 1** — y es el **primer activo africano** de esta KB. Workspace para **expedientes, documentos, clientes y plazos**: React + API Node + PostgreSQL, `docker compose up` y listo, workflow de CI, `SECURITY.md`, documentación de self-hosting y aviso explícito de que el contenido AI debe revisarlo un profesional. **524 refs** en `ls-remote` (ramas `chore/oss-release-prep`, `agent/codeql-remediation`): código real, no un esqueleto. ⚠️ **1★ y sin `description` ni `topics` en GitHub** — invisible para los tres controles de descubrimiento de esta KB. Ver el hallazgo G-L10 abajo. | 1 | 2026-11-01 |
 | 🆕 **legal-agent-workshop** | [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | MIT | Global | 🆕 **El activo de *enablement* que esta KB no tenía: el patrón de verificación como material de formación ejecutable.** Dos sesiones: (1) construir el agente legal — bucle agéntico en SDK de OpenAI en Python, una herramienta por fichero, lectura de documentos por Files API, gestión de expediente con hechos *quote-checked*, y termina en un memo **sin verificar**; (2) **hacerlo confiable** — se construyen los dos controles de la capa de verificación (checklist contra la verdad de base del expediente, y reglas del memo) **que el kit ejecuta FUERA del control del agente**, más rechazos, escalado, liberación de evidencia nueva, reanudación y **firma del abogado**. Incluye caso de trabajo (`northbridge-v-caldera`) y consola de ejecución en vivo. | 73 | 2026-11-06 |
@@ -696,3 +696,77 @@ de tabla (`P22`/G-L11): **86 bloques, 0 defectos** — la reparación del pase 5
 - `laugustyniak/lawful-ai`, `hartmut-ux/ai-legal-team` — **sin fichero de licencia** (medido, 6
   nombres). Además `lawful-ai` es un boletín diario de inteligencia AI *con sesgo legal*, no un
   activo legal: no pasa el gate de pertinencia `P15`.
+
+
+## 🆕 PASE 7 (2026-11-22) — se cierran las dos deudas que el pase 6 dejó declaradas
+
+El pase 6 terminó con dos limitaciones **escritas en el fichero**, que es la razón por la que este
+pase pudo empezar por ellas en vez de redescubrirlas. Las dos están ahora cerradas con medición.
+
+### ✅ Deuda 1 — el censo de renombrados, que el pase 6 **no pudo** hacer
+
+El pase 6 declaró: *«no se pudo comprobar renombrados»*. Hoy sí, sobre **los 93 slugs** que esta KB
+cita en sus ocho ficheros, con los dos canales a la vez (`search/repositories` + `git ls-remote`):
+
+| Medición | Resultado |
+|---|---|
+| Slugs citados en la KB | **93** |
+| Resuelven en `ls-remote` (existen) | **93 / 93** |
+| Archivados | **0** |
+| Inexistentes / 404 | **0** |
+| Renombrados | **3** — los tres ya documentados abajo, ninguno nuevo |
+
+Y la **signatura de renombrado** queda confirmada por tercera vez, ahora con prueba de identidad de
+HEAD el mismo día:
+
+| Slug citado (antiguo) | `search/repositories` | Slug canónico | HEAD compartido |
+|---|---|---|---|
+| `JSv4/OpenContracts` | **HTTP 422** | `Open-Source-Legal/OpenContracts` | `98286cabf3fc` |
+| `microsoft/presidio` | **HTTP 422** | `data-privacy-stack/presidio` | `da9468112d60` |
+| `lowtidebuild/contract-review-agent` | **HTTP 422** | `lowtidebuild/contract-review` | `e16315dd3b8e` |
+
+> **La regla, ahora con las dos mitades.** `search/repositories` devuelve **422** tanto para un slug
+> renombrado como para uno inexistente: **no distingue**. `ls-remote` resuelve en el renombrado y
+> falla en el inexistente. **El par 422 + `ls-remote` OK = renombrado**, y la identidad de HEAD dice
+> *hacia dónde*. Ningún canal solo lo resuelve; el par, sí, y cuesta dos llamadas por fila.
+
+### ✅ Deuda 2 — las seis filas que se publicaron con `n/d` en «último commit»
+
+El pase 6 incorporó la capa LATAM y la de skills permisivas **sin poder medir actividad**. Medido hoy:
+
+| Fila | Estrellas | Último commit (medido) | Lectura |
+|---|---|---|---|
+| `matematicsolutions/br-eli-mcp` | 4 | **2026-11-21** | commit **de ayer** |
+| `BEG-lag/mcp-dof` | 0 | **2026-11-17** | 5 días |
+| `mazulo/leis-mcp` | 71 | **2026-11-13** | 9 días |
+| `mcp-dir/jusbrasil-mcp` | 6 | 2026-08-30 | 3 meses (y es agregador, no fuente oficial) |
+| `ivancaron/jurismcp` | 2 | 2026-09-30 | 2 meses |
+| `rohasnagpal/legal-ai-skills` | **215** | **2026-11-12** | 10 días |
+
+### 🔴 G-L14 — LA ACTIVIDAD Y LA SEÑAL SOCIAL SON **EJES INDEPENDIENTES**, Y ESTA KB SÓLO MEDÍA UNO
+
+Los tres MCP de **fuentes legales oficiales de LATAM** suman **75 estrellas entre los tres** y los
+tres tienen commits **de los últimos nueve días**. `br-eli-mcp`, con **4 estrellas**, se tocó ayer.
+
+Esto no es un matiz del hallazgo G-L10 del pase 6, es el **segundo eje** del mismo plano:
+
+- **G-L10** dijo: las estrellas son un filtro de *precisión*, y usarlas como filtro de *cobertura*
+  produce falsos negativos. (Cómo **encontrar** el activo.)
+- **G-L14** dice: una vez encontrado, **la señal social no predice si está vivo**. Un repo de 4★
+  tocado ayer es una base más defendible que uno de 1.000★ parado hace 18 meses — y esta tabla
+  tiene **las dos cosas** (`lawyer-llama`, 1.003★, 2024-08-28).
+
+La consecuencia operativa es que **`pushed_at` es la columna que decide qué se le promete a un
+cliente**, y las estrellas sólo deciden el orden de lectura. Esta KB ya ordenaba por estrellas y ya
+marcaba 🪦; lo que faltaba era decir que **son medidas de cosas distintas y ninguna sustituye a la otra**.
+
+> 📌 **Para las otras once industrias:** cualquier capa que una KB haya clasificado como «existe
+> pero sin tracción» debe re-leerse midiendo `pushed_at`. Si está viva, el argumento no es
+> «hay poco»; es «hay poco **conocido**», que es una ventaja de entrada, no un riesgo.
+
+### 🧮 Censo de este pase
+
+- **93 / 93** slugs verificados por doble canal. **0** inexistentes, **0** archivados, **3** renombrados (ya documentados).
+- **6** filas que estaban en `n/d` ahora medidas. **0** `n/d` restantes en la columna de actividad.
+- **101** bloques de tabla barridos con el control de estructura `P22`: **0 defectos** — la reparación del pase 5 se sostiene.
+- **0** filas de cabecera o de ejemplo como dato. **0** placeholders.

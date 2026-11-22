@@ -1,13 +1,57 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 📈 Repos trending — Legal Services
 
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
+
+## 🆕 2026-11-22 (pase 7) — lo que se movió no fue el caudal de repos nuevos: fue la **licencia de uno viejo**
+
+### El caudal de creación sigue seco, y ahora está medido dos pases seguidos
+
+`gh api search/repositories -f q='legal AI created:>2026-08-01 stars:>=25'` ⇒ **`total_count` = 10**
+en casi **cuatro meses**, y de esos 10 **seis ya estaban en esta KB**, dos no son legales
+(`revlab` = ingeniería inversa de PE en Windows; `sigillion` = memoria para agentes) y dos se
+descartan arriba. **Repos legales nuevos y relevantes por encima de 25★ en 16 semanas: 0.**
+
+Esto **confirma** la conclusión del pase 6 con una ventana más ancha: *una vez pagada la deuda de
+descubrimiento, un pase horario no puede producir activos nuevos.* Lo que sí produce, y este pase
+lo demuestra, es **corregir la licencia de un activo que la KB llevaba seis pases citando mal**.
+
+### Infraestructura añadida este pase
+
+| Repo | Licencia (leída) | Stars | Último commit | Qué aporta |
+|---|---|---|---|---|
+| [harveyai/harvey-labs](https://github.com/harveyai/harvey-labs) | **MIT (1.067 B)** | **1.668** | 2026-11-12 | **Harvey LAB**: 2.010 tareas con rúbricas + harness de ejecución con adaptadores multi-modelo. La capa de evaluación permisiva que esta KB no tenía. |
+| [HazyResearch/legalbench](https://github.com/HazyResearch/legalbench) | 🔴 **NOASSERTION** · licencia **por tarea** (124 CC BY · 4 MIT · 2 CC BY-SA · **30 NC** · 2 sin concesión) | 663 | 2026-03-30 | Se le da **fila y URL por primera vez**. Estaba citado en tres ficheros **sin ninguna de las dos**, y por eso nunca pasó por el barrido. |
+
+### 🧮 Censo de URLs de este pase — el más completo de los siete
+
+| Control | Resultado |
+|---|---|
+| Slugs citados en los 8 ficheros | **93** |
+| Verificados por **doble canal** (`search/repositories` + `ls-remote`) | **93 / 93** |
+| Inexistentes | **0** |
+| Archivados | **0** |
+| Renombrados | **3**, los tres ya documentados, confirmados hoy por **identidad de HEAD** |
+| Bloques de tabla barridos con `P22` | **101**, **0 defectos** |
+
+### 🔌 Estado de los canales en esta sesión (cambia entre sesiones — por eso se escribe)
+
+| Canal | Estado hoy | Nota |
+|---|---|---|
+| `gh api -X GET search/repositories -f q='repo:<slug>'` | ✅ **funciona** | estrellas + SPDX + `pushed_at` + `archived` en una llamada |
+| `git ls-remote https://github.com/<slug>` | ✅ **funciona** | existencia y SHA de HEAD; **el único que detecta renombrados** |
+| `curl` a `raw.githubusercontent.com/<slug>/HEAD/<path>` | ✅ **funciona** | 200/404 discrimina bien; es el canal de lectura de licencia byte a byte |
+| `curl -sI https://github.com/<slug>` | 🔴 **ciego** | devuelve `HTTP/1.1 200 Connection Established` (es el CONNECT del proxy) **para cualquier cosa**. El chequeo de URL que prescribe el *brief* **no aporta información aquí**; confirmado por tercer pase consecutivo. |
+| `curl https://api.github.com/repos/<o>/<n>` | 🔴 **403** | la sesión no tiene ese ámbito |
+| `www.damiencharlotin.com` (base de datos de citas alucinadas) | 🔴 **no resuelve** | fuera de los dominios permitidos de la sesión. **Es la fuente primaria del contador de sanciones** que esta KB cita de segunda mano: queda declarado como hueco de canal, no como dato ausente. |
+
+---
 
 ## 🆕 2026-11-21 (pase 6, 21:40 UTC) — el caudal no estaba seco: estaba **en portugués**
 

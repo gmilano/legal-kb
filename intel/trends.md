@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 📡 Tendencias — Legal Services
@@ -555,3 +555,74 @@ esta KB **no cambia** (Art. 50 vigente 2-ago-2026 · Anexo III dic-2027 · Anexo
 tercera corroboración tras gaming y enterprise. **Pero un cliente que lea otra fuente verá otro
 calendario**, así que el argumento de venta no debe depender de cuál tiene razón: véndase el
 **inventario fechado** (patrón ya adoptado en la KB de gaming), que es correcto en ambos mundos.
+
+
+## 🆕 Tendencias del pase 7 (2026-11-22)
+
+### T21. El benchmark legal dejó de ser académico y pasó a publicarlo **el vendedor**, en licencia permisiva
+
+El cambio estructural del año en evaluación legal **no ocurrió en la universidad**:
+
+| | Académico | Del vendedor |
+|---|---|---|
+| Activo | `HazyResearch/legalbench` | `harveyai/harvey-labs` (Harvey LAB) |
+| Licencia | **NOASSERTION**, por tarea (30 de 162 NonCommercial) | **MIT a nivel de repositorio** |
+| Tareas | 162 | **2.010** (>1.200 al lanzar en may-2026 → 1.749 → 2.010) |
+| Qué incluye | dataset | dataset **+ harness + rúbricas + juez + informes** |
+| Último commit | 2026-03-30 | **2026-11-12** |
+
+Harvey no publica el banco de pruebas por altruismo: **publicar el estándar de medida es cómo se
+define la categoría**. Y el efecto secundario es real y aprovechable — **el harness de evaluación
+más completo del sector legal es MIT**, con adaptadores para Anthropic, OpenAI, Google, Meta, xAI y
+Mistral, lo que permite a Globant comparar **su** agente contra frontera sobre tareas de M&A, data
+room y contratación in-house sin construir nada.
+
+⚖️ **Y el contrapeso, que va en la propuesta y no en una nota al pie:** `LawNext` observó en el
+lanzamiento que LAB es *«un benchmark construido por un participante del mercado»*. Las tareas y
+las rúbricas codifican **la definición de buen trabajo legal del equipo de Harvey**. La postura de
+esta KB es usar **tres** definiciones (`harvey-labs` permisivo, `legalbench` académico filtrado,
+`thunlp/CAIL` en chino) y **declarar cuál se usó**, porque en el momento en que un benchmark lo
+publica el competidor, *qué se mide* es tan negociable como *cuánto se puntúa*.
+
+### T22. La verificación de cita terminó de migrar de **buena práctica** a **certificación firmada**
+
+El pase 3 registró que el eje regulatorio de EE. UU. giraba de **divulgar** a **verificar**. Este
+pase mide el final de ese recorrido, y el salto es cualitativo:
+
+- **Indiana, 1-ago-2026:** la **firma** de un escrito **certifica que la autoridad citada es
+  auténtica**, y la regla cubre expresamente los escritos asistidos por AI.
+- **Brasil:** sin provimento de la OAB sobre AI generativa a julio de 2026 — y aun así ya se
+  sanciona, vía **Estatuto da Advocacia** y **litigância de má-fé**.
+- **Nueva York (UCS):** AI generativa limitada a **herramientas aprobadas** + formación obligatoria.
+
+> **La tendencia, formulada para que sirva en las doce industrias:** cuando una tecnología toca una
+> profesión regulada, la obligación vinculante **no llega por la ley de la tecnología, llega por el
+> deber profesional preexistente** — que ya está vigente, no tiene calendario y no admite cabildeo.
+> Las leyes de AI de EE. UU. están en litigio federal; **el deber de certificar lo que firmas, no.**
+
+Consecuencia de producto: la función que vende **no es «nuestro modelo alucina menos»** — es
+**«este sistema produce la evidencia que tu firma certifica»**. Es la diferencia entre `casecite` /
+`kancelaria-lex` / `opencaselaw` (que **resuelven la cita contra la fuente** y dejan traza) y
+cualquier asistente que simplemente escriba mejor.
+
+### T23. Dos pases seguidos con el caudal de repos nuevos seco: la curación venció al descubrimiento
+
+`legal AI created:>2026-08-01 stars:>=25` ⇒ **10 repos en casi cuatro meses**, de los cuales **6 ya
+estaban en esta KB**, 2 no son legales y 2 se descartaron por licencia o relevancia. **Cero
+incorporaciones netas por descubrimiento.**
+
+Y sin embargo este pase corrigió la licencia del activo del que colgaba toda la capa de evaluación,
+midió 6 filas que estaban en `n/d`, cerró el censo de renombrados sobre 93 slugs y añadió el
+benchmark más grande del sector. **El valor de un pase horario ya no está en encontrar: está en
+verificar lo que se encontró.** Esta es la tercera medición consecutiva que lo dice, y es el
+argumento estructural contra repetir industria dentro del mismo día.
+
+### T24. La brecha de gobernanza tiene por fin un par de números comparables
+
+**APAC: 94% usa AI, 58% trabaja bajo una política de AI.** Un 36% de uso descubierto, en la región
+con la adopción más rápida y la gobernanza más débil. Combinado con lo que esta KB ya medía —que la
+herramienta más usada en despachos de **todos** los tamaños es **genérica** (43–48%)— la tendencia
+es una sola y se repite en las cuatro regiones:
+
+> **El valor ya se está capturando con herramientas que no son defendibles.** No hay que convencer
+> a nadie de adoptar AI; hay que sustituir una adopción que ya ocurrió y que nadie puede auditar.
