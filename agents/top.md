@@ -770,3 +770,96 @@ marcaba 🪦; lo que faltaba era decir que **son medidas de cosas distintas y ni
 - **6** filas que estaban en `n/d` ahora medidas. **0** `n/d` restantes en la columna de actividad.
 - **101** bloques de tabla barridos con el control de estructura `P22`: **0 defectos** — la reparación del pase 5 se sostiene.
 - **0** filas de cabecera o de ejemplo como dato. **0** placeholders.
+
+---
+
+## 🆕 PASE 8 (2026-11-22) — **EL PLANO DE INGRESOS**: siete pases catalogaron el trabajo del abogado y ninguno miró la factura
+
+Este pase no añade una categoría: añade un **plano**. Los siete pases anteriores construyeron el
+vocabulario de consulta con la forma del **producto jurídico** (contrato, cita, jurisprudencia,
+cláusula, firma, expediente, benchmark). Ninguna de esas palabras encuentra la capa donde el
+despacho **cobra** y donde **incurre en responsabilidad por mala praxis**.
+
+### 📏 Primero la medición de ausencia, que es gratis y es la que justifica el pase
+
+Censo sobre los 8 ficheros de esta KB **antes** de escribir nada (`grep -rioF`, 2026-11-22):
+
+| Término buscado en la KB | Ocurrencias antes de este pase |
+|---|---|
+| `billing` / `invoice` / `timekeep` / `time-track` | 0 · 0 · 0 · 0 |
+| `LEDES` / `UTBMS` / `SALI` / `LMSS` | 0 · 0 · 0 · 0 |
+| `trust-account` / `IOLTA` | 0 · 0 |
+| `conflicts of interest` / `conflict-check` | 0 · 0 |
+| `calendaring` / `statute of limitations` / `docketing` | 0 · 0 · 1 |
+| `legal spend` / `outside counsel` / `panel management` | 0 · 0 · 0 |
+| `realization` / `collections` / `matter profitab` | 0 · 0 · 0 |
+
+Cero en 17 de 19 términos. Y no es que la capa no exista: es que **nadie la había preguntado**.
+
+> 🔑 **El pase 6 escribió esta carencia con sus propias palabras y no la convirtió en una consulta.**
+> Al cerrar el hueco de *practice management* con `boyeesu/Kourti` anotó como salvedad, entre
+> paréntesis, «*sin contabilidad de cuentas de terceros, sin comprobación de conflictos de
+> interés*». Dos pases después esas dos salvedades siguen siendo las dos palabras que esta KB nunca
+> buscó. **Una limitación anotada en un paréntesis es una consulta pendiente, no una nota al pie.**
+
+### 🔴 Y la medición del ecosistema, que es peor de lo que la KB suponía
+
+`gh api -X GET search/repositories`, 2026-11-22, `total_count` tal cual:
+
+| Consulta | `total_count` | Lo mejor que hay |
+|---|---|---|
+| `legal timekeeping billable hours` | **0** | — |
+| `UTBMS task codes` | **0** | — (y UTBMS es el **codelist que lleva toda factura legal**) |
+| `conflicts of interest check law firm` | **1** | de 2021, sin licencia |
+| `docketing court deadlines` | **1** | sin licencia |
+| `trust accounting IOLTA` | **3** | ninguno utilizable (2 son perfiles de API de terceros) |
+| `court rules deadline calculator` | **5** | AGPL-3.0, 2★ |
+| `LEDES legal billing` | **6** | GPL-3.0, 2★ (Windows Forms) |
+
+La capa donde vive el dinero del despacho y su riesgo de mala praxis —**el plazo procesal es la
+primera causa de reclamación por negligencia**— tiene un orden de magnitud **menos** señal social
+que la capa de revisión de contratos, que esta KB ya tenía con 14 filas.
+
+### Activos nuevos de este pase — plano de ingresos
+
+Licencia leída byte a byte sobre `raw.githubusercontent.com/<slug>/HEAD/LICENSE`; existencia por
+recuento de refs de `git ls-remote`; metadatos por `search/repositories`. Tres canales, 2026-11-22.
+
+| Nombre | Repo | Licencia (leída) | País / región de origen | Descripción | Stars | Último commit |
+|--------|------|------------------|-------------------------|-------------|-------|---------------|
+| **billcheck** | [unhingedpanda/billcheck](https://github.com/unhingedpanda/billcheck) | **MIT (1.080 B)** | Global | **El único parser/constructor/validador LEDES 1998B permisivo que existe.** TypeScript, **cero dependencias de runtime**. Conserva ceros a la izquierda, escala decimal y orden de líneas; acepta LF, CR y falta de salto final con aviso. Validador de navegador **local por construcción**: sin endpoint de subida, sin analítica, sin cookies, sin histórico; el servidor estático liga a `127.0.0.1`, rechaza métodos de escritura y Host inesperado, y su política de contenido **bloquea las conexiones del navegador**. Límite 5.000.000 B / 10.000 registros, corte a 15 s. | 0 | **2026-11-19** |
+| **billing-lint** | [kirillsakhin/billing-lint](https://github.com/kirillsakhin/billing-lint) | **MIT (1.070 B)** | Global | Linter de **pre-factura** (CSV, XLSX o LEDES 1998B): narrativas vagas, *block billing*, aritmética que no cuadra, restos de plantilla (`"Draft letter to [client name]"`), entradas duplicadas y **códigos UTBMS inválidos**. Determinista, offline, ejecutable en CI. Documenta por qué el orden importa: la revisión por LLM en lote **es inconsistente** —el mismo defecto se marca en la entrada 3 y pasa callado en la 47, y dos ejecuciones del mismo extracto se contradicen. | 0 | 2026-08-31 |
+| **aderant-legal-billing** | [itsoumya-d/aderant-legal-billing](https://github.com/itsoumya-d/aderant-legal-billing) | **MIT (1.071 B)** | Global | **Cierra la primera salvedad del pase 6: cuentas de terceros.** Motor de facturación y *trust compliance*: WIP por expediente, tarifarios, facturas con impuesto, **libros de cuenta de cliente que no pueden quedar en descubierto**, excepciones de compliance, cuadro de mando React y **export LEDES 1998B**. Publica las fórmulas en el README (`timeValue = round(minutes / 60 * effectiveRate)`), que es lo que lo hace auditable. | 0 | 2026-11-06 |
+| **claude-court-deadline-reasoning** | [protomated/claude-court-deadline-reasoning](https://github.com/protomated/claude-court-deadline-reasoning) | MIT (1.067 B) | Global | Cálculo de plazos procesales **razonado paso a paso sobre la regla que se le da**, no sobre una tabla fija. Es el único permisivo de los cinco que devuelve la consulta de plazos. | 1 | 2026-07-21 |
+| **mycase-mcp** | [oktopeak/mycase-mcp](https://github.com/oktopeak/mycase-mcp) | MIT (1.065 B) | EE. UU. · North America | **El puente al sistema de registro que el despacho ya paga.** Servidor MCP sobre MyCase (practice management comercial): expedientes, contactos, plazos y facturación quedan accesibles al agente sin migrar nada. Patrón opuesto al de sustituir la plataforma. | 6 | 2026-10-15 |
+
+### 🪦 Y el activo que corona la medición: el **único** practice management Apache-2.0 murió en 2016
+
+| Nombre | Repo | Licencia (leída) | País / región de origen | Descripción | Stars | Último commit |
+|--------|------|------------------|-------------------------|-------------|-------|---------------|
+| OpenLawOffice | [NodineLegal/OpenLawOffice](https://github.com/NodineLegal/OpenLawOffice) | Apache-2.0 (11.350 B, `LICENSE.txt`) | EE. UU. · North America | «Open source law office management — case management, billing, tasking and more». 27 forks, 5 refs. **Y 10,6 años sin un commit.** Es la prueba de que la casilla «permisivo + específico del sector + maduro» no está vacía por falta de intento: está vacía porque el intento no se sostuvo. | 38 | **2016-04-10** 🪦 |
+
+### 🔑 La asimetría que ordena todo este plano (y es una regla de decisión, no una observación)
+
+Medido en este pase, con licencia leída: **se puede tener dos de tres propiedades, nunca las tres.**
+
+| Combinación | Qué hay, medido hoy |
+|---|---|
+| Específico del sector **+ maduro** | **Copyleft.** `deedbox-app` AGPL-3.0 (34.523 B), `4csolutions/casecentral` GPL-3.0 (25★, 29 forks), `Litigious` AGPL-3.0, módulo Odoo `legal_practice_management` AGPL-3.0, `legal-deadline-calculator` AGPL-3.0 |
+| **Permisivo** + maduro | **Genérico.** `killbill` Apache-2.0 5.862★, `FOSSBilling` Apache-2.0 1.757★, `InvoicePlane` MIT 3.290★ — ninguno sabe qué es un expediente |
+| **Permisivo + específico del sector** | **0★ y menos de 12 semanas de vida.** `billcheck` (3 días), `aderant-legal-billing` (16 días), `billing-lint` (12 semanas) — o Apache-2.0 muerto en 2016 |
+
+> **Consecuencia para una propuesta:** en el plano de ingresos **no se adopta, se construye** — y se
+> construye poniendo la semántica legal (expediente, tarifario, UTBMS, cuenta de terceros, plazo)
+> **encima de un espinazo genérico permisivo**, no forkeando un producto legal AGPL. Es la decisión
+> inversa a la que esta KB recomienda en el plano del producto jurídico, donde sí hay base permisiva
+> madura. **Dos planos, dos arquitecturas, y la licencia es la que decide cuál.**
+
+### 🗑️ Descartes de este pase, con la medición que los justifica
+
+| Repo | Medición | Veredicto |
+|---|---|---|
+| [createrivabu/Iuris-Soft](https://github.com/createrivabu/Iuris-Soft) | 26★, 18 forks, time tracking + generación de gastos. **Licencia: 5/5 rutas → 404** (`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING`) | **Descarte legítimo** por ausencia *medida* del fichero, no por `NOASSERTION`. Es el caso que la regla del pase 6 exige distinguir |
+| [manojrevenkar12-web/legal-invoice-review-agents](https://github.com/manojrevenkar12-web/legal-invoice-review-agents) | 1★, LEDES 1998B parser/writer en `src/lira/ledes.py`. **Licencia: 5/5 → 404** | **No adoptable, pero se lee**: su arquitectura es la referencia de diseño de `P29`. Se cita en prosa, **no se forkea** |
+| `emirmrkaljevic/awesome-legal-tech` | `search/repositories` → **422** | Indexado por el buscador web, inexistente por el canal de GitHub. Tercer índice `awesome-legaltech` clonado que aparece así (ver censo de nombre, `P18`) |
+| `udayasri10435/CounselFlow…`, `Nefus1/court-clock`, `thegreatsze/singapore-procedural-deadline-calculator` | 0★, sin licencia, sin forks | Fuera por `P15` (pertinencia) **y** por ausencia de licencia. Se registran para que un pase futuro no los redescubra como hallazgo |

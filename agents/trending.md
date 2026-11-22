@@ -9,6 +9,89 @@ updated: 2026-11-22
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-22 (pase 8) — el caudal **no estaba seco**: estaba en un plano que esta KB nunca consultó
+
+**Tres agentes MIT nuevos, los tres en facturación legal, y los tres creados en las últimas 12
+semanas:** `billcheck` (2026‑11‑19, hace **tres días**), `aderant-legal-billing` (2026‑11‑06),
+`billing-lint` (2026‑08‑31). Los tres con **0★**.
+
+### 🔴 Y eso refuta una tendencia que esta KB publicó y confirmó tres pases seguidos
+
+`T-P5-1` dice, con medición: *«el caudal de activos legales nuevos se ha secado»* — `legal AI
+created:>2026-09-01 stars:>=40` → 4 repos; `legal AI created:>2026-08-01 stars:>=25` → 10, de los
+que 0 eran incorporaciones netas. Medido otra vez hoy, sigue siendo cierto. **Y aun así el caudal
+no estaba seco.**
+
+Las dos consultas comparten dos supuestos que no son del ecosistema, sino del instrumento:
+
+1. **El término `legal`.** Un repo que implementa LEDES 1998B no necesita decir «legal»: el nombre
+   del estándar ya lo dice. Filtrar por `legal` no mide pertinencia, mide **si el autor fue
+   redundante**.
+2. **Un umbral de estrellas.** `stars:>=25` elimina por definición a los tres hallazgos de hoy, que
+   tienen cero. Es `G-L10` otra vez —filtro de precisión usado como filtro de cobertura— pero ahora
+   con una causa añadida: en el plano de ingresos **no hay público que estrelle**. Quien factura
+   horas no navega GitHub; el repo no tiene demo viral ni modelo que probar.
+
+> 🔑 **La conclusión correcta, y hay que corregirla en los dos sitios donde está escrita:** lo que
+> tres pases midieron no es *«el ecosistema legal dejó de producir»*, sino **«el vocabulario de esta
+> KB dejó de producir»**. Una serie temporal estable es una propiedad del instrumento hasta que se
+> cambia el instrumento. `T-P5-1` queda **acotada**, no retirada: es cierta *dentro del plano del
+> producto jurídico*, y falsa fuera de él.
+
+### 🔧 G-L17 — AÑADIR LA PALABRA DEL SECTOR AL NOMBRE DE UN ESTÁNDAR SECTORIAL **ES UN FILTRO, NO UNA ACLARACIÓN**
+
+El hallazgo de método del pase, y se mide con tres llamadas:
+
+| Consulta | `total_count` | ¿Aparece `billcheck`, el mejor activo (MIT)? |
+|---|---|---|
+| `LEDES` | 109.739 | ❌ sepultado — el tokenizador lo solapa con la familia `led` (`WLED` 19.102★, `FastLED` 7.539★) |
+| **`LEDES invoice`** | **26** | ✅ **sí** — y con él `ruhee-g/LEDES98B`, `bkattenburg/ledes-invoice-generator`, `roipatents/CrispLEDES` |
+| `LEDES legal billing` | 6 | ❌ **no** — y tampoco ninguno de los otros cinco |
+
+La consulta que **el propio brief prescribe** (`{estándar} {industria} {función}`) devuelve el
+conjunto más pequeño y **pierde el único activo permisivo de la categoría**. El punto óptimo es
+`{estándar} + {sustantivo del artefacto}`: `LEDES` + `invoice`, no `LEDES` + `legal`.
+
+> **Regla para las doce industrias, porque todas tienen estándares con esta propiedad:** *cuando el
+> término de búsqueda es el nombre de un estándar sectorial, **no se le añade el nombre del
+> sector**; se le añade el artefacto que el estándar describe.* Aplica igual a `HL7`/`FHIR` +
+> *record* (salud), `ISO 20022` / `SWIFT MT` + *payment* (financiero), `EDIFACT` + *order*
+> (retail), `IEC 61850` + *substation* (energía), `OpenTravel`/`NDC` + *booking* (viajes). Y el
+> síntoma de que se ha caído en la trampa es exactamente el de hoy: **un `total_count` de un solo
+> dígito que parece confirmar que la categoría no existe.**
+
+### Agentes nuevos con señal real (verificados por tres canales: licencia byte a byte, `ls-remote`, `search/repositories`)
+
+| Agente | Licencia | Por qué entra |
+|---|---|---|
+| [unhingedpanda/billcheck](https://github.com/unhingedpanda/billcheck) | MIT (1.080 B) | Único parser/constructor/validador **LEDES 1998B** permisivo. Cero dependencias de runtime. Validador local **por construcción**: sin endpoint de subida, sin analítica, servidor atado a `127.0.0.1`, CSP que bloquea conexiones salientes |
+| [itsoumya-d/aderant-legal-billing](https://github.com/itsoumya-d/aderant-legal-billing) | MIT (1.071 B) | **Cuentas de terceros** — la salvedad que el pase 6 anotó entre paréntesis y nadie buscó. Libros de cliente que no pueden quedar en descubierto, WIP, tarifarios, export LEDES |
+| [kirillsakhin/billing-lint](https://github.com/kirillsakhin/billing-lint) | MIT (1.070 B) | Linter determinista de pre-factura sobre CSV/XLSX/LEDES, **incluida validación de códigos UTBMS** |
+| [oktopeak/mycase-mcp](https://github.com/oktopeak/mycase-mcp) | MIT (1.065 B) | Puente MCP al practice management que el despacho **ya paga**. 6★ |
+
+### 🧪 Y un dato de ingeniería que vale más que los cuatro repos juntos
+
+`billing-lint` documenta, en su propio README, por qué su arquitectura pone las reglas antes que el
+modelo: **la revisión por LLM en lote es inconsistente** — *«el mismo defecto se marca en la entrada
+3 y pasa callado en la entrada 47, y dos ejecuciones del mismo extracto se contradicen; revisar 400
+entradas en un solo prompt lo empeora, no lo mejora»*.
+
+> Es la primera afirmación **operativa y específica del sector** sobre no determinismo que entra en
+> esta KB, y encaja con lo que el pase 3 ya había registrado por el lado de la calidad (la
+> trazabilidad desplaza a la fluidez). En facturación el efecto es económico y directo: un defecto
+> que pasa en la entrada 47 **se factura**, llega al cliente y vuelve como ajuste. De ahí el orden
+> correcto: **reglas deterministas primero, modelo sólo donde cabe un juicio.**
+
+### ⚠️ Lo que este pase NO midió, y hay que decirlo
+
+- **Ningún activo del plano de ingresos está anclado en LATAM.** Se buscó (`LEDES`, `UTBMS`,
+  facturación y cuentas de terceros) y no aparece ninguno con origen en la región. Ver `intel/market.md`
+  para por qué el hueco importa **menos** de lo que parece y dónde está el trabajo real.
+- **Los tres activos MIT tienen un solo autor y cero forks.** Son bases de referencia y de lectura,
+  no proyectos con comunidad. Lo que se promete a un cliente es **el código leído**, no el mantenimiento.
+- `billcheck` tiene **tres días de vida**. Se publica por función verificada (`P23`), con la fecha a
+  la vista y sin ninguna afirmación sobre su continuidad.
+
 ## 🆕 2026-11-22 (pase 7) — el líder comercial publicó su banco de pruebas en MIT, y esta KB lo tenía perdido desde mayo
 
 **`harveyai/harvey-labs` — Harvey LAB, «Legal Agent Benchmark». MIT (1.067 B byte a byte), 1.668★,

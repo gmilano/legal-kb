@@ -1241,3 +1241,176 @@ cero: se revisa a ojo en diez segundos.
 > texto dentro de bloques, notas al pie y encabezados.* Refutar un hueco en la tabla y dejarlo
 > afirmado en una receta no lo cierra — **deja dos respuestas contradictorias en la misma KB, y la
 > que el siguiente lector copie y pegue será la del bloque de código.**
+
+---
+
+## 🆕 P28 — **Puerta de pre-factura**: que no salga del despacho una línea que el cliente vaya a recortar
+
+**Problema que resuelve, con el número delante:** el cobro cayó del 93% al 92% en 2026 mientras la
+utilización subía de 39% a 42% (Clio, 26-oct-2026). Lo que se recorta se recorta por cuatro motivos
+deterministas: narrativa vaga, *block billing*, aritmética que no cuadra y códigos UTBMS inválidos.
+
+**Piezas, todas MIT y verificadas byte a byte el 2026-11-22:**
+
+| Pieza | Repo | Papel |
+|---|---|---|
+| Linter de pre-factura | [kirillsakhin/billing-lint](https://github.com/kirillsakhin/billing-lint) (MIT 1.070 B) | Reglas deterministas sobre CSV/XLSX/LEDES: narrativa, duplicados, restos de plantilla, UTBMS |
+| Validador de formato | [unhingedpanda/billcheck](https://github.com/unhingedpanda/billcheck) (MIT 1.080 B) | LEDES 1998B: 24 campos, ceros a la izquierda, escala decimal, aritmética exacta |
+| Libro de horas | [kimai/kimai](https://github.com/kimai/kimai) (**AGPL-3.0** ⚠️ interno) | Origen de los datos: timesheets, tarifas por proyecto/actividad/usuario |
+| Taxonomía de materia | [sali-legal/LMSS](https://github.com/sali-legal/LMSS) (MIT 1.073 B) | IRI estable de área/tipo de asunto para agregar por materia y cruzar con el cliente |
+
+**Cableado, en este orden y no en otro:**
+
+```text
+Kimai (export de timesheet)
+   └─> billing-lint   : reglas deterministas  -> hallazgos BLOQUEANTES y hallazgos de JUICIO
+         └─> billcheck: construye el LEDES 1998B y revalida aritmética y formato
+               └─> cola de revisión humana: sólo los de JUICIO
+                     └─> fichero .LED firmado + informe JSON adjunto al expediente
+```
+
+**Las tres decisiones que hacen que funcione:**
+
+1. **Determinista antes que modelo, y está medido, no supuesto.** `billing-lint` documenta que la
+   revisión por LLM en lote es inconsistente: *el mismo defecto se marca en la entrada 3 y pasa
+   callado en la 47, y dos ejecuciones se contradicen; 400 entradas en un prompt lo empeora*.
+2. **Correr en CI sobre el export de pre-factura**, no en el momento de emitir. Un ajuste descubierto
+   por el equipo de facturación del cliente **cuesta dinero y confianza**; el mismo defecto detectado
+   el día 3 del ciclo no cuesta nada.
+3. **`billcheck` no sube nada a ningún sitio.** Cero dependencias de runtime; su validador web liga a
+   `127.0.0.1`, rechaza métodos de escritura y Host inesperado, no tiene endpoint de subida, ni
+   analítica, ni cookies, y su política de contenido **bloquea las conexiones salientes del
+   navegador**. Es la misma garantía *por construcción* del patrón `P21`, aplicada a la factura —
+   que contiene la narrativa de lo que se hizo en cada asunto, es decir, **material privilegiado**.
+
+**Qué hay que construir, dicho sin adornos:** la tabla de tarifas por abogado y materia, el mapeo
+asunto→IRI de LMSS, y las *outside counsel guidelines* del cliente si se quiere anticipar sus cortes
+(eso es `P29`). Nada de esto viene en ninguna de las piezas.
+
+---
+
+## 🆕 P29 — **Revisión de factura contra las guías del cliente** (el lado corporativo, que es donde está la cartera de Globant)
+
+**Reencuadre de comprador, y es el que cambia a quién se le vende:** esta KB lleva ocho pases
+escrita para el **despacho**. La factura tiene dos lados, y el otro —el **departamento legal
+corporativo** que la recibe y la revisa contra sus *outside counsel guidelines*— es donde ya están
+los clientes de Globant. Es la vía de entrada más caliente de todo este plano **y no requiere vender
+nada a un despacho.**
+
+**Referencia de diseño:** [manojrevenkar12-web/legal-invoice-review-agents](https://github.com/manojrevenkar12-web/legal-invoice-review-agents).
+⚠️ **SIN LICENCIA — 5/5 rutas devuelven 404. Se lee, no se forkea.** Lo que aporta es su regla de
+arquitectura, que es la mejor formulación del principio que esta KB venía escribiendo en prosa:
+
+> **«Models read, rules decide.»** *Los modelos leen, las reglas deciden.*
+
+**La arquitectura, en cuatro capas:**
+
+1. **El modelo convierte la prosa de la guía en reglas tipadas** — y **cada regla carga una cita
+   literal** del documento que se comprueba mecánicamente, más un extractor de patrones que
+   contrasta los valores. **Legal operations aprueba el conjunto de reglas antes de que se use.**
+2. **Un motor determinista aplica todo lo que es aritmética**: tarifas, incrementos, topes diarios,
+   roles, gastos, topes de investigación, asistentes a reuniones. **El dinero que ajusta es
+   reproducible al céntimo.**
+3. **NLP clásico criba cada línea** —clasificadores calibrados, NER contra el listado de personal del
+   despacho, modelos de materia y de horas—. **Sólo las líneas donde cabe un juicio llegan al
+   modelo**, que está obligado a **citar la entrada**; un verificador **descarta toda decisión cuya
+   cita o cláusula no se compruebe**.
+4. **Los hallazgos de juicio son propuestas** (*block billing*, narrativa vaga, trabajo administrativo,
+   reuniones internas). Una persona acepta o rechaza. **Nada de lo que dijo un modelo se aplica sin
+   ese paso** — y el despacho puede **apelar** y recibir una respuesta que le cita su propia apelación.
+
+**Piezas permisivas con las que se construye:** `billcheck` (MIT) para leer el LEDES 1998B entrante ·
+`sali-legal/LMSS` (MIT) como eje de materia para agregar el gasto y que **cruce con la taxonomía del
+despacho** · `billing-lint` (MIT) como banco de reglas deterministas de partida · Kill Bill
+(Apache-2.0) si hace falta llevar el ajuste a un flujo de pago.
+
+⚠️ **Lo que hay que decir en la propuesta, porque las fuentes son de parte:** los ahorros publicados
+(5–10%, algún proveedor dice 15–25%) **son cifras de marketing sin fuente trazable**; una de las más
+repetidas —«la revisión manual se pierde hasta el 62% de las infracciones»— **no tiene fuente
+localizable**. Se mide contra la línea base del propio cliente, y no se cita ninguna de ellas.
+Límite real y conocido: la revisión por línea **no ve el contexto** —estrategia del asunto,
+complejidad, si el trabajo debía haberse hecho siquiera—, y eso sigue siendo humano.
+
+---
+
+## 🆕 P30 — **Libro de cumplimiento de honorarios en la era AI** (ABA 512 / Regla 1.5), y sirve dos veces
+
+**Obligación que cubre, y no es futura:** sólo se factura el tiempo efectivamente empleado — el
+prompt y la verificación **sí**, el tiempo ahorrado **no**; una tarifa plana puede volverse
+irrazonable bajo la **Regla 1.5** si la AI comprime el trabajo; el tiempo de **aprender** una
+herramienta general no se repercute; el **coste de la herramienta** exige acuerdo previo. ABA Formal
+Opinion 512, y en la misma línea California, Texas Op. 705, North Carolina 2024 FEO 1 y D.C. Op. 388.
+
+**Base:** [itsoumya-d/aderant-legal-billing](https://github.com/itsoumya-d/aderant-legal-billing)
+(MIT 1.071 B) — WIP por expediente, tarifarios, **libros de cuenta de cliente que no pueden quedar en
+descubierto**, excepciones de compliance y export LEDES, con las fórmulas publicadas en el README
+(`timeValue = round(minutes / 60 * effectiveRate)`), que es lo que lo hace auditable.
+
+**Los cuatro controles que se añaden encima, uno por obligación:**
+
+| Control | Qué hace | Regla que cubre |
+|---|---|---|
+| **Campo de herramienta por entrada de tiempo** | Cada entrada declara si intervino AI, cuál y en qué paso (redacción / revisión / verificación) | Base probatoria de todo lo demás |
+| **Marcador de tarifa plana en riesgo** | Si el esfuerzo real de un asunto a tarifa plana cae por debajo del umbral que la tarifa suponía, se marca para revisión de razonabilidad | Regla 1.5 |
+| **Bloqueo de tiempo de aprendizaje** | Las entradas contra herramientas de uso general marcadas como «aprendizaje» no pueden facturarse salvo petición expresa del cliente, registrada | ABA 512 |
+| **Puerta de repercusión de coste** | El coste de herramienta no se añade a la factura si no existe acuerdo escrito previo en el expediente | ABA 512 |
+
+> 🔑 **Y el motivo por el que esto se construye una vez y se cobra en dos regímenes:** el campo de
+> herramienta por entrada de tiempo **es** el rastro de auditoría que el **EU AI Act** exige
+> documentar — en una región donde **el 56% de los departamentos legales usa herramientas genéricas
+> y sólo el 14% tiene AI legal especializada**, es decir, donde cuatro de cada cinco **no pueden
+> documentar nada**. Misma pieza: Regla 1.5 en EE. UU., expediente documental en la UE, y en LATAM la
+> cobertura de una responsabilidad **ya vigente** por vía colegial. **Una construcción, tres
+> argumentos de venta.**
+
+⚠️ **Límite declarado:** `aderant-legal-billing` tiene **0★, un solo autor y 16 días de vida**. Se
+adopta como **base de referencia leída**, no como dependencia mantenida. Lo que se promete a un
+cliente es el código que se ha leído.
+
+---
+
+## 🆕 P31 — **Consultar por el nombre de un estándar** (la receta que habría evitado `G-L17`)
+
+**Fallo que corrige:** añadir la palabra del sector al nombre de un estándar sectorial **es un
+filtro, no una aclaración** — y filtra precisamente los mejores activos, porque un repo que
+implementa el estándar **no necesita nombrar el sector**.
+
+**Medición que lo demuestra, tres llamadas, 2026-11-22:**
+
+| Consulta | `total_count` | ¿Contiene el mejor activo (`billcheck`, MIT)? |
+|---|---|---|
+| `LEDES` | 109.739 | ❌ sepultado bajo la familia `led` (`WLED`, `FastLED`) |
+| **`LEDES invoice`** | **26** | ✅ **sí**, y con él otros cuatro |
+| `LEDES legal billing` | 6 | ❌ **no** — la consulta que prescribe el brief |
+
+**Receta, cuatro pasos:**
+
+```bash
+# 1. El estándar solo: mide el ruido de tokenización, no se usa para descubrir
+gh api -X GET search/repositories -f q='LEDES' | python3 -c 'import json,sys;print(json.load(sys.stdin)["total_count"])'
+
+# 2. Estándar + SUSTANTIVO DEL ARTEFACTO  <-- el canal útil
+gh api -X GET search/repositories -f q='LEDES invoice' -f sort=stars -f per_page=30
+
+# 3. Estándar + palabra del sector: SOLO para medir cuánto filtra (control, no descubrimiento)
+gh api -X GET search/repositories -f q='LEDES legal billing'
+
+# 4. Todo hallazgo de (2) se verifica por funcion, NO por estrellas: leer README y LICENSE
+curl -s https://raw.githubusercontent.com/<slug>/HEAD/README.md | head -40
+curl -s https://raw.githubusercontent.com/<slug>/HEAD/LICENSE | wc -c
+```
+
+**Tabla de aplicación a la rotación — el sustantivo que hay que usar en cada industria:**
+
+| Industria | Estándar | Sustantivo del artefacto (el que **sí** funciona) |
+|---|---|---|
+| legal | LEDES · UTBMS · SALI LMSS | `invoice` · `task code` · `taxonomy` |
+| healthcare | HL7 · FHIR · DICOM | `record` · `resource` · `image` |
+| financial | ISO 20022 · SWIFT MT · FIX | `payment` · `message` · `order` |
+| retail | EDIFACT · EANCOM · GS1 | `order` · `catalog` · `barcode` |
+| energy | IEC 61850 · CIM · OpenADR | `substation` · `grid model` · `demand response` |
+| travel | OpenTravel · NDC · IATA | `booking` · `offer` · `itinerary` |
+
+> **El síntoma de que se ha caído en la trampa** es siempre el mismo: **un `total_count` de un solo
+> dígito que parece confirmar que la categoría no existe.** Antes de escribir «no existe X
+> permisivo», hay que repetir la consulta **sin la palabra del sector**.

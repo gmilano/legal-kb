@@ -626,3 +626,83 @@ es una sola y se repite en las cuatro regiones:
 
 > **El valor ya se está capturando con herramientas que no son defendibles.** No hay que convencer
 > a nadie de adoptar AI; hay que sustituir una adopción que ya ocurrió y que nadie puede auditar.
+
+---
+
+## 🆕 PASE 8 (2026-11-22) — cinco tendencias, y la primera **corrige una tendencia publicada por esta KB**
+
+### T25. 🔁 «El caudal se ha secado» era una propiedad **del vocabulario**, no del ecosistema
+
+`T-P5-1` se midió y se confirmó tres pases seguidos: `legal AI created:>2026-09-01 stars:>=40` → 4
+repos; `created:>2026-08-01 stars:>=25` → 10, con **cero incorporaciones netas**. Medido otra vez
+hoy, sigue siendo cierto. **Y sin embargo este pase incorpora tres activos MIT creados en las
+últimas 12 semanas** (`billing-lint` 31-ago, `aderant-legal-billing` 6-nov, `billcheck` **19-nov**,
+hace tres días).
+
+No hay contradicción: las dos consultas que midieron la sequía llevan dentro dos supuestos que son
+del instrumento y no del mundo. **(1) El término `legal`** — un repo que implementa LEDES 1998B no
+necesita decirlo, porque el nombre del estándar ya lo dice; filtrar por `legal` mide *si el autor
+fue redundante*. **(2) Un umbral de estrellas** — los tres hallazgos tienen **0★**, y en el plano de
+ingresos no hay público que estrelle: quien factura horas no navega GitHub.
+
+> **La tendencia correcta, y es más útil que la que sustituye:** *el caudal de activos nuevos se
+> concentra en los planos que todavía no se han consultado.* Una serie temporal plana es una
+> propiedad del instrumento hasta que se cambia el instrumento. ⇒ **`T-P5-1` queda acotada, no
+> retirada:** cierta dentro del plano del producto jurídico, falsa fuera de él. Para las doce
+> industrias: **una KB que lleva tres pases midiendo «no hay nada nuevo» está midiendo su propio
+> vocabulario.**
+
+### T26. 🔑 La ética de la AI legal es, antes que nada, **una regla de facturación** — y toca el 100% de los expedientes
+
+Siete pases de esta KB leyeron el riesgo ético como un problema de **citas alucinadas**. La opinión
+más citada del sector, **ABA Formal Opinion 512**, regula **la minuta**: sólo se factura el tiempo
+efectivamente empleado (redactar el prompt y verificar la salida **sí**; el tiempo ahorrado **no**);
+una **tarifa plana puede volverse irrazonable** bajo la Regla 1.5 si la AI comprime el trabajo; el
+tiempo de **aprender** una herramienta general no se repercute; el **coste de la herramienta**
+requiere acuerdo previo. La misma línea en **California**, **Texas Op. 705**, **North Carolina 2024
+FEO 1** y **D.C. Op. 388**.
+
+> **El reencuadre:** la superficie de cumplimiento de la AI legal tiene **dos caras, el escrito y la
+> factura**, y esta KB sólo había catalogado la primera. La diferencia es de alcance: **la
+> verificación de citas sólo muerde donde hay citas** (litigio), mientras que **todo asunto emite
+> factura** — transaccional, regulatorio y corporativo incluidos. La factura es **la única superficie
+> de cumplimiento que alcanza a todos los expedientes**, y hoy no tiene con qué auditarse.
+
+### T27. 📉 La AI subió las horas registradas y facturadas; **el cobro bajó**
+
+Clio, *Legal Trends Report* del 26-oct-2026: utilización **39% → 42%** (la mayor subida interanual en
+11 ediciones), realización **88% → 90%**, **cobro 93% → 92%**. Titular del sector: «récord de horas
+facturables». Dato que nadie comentó: **el único tramo del embudo que convierte trabajo en caja se
+movió en dirección contraria.**
+
+Y coincide exactamente con el hueco medido: `total_count = 0` para facturación legal permisiva, `0`
+para UTBMS, `6` para LEDES. Una factura se recorta o se devuelve por narrativa vaga, *block
+billing*, aritmética que no cuadra o códigos inválidos — **los cuatro defectos deterministas**.
+⇒ **El argumento comercial no necesita prometer que la AI ahorra tiempo (ya está demostrado y además
+genera un problema ético): necesita demostrar que lo facturado se cobra.**
+
+### T28. 🧱 En el plano de ingresos se puede tener **dos de tres** propiedades, nunca las tres
+
+Medido con licencia leída byte a byte: **específico del sector + maduro ⇒ copyleft**
+(`deedbox-app` AGPL, `casecentral` GPL, `Litigious` AGPL, módulo Odoo AGPL). **Permisivo + maduro ⇒
+genérico** (`killbill` Apache 5.862★, `FOSSBilling` Apache 1.757★ — ninguno sabe qué es un
+expediente). **Permisivo + específico ⇒ 0★ y menos de 12 semanas** — o Apache-2.0 muerto en 2016
+(`OpenLawOffice`, sin commits desde el 10-abr-2016).
+
+⇒ **Dos planos, dos arquitecturas.** En el producto jurídico hay base permisiva madura y se
+**adopta**; en el de ingresos no la hay y se **construye**, poniendo la semántica legal encima de un
+espinazo genérico Apache-2.0. Forkear el producto legal AGPL es la opción que **parece** ahorrar
+trabajo y es la que cierra la puerta al entregable comercial.
+
+### T29. 📐 **Especificación abierta ≠ implementación disponible**, y la distancia es el trabajo facturable
+
+Los tres estándares del negocio jurídico están publicados y abiertos. Sólo uno tiene software
+abierto: **SALI LMSS** (MIT, 92★, >18.000 etiquetas con IRI). **LEDES 1998B** tiene especificación
+pública —revisada por última vez en **2014**— y seis repos en todo GitHub. **UTBMS**, el codelist que
+lleva cada línea de factura legal, tiene **cero**.
+
+> Esta KB venía midiendo la apertura de **repos**. En esta capa la unidad que decide si un entregable
+> es interoperable es el **estándar**, y un estándar puede estar perfectamente publicado y no tener
+> con qué ejecutarlo. **Para las doce industrias: inventariar los estándares del sector por separado
+> de los repos, y medir la distancia entre ambos.** Esa distancia no es un hueco de la KB: es el
+> alcance de un proyecto.

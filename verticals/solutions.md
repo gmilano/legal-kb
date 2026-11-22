@@ -354,3 +354,60 @@ mes**. Para una propuesta eso se traduce en **dos frases distintas, y hay que el
 
 **La columna que decide qué se promete es `pushed_at`. Las estrellas sólo deciden el orden en que
 se lee la lista.**
+
+---
+
+## 🆕 PASE 8 (2026-11-22) — la vertical que faltaba no es jurídica: es **el back office que cobra**
+
+Las 14 plataformas de esta capa cubren el **trabajo** del despacho (expediente, documento, firma,
+investigación). Ninguna cubre el **cobro**. Y el cobro es donde esta KB acaba de medir el hueco más
+grande de las ocho pasadas: 17 de 19 términos del vocabulario de facturación, plazos, cuentas de
+terceros y conflictos daban **cero ocurrencias** en los ocho ficheros (detalle en `agents/top.md`).
+
+### Plataformas de partida para el plano de ingresos — verificadas 2026-11-22
+
+Igual que Odoo es la base ERP sobre la que se construye una vertical, estas son las bases de
+**facturación y registro de tiempos** sobre las que se construye el back office del despacho. Son
+genéricas **a propósito**: la capa específica del sector no tiene ninguna opción permisiva madura.
+
+| Plataforma | Repo | Licencia (leída) | Madurez | Para qué sirve en legal | Lo que **no** trae |
+|---|---|---|---|---|---|
+| **Kill Bill** | [killbill/killbill](https://github.com/killbill/killbill) | **Apache-2.0 (11.357 B)** | 5.862★ · 990 forks · 14 años · commit 2026-11-21 | Motor de facturación y pagos con catálogo, impuestos, prorrateo, reintentos y plugins de pago. **La base permisiva más sólida de toda la capa** | Expediente, tarifario por abogado, UTBMS, cuenta de terceros |
+| **FOSSBilling** | [FOSSBilling/FOSSBilling](https://github.com/FOSSBilling/FOSSBilling) | **Apache-2.0 (11.454 B)** | 1.757★ · 374 forks · commit 2026-11-20 | Facturación + clientes + órdenes en PHP con módulos. Alternativa ligera para despacho pequeño sin volumen de suscripción | Lo mismo, y menos extensible que Kill Bill |
+| **InvoicePlane** | [InvoicePlane/InvoicePlane](https://github.com/InvoicePlane/InvoicePlane) | **MIT** en fichero compuesto (5.087 B; GitHub dice `NOASSERTION`) | 3.290★ · 888 forks · commit 2026-11-18 | Presupuesto → factura → pago, autoalojado, muy simple de desplegar | ⚠️ **La marca sí está restringida**: no se redistribuye bajo el nombre «InvoicePlane» |
+| **Kimai** | [kimai/kimai](https://github.com/kimai/kimai) | **AGPL-3.0 (34.523 B)** ⚠️ | 5.173★ · 895 forks · commit **2026-11-22** | Registro de tiempos de referencia: *timesheets*, tarifas por proyecto/actividad/usuario, export, API | ⚠️ Copyleft de red ⇒ **herramienta interna del despacho**, no componente de un SaaS cerrado |
+| **InvoiceShelf** | [InvoiceShelf/InvoiceShelf](https://github.com/InvoiceShelf/InvoiceShelf) | **AGPL-3.0 (34.523 B)** ⚠️ | 2.075★ · 428 forks · commit 2026-11-22 | Facturación autoalojada, linaje Crater, mantenida | Misma advertencia de copyleft |
+
+### 🪦 Y por qué no se recomienda la opción que parecería obvia
+
+Existe **un** sistema de gestión de despacho Apache-2.0 —
+[NodineLegal/OpenLawOffice](https://github.com/NodineLegal/OpenLawOffice), 38★, 27 forks, «case
+management, billing, tasking and more»— y **no tiene un commit desde el 10 de abril de 2016**. Diez
+años y medio. Es la respuesta a la pregunta que todo arquitecto hace al ver este hueco («¿seguro que
+nadie lo ha hecho ya en permisivo?»): sí, alguien lo hizo, y no se sostuvo.
+
+Y las opciones **vivas** y específicas del sector son todas copyleft:
+`deedbox-maintainers/deedbox-app` (AGPL-3.0, 34.523 B), `4csolutions/casecentral` (GPL-3.0, 25★, 29
+forks, commit 2026-11-14), `Litigious` (AGPL-3.0), y el módulo Odoo
+`MohamedESalem/legal_practice_management` (AGPL-3.0) que extiende la app de Proyectos a expedientes.
+
+> **La decisión de arquitectura, y es la inversa de la que esta KB recomienda para el producto
+> jurídico:** en el plano del trabajo legal hay base permisiva madura y se **adopta**. En el plano de
+> ingresos no la hay y se **construye**: semántica legal (expediente, tarifario, UTBMS, cuenta de
+> terceros, plazo) **encima de un espinazo genérico Apache-2.0**. Forkear el producto legal AGPL es
+> la opción que parece ahorrar trabajo y es la que cierra la puerta al entregable comercial.
+
+### Cómo customizar con AI esta capa — y dónde NO poner el modelo
+
+El orden importa y está medido, no supuesto (`billing-lint` lo documenta en su README y esta KB lo
+recoge en `agents/trending.md`): **la revisión por LLM en lote es inconsistente** — el mismo defecto
+se marca en una línea y pasa callado en otra, y dos ejecuciones se contradicen.
+
+1. **Determinista primero.** Aritmética, formato LEDES 1998B, códigos UTBMS, topes y tarifas: reglas.
+   Reproducible al céntimo, ejecutable en CI, sin coste por token. → `billcheck` + `billing-lint`.
+2. **NLP clásico para cribar.** Clasificadores calibrados y NER contra el listado de personal del
+   despacho reducen a una fracción las líneas que merecen juicio.
+3. **El modelo sólo donde cabe un juicio**, y **siempre citando la entrada literal**; un verificador
+   descarta toda decisión cuya cita no se compruebe. → receta completa en `P29`.
+4. **La persona decide.** *Block billing*, narrativa vaga, trabajo administrativo: propuestas, nunca
+   ajustes automáticos. Es el mismo *human gate* que esta KB ya exige en el plano del producto.

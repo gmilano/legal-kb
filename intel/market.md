@@ -447,6 +447,82 @@ contenido alucinado en todo el mundo, **~90% de ellas escritas en 2025**. Compos
 > dominios permitidos). El contador de ~712 llega por **prensa secundaria**, no por la fuente
 > primaria, y las cifras de composición proceden de un único reportaje. Se publica con esa marca:
 > es un **orden de magnitud verificado por varias fuentes secundarias**, no una lectura directa.
+#### 🆕 PASE 8 (2026-11-22) — **el único KPI que la AI no mejoró en 2026 es el que no tiene herramienta permisiva**
+
+Clio publicó su *Legal Trends Report* el **2026-10-26** (11.ª edición). Los tres indicadores del
+ciclo de ingresos, juntos, dicen algo que ninguna de las coberturas de prensa recogió:
+
+| KPI del despacho | 2025 | 2026 | Movimiento |
+|---|---|---|---|
+| **Utilización** (del día de 8 h) | 39% | **42%** (~3,4 h/día) | ▲ **la mayor subida interanual en 11 ediciones** |
+| **Realización** (lo facturado sobre lo registrado) | 88% | **90%** (~3,0 h/día) | ▲ |
+| **Cobro** (*collection*, lo cobrado sobre lo facturado) | 93% | **92%** (~2,8 h/día) | 🔻 **baja** |
+
+> 🔑 **La AI subió las horas que se registran y las que se facturan, y el porcentaje que
+> efectivamente se cobra bajó un punto.** El titular del sector es «récord de horas facturables»; el
+> dato que nadie comentó es que **el último tramo del embudo, el único que convierte trabajo en
+> caja, se movió en la dirección contraria** — y es exactamente el tramo donde esta KB acaba de medir
+> que no existe ninguna herramienta permisiva (`total_count = 0` para facturación legal, `0` para
+> UTBMS, `6` para LEDES). Una factura se recorta o se devuelve por narrativa vaga, *block billing*,
+> aritmética que no cuadra o códigos inválidos: los cuatro defectos que `billing-lint` y `billcheck`
+> detectan de forma determinista.
+
+Contexto del mismo periodo, con la fuente marcada porque son datos de parte:
+
+- **Citi** (banca de despachos): horas facturables **+4,2% en el primer semestre de 2026**, frente a
+  un histórico de 1,5–2%; tarifas **+9,6%** en el sector y **+10,4%** en el Am Law 50.
+- **Deloitte** (encuesta a directivos legales): esperan que la proporción de trabajo facturado por
+  hora caiga del **72% al 44% en dos o tres años**. Es expectativa declarada, no dato de facturación.
+- **Clio**: ~1 de cada 5 despachos con adopción amplia de AI declara **dificultad para alcanzar sus
+  objetivos de horas facturables**. Y los despachos que usan sus dos productos registran +10% de
+  ingreso por abogado responsable y +6,5% de horas — **investigación de proveedor sobre su propio
+  producto, asociación y no causalidad**, declarado por la propia Clio.
+
+**Las dos lecturas conviven y las dos se publican:** la presión sobre la hora facturable es real en
+las *expectativas* y aún no aparece en la *facturación*. Lo que no está en disputa es el cobro.
+
+#### ⚖️ Y la cara de la regulación que esta KB no había mirado: **la ética de la AI legal es, antes que nada, una regla de facturación**
+
+Siete pases leyeron el riesgo ético de la AI legal como un problema de **citas alucinadas**. La
+opinión más citada del sector regula otra cosa: **la minuta**.
+
+- **ABA Formal Opinion 512** (29-jul-2024): bajo facturación horaria **sólo se factura el tiempo
+  efectivamente empleado**. Redactar el prompt, revisar y verificar la salida **es** tiempo
+  facturable; el tiempo *ahorrado* no lo es. Una **tarifa plana puede volverse irrazonable** bajo la
+  Regla 1.5 si la AI comprime el trabajo muy por debajo de lo que la tarifa suponía. El tiempo de
+  **aprender** una herramienta de uso general **no se repercute** salvo petición expresa del cliente.
+  Y el **coste de la herramienta** requiere acuerdo previo, preferiblemente escrito.
+- La misma línea, de forma independiente, en **California State Bar** (guía de AI generativa),
+  **Texas Op. 705**, **North Carolina 2024 FEO 1** y **D.C. Op. 388**: no se facturan horas no
+  empleadas. **Virginia LEO 1901** añade un matiz sobre acuerdos de honorarios alternativos que
+  **este pase no pudo verificar en la fuente primaria** y se publica marcado como tal.
+
+> 🔑 **El reencuadre comercial, y es el más fuerte de las ocho pasadas:** la superficie de
+> cumplimiento de la AI legal tiene **dos caras — el escrito y la factura — y esta KB sólo había
+> catalogado la primera**. La diferencia es de alcance: la verificación de citas sólo muerde donde
+> hay citas (litigio), mientras que **todo asunto emite factura**, incluido el transaccional, el
+> regulatorio y el corporativo. **La factura es la única superficie de cumplimiento que toca el 100%
+> de los expedientes**, y es la que hoy no tiene con qué auditarse.
+
+Lo ya vinculante y no discutible en el resto del eje norteamericano, revalidado este pase: **Indiana**
+—desde el 1-ago-2026 la firma del escrito certifica que la autoridad citada es auténtica—;
+**Connecticut** —Practice Book §4-9, verificación independiente de citas con AI generativa, desde el
+23-jun-2026—; **North Dakota** —el uso no está prohibido y el firmante responde del resultado—.
+En el plano estatal general: **Illinois** (AI en decisiones de empleo, 1-ene-2026), **Texas TRAIGA**
+(1-ene-2026, con el Fiscal General como ejecutor) y **California SB 942** (AI Transparency Act,
+2-ago-2026) están en vigor. Federalmente **sigue sin haber estatuto integral**; lo que hay es una
+orden ejecutiva, un marco de marzo-2026 que empuja la preempción y un borrador bipartidista de
+discusión de junio-2026 que suspendería tres años las leyes estatales de desarrollo — **ninguno es
+derecho vinculante**. Los recuentos de actividad legislativa no se reconcilian entre rastreadores
+(29 estados con legislación de AI a mitad de 2026; 1.561 proyectos en la sesión de 2026 a marzo) y
+se publican como órdenes de magnitud.
+
+⚠️ **Conflicto abierto por tercer pase, Colorado.** La KB de *gaming* dio su ley por muerta; el pase
+7 la registró aplazada al 30-jun-2026; este pase encuentra fuentes que dicen que fue **derogada y
+sustituida por SB 189 en mayo-2026** y otras que la llaman **SB 26-189 con efecto 1-ene-2027**. **No
+se elige lectura**: se publican las tres y se marca como el punto del mapa normativo estadounidense
+donde las fuentes secundarias son menos fiables.
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -689,6 +765,44 @@ Para Globant en EMEA eso significa que el argumento no es sólo «te evito la mu
 dinero público persiguiendo despliegues europeos»** — y un stack permisivo y self-hosted
 (`opencaselaw` CH, `ayunis-legal-mcp` DE, `mcp-legal-it` IT, `kancelaria-lex` PL) es exactamente la
 forma que ese dinero busca financiar.
+#### 🆕 PASE 8 (2026-11-22) — **quedan 10 días** para el marcado, y la brecha genérico/especialista tiene por fin su número más duro
+
+**Calendario post-Omnibus: quinta corroboración consecutiva ⇒ se da por estable y deja de
+reverificarse cada pase.** Reglamento (UE) **2026/1744** de 8-jul-2026, publicado en el DOUE el
+24-jul y en vigor desde el **27-jul-2026**: aplaza las obligaciones de alto riesgo a **2027 y 2028**;
+la **transparencia se aplica desde el 2-ago-2026**; y el **marcado legible por máquina del contenido
+generado por sistemas ya en el mercado vence el 2-dic-2026 — diez días desde hoy.**
+
+**Y el dato de adopción que esta KB llevaba cinco pases persiguiendo, ahora con numerador y
+denominador europeos:**
+
+| Medición (EMEA, 2026) | Valor |
+|---|---|
+| Abogacía *in-house* europea que usa AI | **61% — la tasa más alta del mundo, por encima de EE. UU.** |
+| Departamentos legales europeos que usan herramientas **genéricas** (ChatGPT y similares) | **56%** |
+| Departamentos legales europeos con **AI legal especializada** implantada | **14%** |
+
+> 🔑 **Es la confirmación más limpia de `T-P5-2` («el competidor no es Harvey, es ChatGPT dentro del
+> despacho») y llega desde la región con la regulación más exigente.** Cuatro de cada cinco
+> departamentos que ya usan AI lo hacen con una herramienta que **no puede documentar nada** — justo
+> donde el AI Act exige documentar. No hay que convencer a nadie de adoptar AI: **hay que sustituir
+> una adopción que ya ocurrió y que no se puede auditar**, y ahora con una fecha encima.
+
+Corolario medido y vendible: **la mayoría de los despachos españoles no tiene un rastro de auditoría
+sistemático de su uso de AI** pese a una adopción alta. Y la primera obligación que alcanza a un
+despacho no es técnica sino organizativa: **alfabetización en AI** (Art. 4). Del lado de los
+proveedores, el mercado ya se ordena por eso: se compite menos en capacidad del modelo y más en
+**poder demostrar cumplimiento** a un cliente averso al riesgo. Harvey y Legora suman ~**16.500 M
+USD** de valoración conjunta y Harvey declara al **50% del Am Law 100**.
+
+**Para el plano de ingresos, específicamente:** LEDES y UTBMS son estándares de origen
+estadounidense y su penetración en EMEA es desigual — el *e-billing* del panel de despachos sí los
+usa en corporaciones multinacionales, pero la facturación doméstica va por la factura electrónica
+fiscal de cada país. **Lo que sí transfiere íntegro es el rastro de auditoría**: la misma pieza que
+registra qué herramienta de AI intervino en cada entrada de tiempo (`P30`) sirve a la vez para la
+Regla 1.5 norteamericana y para el expediente documental del AI Act. **Una construcción, dos
+regímenes** — y ese es el argumento que convierte una obligación europea en un activo reutilizable.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -918,6 +1032,45 @@ calendarizado, no ausente**, y empieza a partir de 2027.
 > artículo que lo transporta contiene además pasajes **confusos y verificablemente poco fiables**.
 > Se publica **marcado**: la cifra es plausible y coherente con el 94% de LexisNexis, pero **no se
 > apoya ninguna recomendación en ella** hasta leer el informe original.
+#### 🆕 PASE 8 (2026-11-22) — Singapur publica **la primera guía de AI generativa específica del sector legal de la región**, y es una lista de comprobación
+
+**Ministry of Law de Singapur, *Guide for Using Generative AI in the Legal Sector*, 6-mar-2026.**
+Tres principios —**ética profesional, confidencialidad, transparencia**— y un **marco de implantación
+de cinco pasos**.
+
+> 🔑 **Por qué importa más que una ley:** Singapur **no tiene estatuto vinculante de AI** (opera con
+> el Model AI Governance Framework y AI Verify; la MAS está consultando sus *AI Risk Management
+> Guidelines*). Eso convierte a esta guía en **el documento que un cliente singapurense usará como
+> criterio de compra**, y es un documento **corto, sectorial y accionable** — es decir, algo contra lo
+> que un entregable se puede mapear punto por punto en una propuesta. En una región donde la KB ya
+> midió la brecha de gobernanza (**94% usa AI, 58% bajo política ⇒ 36% de uso descubierto**), un
+> marco de cinco pasos es exactamente el artefacto que cierra esa brecha.
+
+Resto del mapa, con fecha y con los conflictos a la vista:
+
+- **Japón**: *AI Promotion Act* aprobada el 28-may-2025, en vigor el 4-jun-2025 — **ley marco sin
+  sanciones**. El **segundo AI Basic Plan** lo aprobó el Gabinete el **14-jul-2026**: documento de
+  estrategia, no norma.
+- **India**: en **julio de 2026** el Gobierno señaló que podría impulsar legislación específica de AI.
+  Lo vinculante hoy sigue siendo protección de datos: **DPDP** y sus reglas, notificadas en
+  noviembre de 2025 con obligaciones escalonadas **hasta mayo de 2027**. ⚠️ Las fuentes se
+  contradicen sobre el estatus legislativo; se toma la más reciente y se marca.
+- **Corea del Sur**: el **único régimen general obligatorio** de la región. ⚠️ Las fechas no
+  concuerdan entre fuentes (22-ene-2026 frente a «a lo largo de 2026»). Se mantiene lo que el pase 7
+  midió y que ninguna fuente contradice: **2026 es año piloto con un año de gracia sancionadora ⇒ la
+  ventana barata se cierra en 2027**.
+- **Taiwán**: *AI Basic Act*, 14-ene-2026 (incorporado en el pase 7; esta KB ya tenía dos activos allí).
+- Adopción declarada por proveedor y **sin verificar**: uso de AI generativa entre *general counsel*
+  del **44% (2025) al 87% (2026)**. Se publica marcado.
+
+**Para el plano de ingresos:** APAC es la región donde el eje de **cuentas de terceros** es más
+exigente y menos cubierto — las reglas de *client account* de Singapur, Hong Kong y Australia imponen
+controles de conciliación que ninguno de los cinco espinazos permisivos trae de serie. El activo que
+este pase incorpora (`aderant-legal-billing`, MIT) declara explícitamente su origen de diseño en los
+flujos de *legal business management* del mercado ANZ/APAC, con impuesto tipo GST y libros de cliente
+que no pueden quedar en descubierto. **Es el único activo del plano de ingresos de esta KB cuyo
+modelo de datos encaja de origen con una jurisdicción de APAC.**
+
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -1255,6 +1408,50 @@ porque una multa concreta vende servicios. Es el mismo patrón que el pase 6 doc
 fuentes indexadas que un pase futuro encontrará antes que la verdad.** Regla: para estado
 legislativo en LATAM, **sólo cuenta la cámara correspondiente** (Senado/Câmara, DOF/Cámara de
 Diputados) o la orden profesional (OAB, Barra Mexicana). Un blog de compliance **no es un canal**.
+#### 🆕 PASE 8 (2026-11-22) — **hueco informado**: el plano de ingresos no tiene ningún activo LATAM, y la razón hace el hueco más pequeño de lo que parece
+
+**Lo que se buscó y no se encontró, dicho explícitamente** (porque un hueco medido es información y
+el silencio se lee como cobertura): se consultaron `LEDES`, `LEDES invoice`, `UTBMS`,
+`UTBMS task codes`, `trust accounting IOLTA`, `legal timekeeping billable hours` y
+`legal practice management` filtrando por origen regional. **Cero activos con anclaje en América
+Latina en todo el plano de ingresos.** Ninguno de los cinco espinazos permisivos
+(Kill Bill, FOSSBilling, InvoicePlane, Kimai, InvoiceShelf) es de origen latinoamericano.
+
+> 🔑 **Y la razón por la que este hueco vale menos que los que esta KB ha declarado antes:** LEDES y
+> UTBMS son estándares **de origen estadounidense**, nacidos del *e-billing* entre corporación y
+> panel de despachos. En LATAM el equivalente funcional no es un estándar sectorial: es la
+> **factura electrónica fiscal de cada país** —CFDI en México, NF-e/NFS-e en Brasil— más la práctica
+> de honorarios de cada foro. **Portar LEDES a LATAM es el trabajo equivocado.** El trabajo correcto
+> es el inverso: la semántica legal (expediente, tarifario, código de tarea, cuenta de terceros,
+> plazo) **sí transfiere**, y se monta sobre el emisor fiscal que el despacho ya está obligado a usar.
+> Un pase futuro que encuentre «no hay LEDES en LATAM» debe leer esto antes de declararlo hueco.
+
+**Dónde sí está ya la obligación que alcanza al abogado** (y se confirma lo que midió el pase 7): la
+norma que muerde **no es una ley de AI**. La **Barra Mexicana** publicó a finales de 2025 **las
+primeras guías formales de la región** para el uso responsable de AI en la práctica jurídica, y
+**Chile y Argentina** han emitido orientaciones similares. En Brasil se sanciona por el Estatuto da
+Advocacia y por litigância de má-fé sin necesidad de ningún calendario legislativo. ⇒ **La
+verificación de cita y el rastro de auditoría se venden hoy como cobertura de una responsabilidad ya
+vigente**, no como anticipación regulatoria.
+
+Estado legislativo, con el desacuerdo a la vista:
+
+- **México**: **sin ley general de AI**. Lo que hay son reformas **sectoriales** (Ley Federal del
+  Trabajo, Ley Federal del Derecho de Autor, y una reforma educativa en el Estado de México).
+- **Brasil**: **PL 2.338/2023 aprobado por el Senado**, descrito por los analistas regionales como el
+  caso más avanzado **y el más complejo**. Sigue sin ser ley.
+
+🔴 **Patrón de desinformación, tercer pase consecutivo y ya es una constante de esta región.** Una
+guía de cumplimiento para empresas afirma que **Brasil y México ya tienen ley de AI activa**. Es
+falso en ambos casos. Esta KB lo registra por tercera vez porque la fuente errónea **está mejor
+indexada que la correcta**: un pase futuro la encontrará antes que la verdad.
+
+**Dato de demanda, de proveedor y marcado como tal:** LemonTech estima que tareas como revisión de
+jurisprudencia o redacción de contratos que consumían **hasta 15 horas semanales** se resuelven en
+minutos con herramienta especializada. Y el contrapeso, medido por **Stanford RegLab**: las
+herramientas jurídicas comerciales (Lexis+ AI, Westlaw) **alucinan entre el 17% y el 33%** — que es
+la razón por la que el ahorro sólo es facturable si va acompañado del rastro que lo respalda.
+
 ## Hueco de producto transversal (las cuatro regiones)
 
 No existe un **"Odoo de los despachos legales"**: no se halló plataforma de *practice management*

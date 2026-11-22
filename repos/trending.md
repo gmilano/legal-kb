@@ -9,6 +9,66 @@ updated: 2026-11-22
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-22 (pase 8) — el espinazo permisivo del plano de ingresos **existe y es genérico**
+
+El pase 8 abre la capa de facturación, plazos y cuentas de terceros (ver `agents/trending.md` para
+los agentes y `G-L17` para el fallo de canal que la mantenía invisible). Por el lado de
+**infraestructura** el resultado es inverso al de los agentes: aquí no falta madurez, falta
+**semántica legal**.
+
+### Infraestructura añadida este pase — el espinazo sobre el que se construye
+
+| Repo | Licencia (leída byte a byte) | Stars | Último commit | Qué aporta al plano de ingresos |
+|---|---|---|---|---|
+| [killbill/killbill](https://github.com/killbill/killbill) | **Apache-2.0 (11.357 B)** | 5.862 | 2026-11-21 | Plataforma de facturación y pagos, **14 años de vida**, 990 forks. Catálogos, planes, prorrateos, impuestos, *dunning*, plugins de pago. La base permisiva más madura de toda esta capa |
+| [FOSSBilling/FOSSBilling](https://github.com/FOSSBilling/FOSSBilling) | **Apache-2.0 (11.454 B)** | 1.757 | 2026-11-20 | Facturación + clientes + órdenes en PHP, con sistema de módulos. Alternativa más ligera a Kill Bill cuando el despacho es la unidad y no hay volumen de suscripción |
+| [InvoicePlane/InvoicePlane](https://github.com/InvoicePlane/InvoicePlane) | **MIT** dentro de fichero compuesto (5.087 B) — GitHub lo da como `NOASSERTION` | 3.290 | 2026-11-18 | Presupuestos → facturas → pagos, autoalojado. Ver abajo: la marca está restringida, **el código no** |
+| [kimai/kimai](https://github.com/kimai/kimai) | **AGPL-3.0 (34.523 B)** ⚠️ | 5.173 | **2026-11-22** | El registro de tiempos open source de referencia: *timesheets*, tarifas por proyecto/actividad/usuario, export de facturas, API. ⚠️ Copyleft de red: sirve como **herramienta interna del despacho**, no como componente de un SaaS cerrado |
+| [InvoiceShelf/InvoiceShelf](https://github.com/InvoiceShelf/InvoiceShelf) | **AGPL-3.0 (34.523 B)** ⚠️ | 2.075 | 2026-11-22 | Facturación autoalojada (fork mantenido del linaje Crater). Misma advertencia de copyleft |
+
+**Ninguno de los cinco sabe qué es un expediente, un código UTBMS, un plazo procesal ni una cuenta
+de terceros.** Esa es exactamente la distancia que hay que construir, y es la razón de que
+`P28`–`P30` existan.
+
+### 🧮 El checksum de licencias (932-G1) rindió 11/11, y afinó la banda AGPL a **una constante**
+
+Tres lecturas AGPL-3.0 en repos sin relación —`kimai`, `deedbox-app` y
+`DoGood-Studio/legal-deadline-calculator`— dan **34.523 B exactos las tres**. La banda Apache quedó
+en 11.350–11.454 B (3 lecturas) y la MIT en 1.056–1.080 B (7 lecturas). Detalle en
+`repos/foundations.md`.
+
+### 🔁 `NOASSERTION`, tercera vez consecutiva — y el modo de fallo es nuevo: **el aviso de marca va primero**
+
+`InvoicePlane` abre su `LICENSE.txt` con las restricciones de uso del nombre y el logotipo, y sólo
+después incluye el texto MIT íntegro. El clasificador de GitHub lee el principio del fichero y se
+rinde. **Restricción de marca ≠ restricción de código:** no se puede redistribuir *bajo el nombre*
+InvoicePlane; todo lo demás que MIT permite, se puede. La regla asimétrica de bandas predijo
+«compuesto» antes de abrir el fichero (5.087 B ≫ banda MIT) y acertó por tercer pase seguido.
+
+### 🧮 Censo de URLs de este pase
+
+**24 slugs** consultados por `search/repositories` + `ls-remote` + lectura de `LICENSE`:
+**21 resuelven**, **1 devuelve 422** (`emirmrkaljevic/awesome-legal-tech`, indexado por el buscador
+web y **inexistente** por el canal de GitHub), **2 existen sin fichero de licencia en 5/5 rutas**
+(`Iuris-Soft`, `legal-invoice-review-agents` — descartados por ausencia *medida*, que es el único
+descarte legítimo según la regla del pase 6). **0 archivados.** 1 dormancia relevante y publicada:
+`OpenLawOffice`, Apache-2.0, **sin commits desde 2016-04-10**.
+
+### 🔌 Estado de los canales en esta sesión
+
+Idéntico al medido en los pases 6 y 7, y se vuelve a escribir porque **cambia entre sesiones**:
+
+- ✅ `gh api -X GET search/repositories -f q='repo:<slug>'` — estrellas, SPDX, `pushed_at`,
+  `archived` y forks en una llamada. **422 para slug renombrado y para inexistente por igual.**
+- ✅ `git ls-remote https://github.com/<slug>` — recuento de refs: el único canal de existencia
+  fiable (`0` = no existe) y el único que detecta renombrados por identidad de HEAD.
+- ✅ `curl raw.githubusercontent.com/<slug>/HEAD/<ruta>` — 200/404 discrimina correctamente. **Es el
+  canal de lectura de licencia**, y el único que distingue `NOASSERTION` de «sin licencia».
+- 🔴 `curl -sI https://github.com/<slug>` — **403 para todo** a través del proxy: repos vivos,
+  renombrados e inexistentes por igual. **La comprobación de URL que prescribe el brief sigue
+  llevando cero información en este entorno.** Cuarto pase consecutivo que lo mide.
+- 🔴 `gh api repos/<o>/<n>` — 403 (ámbito de sesión).
+
 ## 🆕 2026-11-22 (pase 7) — lo que se movió no fue el caudal de repos nuevos: fue la **licencia de uno viejo**
 
 ### El caudal de creación sigue seco, y ahora está medido dos pases seguidos

@@ -496,3 +496,62 @@ libre de las que te manda instalar:
 > **>1.200** tareas al lanzamiento (mayo-2026) → **1.749** (leaderboard de Mercor) → **2.010** hoy.
 > Un benchmark que crece un 67% en seis meses es un **compromiso sostenido**, no un lanzamiento de
 > marketing. Esta KB lo había perdido durante **seis pases**: se publicó en mayo y nadie lo citó.
+
+---
+
+## 🆕 PASE 8 (2026-11-22) — **LA CAPA DE ESTÁNDARES DEL NEGOCIO JURÍDICO**, y una de las tres es MIT
+
+Esta KB tenía la capa de **corpus** (jurisprudencia, legislación, benchmarks) y la capa de
+**parsing**. No tenía la capa de **estándares de datos del negocio**: los formatos y taxonomías con
+los que un despacho y su cliente intercambian expedientes y facturas. Son tres, y su estado de
+apertura es radicalmente distinto:
+
+| Estándar | Qué normaliza | Quién lo mantiene | Estado open source, medido 2026-11-22 |
+|---|---|---|---|
+| **SALI LMSS** | **Taxonomía de materia**: área de derecho, tipo de asunto, industria, rol, >18.000 etiquetas con IRI única | SALI Alliance™ | ✅ **MIT, en GitHub, 92★** — ver fila abajo |
+| **LEDES 1998B** | **Factura legal**: ASCII delimitado por `\|`, 24 campos | LEDES Oversight Committee | ⚠️ Especificación abierta, **implementaciones casi inexistentes**: `total_count=6` para `LEDES legal billing`. Documentación del formato revisada por última vez en 2014 |
+| **UTBMS** | **Códigos de tarea y actividad** que lleva cada línea de la factura | UTBMS / ABA‑ACCA | 🔴 **`total_count = 0`**. El codelist que valida toda factura legal **no tiene ninguna implementación open source**. `billing-lint` valida contra él, pero embebe su propia copia |
+
+> 🔑 **La lectura que importa:** los tres son estándares *abiertos* y sólo uno es *software* abierto.
+> Esta KB venía midiendo la apertura de **repos**; aquí la unidad que decide si un entregable es
+> interoperable es el **estándar**, y un estándar puede estar publicado y aun así no tener con qué
+> ejecutarlo. **Especificación abierta ≠ implementación disponible**, y la distancia entre las dos
+> es exactamente el trabajo que se factura.
+
+### Activo fundacional nuevo
+
+| Repo | Licencia (leída) | Región | Qué aporta | Stars | Último commit |
+|---|---|---|---|---|---|
+| [sali-legal/LMSS](https://github.com/sali-legal/LMSS) | **MIT (1.073 B, © 2022 SALI Alliance™)** | Global | **La ontología de materia del sector, en abierto y permisiva.** `LMSS.owl`, XML/OWL, **más de 18.000 etiquetas**, cada una con su IRI. Esos mismos IRI son los identificadores del **SALI API standard** (`sali-legal/api`, `SALI_API.yml`), de modo que es a la vez taxonomía y contrato de interfaz. 31 refs. | 92 | 2026-03-10 |
+
+**Por qué entra en `foundations` y no en `agents`:** no hace nada por sí sola. Es la pieza que hace
+que *expediente*, *factura*, *panel de despachos* y *analítica de gasto* hablen del mismo asunto —
+el equivalente funcional a lo que un esquema de códigos es en salud o en finanzas. Sin ella, cada
+integración de facturación legal reinventa su propia tabla de materias y **ninguna cruza con la del
+cliente**. Con ella, el eje por el que se agrega el gasto legal es un identificador estable y
+público, y eso es precondición de cualquier analítica vendible.
+
+### 🧮 Confirmaciones del checksum de licencias (932-G1) en este pase — 11 lecturas, 11 aciertos de banda
+
+- **Banda MIT (≈1.056–1.084 B), 7 lecturas:** `sali-legal/LMSS` 1.073 · `billcheck` 1.080 ·
+  `aderant-legal-billing` 1.071 · `billing-lint` 1.070 · `claude-court-deadline-reasoning` 1.067 ·
+  `mycase-mcp` 1.065 · `lawyered-matter-tracker` 1.056 B.
+- **Banda Apache-2.0 (≈11.284–11.454 B), 3 lecturas:** `killbill` 11.357 · `FOSSBilling` 11.454 ·
+  `OpenLawOffice` 11.350 B (`LICENSE.txt`, con BOM inicial).
+- **Banda AGPL-3.0, 3 lecturas y el dato más limpio del pase:** `kimai`, `deedbox-app` y
+  `legal-deadline-calculator` miden **34.523 B exactos, los tres**, en repos sin relación entre sí.
+  La banda AGPL no es un intervalo: es **una constante**, porque nadie edita ese texto.
+
+### 🔁 `NOASSERTION` — tercera confirmación consecutiva, y el modo de fallo es nuevo
+
+`InvoicePlane/InvoicePlane` (3.290★): GitHub dice `NOASSERTION`. La regla asimétrica de bandas
+predijo **composite** antes de abrir el fichero (5.087 B, muy por encima de la banda MIT). Al
+leerlo, la causa es específica y no estaba catalogada: **el fichero abre con un aviso de marca**
+—restricciones de uso del nombre y el logotipo «InvoicePlane»— y sólo después, bajo el encabezado
+`License for InvoicePlane`, viene el texto **MIT íntegro** (© 2012‑2014 InvoicePlane.com).
+
+> **Modo de fallo: el clasificador lee el principio del fichero.** Un `LICENSE` que antepone marca,
+> atribución o aviso de terceros al texto de la licencia se clasifica como `NOASSERTION` **aunque la
+> concesión sea impecable**. Las restricciones de marca **no son restricciones de código**: no se
+> puede redistribuir *bajo el nombre* InvoicePlane, y se puede hacer todo lo demás que MIT permite.
+> Tercer pase consecutivo en que `NOASSERTION` resulta ser una licencia utilizable.
