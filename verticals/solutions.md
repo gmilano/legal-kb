@@ -598,3 +598,61 @@ la plataforma copyleft que ya la tiene.
 - **Dónde sí:** redacción de memoria y reivindicaciones (APAC ya lo tiene resuelto bajo MIT),
   clasificación CPC/IPC propuesta, cribado de estado de la técnica, y traducción de la prosa de un
   dictamen de oficina a tareas con fecha.
+
+---
+
+## 🆕 PASE 13 (2026-11-25) — la vertical de **admisión y cumplimiento del despacho**: plataformas reales, y la más popular está archivada
+
+Patrón «Odoo» aplicado a este plano: **sistemas reales y personalizables**, no librerías. Lo que
+cambia respecto de los planos jurídicos anteriores es que aquí **sí hay producto permisivo vivo**,
+porque viene del mundo del cumplimiento financiero, no del despacho.
+
+| Plataforma | Licencia (leída) | ★ | `pushed_at` | Qué es, y para qué sirve encima |
+|---|---|---|---|---|
+| [tazama-lf/case-management-system](https://github.com/tazama-lf/case-management-system) | Apache-2.0 (11.357 B) | 12 | 2026-11-24 | **Tazama, proyecto de la Linux Foundation**: sistema de gestión de casos e investigación para monitorización transaccional en tiempo real. Gobernanza de fundación ⇒ la licencia no cambia de dueño. **La base recomendada para la cola de revisión humana** |
+| [opensource-finance/osprey](https://github.com/opensource-finance/osprey) | Apache-2.0 (11.254 B) | 4 | 2026-11-24 | Motor de monitorización autoalojado con reglas en **CEL** (Common Expression Language) y **12 reglas de arranque inspiradas en FATF**. CEL es declarativo y auditable: una regla se lee en una línea y se versiona en git |
+| [StephenAbbott/opencheck](https://github.com/StephenAbbott/opencheck) | MIT (1.262 B) | 26 | 2026-11-25 | Aplicación completa de debida diligencia (backend con despacho *cache-first* + Docker). **La plataforma de admisión de este plano**, y la única que habla CUIT/RUC/CNPJ/NIT de serie |
+| [kamlon10/Sanctions-Screening-Public-Project](https://github.com/kamlon10/Sanctions-Screening-Public-Project) | MIT (1.073 B) | 0 | 2025-08-16 | **Cribado de sanciones 100% local**: descarga y consolida OFAC + ONU + UE + Reino Unido en un SQLite, búsqueda difusa (`TheFuzz`), filtros por fecha de nacimiento, nacionalidad y documento, umbral de sensibilidad ajustable, export CSV. **Interfaz en 7 idiomas, español incluido, con soporte RTL** |
+| [itsmrgeoffrey/FMS](https://github.com/itsmrgeoffrey/FMS) | Apache-2.0 (11.358 B) | 3 | 2026-11-01 | Monitorización + puntuación de riesgo AML con gestión de casos y **rastro de auditoría** por estados (abierto, en revisión, confirmado, descartado, escalado) |
+| [priyankapriyanka3/aml-transaction-monitoring](https://github.com/priyankapriyanka3/aml-transaction-monitoring) | Apache-2.0 (11.357 B) | 0 | 2026-11-23 | Alertas basadas en riesgo, flujos de decisión del oficial de cumplimiento, reglas configurables y **seguimiento de auditoría inmutable** |
+| [jube-home/aml-fraud-transaction-monitoring](https://github.com/jube-home/aml-fraud-transaction-monitoring) | **AGPL-3.0** | 116 | 2026-11-18 | **Jube.** El producto más maduro de la categoría y el más estrellado que sigue vivo. **AGPL-3.0: inservible como entregable comercial cerrado**, excelente como referencia de arquitectura |
+
+### 🪦 La plataforma más popular del plano está **archivada**
+
+| Plataforma | Licencia (leída) | ★ / forks | Estado medido |
+|---|---|---|---|
+| [ballerine-io/ballerine](https://github.com/ballerine-io/ballerine) | **COMPUESTA** (5.552 B, varias licencias por obra) | 2.455 / 319 | 🪦 `archived: true`, último push 2026-11-19 |
+
+Era el orquestador **KYC/KYB** open source de referencia: panel de gestión de casos, flujos de
+aprobación manual y revisiones KYC/KYB. Su propio `LICENSE` abre reconociendo que *«el monorepo usa
+múltiples licencias; la licencia de una obra concreta se define con las siguientes reglas
+priorizadas»* — es decir, **la licencia depende del subdirectorio**, y encima el repo ya no se
+mantiene. Es simultáneamente el activo con más estrellas del plano y el menos utilizable.
+
+**Lo que esto significa para un engagement**: no existe hoy un orquestador de onboarding permisivo,
+vivo y mantenido. Hay **librerías excelentes** (la pila MIT de OpenSanctions), **motores de reglas
+permisivos y vivos** (Osprey, Tazama) y **una aplicación de debida diligencia permisiva y viva**
+(`opencheck`). El orquestador es lo que se construye; el resto se adopta.
+
+### 🚧 El hueco de este plano, medido y nombrado: **no hay muro ético permisivo**
+
+Censo en los ocho ficheros antes de este pase y búsqueda específica después:
+`ethics wall` **0** · `information barrier` **0** · `muralla china` **0**.
+
+La **separación de información** entre equipos del mismo despacho que actúan para partes
+enfrentadas no es una buena práctica: es el mecanismo que permite aceptar un asunto con conflicto
+consentido sin incumplir el deber de confidencialidad. No apareció **ningún** activo open source
+—ni permisivo ni copyleft— que implemente barreras de información sobre un repositorio documental.
+
+Y es el hueco más cercano a lo que Globant ya construye: **control de acceso por asunto sobre un
+gestor documental** es ingeniería de permisos corriente, no AI. Se registra como hueco explícito y
+**como la vía de entrada más barata del plano**, no como una carencia del catálogo.
+
+### 🗑️ Descartado en esta capa, con la medición
+
+- **`AnChainAI/aml-mcp`** (AGPL-3.0, 3★, dormido desde 2025-09-04): copyleft fuerte **y** requiere
+  cuenta de API de pago. Dos bloqueos independientes.
+- **`velbon/aml-fraud-transaction-monitoring`** (AGPL-3.0, 34.522 B leídos): es un **fork de Jube**.
+  Se prefiere el original `jube-home`, que está vivo. Caso de canal interesante: ver
+  `repos/trending.md` → estado de canales.
+- **`Clayton0818/Legal-intake-engine`**: **renombrado**, no muerto. Ver `repos/trending.md`.

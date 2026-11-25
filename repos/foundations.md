@@ -798,3 +798,145 @@ más software que `kind-codes` (MIT, 11★, 2 refs, sin commits desde 2024). Per
 
 La regla que generaliza: **en un plano regulado, el activo fundacional suele ser la tabla de
 significados, no el programa.** Mismo papel que `SALI LMSS` (MIT, 92★) en el plano de la factura.
+
+---
+
+## 🆕 PASE 13 (2026-11-25) — el espinazo de la **admisión del cliente**: una organización MIT completa, y el dato comercial está en los DATOS, no en el código
+
+### 1. La pila de cribado de entidades de OpenSanctions — **MIT de arriba a abajo, y toda viva**
+
+| Repo | Licencia (leída) | ★ | `pushed_at` | Qué resuelve |
+|---|---|---|---|---|
+| [opensanctions/followthemoney](https://github.com/opensanctions/followthemoney) | MIT | 122 | 2026-11-20 | **La ontología.** Modelo de datos tipado de personas, empresas, cargos, participaciones y vínculos. Es el esquema del que dependen todos los demás |
+| [opensanctions/nomenklatura](https://github.com/opensanctions/nomenklatura) | MIT (1.126 B) | 274 | 2026-11-24 | **Resolución de entidades**: deduplicación, agrupación por identidad y almacenamiento de *statements* con **linaje de dato completo** (qué fuente afirmó qué, y cuándo) |
+| [opensanctions/yente](https://github.com/opensanctions/yente) | MIT (1.092 B) | 189 | 2026-11-25 | **La API de cotejo**, autoalojable. Es el componente que un despacho puede correr dentro de su perímetro |
+| [opensanctions/rigour](https://github.com/opensanctions/rigour) | MIT | 74 | 2026-11-23 | Limpieza y validación de nombres de persona y empresa, direcciones, códigos de país e **identificadores fiscales y corporativos**. **Sustituye a `fingerprints`** |
+| [opensanctions/countrynames](https://github.com/opensanctions/countrynames) | MIT | 71 | 2026-07-16 | Nombre de país en cualquier idioma → código ISO. Suena trivial; es el fallo de cotejo más común en datos iberoamericanos |
+| [opensanctions/yente-client](https://github.com/opensanctions/yente-client) | MIT (1.087 B) | 3 | 2026-11-23 | Librería cliente, SDK y CLI contra `yente` |
+| [opensanctions/datapatch](https://github.com/opensanctions/datapatch) | MIT | 18 | 2026-11-06 | Correcciones declarativas sobre datos de origen sucio, versionadas |
+| [opensanctions/offshore-graph](https://github.com/opensanctions/offshore-graph) | MIT | 33 | 2024-12-17 | Filtraciones *offshore* del ICIJ convertidas a FollowTheMoney. **Dormido 11 meses** |
+| [opensanctions/followthemoney-graph](https://github.com/opensanctions/followthemoney-graph) | MIT | 7 | 2026-06-09 | Analítica de grafo sobre entidades FtM |
+| [opensanctions/opensanctions](https://github.com/opensanctions/opensanctions) | MIT | 884 | 2026-11-25 | El *crawler* y las definiciones de dataset. **Es el código, no los datos** — ver el aviso de abajo |
+
+**Nueve MIT vivos y una sola pieza dormida.** Esto es lo contrario de lo que esta KB encuentra en
+los planos jurídicos, donde lo permisivo específico vive con 0★ y menos de 12 semanas.
+
+### 🔴 Aviso de licencia que decide la arquitectura del plano: **el código es MIT, los DATOS son CC-BY-NC**
+
+Es el modo de fallo de licencia más caro de los trece pases, porque **la API no lo muestra**: cada
+repo de arriba devuelve `MIT` y la frase «OpenSanctions es open source» es cierta y a la vez
+inservible para un entregable comercial.
+
+Lo que la propia documentación de OpenSanctions establece:
+
+- Los datos publicados están bajo **CC-BY-NC**; el uso comercial requiere **licencia de datos de
+  pago y un token de entrega**.
+- Su definición de «comercial» es deliberadamente amplia: **cribar a tus clientes o proveedores
+  cuenta como uso comercial y exige licencia de datos aun sin ingresos.**
+- Cargar los datos masivos en tu base, índice, motor de cotejo **o en un despliegue de `yente` que
+  sirva a tus clientes** requiere licencia aparte.
+- **No hay exenciones para usuarios comerciales** y se licencia la colección **completa**, sin
+  licencias parciales.
+- El precio no está publicado: se negocia con su equipo comercial. (Las tarifas por crédito que
+  aparecen en directorios de terceros son de la **API SaaS**, no de la licencia masiva.)
+
+**Consecuencia operativa, y es la salida limpia:** las listas que de verdad obligan a un despacho
+—**OFAC SDN, consolidada de la UE, ONU, HMT del Reino Unido**— las publican los gobiernos como dato
+público. Un motor construido con la pila MIT de arriba **alimentado desde las listas primarias** es
+íntegramente redistribuible. OpenSanctions aporta cobertura de PEP y agregación mucho mejores, y
+eso es exactamente lo que se paga. **Es una decisión de compra, no un bloqueo**, siempre que se tome
+antes de escribir el pipeline y no después.
+
+### 2. Titularidad real: el estándar BODS y su instrumental
+
+| Repo | Licencia (leída) | ★ | `pushed_at` | Nota |
+|---|---|---|---|---|
+| [openownership/data-standard](https://github.com/openownership/data-standard) | **COMPUESTO** (31.729 B) | 85 | 2026-11-10 | **BODS v0.4.** Esquema **Apache-2.0**, documentación **GFDL-1.3**. Ver aviso abajo |
+| [openownership/visualisation-tool](https://github.com/openownership/visualisation-tool) | Apache-2.0 | 29 | 2026-03-29 | Visualización de estructuras de titularidad |
+| [openownership/bodsanalysis](https://github.com/openownership/bodsanalysis) | MIT | 13 | 2026-03-27 | Cuadernos y código de análisis sobre datos BODS |
+| [openownership/bods-dev-handbook](https://github.com/openownership/bods-dev-handbook) | Apache-2.0 | 5 | 2026-04-03 | Manual de implementación |
+| [openownership/bodsld](https://github.com/openownership/bodsld) | MIT | 4 | 2026-03-06 | BODS como *linked data* |
+| [openownership/register-sources-oc](https://github.com/openownership/register-sources-oc) | Apache-2.0 | 3 | 2024-06-28 | Fuente OpenCorporates. **Dormido 17 meses** |
+| [openownership/indonesia-bods-mapping](https://github.com/openownership/indonesia-bods-mapping) | MIT (1.098 B) | 3 | 2026-05-03 | Ejemplo de mapeo de la API indonesia de titularidad real a BODS |
+
+> ⚠️ **`indonesia-bods-mapping` lleva MIT con copyright de «Google LLC, 2010-2020»**: el fichero de
+> licencia viene heredado de una plantilla, no redactado para el proyecto. La licencia es MIT y es
+> válida, pero el titular declarado **no es el autor del código**. Cuarto modo de fallo de licencia
+> nuevo de este pase y el más silencioso: un `LICENSE` correcto que atribuye a quien no corresponde.
+
+### 🧩 El compuesto de `data-standard`: **esquema permisivo + documentación copyleft**
+
+`NOASSERTION` en la API. Leído byte a byte, el fichero de 31.729 B separa dos regímenes:
+
+- **Esquema** → *Licensed under the Apache License, Version 2.0*.
+- **Documentación** → *GNU Free Documentation License, Version 1.3 or any later version*.
+
+La frase «BODS es Apache-2.0» es cierta **sólo de la parte sobre la que se construye**. Quien
+reempaquete la documentación del estándar en un entregable al cliente —y es justo lo que apetece
+hacer, porque la documentación de BODS está muy bien escrita— **arrastra GFDL**. Es la cuarta
+confirmación consecutiva del patrón `NOASSERTION` en esta KB y la primera con esta forma:
+**no es marca contra código (como `InvoicePlane`), es esquema contra prosa.**
+
+### 3. Lo copyleft y lo muerto de este plano, medido
+
+| Repo | Licencia | ★ | Estado medido |
+|---|---|---|---|
+| [openownership/register](https://github.com/openownership/register) | AGPL-3.0 | 20 | 🪦 **ARCHIVADO** (`archived: true`, último push 2024-10-30). Era el registro insignia |
+| [openownership/bodspipelines](https://github.com/openownership/bodspipelines) | AGPL-3.0 | 3 | Dormido desde 2025-03-05 |
+| [openownership/bods-uk-psc-pipeline](https://github.com/openownership/bods-uk-psc-pipeline) | AGPL-3.0 | 5 | 2026-04-13 |
+| [openownership/bods-gleif-pipeline](https://github.com/openownership/bods-gleif-pipeline) | AGPL-3.0 | 3 | Dormido desde 2025-02-25 |
+| [openownership/enricher](https://github.com/openownership/enricher) | AGPL-3.0 | 3 | Dormido desde 2025-04-03 |
+| [jube-home/aml-fraud-transaction-monitoring](https://github.com/jube-home/aml-fraud-transaction-monitoring) | AGPL-3.0 | 116 | Vivo (2026-11-18). **Jube**: motor de reglas + gestión de casos |
+| [ballerine-io/ballerine](https://github.com/ballerine-io/ballerine) | **COMPUESTO** (5.552 B) | 2.455 | 🪦 **ARCHIVADO** (`archived: true`). Era el orquestador KYC/KYB open source más popular |
+
+**`T28` se confirma por sexta vez y en una industria distinta**: *específico + maduro ⇒ copyleft o
+archivado*. Los dos activos con más estrellas de todo el plano de titularidad real y onboarding
+—`ballerine` (2.455★) y `register` (20★ pero insignia de su organización)— **están los dos
+archivados**, y las cinco tuberías que quedan vivas son AGPL. Lo permisivo y vivo de este plano
+está en la capa de **librería** (OpenSanctions, BODS schema), no en la de **producto**.
+
+### 4. Identificador de entidad legal: la pieza que el abogado no sabe que necesita
+
+| Repo | Licencia (leída) | ★ | `pushed_at` | Nota |
+|---|---|---|---|---|
+| [Sociovestix/lenu](https://github.com/Sociovestix/lenu) | **CC0-1.0** | 23 | 2025-09-25 | Clasificación de **forma jurídica** (ELF) a partir del nombre de la entidad. Es la librería que **GLEIF reconoce como open source** en su propia página. CC0 = dominio público, aún menos restrictivo que MIT. Dormido 14 meses |
+
+El dato de contexto que lo justifica: el **LEI** (ISO 17442, 20 caracteres) es obligatorio en
+**200+ regulaciones** —MiFID II, EMIR, Dodd-Frank, DORA— y la API de GLEIF **es gratuita, abierta y
+sin autenticación**, con datos bajo **CC0 1.0**. Es la única fuente de identidad corporativa
+transfronteriza de este plano **sin ninguna restricción comercial**: a diferencia de
+OpenSanctions, aquí no hay nada que negociar.
+
+### 🗑️ Descartes de este plano, con la medición que los descarta
+
+Regla del pase 6 respetada: **sólo se descarta por ausencia de licencia medida en 5 rutas**
+(`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `COPYING`, `LICENCE`), todas 404.
+
+| Repo | ★ | Por qué se descarta |
+|---|---|---|
+| [bellingcat/toolkit](https://github.com/bellingcat/toolkit) | 710 | 5/5 rutas 404. Es un **GitBook de herramientas**, no una librería: se lee como índice, no se forkea |
+| [openownership/bodsdata](https://github.com/openownership/bodsdata) | 16 | 5/5 rutas 404 **y el README no menciona licencia**. Sorprende en una organización que licencia bien el resto |
+| [openownership/cove-bods](https://github.com/openownership/cove-bods) | 5 | 5/5 rutas 404. Es el validador oficial de BODS 0.1-0.4 y **no se puede usar en un entregable**. Dormido desde 2025-01-08 |
+| [Gitoffmylawn-ui/conflicts-check](https://github.com/Gitoffmylawn-ui/conflicts-check) | 0 | 5/5 rutas 404. Prototipo R/Shiny que cruza GLEIF y CourtListener: **se lee como diseño de referencia** (es la idea correcta), no se forkea |
+| [APIHub-CdC/pld-morales-client-java](https://github.com/APIHub-CdC/pld-morales-client-java) | 0 | 5/5 rutas 404 **y dormido desde 2022-05-20 (4,5 años)**. Es el **único artefacto PLD de origen mexicano** que apareció: ver `intel/market.md` → LATAM |
+| [jmejia31/RIESGO_LAVADO](https://github.com/jmejia31/RIESGO_LAVADO) | 0 | 5/5 rutas 404, pero **`pushed_at` de HOY**. Sistema institucional en español (Angular 22 / ASP.NET Core 10 / Oracle) con listas de cautela, coincidencias, evidencias, auditoría y matrices de riesgo. Su README reserva `main` a autorización expresa del autor ⇒ **referencia de diseño, no base de fork** |
+| [FinCrimeRadar/fincrimeradar](https://github.com/FinCrimeRadar/fincrimeradar) | 1 | 5/5 rutas 404. Educativo, y su motor **depende de la API de OpenSanctions** (ver aviso de datos) |
+| [eddyflores100-lang/vrfkyc](https://github.com/eddyflores100-lang/vrfkyc) | 0 | 5/5 rutas 404. Su propio README declara que **no ofrece** aclarado automático, puntuación calibrada ni KYC completo |
+| [api-evangelist/gleif](https://github.com/api-evangelist/gleif) | 0 | 5/5 rutas 404. Perfil de API de terceros, no implementación |
+
+### 🚫 Tres repos que la búsqueda web describió con detalle y **NO EXISTEN**
+
+Esto es nuevo y conviene que quede por escrito, porque el detalle de la descripción **no es prueba
+de existencia**:
+
+| Slug devuelto por la búsqueda | `git ls-remote` | Lo que la búsqueda afirmaba |
+|---|---|---|
+| `mylesparslow-collab/conflicts-desk` | **0 refs** | Era el repo de conflictos **más completo** de todo el barrido: Regla 1.18 de clientes potenciales, renuncias con consentimiento informado por escrito, enrutado de aprobaciones, registros de auditoría y cribado OFAC con el cargador oficial `sdn.csv` |
+| `StanislavEleninWeb/LegalIntakeReceptionist` | **0 refs** | NestJS + FastAPI para llamadas de admisión con marcado de conflictos por nombre |
+| `Studio-V-Tech/tracker` | **0 refs** | Buscador local de conflictos de interés, hackathon PaxLegal 2026 |
+
+El primero es el caso grave: **la funcionalidad mejor descrita del plano entero no es verificable**,
+y escribirla en la tabla de `agents/top.md` habría metido en la KB una fila con URL muerta y
+descripción convincente. `0 refs` no distingue *inexistente* de *privado* (el control contra un
+slug inventado tampoco da 404 limpio, sino petición de credenciales) — pero para esta KB da igual:
+**lo que no se puede clonar no se puede entregar.**

@@ -683,6 +683,57 @@ la firma ya construye), `volfpeter/uspto-patent-citation-graph` (MIT),
 4. **Revisión de cartera pendiente post-2025-11-28**: trabajo acotado, con fecha de disparo, y lo
    necesita todo titular con solicitudes vivas redactadas bajo la guía retirada.
 
+
+#### 🆕 PASE 13 (2026-11-25) — plano de la admisión: **Norteamérica va en dirección CONTRARIA al resto del mundo**
+
+Es el hallazgo regional más fuerte del pase, y no es un matiz de calendario: es un cambio de signo.
+
+**1. El registro federal de titularidad real se ha vaciado de personas estadounidenses.**
+FinCEN publicó la **regla final el 11-ago-2026, en vigor el 14-ago-2026**, que exime
+**permanentemente** —no de forma provisional— a las *domestic reporting companies* de informar
+titularidad real bajo la Corporate Transparency Act. Las sociedades extranjeras obligadas siguen
+declarando, pero **no tienen que informar de beneficiarios finales ni solicitantes que sean
+personas estadounidenses**. Y FinCEN anunció que **borrará de la base los datos ya declarados por
+personas estadounidenses**.
+
+Tres salvedades que hay que decir en la misma frase, porque cambian el encargo:
+- **La CDD Rule no se ha tocado**: los bancos siguen obligados a recabar titularidad real de sus
+  clientes persona jurídica. La obligación no desapareció, **se desplazó al sector privado**.
+- La CTA **sobrevive como ley**: el Undécimo Circuito la confirmó en diciembre de 2025. Lo que
+  cambió es el reglamento, y **un reglamento se revierte con otro reglamento**.
+- En consecuencia, el dato que antes daba el Estado hay que **reconstruirlo desde fuentes
+  comerciales y abiertas**. Eso es, literalmente, el trabajo que hace `opencheck` sobre GLEIF.
+
+**2. El abogado estadounidense NO es sujeto obligado, y es una anomalía medida por FATF.**
+FATF calificó a Estados Unidos **«non-compliant» en las Recomendaciones 22, 23 y 28**, las que
+cubren a las profesiones no financieras designadas: el hueco central es la **ausencia de normas
+federales de AML y de reporte de operaciones sospechosas para abogados**. La posición estadounidense
+sostenida ante FATF es que **los deberes éticos ya cubren lo que pide la R.22**, y la ABA se ha
+opuesto a extender obligaciones federales a los abogados.
+
+> ⚠️ **Precisión que evita un error de venta**: la recalificación de 2024 a «largely compliant»
+> fue de la **R.24 (titularidad real)**, **no de la R.22**. Quien use ese titular para afirmar que
+> EE.UU. ya cumple con los *gatekeepers* se equivoca. El rating de R.22 que localizamos es del
+> ciclo de 2016; **no encontramos un rating posterior específico de R.22** y se registra como
+> dato pendiente de la última evaluación de seguimiento.
+
+**3. Qué vende esto en Norteamérica, y a quién.** No al despacho: el despacho estadounidense no
+tiene deber legal de programa AML y no comprará cumplimiento que no le obliga. **El comprador es el
+departamento legal corporativo**, y por dos razones convergentes:
+- Sus contrapartes en la UE (AMLR, 10-jul-2027), Reino Unido (SRA, ya sancionando) y Australia
+  (Tranche 2, **ya en vigor**) **sí** le van a exigir diligencia de titularidad real, y el registro
+  federal del que tiraba ya no tiene los datos.
+- Es exactamente el **reencuadre de comprador del pase 8 (`P29`)**: la cartera de Globant está en
+  el departamento legal corporativo, no en el despacho. Aquí el reencuadre no es una preferencia
+  comercial: **es el único comprador con obligación.**
+
+**Hueco informado de la región**: se buscó activo permisivo de origen norteamericano específico de
+admisión de cliente en despacho (`conflicts of interest check law firm`, `law firm client intake`).
+Los cinco repos que aparecieron **están sin licencia** (`Gitoffmylawn-ui/conflicts-check`,
+`imranbru99/ai-law-firm-intake-document-agent`, `raheel2wali/Law-firm-intake-agent`,
+`Clayton0818/Legal-intake-engine`, `FinCrimeRadar/fincrimeradar`) **y tres más no existen**. No hay
+nada forkeable con anclaje norteamericano en esta capa: lo que hay es infraestructura global
+(OpenSanctions, GLEIF, BODS) y la aplicación hay que construirla.
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -1137,6 +1188,78 @@ vigilancia de marca —producto que todo titular compra— **no tiene ni un acti
    trabajo de investigación es la mejor especificación abierta que existe; el `epo-bdds` MIT ya da la
    carga masiva que era la parte difícil.
 
+
+#### 🆕 PASE 13 (2026-11-25) — plano de la admisión: **la región con los números duros, y los está publicando el regulador**
+
+EMEA es, con diferencia, **el mejor caso comercial de este plano**: es la única región donde el
+coste del incumplimiento ya está cuantificado por el supervisor, con nombre y cifra.
+
+**1. Reino Unido — la SRA ya está cobrando, y el tramo que más crece es sanciones.**
+Informe anual AML 2025/26 de la Solicitors Regulation Authority (ejercicio cerrado en abril de 2026):
+
+| Medición | Valor | Lectura |
+|---|---|---|
+| Multas totales a despachos y solicitors | **£2,6 M** | El supervisor ya convierte el incumplimiento en caja |
+| Acuerdos de conciliación | **145, por £2 M** | La mayor parte no llega a expediente: se transa |
+| Casos por fallos en régimen de **sanciones** | **se triplicaron** respecto del año anterior | El tramo de mayor crecimiento, y el más automatizable |
+| Fallos de **políticas, controles y procedimientos (PCP)** | presentes en el **67% de las multas** | **Dos de cada tres multas son por documentación, no por blanquear** |
+| Despachos evaluados como no conformes | **32% → 22%** | Mejora real, con margen aún amplio |
+| Inspecciones específicas de sanciones | **47** | Supervisión dirigida, no muestreo |
+| Retorno obligatorio de datos a la SRA | fecha límite **27-jul-2026** | Trabajo regulado, tratos con personas designadas y SARs |
+
+> ⚠️ Las fuentes discrepan en el número de actuaciones: **935** / **966 evaluaciones de
+> cumplimiento** / **985 actuaciones totales**. Se publican las tres sin elegir; el informe oficial
+> de la SRA es la referencia buena. Varias de estas cifras vienen de blogs de proveedores de
+> *compliance* que citan el informe: el sentido es consistente en todas, la aritmética fina no.
+
+**El argumento de venta sale de una sola fila**: si el **67% de las multas** es por políticas,
+controles y procedimientos defectuosos, entonces **la mayoría del riesgo sancionador es
+determinista y documental** — exactamente lo que un motor de reglas audita y un LLM no debe
+decidir. Es la misma arquitectura «*models read, rules decide*» del pase 8, aplicada a la admisión.
+
+**2. Unión Europea — el abogado es sujeto obligado por reglamento, y la fecha es firme.**
+El **Reglamento (UE) 2024/1624 (AMLR) se aplica desde el 10-jul-2027** —directamente, sin
+transposición— e incluye expresamente como sujetos obligados a **abogados, notarios, contables y
+asesores fiscales** cuando intervienen en transacciones financieras o inmobiliarias, o en su
+planificación.
+
+Contenido de la diligencia debida: identificar y verificar al cliente, identificar a los
+beneficiarios finales, entender el propósito de la relación y **monitorizarla de forma continua**,
+con profundidad escalada al riesgo. **Art. 26(2)**: actualizar la información **al menos
+anualmente** para clientes de mayor riesgo y **al menos cada cinco años** para el resto.
+
+> ⚠️ **Umbral de operación ocasional: conflicto abierto a tres bandas.** Las fuentes dan
+> **10.000 €**, **3.000 € (Art. 19(4), efectivo)** y **1.000 € (Art. 19(3))**. Se publican las tres
+> sin elegir: hay que leer el Art. 19 del Reglamento. Es el tipo de dato que **no** se cita en una
+> propuesta sin fuente primaria.
+
+**3. El formato ya es norma, y eso convierte el cumplimiento en un problema de datos.**
+El **Reglamento de Ejecución (UE) 2026/2354**, adoptado el **16-oct-2026** y publicado el
+**22-oct-2026**, fija los **formatos de presentación de información de titularidad real** a los
+registros centrales, al amparo del Art. 10(6) de la Directiva (UE) 2024/1640 (AMLD6). Incluye
+exigencias de granularidad tan concretas como **porcentajes de participación a dos decimales** y
+**motivo declarado cuando no se identifica beneficiario final** (por ejemplo, propiedad dispersa).
+
+> ⚠️ Fechas en conflicto: una fuente da **entrada en vigor el 11-nov-2026**; otra, **aplicabilidad
+> el 10-jul-2027** (alineada con AMLR). Ambas publicadas. No se pudo leer el texto del DOUE.
+
+Sobre AMLA: debía entregar a la Comisión **23 RTS, ITS y guías antes del 10-jul-2026**. El borrador
+final de las **RTS de diligencia debida (Art. 28(1) AMLR)** se cita con fecha **1-oct-2026**, pero
+**esa fecha procede de un issue de GitHub y del README de `opencheck`, no de fuente primaria de
+AMLA**: se publica marcada.
+
+**4. Lo que esto significa para el activo.** `opencheck` (MIT) publica un **crosswalk explícito** de
+sus señales de riesgo estructural contra las normas de diligencia debida de AMLA, y
+`beneficial-ownership-data` (MIT) trae **AMLR, transposición de AMLD6, los expedientes de
+infracción de 2026, BORIS, el Reglamento 2026/2354 y las RTS de AMLA** como material de referencia
+cargable por un agente. **La capa normativa europea de este plano ya está empaquetada en MIT.** Es
+la primera vez en trece pases que esta KB encuentra eso.
+
+**Hueco informado**: no apareció **ningún** activo open source —permisivo ni copyleft— que
+implemente **murallas éticas / barreras de información** entre equipos del mismo despacho, que es
+el mecanismo que la normativa europea presupone para aceptar un asunto con conflicto consentido.
+Censo: `ethics wall` **0**, `information barrier` **0**, `muralla china` **0**. Ver
+`verticals/solutions.md`.
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -1566,6 +1689,60 @@ tiene la mejor capa de redacción y una capa de **acceso al registro** muy desig
 4. **Expediente conforme a examen asistido por AI**: CNIPA, JPO y KIPO ya examinan con AI. El
    criterio de compra del cliente es que su solicitud aguante *ese* examen.
 
+
+#### 🆕 PASE 13 (2026-11-25) — plano de la admisión: **Australia es la única jurisdicción donde el deber del despacho YA está vivo**
+
+Mientras la UE apunta a julio de 2027 y EE.UU. va marcha atrás, **Australia ya lo tiene en vigor**,
+y eso convierte a APAC en **el único mercado de este plano con demanda presente, no anunciada**.
+
+**Tranche 2 — el abogado australiano es entidad declarante desde el 1-jul-2026.**
+Un abogado que preste uno o más *designated services* con vínculo geográfico australiano, en el
+curso de su actividad, **es entidad declarante ante AUSTRAC** y está sujeto a obligaciones AML/CTF.
+
+| Hito | Fecha | Contenido |
+|---|---|---|
+| Alta en AUSTRAC abierta | **31-mar-2026** | Comienza el proceso de enrolamiento |
+| **Obligaciones AML/CTF en vigor** | **1-jul-2026** | Deber pleno de programa |
+| Límite de alta y de notificación de responsable de cumplimiento | **29-jul-2026** | O dentro de 14 días desde el alta, lo que ocurra más tarde |
+
+**Lo que obliga, y por qué es software y no formación**: el art. **26P** exige mantener un
+**programa AML/CTF documentado y aprobado por un alto directivo ANTES de prestar un servicio
+designado**. No es un deber de resultado: es un deber de **tener el programa escrito, aprobado y
+fechado antes del primer expediente**. Un deber documental con sello temporal **es un artefacto de
+software**.
+
+Servicios designados que atrapan al despacho: asistir en **compraventa o transmisión de inmuebles**
+(ítem 1), asistir en **transmisiones de entidades o estructuras jurídicas**, y asistir en
+**financiación de capital o deuda**.
+
+**Privilegio profesional**: la ley reformada **conserva** el secreto profesional, pero las
+obligaciones AML/CTF **sí alcanzan a los aspectos no privilegiados** del trabajo. Esto importa en
+ingeniería: implica que el sistema debe **separar por diseño** lo privilegiado de lo declarable —y
+es exactamente la propiedad por la que `opencheck` corre en modo *stub* sin claves y
+`billcheck` (pase 8) ataba su servidor a 127.0.0.1. **El patrón «local por construcción» de esta KB
+tiene aquí su fundamento legal más claro.**
+
+> ⚠️ Las fuentes son casi todas guías de despacho y de proveedor, y **son inconsistentes en el
+> tiempo verbal**: unas describen el 1-jul-2026 como futuro y otras como pasado. La fecha del
+> **29-jul-2026** también se enuncia de forma distinta entre fuentes. Confirmar contra la guía de
+> **AUSTRAC** antes de usarlo en propuesta.
+
+**Resto de la región, con lo que ya traía esta KB.** Singapur sigue sin estatuto vinculante de AI y
+su palanca de compra es la **guía sectorial de MinLaw de 6-mar-2026** (pase 8); para este plano, el
+abogado singapurense ya está dentro del perímetro AML. Corea, Vietnam, China y Taiwán aportan
+regulación **de AI**, no de *gatekeepers*, y se dejan donde estaban: la novedad de este pase es que
+**el eje regulatorio de APAC en este plano es Australia, no la ley de AI**.
+
+**Por qué APAC es el mejor punto de entrada comercial del plano**: es el único sitio donde se puede
+vender contra una obligación **ya incumplida**. Un despacho que se enroló en julio de 2026 lleva
+cinco meses operando un programa que, en la inmensa mayoría de los casos, se documenta en hoja de
+cálculo. No hay que convencer a nadie de que la obligación llega: llegó.
+
+**Hueco informado**: se buscó activo open source de origen APAC para este plano
+(`AML KYC onboarding` con filtro regional, `AUSTRAC`, `Tranche 2`). **Cero activos con anclaje
+APAC**: ni implementación de las obligaciones de AUSTRAC, ni plantilla de programa AML/CTF, ni
+adaptador de las listas australianas (DFAT Consolidated List). Es un hueco **de implementación
+sobre una obligación vigente** — la clase más valiosa, porque el comprador ya existe.
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -2217,3 +2394,62 @@ Globant AI Studios — Legal Practice
 *v2026-11-20 — Oportunidades publicadas para las cuatro regiones bajo un único encabezado.
 Dos conflictos de fuentes resueltos (EU AI Act alto riesgo; exigibilidad en Corea), uno nuevo
 abierto (Colorado), y los huecos de adopción APAC/LATAM declarados por tercer pase consecutivo.*
+
+#### 🆕 PASE 13 (2026-11-25) — plano de la admisión: **LATAM va POR DELANTE de Estados Unidos, y hay que decirlo así**
+
+Este pase invierte el encuadre habitual. En doce pases, LATAM apareció casi siempre como la región
+con el hueco. **En el plano de la admisión del cliente, LATAM está por delante de EE.UU.**: el
+abogado latinoamericano es sujeto obligado en varias jurisdicciones de la región, y el abogado
+estadounidense **no lo es en ninguna**.
+
+**1. El estándar que obliga, y llega por GAFILAT.**
+La **Recomendación 23 del GAFI** (reproducida en los estándares de GAFILAT) somete a **abogados,
+notarios y otros profesionales jurídicos independientes** a medidas preventivas cuando realizan
+transacciones para sus clientes en actividades como **compraventa de inmuebles o administración de
+dinero o activos**: debida diligencia, **reporte de operaciones sospechosas** y conservación de
+registros. Publicado en la biblioteca de GAFILAT en versión de **diciembre de 2025** y de
+**julio de 2026**.
+
+**2. Lo que ya está en vigor, por país.**
+
+| País | Estado medido | Nota |
+|---|---|---|
+| **Guatemala** | **Decreto 15-2026, aprobado el 2-jun-2026** | Incluye formalmente a **notarios, abogados**, contadores, agentes inmobiliarios, casinos, joyeros y fintechs. Es la norma **más nueva y más explícita** de la región |
+| **Argentina** | Escribanos, contadores y **abogados** (bajo determinados umbrales) figuran como sujetos obligados | La evaluación mutua de GAFILAT presionó para formalizar programas basados en riesgo. ⚠️ **Fuente de consultoría, no normativa**: verificar la norma vigente y los umbrales |
+| **Chile** | GAFILAT pidió **incluir a los abogados** como sujetos obligados en la **Ley 19.913** | ⚠️ Fuente académica **anterior a 2026**: no se pudo confirmar si la inclusión se consumó |
+| **El Salvador** | Manual de prevención de lavado publicado por la Corte Suprema de Justicia | Material de aplicación, no norma nueva |
+
+**3. Los activos: hueco informado y explícito, con la razón medida.**
+Se consultó `prevención lavado de dinero open source`, `PLD`, `UIF`, `COAF`, `sujetos obligados`,
+`AML LATAM github`, filtrando por origen regional. **Aparecieron exactamente dos artefactos de
+origen latinoamericano, y ninguno es forkeable:**
+
+| Repo | Origen | Medición | Veredicto |
+|---|---|---|---|
+| [APIHub-CdC/pld-morales-client-java](https://github.com/APIHub-CdC/pld-morales-client-java) | **México** (Círculo de Crédito) | Sin licencia (5/5 rutas 404) · **dormido desde 2022-05-20, 4,5 años** · 35 refs | Cliente de filtrado contra listas públicas PLD/FT para personas morales. **Único artefacto PLD mexicano del barrido.** Se lee como referencia de integración |
+| [jmejia31/RIESGO_LAVADO](https://github.com/jmejia31/RIESGO_LAVADO) | Hispanohablante (país no declarado) | Sin licencia (5/5 rutas 404) · **`pushed_at` de HOY** · Angular 22 / ASP.NET Core 10 / Oracle | Sistema institucional de gestión de riesgo: listas de cautela, coincidencias, evidencias, auditoría y **matrices de riesgo**. Su README **reserva `main` a autorización expresa del autor** ⇒ referencia de diseño, no base de fork |
+
+**4. Y aquí está la corrección que hace el hueco MUCHO más pequeño de lo que parece.**
+El pase 8 concluyó, sobre el plano de ingresos, que **«portar LEDES a LATAM es el trabajo
+equivocado»** porque LEDES y UTBMS son estándares de origen estadounidense sin equivalente
+funcional regional. **En este plano la conclusión es la contraria, y es mejor noticia:**
+
+`opencheck` (MIT, vivo hoy) **ya deriva CUIT argentino, RUC peruano, CNPJ brasileño y NIT
+colombiano** como identificadores de primera clase, junto a los europeos y asiáticos. **La
+herramienta permisiva ya habla los identificadores de la región**: no hay que portar nada del
+modelo de entidad. Y la identidad corporativa transfronteriza viene de **GLEIF**, cuya API es
+gratuita, abierta, sin autenticación y con datos en **CC0 1.0** — sin restricción comercial ninguna,
+a diferencia de OpenSanctions.
+
+**Lo que falta es una capa, y es pequeña y nombrable: los adaptadores de listas nacionales.**
+`kamlon10/Sanctions-Screening-Public-Project` (MIT) consolida **OFAC + ONU + UE + Reino Unido** —y
+nada más—. No incluye las listas de la **UIF mexicana** ni del **COAF brasileño**, ni las
+designaciones nacionales del resto de la región. Eso es **un adaptador por país sobre un agregador
+MIT que ya funciona y ya está en español**, no un producto nuevo.
+
+**El argumento de venta regional**, y es el mismo activo vendido tres veces (patrón del pase 8):
+una sola construcción —expediente de admisión con cribado determinista y rastro de auditoría—
+responde a la **Recomendación 23 del GAFI vía GAFILAT ya vigente en LATAM**, al **AMLR europeo de
+julio de 2027** y a **Tranche 2 australiano ya en vigor**. **Una construcción, tres jurisdicciones
+obligadas, y el cliente corporativo norteamericano como cuarto comprador** porque su registro
+federal se acaba de vaciar.

@@ -9,6 +9,86 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-25 (pase 13) — el plano de la **admisión del cliente**, y **las estrellas apuntando a la librería muerta**
+
+Séptimo plano consecutivo que aparece completo al cambiar de vocabulario
+(factura → prueba → norma → acústico → propiedad industrial → **admisión**). Censo previo con
+límite de palabra: `AML` **0**, `KYC` **0**, `sanctions screening` **0**, `onboarding` **0**,
+`FATF` **0**, `FinCEN` **0**, `GAFILAT` **0**, `PEP` **0**, `UBO` **1**, `conflicts` **3**.
+**20 activos nuevos, 0 solapaban.** Y cierra el paréntesis de salvedad que el pase 6 escribió y el
+pase 8 marcó sin resolver: *«sin comprobación de conflictos»*.
+
+### Lo nuevo de esta semana (★ y `pushed_at` medidos 2026-11-25)
+
+| Agente | Licencia (leída) | Región | Qué aporta | ★ |
+|---|---|---|---|---|
+| [StephenAbbott/opencheck](https://github.com/StephenAbbott/opencheck) | MIT (1.262 B) | Global | Debida diligencia LEI → **74 fuentes corporativas** → BODS v0.4; `pushed_at` **de hoy** | 26 |
+| [StephenAbbott/beneficial-ownership-data](https://github.com/StephenAbbott/beneficial-ownership-data) | MIT (1.076 B) | Global | **Claude Skill**: acceso al registro de titularidad real en **75 jurisdicciones**, corte del 23-nov-2026 | 3 |
+| [olgasafonova/gleif-mcp-server](https://github.com/olgasafonova/gleif-mcp-server) | MIT (1.070 B) | Global | 12 herramientas MCP sobre GLEIF (LEI, BIC/SWIFT, ISIN, cadenas de propiedad) | 8 |
+| [Cassxbt/convex-conflict](https://github.com/Cassxbt/convex-conflict) | MIT (1.064 B) | EMEA | Conflictos en la admisión resueltos **por número de registro**, no por nombre | 0 |
+| [satoshkin-dev/satoshkin-aml-mcp](https://github.com/satoshkin-dev/satoshkin-aml-mcp) | MIT | Global | MCP AML/KYT cripto; **modo simulado etiquetado** sin clave | 0 |
+
+### 🧭 `T32` — **la señal social apunta a la librería DEPRECADA, y la migración no mueve las estrellas**
+
+Medido en una sola organización, con dos repos MIT del mismo autor:
+
+| Librería | ★ | `pushed_at` | Estado real |
+|---|---|---|---|
+| [opensanctions/fingerprints](https://github.com/opensanctions/fingerprints) | **149** | 2025-11-24 | **UNMAINTAINED** desde 2025-05, declarado en la primera línea del README |
+| [opensanctions/rigour](https://github.com/opensanctions/rigour) | 74 | 2026-11-23 | La sucesora. Absorbe `fingerprints`, `languagecodes` y `pantomime` |
+
+El doble de estrellas para la muerta. Causa estructural, no accidente: **el repo nuevo empieza en
+cero y el viejo conserva el histórico de toda su vida útil**, así que ordenar por estrellas
+—que es lo que hace cualquier barrido automático, incluido el que prescribe el brief— corona
+sistemáticamente a la reemplazada. Agrava el engaño que `fingerprints` siga recibiendo commits de
+mantenimiento (`pushed_at` de hace un año, no de hace cinco), con lo que el filtro de dormancia
+tampoco la descarta.
+
+**`G-L18`, aplicable a las doce industrias: leer la PRIMERA LÍNEA del README del repo más
+estrellado antes de coronarlo.** Coste: una llamada. Lo que evita: construir sobre código que su
+autor abandonó hace 18 meses y recomendárselo a un cliente.
+
+### 💰 `T33` — **el código es MIT y los DATOS son CC-BY-NC: el bloqueo que la API de licencias no puede ver**
+
+Los diez repos de la pila de OpenSanctions devuelven `MIT`. La frase «OpenSanctions es open source»
+es **cierta y a la vez inservible** para un entregable comercial, porque el dato va aparte:
+CC-BY-NC, licencia de pago y token de entrega para uso comercial, **y su definición de comercial
+incluye cribar a tus propios clientes aunque no haya ingresos**. Sin exenciones y sin licencias
+parciales.
+
+Esto es nuevo como *clase*: los doce pases anteriores midieron licencias de **código**. Aquí el
+artefacto que decide el entregable es el **corpus**, y ningún campo `license` lo refleja. Mismo
+patrón que el pase 11 encontró con un estándar de pago, pero al revés: allí el formato era
+propietario con software libre; aquí el software es libre con el dato restringido.
+
+**Salida medida, no teórica**: las listas que obligan al despacho (**OFAC SDN, consolidada UE, ONU,
+HMT**) son dato público publicado por gobiernos.
+[kamlon10/Sanctions-Screening-Public-Project](https://github.com/kamlon10/Sanctions-Screening-Public-Project)
+(MIT, 1.073 B) hace exactamente eso: las descarga y consolida en SQLite local, en 7 idiomas. La
+pila MIT + listas primarias es **íntegramente redistribuible**; OpenSanctions se compra cuando se
+necesita su cobertura de PEP. Es una decisión de compra, y hay que tomarla **antes** de escribir el
+pipeline.
+
+### 🪦 Mortalidad del plano: los dos activos más estrellados están archivados
+
+| Repo | ★ | Licencia | Estado |
+|---|---|---|---|
+| [ballerine-io/ballerine](https://github.com/ballerine-io/ballerine) | 2.455 | COMPUESTA (5.552 B) | 🪦 `archived: true` — era el orquestador KYC/KYB de referencia |
+| [openownership/register](https://github.com/openownership/register) | 20 | AGPL-3.0 | 🪦 `archived: true` (2024-10-30) — era el registro insignia de su organización |
+
+Sexta confirmación de `T28`: **específico + maduro ⇒ copyleft o archivado**. No existe hoy un
+orquestador de onboarding permisivo, vivo y mantenido. Lo permisivo vivo está en la capa de
+librería; el orquestador se construye.
+
+### 🚫 Tres repos descritos con detalle por la búsqueda web que **NO EXISTEN** (`ls-remote` 0 refs)
+
+`mylesparslow-collab/conflicts-desk` (era el más completo del barrido: Regla 1.18, renuncias,
+cribado OFAC con `sdn.csv` oficial) · `StanislavEleninWeb/LegalIntakeReceptionist` ·
+`Studio-V-Tech/tracker`. **El detalle de una descripción no es prueba de existencia**, y el primero
+habría entrado en la tabla con una URL muerta y una descripción convincente.
+
+---
+
 ## 🆕 2026-11-25 (pase 12) — el plano de la **propiedad industrial**, y **dos trampas de consulta nuevas** que explican por qué estuvo invisible 11 pases
 
 Sexto plano consecutivo que aparece completo al cambiar de vocabulario (factura → prueba → norma →

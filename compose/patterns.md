@@ -2056,3 +2056,174 @@ APAC publicó las plantillas bajo MIT y con tracción real (65–216★ en repos
      es una buena práctica: es el régimen de responsabilidad.
 5. **Clasificación CPC/IPC:** `roy-tian/cn-patent-ipc` (MIT) y `NICTA/t3as-pat-clas` (GPL-3.0, solo
    lectura). ⚠️ Capa pobre: `CPC IPC patent classification` ⇒ **total 4**.
+
+---
+
+## 🆕 P50 — Puerta de admisión del cliente, auditable y redistribuible
+
+**Problema que resuelve**: en Reino Unido, **dos de cada tres multas de la SRA** incluyen fallos de
+políticas, controles y procedimientos. En Australia el art. **26P** exige un programa AML/CTF
+documentado y aprobado **antes** de prestar un servicio designado. En ambos casos lo que se
+sanciona es **no poder demostrar el procedimiento**, no el blanqueo.
+
+**Todas las piezas son permisivas y están vivas (medidas 2026-11-25).**
+
+```
+1. LISTAS (dato público, redistribuible)
+   kamlon10/Sanctions-Screening-Public-Project  MIT
+   └─ descarga y consolida OFAC SDN + ONU + UE + HMT(RU) → SQLite local
+      (+ adaptador propio por país: UIF-MX, COAF-BR, DFAT-AU → ver P52)
+
+2. NORMALIZACIÓN  (antes de cotejar, nunca después)
+   opensanctions/rigour        MIT  ← nombres, direcciones, identificadores fiscales
+   opensanctions/countrynames  MIT  ← país en cualquier idioma → ISO
+   ⚠️ NO usar opensanctions/fingerprints (149★ pero UNMAINTAINED desde 2025-05)
+
+3. COTEJO Y RESOLUCIÓN
+   opensanctions/followthemoney  MIT  ← la ontología de entidades
+   opensanctions/nomenklatura    MIT  ← resolución + linaje: qué fuente afirmó qué y cuándo
+   opensanctions/yente           MIT  ← API de cotejo, autoalojada en el perímetro del despacho
+
+4. TITULARIDAD REAL Y ESTRUCTURA
+   StephenAbbott/opencheck            MIT  ← LEI → 74 fuentes corporativas → BODS v0.4
+   openownership/data-standard        esquema Apache-2.0  ← BODS v0.4 como formato de salida
+   GLEIF API                          datos CC0-1.0, gratuita y sin autenticación
+   Sociovestix/lenu                   CC0-1.0  ← forma jurídica (ELF) desde el nombre
+
+5. REGLAS DETERMINISTAS
+   opensource-finance/osprey     Apache-2.0  ← reglas en CEL, versionables en git
+                                 12 reglas de arranque inspiradas en FATF
+
+6. COLA HUMANA (sólo lo que requiere juicio)
+   tazama-lf/case-management-system  Apache-2.0 (Linux Foundation)
+   └─ estados: abierto → en revisión → confirmado/descartado/escalado
+
+7. CONOCIMIENTO NORMATIVO CARGABLE POR EL AGENTE
+   StephenAbbott/beneficial-ownership-data  MIT (Claude Skill)
+   └─ acceso al registro en 75 jurisdicciones, AMLR/AMLD6, AMLA CDD RTS, FATF R24/R25,
+      reglas del 50% de OFAC/UE/RU/Canadá
+```
+
+**Orden no negociable**: normalizar → cotejar determinista → **sólo entonces** modelo, y el modelo
+**nunca decide**: redacta la justificación de un hallazgo que las reglas ya marcaron, citando la
+fuente, y una persona acepta o rechaza.
+
+**Lo que el expediente debe emitir** (es el entregable, no un subproducto):
+fecha y hora · versión de cada lista con su fecha de publicación · umbral de similitud aplicado ·
+**todo candidato descartado y por qué** · identificadores derivados con su fuente · el BODS v0.4 de
+la estructura de propiedad · quién aprobó y cuándo. Un expediente sin la lista descartada **no es
+auditable**: demuestra lo que se encontró, no que se buscó.
+
+---
+
+## 🆕 P51 — Conflictos por **número de registro**, nunca por nombre
+
+**La prueba de que el cribado por nombre no basta**, y es un caso real comprobable:
+
+> La sociedad británica **08680755** se llamaba **Royal Mail plc** hasta 2022 y hoy se llama
+> **International Distribution Services Limited**. Un despacho que actuó para Royal Mail **sigue
+> obligado por sus confidencias**. Una búsqueda por el nombre nuevo en el libro de clientes
+> **no devuelve nada**. La búsqueda por número de sociedad devuelve **CONFLICT**.
+
+Esto no es un caso de laboratorio: el cambio de denominación es **rutinario** en reestructuraciones,
+y es precisamente en reestructuraciones cuando se abren los asuntos grandes.
+
+**Receta** (diseño de referencia: [`Cassxbt/convex-conflict`](https://github.com/Cassxbt/convex-conflict), MIT):
+
+1. **Extraer** del encargo entrante cada parte nombrada (cliente, contraparte, matriz, filial,
+   administradores). Aquí el modelo es útil: es extracción de prosa, no decisión.
+2. **Resolver cada parte a un identificador de registro**, no a una cadena de texto:
+   `olgasafonova/gleif-mcp-server` (MIT, 12 herramientas) para LEI y cadena de propiedad;
+   `StephenAbbott/opencheck` (MIT) para el número de registro nacional —**incluye CUIT, RUC, CNPJ y
+   NIT**, así que la receta vale igual en LATAM.
+3. **Recuperar las denominaciones anteriores** del identificador. Es el paso que falta en todo
+   cribado por nombre y el único que atrapa el caso Royal Mail.
+4. **Cotejar el identificador** —y todos sus nombres históricos— contra el libro de clientes y de
+   partes adversas del despacho.
+5. **Resolver en tres estados, no en dos**: `CLEAR` / `CONFLICT` / `NEEDS_REVIEW`. El tercero es
+   obligatorio: un cribado binario fuerza a la máquina a decidir lo que debe decidir un socio.
+6. **Emitir dos documentos distintos**: al cliente potencial, un aviso de retención **sin motivo
+   confidencial** (revelar *por qué* hay conflicto ya incumple el deber con el otro cliente); al
+   socio, el recibo completo.
+
+**Aserción de CI que hace la receta verificable** — tres líneas, y falla si se rompe el paso 3:
+
+```
+dado  un cliente histórico registrado con su DENOMINACIÓN ANTIGUA
+y     un encargo entrante que nombra la DENOMINACIÓN ACTUAL de la misma sociedad
+exigir  veredicto == CONFLICT
+```
+
+**Hueco conocido y declarado**: no existe activo open source de **murallas éticas / barreras de
+información**, que es lo que permite aceptar un asunto con conflicto consentido sin incumplir
+confidencialidad (censo: `ethics wall` 0, `information barrier` 0). Ver `P53`.
+
+---
+
+## 🆕 P52 — La licencia de datos como **interruptor**, no como dependencia
+
+**El riesgo que evita**: la pila de OpenSanctions es MIT entera, así que un equipo la adopta en una
+tarde — y descubre al final del proyecto que **los datos son CC-BY-NC**, que el uso comercial exige
+licencia de pago con token de entrega, y que **cribar a los propios clientes ya cuenta como uso
+comercial aunque no haya ingresos**. A esa altura el pipeline ya está escrito contra ese esquema.
+
+**Receta**: una interfaz de proveedor de listas, **dos implementaciones**, decisión diferida.
+
+```
+interfaz  ListasProvider
+          · cargar(fecha) → [Entidad en esquema FollowTheMoney]
+          · procedencia() → {fuente, url, fecha_publicacion, licencia}
+
+impl A  «primarias»   licencia: dato público  → REDISTRIBUIBLE
+        OFAC SDN · consolidada UE · ONU · HMT(RU) · DFAT(AU) · UIF(MX) · COAF(BR)
+        vía kamlon10/Sanctions-Screening-Public-Project (MIT)
+
+impl B  «opensanctions»  licencia: CC-BY-NC / comercial de pago  → NO REDISTRIBUIBLE
+        mejor cobertura de PEP y agregación. Es lo que se compra.
+```
+
+Ambas emiten **el mismo esquema FollowTheMoney (MIT)**, así que el motor, las reglas y la cola
+humana no distinguen cuál está detrás. La decisión pasa de arquitectónica a contractual.
+
+**La puerta que lo hace real** — sin esto la separación se degrada en el primer sprint:
+
+```
+en CI, para el artefacto marcado como redistribuible:
+  para cada registro cargado:
+      afirmar  procedencia().licencia ∈ {dato_publico}
+  fallar el build si aparece una sola procedencia CC-BY-NC
+```
+
+**Generalizable a las doce industrias** (ver `T34`): licencia de **código** y licencia de **datos**
+son dos campos distintos en la ficha de cualquier activo cuyo valor esté en un corpus mantenido
+—sanciones, jurisprudencia, patentes, precios, mapas—. Y conviene medir primero la de datos, porque
+es la que no aparece en ninguna API.
+
+---
+
+## 🆕 P53 — Muralla ética como control de acceso (el hueco más barato del plano)
+
+**Por qué está aquí**: es el único hueco del plano **sin ningún activo open source**, permisivo o
+copyleft (censo: `ethics wall` **0**, `information barrier` **0**, `muralla china` **0**), y a la
+vez **no requiere AI**: es control de acceso por asunto sobre un gestor documental. Es ingeniería de
+permisos corriente, que es exactamente lo que Globant ya construye.
+
+**Qué tiene que hacer** —y cada punto es una obligación, no una función deseable:
+
+1. **Adscripción por asunto, no por persona**: el permiso cuelga del expediente; el equipo se
+   deriva. Un abogado que cambia de equipo pierde el acceso **por construcción**, no por un ticket.
+2. **Negación por defecto** entre asuntos marcados como enfrentados, declarada en el momento de la
+   admisión (`P51` emite esa marca junto al veredicto `CONFLICT` consentido).
+3. **Rastro de acceso inmutable**: quién abrió qué y cuándo. Es la prueba de que la barrera
+   existía, y sin ella la barrera **no es alegable**.
+4. **La barrera alcanza también a los índices**: un buscador documental que devuelva *títulos* del
+   otro lado del muro ya filtró información. Es el fallo que un *retriever* RAG introduce sin que
+   nadie lo note — **el índice vectorial hereda el permiso del documento o no se construye**.
+5. **Separación privilegiado / no privilegiado**, que es lo que exige el régimen australiano:
+   Tranche 2 conserva el secreto profesional y las obligaciones AML/CTF **sí** alcanzan a lo no
+   privilegiado. Son dos clasificaciones distintas sobre el mismo expediente y **deben almacenarse
+   como dos campos**, no derivarse una de la otra.
+
+**Encaje**: el punto 4 es el que convierte esto en un patrón de esta KB y no en una tarea de
+infraestructura. Todo el resto del catálogo legal de esta KB apunta a RAG sobre material del
+despacho; **un RAG sin herencia de permisos es una fuga de confidencialidad con buena interfaz.**

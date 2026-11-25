@@ -1192,3 +1192,79 @@ cartera —plazos, renovaciones, riesgo— no lo está en ninguna región.**
 | [PatentsView/PatentsView-APIWrapper](https://github.com/PatentsView/PatentsView-APIWrapper) | 31 | **`archived`**, 2025-05-22 | Wrapper oficial archivado; la API sí sigue viva |
 | [ip-tools/uspto-opendata-python](https://github.com/ip-tools/uspto-opendata-python) | 114 | Vivo pero **sin commits desde 2022-08-02** | 4,3 años. Ficha excelente, dependencia inviable: se forkea |
 | Flota PQAI (`pqai-db`, `-index`, `-encoder`, `-classifier`, `-reranker`, `-gateway`, `-snippet`) | 6–13 c/u | MIT, **todos 2022–2023** | El núcleo `pqai` sí tiene commit de 2026-10-21; los 7 microservicios no. Se forkea el conjunto |
+
+---
+
+## 🆕 PASE 13 (2026-11-25) — el plano de la **admisión del cliente**: el séptimo plano que aparece al cambiar de vocabulario
+
+Censo previo sobre los ocho ficheros, con límite de palabra (`grep -rE '\b…\b'`):
+`AML` **0** · `KYC` **0** · `sanctions screening` **0** · `screening` **0** · `onboarding` **0** ·
+`FATF` **0** · `FinCEN` **0** · `GAFILAT` **0** · `PEP` **0** · `UBO` **1** · `conflicts` **3**.
+De los 20 activos nuevos de este pase, **0 estaban ya en la KB** (comprobado slug a slug: las tres
+coincidencias de `yente` eran la subcadena de «contri**buyente**» y una línea de método).
+
+Séptimo plano consecutivo que aparece completo al cambiar de vocabulario
+(factura → prueba → norma → acústico → propiedad industrial → **admisión**). Y este cierra
+explícitamente el paréntesis de salvedad del pase 6 que el pase 8 señaló sin resolver:
+*«sin comprobación de conflictos»*. **Era una consulta pendiente, no una nota al pie.**
+
+### Agentes del plano — licencia leída byte a byte, `★`/`pushed_at` medidos 2026-11-25
+
+| Agente | Licencia (leída) | Región | Qué aporta | ★ |
+|---|---|---|---|---|
+| [StephenAbbott/opencheck](https://github.com/StephenAbbott/opencheck) | MIT (1.262 B) | Global | Debida diligencia desde un LEI: deriva identificadores cruzados y abre en abanico **74 fuentes corporativas** nacionales e internacionales; todo sale en BODS v0.4. `pushed_at` **de hoy** | 26 |
+| [StephenAbbott/beneficial-ownership-data](https://github.com/StephenAbbott/beneficial-ownership-data) | MIT (1.076 B) | Global | **Claude Skill** de titularidad real: quién puede ver el registro en **75 jurisdicciones** (corte del 23-nov-2026), AMLR/AMLD6, AMLA CDD RTS, FATF R24/R25, reglas del 50% de OFAC/UE/RU/Canadá | 3 |
+| [olgasafonova/gleif-mcp-server](https://github.com/olgasafonova/gleif-mcp-server) | MIT (1.070 B) | Global | **12 herramientas MCP** sobre GLEIF: alta de LEI, cruce BIC/SWIFT e ISIN, cadenas de propiedad y validación por lotes (2,8 M entidades, 200+ jurisdicciones) | 8 |
+| [Cassxbt/convex-conflict](https://github.com/Cassxbt/convex-conflict) | MIT (1.064 B) | EMEA | Cribado de conflictos en la admisión: resuelve cada parte **al número de registro**, no al nombre, y responde CLEAR / CONFLICT / NEEDS_REVIEW con recibo para el socio | 0 |
+| [satoshkin-dev/satoshkin-aml-mcp](https://github.com/satoshkin-dev/satoshkin-aml-mcp) | MIT | Global | MCP de cribado AML/KYT de carteras cripto; **sin clave corre en modo simulado etiquetado**, nunca confundible con un veredicto real | 0 |
+| [AnChainAI/aml-mcp](https://github.com/AnChainAI/aml-mcp) | **AGPL-3.0** | Global | MCP de sanciones + riesgo blockchain. **Copyleft fuerte y exige cuenta de API de pago**: se cita para descartarlo con la medición, no para construir encima | 3 |
+
+**Cinco permisivos de seis.** Es la primera vez en trece pases que un plano nuevo rinde cinco
+activos MIT con utilidad directa: la causa es que este plano **no es jurídico por origen** sino de
+cumplimiento financiero, donde sí hay público que estrella y financiación pública detrás.
+
+### 🥇 `opencheck` es el activo más fuerte que esta KB ha medido en un plano nuevo
+
+No por las estrellas (26), sino por cuatro propiedades que no suelen coincidir:
+
+1. **MIT y vivo**: `pushed_at` de hoy, 2026-11-25, y el README se autodescribe en «Phase 615».
+2. **Cruza las cuatro regiones en el propio código**: entre los identificadores que deriva están
+   **CUIT argentino, RUC peruano, CNPJ brasileño y NIT colombiano**, junto a Companies House,
+   SIREN, KvK, Firmenbuchnummer, 法人番号 japonés, UEN singapurense y ACN/ABN australiano.
+   **No es una herramienta anglosajona a la que haya que portar LATAM: ya la habla.**
+3. **Local por construcción** — el mismo patrón `P21` que esta KB viene midiendo: en modo *stub*
+   (sin claves, sin `OPENCHECK_ALLOW_LIVE`) **cada adaptador devuelve datos deterministas de
+   relleno**; el modo real se activa fuente por fuente con variables de entorno.
+4. **Exporta a todo lo demás del plano**: FollowTheMoney (OpenSanctions/OpenAleph), Senzing,
+   Neo4j Cypher, property-graph de BigQuery, tablas de entrada de Google AML AI, y BODS-RDF en
+   TriG para SPARQL. Es la pieza que **une** los dos ecosistemas de este pase.
+
+Y lo que lo hace vendible: `docs/risk-signals.md` publica un **crosswalk regulatorio** contra las
+normas de debida diligencia de **AMLA** (borrador final, septiembre 2026), y sus señales de riesgo
+estructural (capas de propiedad intermedias *por encima del sujeto*, fideicomisos en la cadena,
+testaferros, entidades en jurisdicciones de alto riesgo FATF/UE) **declaran expresamente que no
+fijan umbral regulatorio**. Es la postura correcta y es la que un despacho puede firmar.
+
+> ⚠️ El crosswalk a «AMLA CDD RTS, borrador final de 1-oct-2026» procede del README y de un issue
+> del repo del estándar, **no de una fuente primaria de AMLA**: se publica marcado. Lo que sí está
+> corroborado por fuentes independientes es que AMLA debía entregar **23 RTS/ITS y guías** a la
+> Comisión antes del **10-jul-2026**.
+
+### 🔴 El hallazgo de método del plano: **las estrellas apuntan a la librería DEPRECADA**
+
+`opensanctions/fingerprints` tiene **149★**; `opensanctions/rigour` tiene **74★**. El doble de
+señal social. Y el README de `fingerprints` dice, en su primera línea:
+
+> «**UPDATE 2025-05:** the next generation of the `fingerprints` codebase is now included in
+> `rigour`. … **This library is now UNMAINTAINED.**»
+
+Ambas MIT, mismo autor, misma organización. Quien ordene el ecosistema por estrellas —que es lo que
+hace cualquier barrido automático, incluido el que prescribe el brief— **se lleva la librería
+muerta y deja la viva**. El `pushed_at` lo discrimina al instante (`fingerprints` 2025-11-24 vs
+`rigour` 2026-11-23) pero **sólo si se mira**, y una librería deprecada sigue recibiendo commits de
+mantenimiento menores que la hacen parecer viva.
+
+**Regla G-L18, generalizable a las doce industrias: dentro de una misma organización, la
+librería con más estrellas puede ser la que fue reemplazada.** La migración no mueve las
+estrellas: el repo nuevo empieza en cero y el viejo conserva el histórico de toda su vida útil.
+Comprobar siempre la **primera línea del README del repo más estrellado** antes de coronarlo.

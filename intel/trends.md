@@ -1016,3 +1016,99 @@ Tres colisiones medidas, siempre con el sentido jurídico en el lado pequeño de
 sus cosas con siglas que la ingeniería ya había ocupado.** La consulta que funciona nunca contiene la
 sigla; contiene el sustantivo del artefacto. Y el caso nuevo que `P31` no cubría: **un estándar con
 punto en el nombre (`ST.96`, `ST.26`) no es consultable por su nombre en ningún motor.**
+
+---
+
+## 🆕 Tendencias del pase 13 (2026-11-25) — el plano de la admisión del cliente
+
+### A. La divergencia regulatoria dejó de ser de calendario y pasó a ser de **signo**
+
+Doce pases describieron la divergencia regulatoria como un problema de fechas: la UE antes, EE.UU.
+después, APAC a su ritmo. **En el plano de la titularidad real eso ya no describe los hechos.**
+
+| Región | Dirección | Hecho fechado |
+|---|---|---|
+| **EE.UU.** | ⬇️ **Retrocede** | FinCEN **elimina permanentemente** el reporte de titularidad real de sociedades nacionales (regla final 11-ago-2026, en vigor 14-ago-2026) **y borra de la base los datos ya declarados por personas estadounidenses** |
+| **UE** | ⬆️ Avanza | AMLR (UE) 2024/1624 aplicable **10-jul-2027**; abogados y notarios sujetos obligados; formatos ya fijados por el Reglamento de Ejecución (UE) 2026/2354 |
+| **Reino Unido** | ⬆️ Ya ejecuta | SRA: **£2,6 M** de multas en el ejercicio cerrado en abril de 2026; casos de sanciones **triplicados** |
+| **Australia** | ⬆️ **Ya en vigor** | Tranche 2: abogados son entidades declarantes ante AUSTRAC desde **1-jul-2026** |
+| **LATAM** | ⬆️ Avanza | Guatemala **Decreto 15-2026** (2-jun-2026) incluye a abogados y notarios; GAFI R.23 vía GAFILAT |
+
+La consecuencia práctica no es «hay que seguir varios calendarios», es **«el mismo dato es
+obligatorio en una jurisdicción e inexistente en otra»**. Un producto que asuma la existencia de un
+registro público de titularidad real **funciona en Europa y no funciona en Estados Unidos**, y
+desde agosto de 2026 funciona *menos* que antes. **La configuración por jurisdicción deja de ser
+una función y pasa a ser la arquitectura.**
+
+### B. El cumplimiento AML del despacho es **documental en dos tercios**, y eso es medible
+
+El dato que lo sostiene es del supervisor, no de un proveedor: en la SRA británica, los fallos de
+**políticas, controles y procedimientos (PCP)** están presentes en el **67% de las multas**. No se
+multa principalmente por haber blanqueado: **se multa por no poder demostrar el procedimiento.**
+
+Es la misma estructura que el pase 8 encontró en la factura (narrativa vaga, *block billing*,
+aritmética que no cuadra, códigos UTBMS inválidos = **defectos deterministas**) y confirma la regla
+de arquitectura **«models read, rules decide»** en un segundo plano independiente:
+
+- reglas deterministas donde el defecto es verificable (lista, umbral, fecha de actualización,
+  campo ausente, porcentaje que no suma);
+- modelo sólo donde cabe juicio (¿esta estructura societaria es artificiosa?), **siempre citando** y
+  **siempre como propuesta** que una persona acepta.
+
+**Dos planos, dos industrias de origen distintas, misma conclusión.** Esto ya no es una hipótesis de
+esta KB: es un resultado replicado.
+
+### C. `T34` — **el bloqueo comercial se mudó del código al corpus**
+
+Trece pases midiendo licencias de **código**. Este plano trae el primer caso donde **todo el código
+es MIT y el obstáculo es el dato**: la pila de OpenSanctions (10 repos, 9 vivos, todos MIT) con
+datos **CC-BY-NC** cuyo uso comercial exige licencia de pago y token, **y cuya definición de
+«comercial» incluye cribar a tus propios clientes aunque no haya ingresos**.
+
+Ningún campo `license` de ninguna API refleja esto. El pase 5 ya había encontrado el *grant partido
+código/corpus* en la industria legal; **aquí el patrón reaparece fuera de lo jurídico, lo que lo
+convierte en transversal**: en cualquier industria donde el valor esté en un corpus mantenido
+—sanciones, jurisprudencia, patentes, precios, mapas— **la licencia del software es la pregunta
+fácil y la equivocada**.
+
+**Regla operativa**: en la ficha de cada activo, licencia de **código** y licencia de **datos** son
+**dos campos distintos**. Si sólo hay uno, está sin medir.
+
+### D. `T35` — la señal social envejece al revés: **el repo más estrellado puede ser el jubilado**
+
+`opensanctions/fingerprints` **149★** y *UNMAINTAINED* declarado desde mayo de 2025;
+`opensanctions/rigour` **74★** y es su sucesora. Las estrellas no migran: el repo nuevo arranca en
+cero y el viejo conserva el acumulado de toda su vida útil. Un barrido ordenado por estrellas
+**corona sistemáticamente a la librería reemplazada**, y el filtro de dormancia no la salva porque
+sigue recibiendo commits de mantenimiento.
+
+Esto acota una tendencia propia que esta KB arrastra desde el pase 5 (**T-P5-1**, «el caudal de
+activos nuevos se ha secado»): parte de esa sequía era **el instrumento**, no el terreno. Ordenar
+por estrellas mide **antigüedad acumulada**, no vigencia.
+
+### E. La admisión es el **primer** punto del expediente, y por eso es el mejor punto de entrada
+
+Lectura conjunta con el pase 8, que encontró la factura:
+
+- La **factura** es la única superficie de cumplimiento que alcanza al 100% de los expedientes… **al
+  final**.
+- La **admisión** los alcanza al **principio**, y además decide si el expediente debe existir.
+
+Un error en la factura se corrige con un ajuste. Un error en la admisión —aceptar al cliente
+equivocado, no detectar el conflicto, no documentar el programa antes del primer servicio
+designado— **no se corrige: se declara**. En Australia el art. 26P exige el programa **antes** de
+prestar el servicio; en la SRA, dos de cada tres multas son documentales.
+
+**Es el punto del ciclo de vida del expediente con el mayor cociente entre riesgo y esfuerzo de
+ingeniería**, y es donde no hay producto permisivo vivo: los dos orquestadores más estrellados del
+plano (`ballerine`, 2.455★; `openownership/register`) **están archivados los dos**.
+
+### F. Lo que NO cambió, y conviene dejar de reverificar
+
+- Calendario post-Omnibus del EU AI Act: **sexta** corroboración. Estable. No se revisa más.
+- Comoditización por arriba (los cuatro laboratorios con vertical legal): sin novedad este pase.
+- Adopción: Clio 2026 sitúa el uso entre **71% y 87%** según segmento, con herramientas genéricas
+  (ChatGPT, Copilot) todavía en cabeza al **43-48%**, y proyecta utilización del **42%**. Coherente
+  con lo publicado en los pases 7 y 8; **se registra sin reabrir el análisis**.
+- Un dato nuevo de Clio que sí encaja en este plano: **46% de los consumidores consultaría a una AI
+  antes de contactar con un abogado.** La admisión no empieza en el despacho; empieza antes.

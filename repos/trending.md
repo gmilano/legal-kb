@@ -9,6 +9,94 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-25 (pase 13) — la **admisión del cliente**: una organización MIT entera viva, y el primer canal que distingue *renombrado* de *muerto*
+
+### Infraestructura añadida este pase — el espinazo permisivo del plano
+
+| Repo | Licencia (leída) | ★ | `pushed_at` | Capa |
+|---|---|---|---|---|
+| [opensanctions/opensanctions](https://github.com/opensanctions/opensanctions) | MIT | 884 | 2026-11-25 | Crawler y definiciones de dataset |
+| [opensanctions/nomenklatura](https://github.com/opensanctions/nomenklatura) | MIT (1.126 B) | 274 | 2026-11-24 | Resolución de entidades + linaje de dato |
+| [opensanctions/yente](https://github.com/opensanctions/yente) | MIT (1.092 B) | 189 | 2026-11-25 | API de cotejo autoalojable |
+| [opensanctions/followthemoney](https://github.com/opensanctions/followthemoney) | MIT | 122 | 2026-11-20 | **La ontología de entidades** |
+| [opensanctions/rigour](https://github.com/opensanctions/rigour) | MIT | 74 | 2026-11-23 | Limpieza de nombres, direcciones e identificadores |
+| [opensanctions/countrynames](https://github.com/opensanctions/countrynames) | MIT | 71 | 2026-07-16 | País en cualquier idioma → ISO |
+| [openownership/data-standard](https://github.com/openownership/data-standard) | **COMPUESTO** (31.729 B) | 85 | 2026-11-10 | BODS v0.4: esquema Apache-2.0 + docs GFDL-1.3 |
+| [openownership/visualisation-tool](https://github.com/openownership/visualisation-tool) | Apache-2.0 | 29 | 2026-03-29 | Visualización de titularidad |
+| [Sociovestix/lenu](https://github.com/Sociovestix/lenu) | **CC0-1.0** | 23 | 2025-09-25 | Forma jurídica (ELF) desde el nombre; la que GLEIF reconoce |
+| [tazama-lf/case-management-system](https://github.com/tazama-lf/case-management-system) | Apache-2.0 (11.357 B) | 12 | 2026-11-24 | Gestión de casos (Linux Foundation) |
+| [opensource-finance/osprey](https://github.com/opensource-finance/osprey) | Apache-2.0 (11.254 B) | 4 | 2026-11-24 | Motor de reglas CEL + 12 reglas FATF |
+
+### 🔌 `T-P13-1` — **las tres clases de «no lo encuentro» ahora se distinguen**, combinando dos canales
+
+El pase 8 dejó escrito que `search/repositories` devuelve «422 idéntico para renombrado e
+inexistente». **Ya no hace falta conformarse**: cruzando ese canal con `git ls-remote` salen tres
+clases separables, medidas hoy las tres.
+
+| `search/repositories` | `git ls-remote` | Diagnóstico | Caso medido hoy |
+|---|---|---|---|
+| **422** Validation Failed | **0 refs** | No existe, o es privado | `mylesparslow-collab/conflicts-desk`, `StanislavEleninWeb/LegalIntakeReceptionist`, `Studio-V-Tech/tracker` |
+| **422** Validation Failed | **> 0 refs** | **RENOMBRADO** — GitHub redirige | `Clayton0818/Legal-intake-engine` → `Legal-Case-Management-Practice-Engine` |
+| `total_count: 0` **sin error** | **> 0 refs** | Existe pero **NO ESTÁ INDEXADO** | `velbon/aml-fraud-transaction-monitoring` |
+
+**La prueba del renombrado es el SHA.** `ls-remote HEAD` sobre los dos nombres devuelve
+`4f8bf0c6aafc6df3ccfd23f2e58f07396eba4713` **idéntico** ⇒ es el mismo repo bajo dos nombres.
+
+Y de aquí sale la corrección de método que importa: **`ls-remote` sigue silenciosamente los
+redirectores de renombrado de GitHub**, así que *no* prueba que el nombre escrito sea el vigente,
+sólo que **algo** responde en esa ruta. El nombre viejo seguirá funcionando en una URL para
+siempre, con lo cual **una fila con el slug obsoleto pasa cualquier comprobación de enlace y aun
+así está mal**. El pase 8 llamó a `ls-remote` «el único canal de existencia fiable»: sigue siendo
+cierto para *existencia* y **queda acotado para *identidad***.
+
+> `total_count: 0` sin error es, además, una clase nueva: el repo existe y la API de búsqueda no lo
+> conoce. Un barrido que sólo use `search/repositories` lo declara inexistente — y por eso este
+> pase no descartó `velbon` por inexistente sino por ser **fork AGPL de `jube-home`**, que es la
+> razón correcta.
+
+### 🧮 `T-P13-2` — `T-P12-6` confirmado: la regla de bandas de bytes **ya sólo sirve de triaje**
+
+El pase 12 degradó la regla de bandas (`932-G1`) a triaje. Doce lecturas nuevas hoy lo confirman y
+**ensanchan las dos bandas por los dos extremos**:
+
+| Licencia | Banda previa publicada | Lecturas de hoy | Veredicto |
+|---|---|---|---|
+| MIT | 1.056–1.080 B | **1.064 · 1.070 · 1.073 · 1.076 · 1.087 · 1.092 · 1.098 · 1.126 · 1.262 · 1.276** | Banda **rota** por arriba: 4 de 10 fuera |
+| Apache-2.0 | 11.350–11.454 B | **11.254 · 11.314 · 11.357 · 11.357 · 11.358** | Banda **rota** por abajo |
+| AGPL-3.0 | 34.523 B «constante exacta» | **34.522** | Roto por **1 byte** |
+
+Causa identificada y mecánica: **el texto MIT lleva la línea de copyright dentro**, así que cada
+titular adicional engorda el fichero. `nomenklatura` (1.126 B) tiene **dos** líneas de copyright;
+las dos lecturas de 1.262 y 1.276 B son de ficheros MIT íntegros con encabezados más largos.
+**La banda no mide la licencia: mide cuánta gente la firmó.** Para Apache-2.0 la variación viene del
+apéndice. Conclusión práctica: **la banda sirve para sospechar un compuesto, nunca para afirmar una
+licencia.** Lo único que afirma es leer el fichero, y es una llamada.
+
+### 🗑️ Clases de descarte medidas en este plano
+
+- **Sin licencia, 5/5 rutas 404** (`LICENSE`, `.md`, `.txt`, `COPYING`, `LICENCE`): 9 repos, entre
+  ellos `bellingcat/toolkit` (**710★**) y —lo llamativo— **tres de la propia organización Open
+  Ownership**: `bodsdata` (16★), `cove-bods` (5★, el validador oficial de BODS) y
+  `bodsriskdetection` (8★). Una organización que licencia impecablemente su estándar **deja sin
+  licencia su instrumental**.
+- **Archivado**: `ballerine-io/ballerine` (2.455★) y `openownership/register` (20★).
+- **Copyleft + API de pago**: `AnChainAI/aml-mcp` (AGPL-3.0, dormido desde 2025-09-04).
+- **Dato restringido bajo código permisivo**: toda la pila de OpenSanctions (ver `T33` en
+  `agents/trending.md`).
+
+### 🔌 Estado de los canales — remedido hoy (se reescribe porque cambia entre sesiones)
+
+| Canal | ¿Sirve? | Medición de hoy |
+|---|---|---|
+| `gh api search/repositories -f q='repo:<slug>'` | ✅ | ★, SPDX, `pushed_at`, `archived`, forks en una llamada. **422** = inexistente *o renombrado*; **`total_count:0`** = inexistente *o no indexado* |
+| `git ls-remote https://github.com/<slug>` | ✅ | Único oráculo de alcanzabilidad. **Sigue redirectores de renombrado** ⇒ no prueba identidad. 0 refs no distingue inexistente de privado (pide credenciales, no da 404) |
+| `curl raw.githubusercontent.com/<slug>/HEAD/<ruta>` | ✅ | Único canal de lectura de licencia. 200/404 discrimina |
+| `gh api orgs/<org>/repos` | ❌ **NUEVO** | **403**: «sessions are bound to their configured repositories». Sustituto que **sí** funciona: `search/repositories -f q='user:<org>' -f per_page=100` — así se levantaron las 28 filas de OpenSanctions y Open Ownership |
+| `curl -sI github.com/<slug>` | ❌ | **403 para todo** a través del proxy. **Quinto pase consecutivo midiéndolo**: la comprobación de URL que prescribe el brief sigue llevando **cero información** en este entorno |
+| `gh api repos/<o>/<n>` | ❌ | 403 |
+
+---
+
 ## 🆕 2026-11-25 (pase 12) — la propiedad industrial: **una organización MIT entera**, y la regla de bandas de licencia se cae
 
 El activo estructural del pase no es un repo: es **`patent-dev`**, una organización que publica
