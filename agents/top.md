@@ -1112,3 +1112,83 @@ reparto, no por una concesión. Leído byte a byte:
   `courtroom transcription` = **7** (de los 7, **uno** permisivo y vivo).
 
 La capa con **113.000 estrellas de infraestructura** tiene **cero estrellas de producto jurídico**.
+
+## 🆕 PASE 12 (2026-11-25) — el plano de la **propiedad industrial**: el sexto plano que aparece al cambiar de vocabulario
+
+Censo de entrada sobre los ocho ficheros, hecho **antes** de consultar nada. Se cuenta con límite de
+palabra porque sin él el censo miente: `EPO` devuelve **527** aciertos que son todos la palabra
+«repo», y `visa` devuelve **30** que son todos «revisa».
+
+| Término consultado | Ocurrencias previas en la KB |
+|---|---|
+| `patente` · `trademark` · `marca registrada` | 0 · 0 · 0 |
+| `WIPO` · `OMPI` · `EUIPO` · `Espacenet` · `INPADOC` | 0 · 0 · 0 · 0 · 0 |
+| `ST.96` · `PCT` · `prior art` · `estado de la técnica` | 0 · 0 · 0 · 0 |
+| `annuity` · `renewal` · `infringement` · `invention` | 0 · 0 · 0 · 0 |
+| `intellectual property` · `propiedad intelectual` | 0 · 1 |
+| `USPTO` · `patent` (con límite de palabra) | 2 · 2 — **la misma fila** |
+
+Veintiuna consultas y **una sola fila previa** en 8.974 líneas: `Tam1379/uspto_fpd_mcp`, con la
+descripción cortada a mitad de palabra («USPTO Final Pe»). El plano donde vive el activo más caro de
+la cartera del cliente corporativo —patentes y marcas— estaba vacío. **34 activos nuevos verificados
+byte a byte, 0 solapaban con la KB.**
+
+### Agentes y clientes del plano — licencia leída byte a byte + `ls-remote` + `search/repositories`
+
+| Agente | Licencia (leída) | Región | Qué aporta | ★ | Último commit |
+|---|---|---|---|---|---|
+| [RobThePCGuy/Claude-Patent-Creator](https://github.com/RobThePCGuy/Claude-Patent-Creator) | MIT (1.069 B) | Global | Redacción asistida de solicitud completa. El más estrellado del plano | 216 | 2026-11-20 |
+| [ip-tools/python-epo-ops-client](https://github.com/ip-tools/python-epo-ops-client) | Apache-2.0 (10.173 B) | **EMEA** | Cliente Python de **EPO OPS**. 12 años vivo, commit de hace 4 días | 197 | 2026-11-21 |
+| [pqaidevteam/pqai](https://github.com/pqaidevteam/pqai) | MIT (1.117 B) | Global | Servidor de búsqueda de **estado de la técnica** por descripción en lenguaje natural | 140 | 2026-10-21 |
+| [PisenAILab/china-patent-figure-skill](https://github.com/PisenAILab/china-patent-figure-skill) | MIT (1.087 B) | **APAC** (China) | **Dibujos de patente** conformes a CNIPA. Creado hace 4 semanas | 100 | 2026-10-30 |
+| [lsj4232/KR_PATENT_SKILL](https://github.com/lsj4232/KR_PATENT_SKILL) | MIT (1.085 B) | **APAC** (Corea) | Redacción de patente coreana como *skill* de agente | 67 | 2026-11-20 |
+| [handsomeZR-netizen/cn-patent-drafter](https://github.com/handsomeZR-netizen/cn-patent-drafter) | MIT (1.075 B) | **APAC** (China) | Redactor de invención para CNIPA | 65 | 2026-05-06 |
+| [chrisryugj/korean-patent-mcp](https://github.com/chrisryugj/korean-patent-mcp) | MIT (1.067 B) | **APAC** (Corea) | MCP sobre **KIPRIS**, el registro coreano | 64 | 2026-11-17 |
+| [smcronin/uspto-cli](https://github.com/smcronin/uspto-cli) | MIT (1.068 B) | **North America** | CLI *agent-ready* del **USPTO Open Data Portal** | 43 | 2026-11-19 |
+| [yorkeccak/patents](https://github.com/yorkeccak/patents) | MIT (1.062 B) | Global | Búsqueda de patentes para agentes | 29 | 2026-11-08 |
+| [navisbio/OPS-patent-search-mcp](https://github.com/navisbio/OPS-patent-search-mcp) | MIT (1.066 B) | **EMEA** | MCP de Espacenet/OPS — la alternativa a raspar la web | 23 | 2026-11-05 |
+| [patent-dev/uspto-odp](https://github.com/patent-dev/uspto-odp) | MIT (1.102 B) | **North America** | Cliente Go completo de USPTO ODP. **Commit de hoy** | 18 | 2026-11-25 |
+| [volfpeter/uspto-patent-citation-graph](https://github.com/volfpeter/uspto-patent-citation-graph) | MIT (1.067 B) | **North America** | Grafo de citas de patentes US | 16 | 2025-05-05 |
+| [patent-dev/epo-ops](https://github.com/patent-dev/epo-ops) | MIT (1.102 B) | **EMEA** | Cliente Go de EPO OPS. **Commit de hoy** | 10 | 2026-11-25 |
+| [smcronin/epo-cli](https://github.com/smcronin/epo-cli) | MIT (1.068 B) | **EMEA** | CLI Go de EPO OPS | 8 | 2026-11-13 |
+| [nuri428/langchain_kipris_tools](https://github.com/nuri428/langchain_kipris_tools) | Apache-2.0 (11.357 B) | **APAC** (Corea) | Herramientas LangChain sobre KIPRIS. ⚠️ Sin commits desde 2025-02-04 | 8 | 2025-02-04 |
+| [john-walkoe/uspto_enriched_citation_mcp](https://github.com/john-walkoe/uspto_enriched_citation_mcp) | MIT (1.086 B) | **North America** | MCP del dataset de citas enriquecidas del USPTO | 7 | 2026-11-12 |
+| [DunlapCoddingPC/pyUSPTO](https://github.com/DunlapCoddingPC/pyUSPTO) | MIT (1.075 B) | **North America** | Cliente Python de USPTO **publicado por un despacho de patentes** | 6 | 2026-11-23 |
+| [patent-dev/dpma-connect-plus](https://github.com/patent-dev/dpma-connect-plus) | MIT (1.103 B) | **EMEA** (Alemania) | Cliente Go de **DPMA Connect Plus**. Única vía permisiva al registro alemán. **Commit de hoy** | 2 | 2026-11-25 |
+| [anseljh/euipo-tm-client](https://github.com/anseljh/euipo-tm-client) | MIT (1.074 B) | **EMEA** | Cliente de **marcas EUIPO**. El único activo de marca permisivo y vivo que encontró este pase | 1 | 2026-09-18 |
+| [kitepon/IP-MCP](https://github.com/kitepon/IP-MCP) | MIT (1.068 B) | **APAC** (Japón) | MCP de PI con alcance JPO. Único resultado de `JPO patent japan api` (total 1) | 0 | 2026-11-06 |
+| [ChloePark85/kipris-cli](https://github.com/ChloePark85/kipris-cli) | **MIT-0** (905 B) | **APAC** (Corea) | CLI de KIPRIS. **MIT No Attribution**: el grant más permisivo de toda la KB | 0 | 2026-05-04 |
+| [milaniseb12-png/inpi-marcas-mcp-server](https://github.com/milaniseb12-png/inpi-marcas-mcp-server) | MIT (1.080 B) | **LATAM** (Brasil) | MCP de **marcas del INPI brasileño** | 0 | 2026-09-11 |
+| [mcp-dir/inpi_patentes-mcp](https://github.com/mcp-dir/inpi_patentes-mcp) | MIT (1.071 B) | **LATAM** (Brasil) | MCP de **patentes del INPI** | 0 | 2026-08-30 |
+| [CarlsRemy/onapi-utils](https://github.com/CarlsRemy/onapi-utils) | MIT (1.078 B) | **LATAM** (R. Dominicana) | Utilidades para **ONAPI**. El único activo del Caribe de este plano | 0 | 2025-10-29 |
+| [veered-org/pendant-patent-docketing](https://github.com/veered-org/pendant-patent-docketing) | MIT (1.063 B) | Global | **Docketing** permisivo. 6 semanas de vida, 0★ — la pata «permisivo+específico» de `T28` | 0 | 2026-10-15 |
+| [angela-125/ST26_sequence-xml-generator](https://github.com/angela-125/ST26_sequence-xml-generator) | MIT (1.067 B) | Global | **La única implementación permisiva de WIPO ST.26 que existe.** Ver `T-P12-2` | 0 | 2026-05-26 |
+
+### 🔴 `T-P12-4` — las cuatro regiones se separan por **tipo de artefacto**, no por volumen
+
+Primera vez que esta KB puede caracterizar las cuatro regiones por *qué construyen* en lugar de por
+cuánto. Es el hallazgo comercialmente más directo del pase:
+
+- **North America** construye **clientes de datos y datasets oficiales**: USPTO ODP, PatentsView,
+  grafos de citas. Financiación pública detrás, licencias permisivas, y **ningún producto de bufete**.
+- **EMEA** construye **clientes de API de oficina**: EPO OPS (dos implementaciones independientes),
+  EPO Bulk Data, DPMA, EUIPO. Es la región con más oficinas distintas que integrar y se nota.
+- **APAC** construye **redacción**: `KR_PATENT_SKILL` (67★), `cn-patent-drafter` (65★),
+  `china-patent-figure-skill` (100★) — los tres MIT, los tres creados en los últimos 7 meses, y con
+  **de 10 a 100 veces las estrellas** de cualquier intento occidental de docketing. Mientras
+  Occidente discute si se puede usar AI para redactar, APAC publicó las plantillas.
+- **LATAM** construye **raspadores**: de 11 resultados de `patente INPI`, **10 no tienen licencia** y
+  son TCCs, monitores de leads o prototipos de 0★. Lo permisivo son 3 MCP de 0★ (dos de Brasil, uno
+  de República Dominicana) y ninguno tiene fork.
+
+La lectura para un engagement: **la capa de redacción ya está resuelta y es MIT; la capa de
+cartera —plazos, renovaciones, riesgo— no lo está en ninguna región.**
+
+### 🪦 Mortalidad de este plano (`T74` cobrada dos veces más)
+
+| Repo | ★ | Estado medido | Por qué importa |
+|---|---|---|---|
+| [parkerhancock/patent_client](https://github.com/parkerhancock/patent_client) | 128 | **`archived`**, último push 2026-04-24 | Era el 2.º más estrellado de `EPO OPS patent`. Entraba por estrellas; lo frenó el campo `archived` |
+| [PatentsView/PatentsView-APIWrapper](https://github.com/PatentsView/PatentsView-APIWrapper) | 31 | **`archived`**, 2025-05-22 | Wrapper oficial archivado; la API sí sigue viva |
+| [ip-tools/uspto-opendata-python](https://github.com/ip-tools/uspto-opendata-python) | 114 | Vivo pero **sin commits desde 2022-08-02** | 4,3 años. Ficha excelente, dependencia inviable: se forkea |
+| Flota PQAI (`pqai-db`, `-index`, `-encoder`, `-classifier`, `-reranker`, `-gateway`, `-snippet`) | 6–13 c/u | MIT, **todos 2022–2023** | El núcleo `pqai` sí tiene commit de 2026-10-21; los 7 microservicios no. Se forkea el conjunto |

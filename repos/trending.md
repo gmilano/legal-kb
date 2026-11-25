@@ -9,6 +9,107 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-25 (pase 12) — la propiedad industrial: **una organización MIT entera**, y la regla de bandas de licencia se cae
+
+El activo estructural del pase no es un repo: es **`patent-dev`**, una organización que publica
+clientes Go **MIT** para las oficinas de patentes, y que estaba fuera del alcance de las 21
+consultas previas de esta KB porque ninguna contenía la palabra «patent».
+
+### Infraestructura añadida este pase — el espinazo permisivo del plano
+
+| Repo | Licencia (leída) | Región | Qué cubre | ★ | Creado / último commit |
+|---|---|---|---|---|---|
+| [patent-dev/uspto-odp](https://github.com/patent-dev/uspto-odp) | MIT (1.102 B) | North America | Cliente Go completo del **USPTO Open Data Portal** | 18 | 2026-03-28 / **2026-11-25** |
+| [patent-dev/bulk-file-loader](https://github.com/patent-dev/bulk-file-loader) | MIT (1.103 B) | Global | Descarga y gestión de **ficheros masivos** de patentes | 17 | 2025-02-12 / 2026-11-10 |
+| [patent-dev/kind-codes](https://github.com/patent-dev/kind-codes) | MIT (1.067 B) | Global | **Códigos *kind* con su significado y su línea temporal.** Dataset de referencia, no librería | 11 | 2024-11-08 / 2024-11-08 |
+| [patent-dev/epo-ops](https://github.com/patent-dev/epo-ops) | MIT (1.102 B) | EMEA | Cliente Go de **EPO Open Patent Services** | 10 | 2025-10-23 / **2026-11-25** |
+| [patent-dev/epo-bdds](https://github.com/patent-dev/epo-bdds) | MIT (1.102 B) | EMEA | **EPO Bulk Data Distribution** — la vía de *backfill* histórico | 5 | 2025-10-23 / 2026-11-08 |
+| [patent-dev/dpma-connect-plus](https://github.com/patent-dev/dpma-connect-plus) | MIT (1.103 B) | EMEA (Alemania) | **DPMA Connect Plus**, registro alemán | 2 | 2025-10-23 / **2026-11-25** |
+| [PatentsView/PatentsView-API](https://github.com/PatentsView/PatentsView-API) | BSD-2-Clause (1.293 B) | North America | API del dataset **PatentsView**, financiado por el USPTO | 19 | 2014-09-04 / 2026-04-18 |
+| [ropensci/patentsview](https://github.com/ropensci/patentsview) | **MIT vía `DESCRIPTION`** (`LICENSE` = 47 B) | North America | Cliente R de PatentsView, de rOpenSci. Ver `T-P12-7` | 39 | 2017-02-17 / 2026-11-24 |
+| [pqaidevteam/pqai](https://github.com/pqaidevteam/pqai) | MIT (1.117 B) | Global | Motor de búsqueda de **estado de la técnica** | 140 | 2020-01-22 / 2026-10-21 |
+
+### 🧮 `T-P12-6` — **la regla de bandas de bytes (932-G1) falla en la mitad de las lecturas y queda degradada a triaje**
+
+Esta KB publicó durante once pases que el tamaño del fichero `LICENSE` identifica la licencia, con
+bandas estrechas, y el pase 8 llegó a declarar la banda AGPL **«una constante, no un intervalo:
+34.523 B exactos»**. Las **40 lecturas de hoy la refutan en tres sitios distintos**:
+
+| Licencia | Banda publicada | **Medido hoy** | Veredicto |
+|---|---|---|---|
+| MIT | 1.056–1.090 B | **1.062–1.117 B** (18 lecturas) | `pqai` 1.117 B y los cuatro `patent-dev` 1.102–1.103 B **caen fuera por arriba**. La banda habría marcado cinco MIT limpias como «compuestas» |
+| Apache-2.0 | 11.350–11.454 B | **10.173–11.358 B** (5 lecturas) | `python-epo-ops-client` mide **10.173 B** porque su fichero **termina en `END OF TERMS AND CONDITIONS`: no lleva el APPENDIX**. Verificado leyendo la cola |
+| AGPL-3.0 | **34.523 B «exactos»** | **34.520 B** en `patzilla` | **La «constante» no lo es.** Tres bytes, pero la afirmación publicada era de igualdad exacta |
+| GPL-3.0 | sin banda previa | **35.131 B** (`phpip`) | Banda nueva |
+| MIT-0 | sin banda previa | **905 B** (`kipris-cli`) | Banda nueva. *MIT No Attribution* |
+| BSD-2-Clause | sin banda previa | **1.293 B** (`PatentsView-API`) | Banda nueva |
+
+**Qué sobrevive de la regla:** el tamaño es un **indicio de triaje** útil para ordenar el trabajo, y
+nada más. La evidencia es la **primera línea del fichero**. El error de fondo fue de muestra: las
+bandas se derivaron de repos de un mismo nicho, donde todo el mundo copia el `LICENSE` del mismo
+sitio, y se publicaron como si fueran propiedades del texto de la licencia.
+
+### 🔴 `T-P12-7` — dos modos de fallo del clasificador de licencias, **en direcciones opuestas**, y el peligroso es el segundo
+
+**(a) El `LICENSE` que es un puntero — y afecta a un ecosistema entero.**
+`ropensci/patentsview` tiene un `LICENSE` de **47 bytes** cuyo contenido completo es:
+
+```
+YEAR: 2021
+COPYRIGHT HOLDER: Christopher Baker
+```
+
+GitHub lo clasifica **`NOASSERTION`**. La concesión real está en el manifiesto:
+`DESCRIPTION` dice `License: MIT + file LICENSE`. **Es la convención de CRAN**, así que
+*todo paquete de R en GitHub se lee mal por este camino*, y una auditoría por bandas de bytes lo
+puntúa como «47 B = nada», que es el error máximo posible. **Regla general, aplicable a las doce
+industrias: cuando `LICENSE` falta o es un sello, la concesión está en el manifiesto del
+empaquetador** — `DESCRIPTION` en R, `pyproject.toml`/`setup.cfg` en Python, `package.json` en Node,
+`Cargo.toml` en Rust.
+
+**(b) El clasificador que afirma una licencia que ningún fichero respalda.**
+`cantab/patentscope` (18★) aparece en `search/repositories` como **MIT**. Comprobadas **siete** rutas
+en `raw.githubusercontent.com` —`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING`,
+`mit-license.txt`, `license.md`— todas **404**; y tampoco hay manifiesto (`pyproject.toml`,
+`setup.py`, `package.json`: 404 los tres). Solo `README.md` responde 200, luego `HEAD` resuelve
+bien y la ausencia es real.
+
+Los once pases anteriores solo habían cazado el fallo en la dirección *inocua* (API dice
+`NOASSERTION`, el fichero dice MIT: se pierde un activo bueno). **Este es el inverso y es el
+peligroso, porque se lee como luz verde**: el campo de la API dice «permisivo» y no hay texto que lo
+sostenga. Queda **nombrado y no tabulado**, según la regla del pase 6.
+
+### 🧾 Un error propio, detectado antes de publicar
+
+Mi detector de licencias marcó `PatentsView/PatentsView-API` como **ISC** contra el `BSD-2-Clause`
+de la API, y estuve a punto de publicar una «discrepancia del clasificador». No existía: el patrón
+`ISC` sin límite de palabra estaba casando dentro de **«d·isc·laimer»**, palabra que aparece en toda
+licencia BSD. GitHub tenía razón. **Cualquier detector de licencias por `grep` necesita `\b`**, y el
+fallo es silencioso porque produce un nombre de licencia plausible.
+
+### 🗑️ Clases de descarte medidas en este plano
+
+- **`DURY-LEGAL/*`** — cuatro repos (`euipo-trademark-application`, `ip-portfolio`,
+  `madrid-protocol`, `wipo-trademark`), **0★, sin licencia, los cuatro con fecha 2026-05-03**: son
+  documentos de un despacho, no software. Patrón reconocible y descartable en bloque.
+- **`pipeworx-io`** — **2.109 repositorios** MCP generados en serie, de 1–11★. `mcp-euipo` (MIT
+  1.070 B) y `mcp-usitc-edis` (MIT 1.070 B) son reales y del plano, pero son *inventario*, no
+  proyectos curados: se nombran, no se celebran.
+- **Raspadores de Espacenet** — seis encontrados (`Scrapy_Espacenet`, `espacenet-scraper`,
+  `Espacenet_Patents_Search`, `despacenet`…), **todos de 0–1★ y sin licencia**. Hay dos clientes MIT
+  de la API oficial: raspar no tiene justificación técnica ni jurídica.
+
+### 🔌 Estado de los canales — remedido hoy (se reescribe porque cambia entre sesiones)
+
+| Canal | Estado 2026-11-25 | Nota |
+|---|---|---|
+| `gh api -X GET search/repositories -f q='repo:<slug>'` | **OK** | ★, SPDX, `pushed_at`, `created_at`, `forks`, `archived` en una llamada. 34/34 resolvieron |
+| `git ls-remote https://github.com/<slug>` | **OK** | Único canal fiable de existencia. 0 refs = no existe |
+| `curl raw.githubusercontent.com/<slug>/HEAD/<ruta>` | **OK** | Único canal de lectura de licencia. 200/404 discrimina |
+| `curl -sI https://github.com/<slug>` | **403 para todo** | **Quinto pase consecutivo midiéndolo.** La comprobación de URL que prescribe el brief sigue llevando **cero información** en este entorno |
+| `gh api repos/<o>/<n>` | **403** | Acotado por la sesión |
+| `WebFetch` a `ip-tools.org` y `projectpq.ai` | **ENOTFOUND** | **Nuevo hoy:** dos directorios del sector fuera de la lista de dominios permitidos de la sesión. Sorteado por el canal GitHub (`org:ip-tools` devolvió los 11 repos) |
+
 ## 🆕 2026-11-25 (pase 11) — el plano **acústico**: 113.000★ de infraestructura, **0★** de producto jurídico
 
 El contraste más extremo que esta KB ha medido en once pases. La infraestructura de voz es

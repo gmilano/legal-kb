@@ -1916,3 +1916,143 @@ Japón o Corea.**
 > OCR, TTS— **la licencia puede variar con el mercado del engagement**. Una auditoría hecha en
 > Norteamérica **no vale** para la propuesta de LATAM, y es el tipo de defecto que no aparece hasta
 > la due diligence del cliente.
+
+## 🆕 P45 — Puerta de **renovaciones y anualidades**: el único plano de esta KB donde el fallo es irreversible
+
+**Problema.** Una anualidad o una renovación de marca olvidada **abandona el derecho de forma
+definitiva** en la mayoría de jurisdicciones: no hay restitución ni recurso, y el activo que caduca
+es normalmente el más caro de la cartera. El censo de este pase midió la herramienta abierta
+disponible para eso: `patent annuity renewal deadline` ⇒ **1 repo, sin licencia**.
+
+**Lo que NO se hace.** Forkear [`jjdejong/phpip`](https://github.com/jjdejong/phpip) (GPL-3.0). Trae
+el calendario de renovaciones resuelto y es la opción que *parece* ahorrar seis meses; arrastra
+GPL-3.0 al entregable comercial. Se despliega tal cual como sistema de registro del cliente y **se
+lee como especificación funcional**: su modelo de datos de plazos es el mejor documento de requisitos
+que existe en abierto.
+
+**Receta, con la regla `MODELS READ, RULES DECIDE` del `P29`:**
+
+1. **Estado oficial, de la oficina, nunca de un agregador:**
+   [`patent-dev/uspto-odp`](https://github.com/patent-dev/uspto-odp) (MIT) ·
+   [`patent-dev/epo-ops`](https://github.com/patent-dev/epo-ops) (MIT) ·
+   [`patent-dev/dpma-connect-plus`](https://github.com/patent-dev/dpma-connect-plus) (MIT) ·
+   [`chrisryugj/korean-patent-mcp`](https://github.com/chrisryugj/korean-patent-mcp) (MIT) ·
+   [`milaniseb12-png/inpi-marcas-mcp-server`](https://github.com/milaniseb12-png/inpi-marcas-mcp-server) (MIT).
+2. **Backfill histórico** con [`patent-dev/epo-bdds`](https://github.com/patent-dev/epo-bdds) y
+   [`patent-dev/bulk-file-loader`](https://github.com/patent-dev/bulk-file-loader) (MIT los dos).
+   Nunca raspando Espacenet: los seis raspadores que existen son de 0–1★ y sin licencia.
+3. **Tabla de significados** —el paso que se salta todo el mundo—:
+   [`patent-dev/kind-codes`](https://github.com/patent-dev/kind-codes) (MIT) traduce el código *kind*
+   del documento a su posición en el ciclo de vida, que es lo que determina **qué plazo corre**.
+4. **Escalera de plazos determinista.** Aritmética de fechas en código versionado, con prueba de
+   regresión por jurisdicción y reproducible al día. **Cero modelo en este paso.**
+5. **El modelo, solo en la última milla:** redactar el aviso legible para el cliente y convertir la
+   prosa de un dictamen de oficina en tareas con fecha — cada una **citando el párrafo** del que
+   sale, y un verificador que descarta la tarea cuya cita no se comprueba.
+6. **Doble control de caducidad:** el sistema avisa, y además **reconcilia contra el estado publicado
+   por la oficina** tras la fecha. El fallo que mata no es «no avisé», es «avisé y nadie lo hizo».
+
+**Por qué se vende.** Es el único entregable de esta KB cuyo valor no se mide en horas ahorradas sino
+en **un activo que no se pierde**. Y la contraparte compradora no es el despacho: es el departamento
+de PI corporativo, que es donde ya está la cartera de Globant (mismo reencuadre de comprador que el
+`P29`).
+
+## 🆕 P46 — Búsqueda de estado de la técnica **con informe de exactitud**, no con promesa
+
+**Problema.** Nadie publica su exactitud. El pase 11 lo midió en transcripción (`T-P11-2`: «nadie
+vende exactitud certificada») y aquí se repite: el único banco agéntico de estado de la técnica que
+existe, [`AIforIP/PatEx-Gym`](https://github.com/AIforIP/PatEx-Gym) (13★), **no tiene licencia**.
+
+**Receta:**
+
+1. **Recuperación:** [`pqaidevteam/pqai`](https://github.com/pqaidevteam/pqai) (MIT) como núcleo
+   semántico. ⚠️ Sus siete microservicios llevan dormidos desde 2022–2023: **se forkea la flota
+   completa y se asume mantenimiento**, no se declara dependencia.
+2. **Fuentes:** [`ip-tools/python-epo-ops-client`](https://github.com/ip-tools/python-epo-ops-client)
+   (Apache-2.0, vivo) para EPO OPS;
+   [`PatentsView/PatentsView-API`](https://github.com/PatentsView/PatentsView-API) (BSD-2) y
+   [`ropensci/patentsview`](https://github.com/ropensci/patentsview) (MIT) para bibliografía y
+   cesionarios US.
+3. **Estructura:**
+   [`volfpeter/uspto-patent-citation-graph`](https://github.com/volfpeter/uspto-patent-citation-graph)
+   (MIT) — la citación es la señal de relevancia que el examinador ya usa.
+4. **El entregable que falta:** `recall@k` sobre las citas que el examinador **efectivamente** opuso
+   en expedientes ya resueltos. Es un banco de pruebas que se construye con datos públicos del propio
+   USPTO, y **`PatEx-Gym` se lee como referencia de diseño, no se forkea** (sin licencia).
+5. `AIforIP/PatEx-Gym` y `smcronin/ai-language-patent-applications` (MIT, paquete de réplica) se citan
+   como literatura, no como dependencias.
+
+**Regla:** no se promete «encontramos más estado de la técnica». Se entrega **la medida contra la
+línea base del cliente**, igual que en `P29` con los ahorros de facturación.
+
+## 🆕 P47 — Cartera multi-oficina **solo con fuentes oficiales** (nueve registros, todos permisivos)
+
+Ocho oficinas y nueve clientes MIT/Apache verificados hoy. Es el patrón «MCP de fuentes oficiales»
+(`intel/trends.md` nº 13) aplicado a PI, y la plaza vacía ya no es LATAM entera:
+
+| Registro | Cliente permisivo | Licencia | Hueco |
+|---|---|---|---|
+| USPTO (patentes y expediente) | `patent-dev/uspto-odp`, `smcronin/uspto-cli`, `DunlapCoddingPC/pyUSPTO` | MIT | — |
+| EPO / Espacenet | `patent-dev/epo-ops`, `ip-tools/python-epo-ops-client`, `navisbio/OPS-patent-search-mcp` | MIT / Apache-2.0 | — |
+| DPMA (Alemania) | `patent-dev/dpma-connect-plus` | MIT | 2★, un solo mantenedor |
+| EUIPO (marcas UE) | `anseljh/euipo-tm-client` | MIT | **1★.** Toda la capa de marca EMEA cuelga de un repo |
+| KIPRIS (Corea) | `chrisryugj/korean-patent-mcp`, `ChloePark85/kipris-cli` | MIT / **MIT-0** | — |
+| JPO (Japón) | `kitepon/IP-MCP` | MIT | 0★; `JPO patent japan api` devuelve **total 1** |
+| INPI (Brasil) | `milaniseb12-png/inpi-marcas-mcp-server`, `mcp-dir/inpi_patentes-mcp` | MIT | 0★ y 0 forks los dos |
+| ONAPI (R. Dominicana) | `CarlsRemy/onapi-utils` | MIT | 0★. Único activo del Caribe |
+| CNIPA (China) | `faruheaisha/cnipa-patent-kit`, `roy-tian/cn-patent-ipc` | MIT | 2★ y 0★ |
+| **IMPI (México)** | **ninguno** | — | **Hueco medido: `IMPI mexico marcas` ⇒ 2 resultados, 0★, sin licencia** |
+| **CGPDTM (India)** | **ninguno permisivo encontrado** | — | Hueco medido |
+
+**Regla de arquitectura:** un adaptador por oficina detrás de una interfaz común, y el **estado
+canónico siempre el de la oficina**. Las 3 ó 4 oficinas que faltan se construyen con el mismo patrón
+—es el trabajo más pequeño y mejor acotado de todo este plano— y son **entregables reutilizables en
+todos los engagements de la región**.
+
+## 🆕 P48 — `ST.96` como contrato de integración: es una **construcción**, y el alcance está medido
+
+**Honestidad primero:** no existe implementación abierta de ST.96. `wipo xml schema patent trademark`
+⇒ `total_count` **0**; `ST96` ⇒ 9 repos, todos de prácticas universitarias. Esto **no es un patrón de
+composición: es un proyecto**, y el valor de haberlo medido es que el alcance deja de ser una
+incógnita.
+
+**Lo que hay para empezar:**
+
+- Los **esquemas oficiales de WIPO, ST.96 v9.0**, aprobados por el *XML4IP Task Force* el
+  **2025-04-01**, publicados en ZIP (normal y *flattened*), con seis familias de componentes:
+  comunes, patente, marca, diseño, indicación geográfica y copyright.
+- **ST.26** (listados de secuencias, obligatorio en PCT) tiene **una** implementación permisiva de la
+  que partir: [`angela-125/ST26_sequence-xml-generator`](https://github.com/angela-125/ST26_sequence-xml-generator) (MIT).
+- Las implementaciones de oficina (el USPTO publica esquemas propios **basados** en componentes
+  ST.96) sirven de referencia de cómo se restringe el estándar en la práctica.
+
+**Alcance recomendado:** **no** se implementa ST.96 completo. Se tipa el **subconjunto** de las
+familias que el cliente realmente presenta, con validación contra el XSD oficial y una prueba por
+cada campo que su oficina exija. Y se consulta por el **sustantivo del artefacto**, nunca por el
+nombre del estándar — ver `T-P12-1`: `ST.96` devuelve 2.683 resultados de pantallas OLED.
+
+## 🆕 P49 — La capa de **redacción** ya está resuelta, es MIT, y es de APAC
+
+El hallazgo que más acorta un engagement: mientras Occidente debate si se puede redactar con AI,
+APAC publicó las plantillas bajo MIT y con tracción real (65–216★ en repos de semanas o meses).
+
+**Composición, con enrutador por jurisdicción:**
+
+1. **Memoria y reivindicaciones:**
+   [`RobThePCGuy/Claude-Patent-Creator`](https://github.com/RobThePCGuy/Claude-Patent-Creator)
+   (MIT, 216★, 35 forks) como base general.
+2. **Por jurisdicción:** [`lsj4232/KR_PATENT_SKILL`](https://github.com/lsj4232/KR_PATENT_SKILL)
+   (MIT, 67★) para Corea · [`handsomeZR-netizen/cn-patent-drafter`](https://github.com/handsomeZR-netizen/cn-patent-drafter)
+   (MIT, 65★) para China · [`ThomasMoreAI/legal-skills-open`](https://github.com/ThomasMoreAI/legal-skills-open)
+   (Apache-2.0, 143★, 39 jurisdicciones) como marco de *skills*.
+3. **Dibujos:** [`PisenAILab/china-patent-figure-skill`](https://github.com/PisenAILab/china-patent-figure-skill)
+   (MIT, 100★) — conformidad formal de figuras CNIPA, la causa de objeción más tonta y más frecuente.
+4. **Dos puertas obligatorias antes de que salga nada:**
+   - **Inventoría:** solo personas naturales (USPTO 2025-11-28; igual en LATAM y en la línea DABUS).
+     El expediente registra **qué aportó la persona y qué la herramienta, por reivindicación y con
+     fecha** — el mismo rastro que piden la ABA 512 y el EU AI Act (ver `intel/trends.md` H).
+   - **Responsabilidad de contenido:** la EPO lo dice expresamente en las Guidelines 2026 (Sección 5
+     del Prólogo) — la parte responde del contenido **se haya usado AI o no**. La revisión humana no
+     es una buena práctica: es el régimen de responsabilidad.
+5. **Clasificación CPC/IPC:** `roy-tian/cn-patent-ipc` (MIT) y `NICTA/t3as-pat-clas` (GPL-3.0, solo
+   lectura). ⚠️ Capa pobre: `CPC IPC patent classification` ⇒ **total 4**.

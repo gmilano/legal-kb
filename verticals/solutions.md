@@ -553,3 +553,48 @@ determinista (25 líneas por página, numeración consecutiva, índice `página:
 procesal de cada foro y el gate de certificación humana. No hay implementación permisiva de `PTX`
 ni de `LEF` (ver `T31` en `repos/trending.md`). **Es código a escribir y es pequeño** — y es lo
 único que separa «texto con timestamps» de «documento que un juzgado acepta».
+
+## 🆕 PASE 12 (2026-11-25) — la vertical de la **cartera de PI**: la plataforma existe, es de abogados de patentes, y es GPL
+
+Hueco cerrado a medias, y la mitad que no se cierra es la que importa para un entregable comercial.
+
+### Las plataformas reales de este plano — verificadas 2026-11-25
+
+| Plataforma | Licencia (leída) | Stack | Qué cubre | ★ | Último commit |
+|---|---|---|---|---|---|
+| [jjdejong/phpip](https://github.com/jjdejong/phpip) | **GPL-3.0 (35.131 B)** | Laravel + MySQL + Apache | **El «Odoo» de la PI.** Gestor de cartera y *docketing* de patentes y marcas, con **renovaciones** e integración **EPO OPS**. Escrito por agentes de la propiedad industrial en ejercicio, liberado porque «no tenemos recursos para vender y mantener nuestro software». 29 forks | 55 | 2026-09-25 |
+| [ip-tools/patzilla](https://github.com/ip-tools/patzilla) | **AGPL-3.0 (34.520 B)** | Python | Plataforma modular de **investigación** de información de patentes y espacio de trabajo documental. 529 refs, commit de ayer. La más viva del plano | 127 | 2026-11-24 |
+| [ip-tools/minesoft-patbase-client](https://github.com/ip-tools/minesoft-patbase-client) | AGPL-3.0 | Python | Cliente de la API de **Minesoft PatBase** (base comercial). ⚠️ Sin commits desde 2018-06-12 | 6 | 2018-06-12 |
+
+⚠️ **Aviso de licencia, y aquí es el eje de la decisión, no una nota al pie.** Las tres plataformas
+verticales de este plano son **copyleft fuerte**, y dos de ellas AGPL. `phpIP` resuelve de fábrica
+exactamente lo que el pase midió como vacío —el calendario de renovaciones— y precisamente por eso
+es la trampa: adoptarlo como base del producto arrastra GPL-3.0 al entregable. **Se despliega como
+sistema de registro del cliente y se lee como especificación; no se forkea para construir producto
+encima.**
+
+### 🔑 `T-P12-3` — la matriz `T28` se confirma por **cuarta vez**, en un plano nuevo y sin una sola excepción
+
+La matriz del pase 8 decía: se pueden tener dos de tres propiedades —específico del sector, maduro,
+permisivo— nunca las tres. Este plano la reproduce con precisión incómoda:
+
+| Combinación | Qué hay en el plano de PI | Medición |
+|---|---|---|
+| **específico + maduro** ⇒ **copyleft** | `phpip` GPL-3.0 (55★, 2017), `patzilla` AGPL-3.0 (127★, 2017), `minesoft-patbase-client` AGPL-3.0 | 3 de 3 |
+| **permisivo + maduro** ⇒ **genérico** | `python-epo-ops-client` Apache-2.0 (197★, 2014), `PatentsView-API` BSD-2 (19★, 2014), `pqai` MIT (140★, 2020) | Mueven bytes; **ninguno sabe qué es un plazo de renovación** |
+| **permisivo + específico** ⇒ **0★ y semanas de vida** | `veered-org/pendant-patent-docketing` (MIT, **0★**, creado 2026-10-15), `Enterprise-DNA-OS/ip-docketing-for-claude-code` (MIT, 0★, 2026-10-18), toda la organización `patent-dev` (2–18★, creada 2025-10/2026-03) | 3 de 3 |
+
+Cuarta industria-plano consecutiva en que se cumple. **Y la consecuencia de arquitectura es la misma
+que en el plano de la factura:** la cartera de PI **se construye** poniendo semántica de PI (código
+*kind*, familia, plazo, anualidad, clase de Niza) sobre espinazo genérico permisivo; **no** se forkea
+la plataforma copyleft que ya la tiene.
+
+### Cómo customizar con AI esta capa — y dónde NO poner el modelo
+
+- **El modelo no calcula plazos.** Una anualidad olvidada abandona la patente de forma irreversible.
+  Toda aritmética de fechas es determinista, reproducible y versionada (ver `P45`).
+- **El modelo no decide inventoría.** USPTO (guía revisada **2025-11-28**) y las oficinas de LATAM
+  exigen **persona natural**; el modelo redacta, la persona firma y consta como inventora.
+- **Dónde sí:** redacción de memoria y reivindicaciones (APAC ya lo tiene resuelto bajo MIT),
+  clasificación CPC/IPC propuesta, cribado de estado de la técnica, y traducción de la prosa de un
+  dictamen de oficina a tareas con fecha.

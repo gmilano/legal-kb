@@ -948,3 +948,71 @@ repo público y vivo. **Se midió y es falso:** los tres eran renombrados o muda
 `<nombre> in:name org:<dueño-antiguo>` **falla por diseño** cuando el repo ha salido de la
 organización, que es justo el caso en que se necesita. **La KB consultada es un canal de resolución
 de renombrados** — `presidio` estaba ya resuelto en `repos/foundations.md` desde el pase 9.
+
+## 🆕 Tendencias del pase 12 (2026-11-25) — el plano de la propiedad industrial
+
+### G. La oficina de patentes se convirtió en usuaria de AI antes que el despacho, y las cuatro grandes lo publicaron
+
+El patrón de los once pases anteriores era: el regulador escribe reglas, el despacho adopta, la
+oficina observa. En PI está **invertido** — quien usa AI en producción es la propia oficina:
+
+- **EPO**: las **Guidelines for Examination 2026**, en vigor desde el **2026-04-01**, traen la
+  **primera sección dedicada al uso de herramientas de AI en el procedimiento** (Sección 5 del
+  Prólogo), con dos afirmaciones simétricas: las partes son **responsables del contenido** de la
+  solicitud *con independencia de que se haya preparado con AI*, y **la propia EPO podrá usar AI**
+  para mejorar la calidad y eficiencia de su trabajo. Además **se suprime la búsqueda acelerada
+  PACE**. La EPO opera `ANSERA` en examen.
+- **USPTO**: pilotos de examen (`ASAP!`) y, a principios de **abril de 2026**, una herramienta de
+  **búsqueda de marcas por imagen**.
+- **CNIPA**: sistema de examen y búsqueda inteligente **desde enero de 2023** (documento WIPO
+  `SCP/37/6`, 2025-09-04), y el **15.º Plan Quinquenal (2026–2030)** instituye un mecanismo de
+  gestión de examen **«AI+»** e investiga **informes de búsqueda previa** para solicitudes de
+  invención.
+- **JPO**: el *AI Action Plan* de 2022 es una hoja de ruta a **cuatro años, hasta 2026**, para
+  llevar la AI al núcleo del examen; la revisión del manual de examen de **marzo de 2026** añadió
+  casos de AI generativa.
+- **KIPO**: integra AI en examen y recursos desde principios de 2023 y en **diciembre de 2023**
+  construyó un modelo de lenguaje propio especializado en documento de patente.
+
+⚠️ Fuentes: las de EPO/CNIPA/KIPO se apoyan en la propia EPO y en el documento de WIPO; las de JPO y
+la reunión de jefes de las IP5 (Tokio, **2026-06-12**) provienen de comentario de parte y **no se han
+verificado contra fuente primaria**. Se publican marcadas.
+
+**Consecuencia comercial:** el argumento de venta en PI no es «la AI acelera la redacción» —eso ya lo
+acepta la oficina—, es **que el expediente aguante el escrutinio de una oficina que también usa AI**.
+
+### H. La inventoría cerró como cuestión jurídica y se abrió como requisito de producto
+
+El eje se cerró en las cuatro regiones y en la misma dirección: **solo una persona natural puede ser
+inventora**. La **guía revisada del USPTO del 2025-11-28** retiró la de febrero de 2024 y devuelve el
+análisis a la **concepción** tradicional: la AI es una herramienta, no una contribuyente, y no se
+aplica un estándar distinto de elegibilidad por haberla usado. La línea `DABUS` quedó igual en EE.
+UU., Reino Unido, Alemania y la EPO; las oficinas de LATAM exigen lo mismo.
+
+Y aquí está la parte de producto, que nadie está vendiendo: si la inventoría depende de la
+**concepción humana** y la redacción se hace con AI, lo que el expediente necesita es **el rastro de
+qué aportó la persona y qué aportó la herramienta** — por reivindicación, con fecha. Es
+**exactamente el mismo artefacto** que el campo de herramienta por entrada de tiempo que el pase 8
+derivó de la ABA 512 y del rastro documental del EU AI Act. **Tercera construcción distinta que pide
+el mismo registro**, y eso ya no es coincidencia: es el entregable transversal de esta KB.
+
+⚠️ Todo este apartado procede de comentario de despachos. La fuente primaria es la notificación del
+*Federal Register* del **2025-11-28** y conviene citarla directamente en cualquier propuesta.
+
+### I. El estándar obligatorio no produce código abierto — ahora con la regla invertida
+
+Ver `agents/trending.md` `T-P12-2`. **UTBMS = 0** implementaciones (pase 8), **ST.96 = 0**, **ST.26 =
+1 y de 0★** (hoy). Tres estándares obligatorios o cuasi-obligatorios, cero o una implementación
+abierta. La hipótesis estructural que queda escrita para refutarla en otra industria: *un estándar
+obligatorio crea proveedores que venden cumplimiento y la implementación nace dentro de ellos; un
+estándar opcional solo sobrevive si es abierto.* **Medir en las otras once: HL7/FHIR, ISO 20022,
+EDIFACT/GS1, IEC 61850, OpenTravel/NDC.**
+
+### J. El vocabulario del sector colisiona con el del hardware, y es la causa medible de once pases de ceguera
+
+`IP` → direcciones de red. `ST.96` → pantallas OLED de 0,96 pulgadas. `LEDES` → la familia LED.
+Tres colisiones medidas, siempre con el sentido jurídico en el lado pequeño del token, con cuatro
+órdenes de magnitud de diferencia. **No es un problema de buscador: es que el sector legal nombra
+sus cosas con siglas que la ingeniería ya había ocupado.** La consulta que funciona nunca contiene la
+sigla; contiene el sustantivo del artefacto. Y el caso nuevo que `P31` no cubría: **un estándar con
+punto en el nombre (`ST.96`, `ST.26`) no es consultable por su nombre en ningún motor.**

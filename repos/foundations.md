@@ -764,3 +764,37 @@ Esta es la pieza que convierte un transcript automático en algo que un tribunal
 | [moonshine-ai/moonshine](https://github.com/moonshine-ai/moonshine) | 11.598 | **El modelo en español es no-comercial** por encima de USD 1 M de facturación. Ver `agents/top.md` |
 | [Stage-Whisper/Stage-Whisper](https://github.com/Stage-Whisper/Stage-Whisper) | 261 | Sin commits desde **2023-04-27**. Base para forkear, no dependencia |
 | `alphacep/vosk-models` | — | **No existe.** Conjetura propia que dio 404 por `ls-remote` y por `raw`; el real es `vosk-api` y los modelos se distribuyen fuera de GitHub |
+
+## 🆕 PASE 12 (2026-11-25) — la capa fundacional de la **propiedad industrial**: datos oficiales, no raspado
+
+Esta capa tiene una propiedad que ninguna otra de la KB tenía: **todas las fuentes primarias son
+oficinas públicas con API documentada**. No hace falta raspar nada, y los seis raspadores de
+Espacenet que encontró el censo (0–1★, sin licencia) son trabajo tirado. Lo fundacional aquí son los
+clientes de esas API y los datasets que las oficinas publican.
+
+| Repo | Licencia (leída) | Región | Papel fundacional | ★ |
+|---|---|---|---|---|
+| [ip-tools/python-epo-ops-client](https://github.com/ip-tools/python-epo-ops-client) | Apache-2.0 (10.173 B) | EMEA | **La referencia del plano.** Cliente Python de EPO OPS, 12 años vivo, 70 forks. Gestiona *throttling* y cuotas de OPS, que es donde se rompen las integraciones propias | 197 |
+| [pqaidevteam/pqai](https://github.com/pqaidevteam/pqai) | MIT (1.117 B) | Global | Motor de búsqueda de estado de la técnica por descripción en lenguaje natural. 42 forks. ⚠️ Sus 7 microservicios están dormidos desde 2022–2023: **se forkea el conjunto, no se depende de él** | 140 |
+| [patent-dev/uspto-odp](https://github.com/patent-dev/uspto-odp) | MIT (1.102 B) | North America | Cliente Go del USPTO Open Data Portal. La vía permisiva al expediente US vivo | 18 |
+| [PatentsView/PatentsView-API](https://github.com/PatentsView/PatentsView-API) | BSD-2-Clause (1.293 B) | North America | API del dataset financiado por el USPTO: inventores, cesionarios, citas, desambiguados | 19 |
+| [ropensci/patentsview](https://github.com/ropensci/patentsview) | MIT (declarada en `DESCRIPTION`) | North America | Cliente R de PatentsView, revisado por rOpenSci. Commit de ayer. ⚠️ GitHub lo lee `NOASSERTION`: ver `T-P12-7` | 39 |
+| [patent-dev/epo-bdds](https://github.com/patent-dev/epo-bdds) | MIT (1.102 B) | EMEA | **EPO Bulk Data Distribution**: la única vía permisiva de carga histórica masiva. Lo que `patzilla` hace bajo AGPL, esto lo hace bajo MIT | 5 |
+| [patent-dev/kind-codes](https://github.com/patent-dev/kind-codes) | MIT (1.067 B) | Global | Los **códigos *kind*** (A1, B2, T3…) con su significado y su posición en el ciclo de vida. Pequeño y aburrido, y sin él **ningún cálculo de plazo es correcto** | 11 |
+| [patent-dev/bulk-file-loader](https://github.com/patent-dev/bulk-file-loader) | MIT (1.103 B) | Global | Descarga unificada de los volcados masivos de varias oficinas | 17 |
+| [volfpeter/uspto-patent-citation-graph](https://github.com/volfpeter/uspto-patent-citation-graph) | MIT (1.067 B) | North America | Grafo de citas: la estructura sobre la que se mide relevancia de estado de la técnica | 16 |
+| [angela-125/ST26_sequence-xml-generator](https://github.com/angela-125/ST26_sequence-xml-generator) | MIT (1.067 B) | Global | Generador de XML **ST.26**. Única implementación permisiva del estándar obligatorio de listados de secuencias | 0 |
+
+### 📐 Por qué `kind-codes` es fundacional y `patzilla` no
+
+Contraintuitivo y conviene dejarlo escrito. `patzilla` (AGPL-3.0, 127★, 529 refs) es incomparablemente
+más software que `kind-codes` (MIT, 11★, 2 refs, sin commits desde 2024). Pero:
+
+- `patzilla` es **AGPL**: usarlo como servicio obliga a liberar el servicio. Para un entregable
+  comercial de Globant es una plataforma de **referencia y lectura**, no una dependencia.
+- `kind-codes` es un **dataset de significados normativos** bajo MIT. Un código *kind* dice si un
+  documento es solicitud publicada, concesión o traducción, y de ahí cuelga **qué plazo corre**. Es
+  la tabla que convierte un registro de oficina en una obligación con fecha.
+
+La regla que generaliza: **en un plano regulado, el activo fundacional suele ser la tabla de
+significados, no el programa.** Mismo papel que `SALI LMSS` (MIT, 92★) en el plano de la factura.

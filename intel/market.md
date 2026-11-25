@@ -637,6 +637,52 @@ Asesor de Reglas Civiles **declinó** legislar sobre AI en abril de 2026 y el Qu
 no es un ASR, es **el acta certificable y su informe de exactitud** (`P41`, `P42`), y el comprador es
 la administración judicial estatal, no el despacho.
 
+
+#### 🆕 Pase 12 (2026-11-25) — propiedad industrial en North America
+
+**Lo que cambió, y es la fecha que manda en toda propuesta de PI:** el USPTO publicó **guía revisada
+de inventoría para invenciones asistidas por AI el 2025-11-28**, y **retiró** la de febrero de 2024.
+El efecto es volver al análisis tradicional de **concepción**: la AI es herramienta, no contribuyente;
+solo personas naturales pueden ser inventoras; y **no se aplica un estándar de elegibilidad distinto**
+por haber usado AI — los examinadores vuelven al marco *Alice*/*Mayo*. Consecuencia práctica que
+varios despachos señalan: **hay que revisar las solicitudes pendientes que se construyeron sobre el
+análisis de «contribución significativa» de 2024**, y la guía nueva no invalida por sí sola lo ya
+concedido.
+
+A fecha de principios de 2026 **el USPTO no exige divulgar el uso de AI** en una solicitud de patente.
+
+**La oficina como usuaria de AI:** piloto `ASAP!` en examen y, a principios de **abril de 2026**,
+herramienta de **búsqueda de marcas por imagen**. Para marcas sigue exigiéndose **autoría humana**,
+lo que importa directamente para logotipos generados con AI.
+
+⚠️ Todo lo anterior procede de comentario de despachos y de prensa sectorial. **La fuente primaria es
+la notificación del *Federal Register* del 2025-11-28** y es la que debe citarse. Varias de las
+fuentes consultadas eran de baja calidad y una afirmaba requisitos de prueba de cuaderno de
+laboratorio que **no se pudieron confirmar** en texto oficial del USPTO: no se recoge.
+
+**Activos abiertos de la región, verificados hoy:** es la región de los **datos oficiales**, no del
+producto. `PatentsView` (dataset financiado por el USPTO: API BSD-2-Clause, DB y desambiguación
+GPL-3.0, cliente R de rOpenSci MIT), `patent-dev/uspto-odp` (MIT, commit de hoy), `smcronin/uspto-cli`
+(MIT, 43★), `DunlapCoddingPC/pyUSPTO` (MIT — **publicado por un despacho de patentes**, señal de que
+la firma ya construye), `volfpeter/uspto-patent-citation-graph` (MIT),
+`john-walkoe/uspto_enriched_citation_mcp` (MIT), `pipeworx-io/mcp-usitc-edis` (MIT, EDIS de la USITC).
+⚠️ `parkerhancock/patent_client` (128★) está **archivado** desde 2026-04-24 y
+`PatentsView-APIWrapper` (31★) desde 2025-05-22.
+
+**Oportunidades:**
+
+1. **El registro de contribución humana por reivindicación.** Si la inventoría depende de la
+   concepción y la redacción se hace con AI, el expediente necesita el rastro de qué aportó la
+   persona y qué la herramienta, con fecha. Nadie lo vende; es el mismo artefacto que exigen la ABA
+   512 y el EU AI Act, con lo que **una construcción sirve en tres regiones**.
+2. **Puerta de anualidades sobre fuente oficial** (`P45`). La capa está vacía: `patent annuity
+   renewal deadline` ⇒ 1 repo sin licencia.
+3. **Banco de exactitud de estado de la técnica** (`P46`) contra citas efectivamente opuestas por
+   examinadores en expedientes US ya resueltos: datos públicos, y es el único entregable que
+   convierte «buscamos mejor» en un número.
+4. **Revisión de cartera pendiente post-2025-11-28**: trabajo acotado, con fecha de disparo, y lo
+   necesita todo titular con solicitudes vivas redactadas bajo la guía retirada.
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -1040,6 +1086,57 @@ transcripción: un dossier que sitúe el despliegue en el Considerando 61, docum
 8(a), mantenga el Art. 50 fuera de ámbito por diseño y resuelva el deber de confidencialidad de la
 Directiva 2010/64/UE con ejecución local (`P43`).
 
+
+#### 🆕 Pase 12 (2026-11-25) — propiedad industrial en EMEA
+
+**La medición del pase, y es inusualmente firme porque viene de la propia oficina:** las **EPO
+Guidelines for Examination 2026 entraron en vigor el 2026-04-01** e incluyen la **primera sección
+dedicada al uso de herramientas de AI en el procedimiento** (Sección 5 del Prólogo). Dos
+afirmaciones simétricas:
+
+- **Las partes responden del contenido** de la solicitud **con independencia de que el documento se
+  haya preparado con asistencia de AI.** No es una buena práctica recomendada: es el régimen de
+  responsabilidad, y convierte la revisión humana en requisito de arquitectura.
+- **La EPO podrá usar AI** para mejorar la calidad y la eficiencia de su trabajo. Opera `ANSERA` en
+  examen y en marzo de 2026 lo trató con representantes de PI de la industria alemana: la AI se
+  integrará más en la concesión **sin ceder el juicio jurídico a la máquina**.
+
+Otros cambios de las Guidelines 2026: **se suprime la búsqueda acelerada `PACE`**, cambios en
+interpretación de reivindicaciones y en novedad de invenciones de selección, y admisión de **dibujos
+en color**. La patentabilidad sustantiva de AI **no cambia**: sigue el enfoque de dos obstáculos y
+efecto técnico, y **los algoritmos de AI como tales no son patentables**.
+
+**Marco institucional:** Patente Unitaria y **UPC** operativos desde el **2023-06-01**, con una
+patente ejecutable en 18 o más Estados. Las búsquedas de este pase **no encontraron novedad
+regulatoria del UPC en 2026**: lo que hay es comentario de estrategia, y así se registra —**hueco
+informado**, no silencio.
+
+**Activos abiertos de la región:** es la región de los **clientes de API de oficina**, y tiene más
+oficinas distintas que integrar que ninguna otra.
+`ip-tools/python-epo-ops-client` (Apache-2.0, 197★, 70 forks, 12 años vivo, commit 2026-11-21) ·
+`patent-dev/epo-ops` y `patent-dev/epo-bdds` (MIT) · `patent-dev/dpma-connect-plus` (MIT, **única vía
+permisiva al DPMA alemán**) · `navisbio/OPS-patent-search-mcp` (MIT) · `smcronin/epo-cli` (MIT) ·
+`anseljh/euipo-tm-client` (MIT) · `cyanheads/eur-lex-mcp-server` (Apache-2.0, ya en la KB).
+⚠️ Las dos plataformas verticales del plano, `patzilla` (AGPL-3.0, 127★) y
+`minesoft-patbase-client` (AGPL-3.0), son **europeas y copyleft fuerte**.
+
+**El punto frágil, medido:** toda la capa permisiva de **marcas** de EMEA cuelga de
+`anseljh/euipo-tm-client`, que tiene **1★ y 0 forks**. `trademark monitoring watch brand` devuelve
+`total_count` **0** y `madrid protocol trademark` devuelve **2**, ambos sin licencia y de 0★. La
+vigilancia de marca —producto que todo titular compra— **no tiene ni un activo abierto utilizable**.
+
+**Oportunidades:**
+
+1. **Vigilancia de marca abierta** sobre EUIPO + DPMA + registros nacionales. Categoría con
+   `total_count` 0 y demanda comercial demostrada: es el hueco más limpio de las cuatro regiones.
+2. **Expediente defendible bajo la Sección 5 del Prólogo 2026**: revisión humana registrada,
+   responsabilidad de contenido trazable. La EPO ya escribió el criterio de compra; basta mapearlo.
+3. **Multi-oficina EMEA** (`P47`): EPO + DPMA están cubiertas bajo MIT; faltan las nacionales. Misma
+   plantilla, trabajo acotado, reutilizable en todos los engagements de la región.
+4. **Reconstruir en permisivo lo que `patzilla` demuestra bajo AGPL**: su modelo de espacio de
+   trabajo de investigación es la mejor especificación abierta que existe; el `epo-bdds` MIT ya da la
+   carga masiva que era la parte difícil.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -1412,6 +1509,62 @@ de hoy (ver el bloque EMEA).
 al despliegue: **medición de exactitud por idioma y por acento** (`P42`), publicación estable del
 récord y el gate de verificación humana que su propio tribunal supremo exige. Mercado de servicios
 sobre sistemas existentes, no de plataforma nueva.
+
+
+#### 🆕 Pase 12 (2026-11-25) — propiedad industrial en APAC
+
+**El hallazgo regional del pase, y repite el patrón que el pase 11 encontró en transcripción: APAC
+desplegó lo que Occidente discute.** Y aquí va un paso más allá — **no solo la oficina usa AI: la
+comunidad publicó las plantillas de redacción bajo MIT.**
+
+**Las oficinas:**
+
+- **CNIPA (China)**: sistema de **examen y búsqueda inteligente desde enero de 2023** (documento WIPO
+  `SCP/37/6`, 2025-09-04, que lo describe usando varias técnicas de AI). El **15.º Plan Quinquenal de
+  examen de patentes y marcas (2026–2030)** instituye un mecanismo de gestión de examen **«AI+»** e
+  investiga **informes de búsqueda previa** para solicitudes de invención.
+- **JPO (Japón)**: *AI Action Plan* de 2022, hoja de ruta a **cuatro años hasta 2026** para llevar la
+  AI al núcleo del examen. La revisión del **manual de examen de marzo de 2026** añadió casos de
+  aplicaciones de AI generativa y de métodos de estimación por AI. ⚠️ Una fuente afirma además un
+  **endurecimiento del estándar de actividad inventiva** para invenciones asistidas por AI: **no se
+  pudo confirmar** contra el *Status Report 2026* del JPO y se publica marcado.
+- **KIPO (Corea)**: integra AI en examen, recursos y administración desde principios de 2023, y en
+  **diciembre de 2023** desarrolló un **modelo de lenguaje propio de mayor escala especializado en
+  documento de patente**.
+- **India (CGPDTM)**: las solicitudes en la subclase **`G06N` pasaron de 3.545 (2022) a 13.431
+  (2025), +279%**, mientras que las **concesiones cayeron un 71% en 2025** con las solicitudes
+  subiendo. ⚠️ Ambas cifras vienen de **un único informe comercial** y se publican marcadas. Sobre AI
+  en la oficina: a **julio de 2026 no se ha identificado públicamente un sistema de AI de cara al
+  examinador** con nombre propio.
+- **IP5**: los jefes de las cinco mayores oficinas se reunieron en **Tokio el 2026-06-12** y
+  acordaron nuevas líneas de cooperación en AI. ⚠️ **Sin fuente primaria localizada.**
+
+**Lo que hace única a la región, medido en estrellas:** la capa de **redacción** es MIT y es de aquí.
+`PisenAILab/china-patent-figure-skill` (MIT, **100★**, creado hace 4 semanas) ·
+`lsj4232/KR_PATENT_SKILL` (MIT, **67★**) · `handsomeZR-netizen/cn-patent-drafter` (MIT, **65★**) ·
+`chrisryugj/korean-patent-mcp` (MIT, 64★, KIPRIS) · `nuri428/langchain_kipris_tools` (Apache-2.0,
+⚠️ dormido desde 2025-02-04) · `ChloePark85/kipris-cli` (**MIT-0**, el grant más permisivo de la KB) ·
+`kitepon/IP-MCP` (MIT, JPO) · `faruheaisha/cnipa-patent-kit` y `roy-tian/cn-patent-ipc` (MIT) ·
+`fangwenhe/awesome-china-ip` (MIT, índice).
+
+Contraste que conviene tener a mano en una conversación comercial: **esos tres repos de redacción
+suman 232★ en menos de siete meses, mientras los dos intentos occidentales de docketing permisivo
+tienen 0★ cada uno.**
+
+⚠️ **Huecos informados:** `JPO patent japan api` devuelve `total_count` **1**, y ese único resultado
+tiene **0★**. No se encontró **ningún** cliente permisivo de la oficina india (CGPDTM). La región
+tiene la mejor capa de redacción y una capa de **acceso al registro** muy desigual.
+
+**Oportunidades:**
+
+1. **Adoptar la capa de redacción APAC en los engagements occidentales**, con las dos puertas de
+   `P49` (inventoría de persona natural, responsabilidad de contenido). Es ahorro inmediato y la
+   licencia ya lo permite.
+2. **Cliente permisivo del registro indio**: hueco medido a cero, en el mercado de PI que crece más
+   rápido de la región.
+3. **Puente JPO**: un solo repo de 0★ sostiene el acceso a la tercera oficina del mundo.
+4. **Expediente conforme a examen asistido por AI**: CNIPA, JPO y KIPO ya examinan con AI. El
+   criterio de compra del cliente es que su solicitud aguante *ese* examen.
 
 ### LATAM
 
@@ -1960,6 +2113,68 @@ listan transcripción como funcionalidad son **marketing**; y la columna de opin
 (octubre 2026) que sostiene que **«la transcripción nunca fue la causa del retraso judicial»** es
 **editorial**. Se publica porque es la objeción que un comprador público va a plantear, y conviene
 tenerla escrita antes de la reunión.
+
+
+#### 🆕 Pase 12 (2026-11-25) — propiedad industrial en LATAM
+
+**Fecha accionable y a siete días:** el **INPI brasileño** publicó una **versión revisada de su
+borrador de directrices de examen para solicitudes de patente de AI**, y el **plazo de comentarios
+vence el 2026-12-02**. El contenido: los modelos y técnicas de AI **en abstracto** se clasifican como
+**métodos matemáticos**, categoría excluida por el **art. 10(I) de la Ley de Propiedad Industrial**;
+una técnica de AI **sí** es patentable si resuelve un problema técnico y produce un efecto técnico en
+una aplicación concreta. Un análisis independiente subraya que la propuesta **no** crea una categoría
+automática de patente de AI. Es el mismo enfoque de efecto técnico que la EPO, en la mayor economía
+de la región, y la ventana para comentar sigue abierta mientras se escribe esto.
+
+**México:** el **IMPI** reportó un récord en 2025 — **972 patentes concedidas a personas físicas
+mexicanas, la cifra más alta en 30 años**. Y hay cambio de reglas con fecha: el **reglamento de la
+LFPPI entró en vigor el 2026-07-23**, introduciendo **plazos máximos vinculantes de resolución** para
+el IMPI. Un plazo vinculante de la oficina es, para el titular, un calendario nuevo que gestionar.
+
+**Concentración regional:** según el Índice Latinoamericano de IA, **Brasil y México concentran
+~95% de las solicitudes de patente de AI de la región**. Las oficinas de LATAM, el INPI brasileño
+incluido, **exigen inventoría de persona natural**. Argentina, México y Colombia siguen apoyándose en
+leyes de patentes y derecho de autor que **no abordan el contenido generado por AI** (fuente de
+análisis, no normativa).
+
+⚠️ Cifras y fechas provienen de prensa sectorial y análisis de despachos; deben verificarse en los
+sitios oficiales de INPI e IMPI antes de usarse en una propuesta.
+
+**HUECO INFORMADO Y EXPLÍCITO, con las consultas a la vista.** Se consultó
+`INPI patente marca`, `INPI Brasil marcas`, `IMPI mexico marcas`, `propiedad industrial marcas
+patentes`, `patentes busqueda`, `espacenet` y `patent docketing` filtrando por origen regional:
+
+| Consulta | `total_count` | Qué hay de verdad |
+|---|---|---|
+| `patente INPI` | 11 | **10 sin licencia**: TCCs, monitores de leads, prototipos. 1 MIT |
+| `INPI Brasil marcas` | 5 | 1 MIT (`inpi-marcas-mcp-server`), resto sin licencia o irrelevante |
+| `IMPI mexico marcas` | 2 | **0★, sin licencia los dos.** México **no tiene** cliente abierto de su oficina |
+| `propiedad industrial marcas patentes` | 1 | `CarlsRemy/onapi-utils` (MIT, ONAPI, R. Dominicana) |
+| `patentes busqueda` | 5 | Todos 0★ y sin licencia |
+
+Lo permisivo de toda la región son **tres repositorios MIT, los tres de 0★ y 0 forks**:
+`milaniseb12-png/inpi-marcas-mcp-server` (marcas INPI, 2026-09-11),
+`mcp-dir/inpi_patentes-mcp` (patentes INPI, 2026-08-30) y `CarlsRemy/onapi-utils`
+(ONAPI, 2025-10-29). **Ninguno tiene fork. Ninguno tiene mantenedor visible.**
+
+**Y la lectura que hace el hueco más pequeño de lo que parece** —hay que leerla antes de declararlo
+hueco en un pase futuro, igual que con LEDES en el pase 8—: a diferencia de la factura legal, **aquí
+el estándar no es estadounidense ni hay nada que «portar»**. Las oficinas latinoamericanas publican
+los mismos datos bibliográficos que EPO y USPTO y muchas participan en **PROSUR**; lo que falta no es
+semántica regional, es **el adaptador**. Es decir: es el hueco **más barato de cerrar** de las cuatro
+regiones, porque la plantilla ya existe nueve veces (`P47`) y solo hay que instanciarla.
+
+**Oportunidades:**
+
+1. **Cliente permisivo del IMPI**: hueco medido a cero en la segunda economía de la región, justo
+   cuando el reglamento de la LFPPI (2026-07-23) impone plazos vinculantes a la oficina.
+2. **Endurecer y mantener los tres MCP existentes.** Están bajo MIT, son de 0★ y resuelven el acceso
+   a INPI y ONAPI. Adoptarlos, auditarlos y mantenerlos cuesta días, no meses, y produce un activo
+   regional con el nombre de Globant detrás.
+3. **Comentario técnico al borrador del INPI antes del 2026-12-02** como posicionamiento: es una
+   consulta pública abierta sobre patentabilidad de AI en la mayor economía de LATAM.
+4. **Cartera multi-oficina LATAM** (`P47`) sobre la plantilla ya probada: INPI, IMPI, ONAPI, INAPI,
+   SIC. Ninguno exige tecnología nueva; exigen el adaptador y alguien que lo mantenga.
 
 ## Hueco de producto transversal (las cuatro regiones)
 

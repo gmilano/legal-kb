@@ -9,6 +9,83 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-25 (pase 12) — el plano de la **propiedad industrial**, y **dos trampas de consulta nuevas** que explican por qué estuvo invisible 11 pases
+
+Sexto plano consecutivo que aparece completo al cambiar de vocabulario (factura → prueba → norma →
+acústico → **propiedad industrial**). Censo previo: `patente` **0**, `trademark` **0**, `WIPO` **0**,
+`EUIPO` **0**, `Espacenet` **0**, `prior art` **0**, `annuity` **0**, `renewal` **0**.
+**34 activos nuevos, 0 solapaban.** Pero lo que vale más que los repos es *por qué* no aparecieron
+antes, y esta vez la causa es medible.
+
+### Lo nuevo de esta semana (★ y `pushed_at` medidos 2026-11-25)
+
+| Agente | Licencia (leída) | Región | Qué aporta | ★ |
+|---|---|---|---|---|
+| [RobThePCGuy/Claude-Patent-Creator](https://github.com/RobThePCGuy/Claude-Patent-Creator) | MIT (1.069 B) | Global | Redacción de solicitud completa | 216 |
+| [ip-tools/python-epo-ops-client](https://github.com/ip-tools/python-epo-ops-client) | Apache-2.0 (10.173 B) | EMEA | Cliente EPO OPS, commit de hace 4 días | 197 |
+| [ThomasMoreAI/legal-skills-open](https://github.com/ThomasMoreAI/legal-skills-open) | Apache-2.0 (11.314 B) | Global | Biblioteca de *skills* legales, 39 jurisdicciones | 143 |
+| [PisenAILab/china-patent-figure-skill](https://github.com/PisenAILab/china-patent-figure-skill) | MIT (1.087 B) | APAC | Dibujos de patente para CNIPA, creado hace 4 semanas | 100 |
+| [lsj4232/KR_PATENT_SKILL](https://github.com/lsj4232/KR_PATENT_SKILL) | MIT (1.085 B) | APAC | Redacción de patente coreana | 67 |
+| [patent-dev/uspto-odp](https://github.com/patent-dev/uspto-odp) | MIT (1.102 B) | North America | Cliente Go de USPTO ODP, **commit de hoy** | 18 |
+| [patent-dev/dpma-connect-plus](https://github.com/patent-dev/dpma-connect-plus) | MIT (1.103 B) | EMEA | Registro alemán DPMA, **commit de hoy** | 2 |
+| [angela-125/ST26_sequence-xml-generator](https://github.com/angela-125/ST26_sequence-xml-generator) | MIT (1.067 B) | Global | La **única** implementación permisiva de ST.26 | 0 |
+
+### 🔴 `T-P12-1` — **la abreviatura del sector es casi siempre el significado MINORITARIO del token**
+
+Tres trampas medidas, dos nuevas hoy, y juntas forman una regla que se copia a las doce industrias:
+
+| Consulta | `total_count` | Qué devuelve de verdad |
+|---|---|---|
+| `ST.96` | **2.683** | Pantallas OLED de **0,96 pulgadas** y placas STM32. El punto se descarta en la tokenización y `96` colisiona con medidas de hardware |
+| `ST96` | **9** | Nueve repos de prácticas universitarias (`CCSA-St96105`, `CCSA-ST96166`…). **Cero implementaciones** |
+| `phpIP` (web) | — | Casi todo **phpIPAM**, gestión de *direcciones IP* de red. El producto jurídico queda sepultado bajo el de redes |
+| `LEDES` (pase 8) | 109.739 | La familia **LED** (WLED 19.102, FastLED 7.539) |
+
+La causa es la misma en los tres casos y no es el buscador: **el sector legal comparte
+abreviaturas con el hardware y las redes, y siempre es el lado pequeño del token.** `IP` significa
+*propiedad intelectual* para el cliente y *dirección de red* para GitHub; hay cuatro órdenes de
+magnitud entre ambos usos.
+
+**Y la variante nueva, que `P31` no cubría:** un estándar cuyo nombre **contiene un punto** no es
+consultable por su nombre, en ningún motor, porque el punto se descarta y el número queda suelto.
+Afecta a toda la familia WIPO (`ST.96`, `ST.26`, `ST.3`, `ST.9`) y a cualquier estándar con
+numeración decimal. La consulta que funciona nunca contiene la abreviatura: es el **sustantivo del
+artefacto** (`patent docketing`, `trademark renewal`, `sequence listing`). Receta ampliada en
+`compose/patterns.md` `P31`/`P48`.
+
+### 🔴 `T-P12-2` — `T29` se confirma por tercera vez, y aparece la **regla de proporcionalidad inversa**
+
+El pase 8 midió **UTBMS = 0 implementaciones**. El pase 9 lo midió en la capa de estándares de
+prueba. Hoy, en la capa de estándares de PI:
+
+- **WIPO ST.96 v9.0** (aprobado por el *XML4IP Task Force* el **2025-04-01**), con seis familias de
+  componentes —patente, marca, diseño, indicación geográfica, copyright y comunes— y los esquemas
+  publicados por WIPO en ZIP: **CERO implementaciones abiertas.** `wipo xml schema patent trademark`
+  devuelve `total_count` **0**.
+- **WIPO ST.26**, de uso **obligatorio** para listados de secuencias en solicitudes PCT: **UNA**
+  implementación permisiva en todo GitHub, `angela-125/ST26_sequence-xml-generator` (MIT 1.067 B,
+  **0★**, 2026-05-26).
+
+Enunciada como regla, y es contraintuitiva: **cuanto más obligatorio es el estándar, menos código
+abierto lo implementa.** El motivo es estructural, no casual — un estándar obligatorio crea un
+mercado de proveedores que venden el cumplimiento, y la implementación nace *dentro* de ellos y se
+queda ahí. Un estándar opcional sobrevive solo si alguien lo adopta por voluntad, y para eso tiene
+que ser abierto. **Corolario de planificación:** encontrar 0 implementaciones de un estándar
+obligatorio no es señal de que el trabajo no haga falta; es la medida exacta de su alcance.
+
+### 🔴 `T-P12-5` — la capa de **renovaciones** es la capa de responsabilidad civil, y está vacía por segunda vez
+
+`patent annuity renewal deadline` devuelve **1** repositorio, **sin licencia**. `patent docketing`
+devuelve 11, de los que los permisivos son dos de **0★** creados en octubre.
+
+Es exactamente la forma del hallazgo del pase 8 sobre el plazo procesal, en un plano distinto: el
+olvido de una anualidad **abandona la patente de forma irreversible** en la mayoría de
+jurisdicciones —no hay restitución, no hay recurso, y el activo caducado era el más caro de la
+cartera—. **Dos planos consecutivos en los que la capa del plazo irreversible es la que menos
+herramienta abierta tiene.** Ya no se lee como una carencia del sector de PI: se lee como la regla
+de que **el riesgo irreversible no genera software abierto, porque quien lo asume compra seguro y
+servicio, no biblioteca.**
+
 ## 🆕 2026-11-25 (pase 11) — el plano **acústico**, y la primera exclusión de licencia que esta KB mide **por idioma**
 
 Quinto plano consecutivo que aparece completo al cambiar de vocabulario (factura → prueba → norma →
