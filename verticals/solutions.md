@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🏭 Verticales de partida — Legal Services
@@ -411,3 +411,48 @@ se marca en una línea y pasa callado en otra, y dos ejecuciones se contradicen.
    descarta toda decisión cuya cita no se compruebe. → receta completa en `P29`.
 4. **La persona decide.** *Block billing*, narrativa vaga, trabajo administrativo: propuestas, nunca
    ajustes automáticos. Es el mismo *human gate* que esta KB ya exige en el plano del producto.
+
+---
+
+## 🆕 PASE 9 (2026-11-25) — la vertical de la **prueba**: el escritorio del litigante, y por qué aquí el copyleft gana
+
+El pase 8 añadió la vertical del back office que cobra. Esta es la del **documento que se convierte
+en prueba**: numerarlo (Bates), redactarlo, producirlo y certificar su firma. Es una vertical real
+—los despachos la compran hoy a Relativity, Everlaw y Reveal— y en abierto está **partida en dos
+por la licencia**, de forma más nítida que ninguna otra capa de esta KB.
+
+### Plataformas de partida, verificadas 2026-11-25 (licencia byte a byte + `ls-remote` + API)
+
+| Plataforma | Licencia (leída) | Repo | Stack | Qué resuelve y qué hay que saber | ★ |
+|---|---|---|---|---|---|
+| 🆕 **Autogram Portal** | **EUPL-1.2** (13.832 B) | [slovensko-digital/autogram-portal](https://github.com/slovensko-digital/autogram-portal) | Java / web | **Portal de firma de documentos con firmas cualificadas eIDAS, en producción en un Estado miembro de la UE** (ecosistema digital eslovaco). 483 refs: software real. ⚠️ **EUPL-1.2** es copyleft con cláusula de compatibilidad: lo publicado se mantiene libre, pero **es la licencia que la propia UE prefiere en contratación pública**, lo que en EMEA es ventaja y no obstáculo | 3 |
+| 🆕 **RaioPDF** | **GPL-3.0** (35.149 B) | [Macrify-LLC/raiopdf](https://github.com/Macrify-LLC/raiopdf) | Escritorio, **100% local** | Suite PDF **para despachos**: OCR, organización de páginas, redacción y **estampado Bates**. 468 refs, commit de hace 6 días. **Totalmente local** ⇒ encaja con la tendencia nº1 de esta KB. ⚠️ **GPL-3.0: útil como herramienta interna del despacho, inviable como base de producto cerrado** | 6 |
+| 🆕 **doc_redaction** | **AGPL-3.0** (34.523 B) | [seanpedrick-case/doc_redaction](https://github.com/seanpedrick-case/doc_redaction) | Python / GUI | **La redacción más madura en abierto**: PDF, imágenes, Word, CSV/XLSX con interfaz gráfica. 315 refs, muy activo. ⚠️ **AGPL-3.0 (copyleft de red)**: inviable para SaaS cerrado | **64** |
+| 🆕 **pii-gui** | **AGPL-3.0** (34.523 B) | [sophia486/pii-gui](https://github.com/sophia486/pii-gui) | Escritorio *local-first* | Detecta y redacta PII en PDF, Markdown y texto **sin que el documento salga de la máquina**. 56 refs, 7 forks, commit de hace 2 días. ⚠️ AGPL-3.0 | 49 |
+| 🆕 **legion-pdf** | **AGPL-3.0** (34.524 B) | [CasusBelli1337/legion-pdf](https://github.com/CasusBelli1337/legion-pdf) | Escritorio | Editor PDF **para abogados de litigio**: estampado Bates y formatos exigidos por tribunal. ⚠️ **0★, creado 2026-11-18 (hace 7 días), 5 refs: se registra como señal de categoría, NO como plataforma adoptable todavía** | 0 |
+
+### 🔴 La lectura comercial de esta tabla, y es incómoda pero es la útil
+
+**Las cinco plataformas de esta vertical son copyleft. Las cinco.** No hay una sola base permisiva de
+*plataforma* en el plano de la prueba — y eso, lejos de ser un callejón sin salida, **indica dónde
+está el trabajo**:
+
+| Capa | Licencia disponible | Qué se puede prometer a un cliente |
+|---|---|---|
+| **Plataforma** (escritorio/suite completa) | GPL / AGPL / EUPL únicamente | Herramienta **interna** del despacho, o despliegue con el derivado liberado. **No** producto cerrado |
+| **Estándar / biblioteca** | **MIT / LGPL** (`pyHanko`, `loadfile-tool`, `Marisol`) | **Producto cerrado, entregable comercial, empotrable** |
+
+> 🔑 **Conclusión de arquitectura para esta vertical (y es `T29` aplicado):** el escritorio del
+> litigante **no se forkea**, se **compone** sobre las bibliotecas permisivas. `pyHanko` (MIT) firma y
+> valida, `Marisol` (MIT) numera y redacta, `loadfile-tool` (MIT) exporta la producción — y la capa de
+> flujo, cliente y semántica la pone Globant. Forkear `doc_redaction` o `raiopdf` parece ahorrar seis
+> meses y **convierte el entregable en software libre obligatorio**.
+
+### ⚠️ Y un hueco de esta vertical que se publica ABIERTO
+
+**El *privilege log* no tiene plataforma ni biblioteca abierta localizable** — ni permisiva ni
+copyleft. Medido: `privilege log` → 902 resultados, **cero relevantes** (colisión con «escalada de
+privilegios» en seguridad); `privileged document review redaction` → **0**. Es, según los pronósticos
+de sector de 2026, **uno de los flujos de e-discovery que más se automatiza este año**. Para un
+engagement, eso es un hueco de producto; para esta KB, un hueco que **no se cierra con una fila
+inventada**.

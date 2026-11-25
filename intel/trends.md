@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 📡 Tendencias — Legal Services
@@ -706,3 +706,94 @@ lleva cada línea de factura legal, tiene **cero**.
 > con qué ejecutarlo. **Para las doce industrias: inventariar los estándares del sector por separado
 > de los repos, y medir la distancia entre ambos.** Esa distancia no es un hueco de la KB: es el
 > alcance de un proyecto.
+
+---
+
+## 🆕 Tendencias del pase 9 (2026-11-25)
+
+### 🔑 T30 — LAS TRES REGIONES REGULAN **TRES OBJETOS DISTINTOS**, Y ESO DECIDE CON QUÉ SE ENTRA EN CADA UNA
+
+El hallazgo de inteligencia de mercado más fuerte del pase, y nace de leer las cuatro búsquedas
+regionales **juntas** en lugar de por separado. No es que unas regiones regulen más que otras: es que
+**regulan cosas diferentes**, y por tanto el mismo producto necesita **una superficie de cumplimiento
+distinta en cada una**.
+
+| Región | Objeto regulado | Instrumentos de referencia (2026) | Pregunta que el cliente hace primero | Con qué se entra |
+|---|---|---|---|---|
+| **North America** | **LA PRUEBA** | `Schulte v. LinkedIn` (jul-2026, AI generativa aceptada para pertinencia final); privilegio del *prompt* litigado; datos de AI **descubribles**; la regla federal de evidencia de máquina **NO avanzó** | *«¿lo aceptará el juez?»* | Plano de la prueba: Bates, *load file*, *legal hold*, docket, deposición |
+| **EMEA** | **LA FIRMA Y LA IDENTIDAD** | eIDAS 2.0 + EUDI Wallet (final de 2026, pendiente de actos de ejecución); firma **cualificada** como referencia; **España CGPJ Instrucción 2/2026**: el juez sólo usa lo que le da la administración | *«¿es válido el documento, y puedo yo proveerlo?»* | Conformidad PAdES: `pyHanko` (MIT), `esig/dss` (**de la Comisión Europea**), `autogram-portal` |
+| **APAC** | **CASI NADA — y es el problema** | Mayoría en fase de propuesta; **Singapur**: el profesional responde de **todo** su producto de trabajo; Japón centrado en derechos de autor | *«¿cómo demuestro control sobre lo que ya usamos?»* | Gobernanza y auditoría: `judgment-compiler`, verificación de cita |
+| **LATAM** | **EL ACTOR** (juez y abogado) | **Brasil**: decisión judicial automatizada = **ALTO RIESGO**; **Edomex `PTSJ/028/2026`** (en vigor 11-nov-2026, con sanciones); **Guía Judicial Iberoamericana** (8 propuestas, jul-2026) | *«¿quién responde si falla?»* | Trazabilidad de intervención humana; patrón `kancelaria-lex` |
+
+> 🔑 **La consecuencia comercial, y es accionable:** un *pitch* único para las cuatro regiones **falla
+> en tres**. En Norteamérica se vende **defendibilidad**; en EMEA, **validez y condición de
+> proveedor de la administración**; en APAC, **gobernanza sobre una adopción que ya ocurrió**; en
+> LATAM, **responsabilidad trazable del actor**. El motor técnico puede ser el mismo; **la promesa,
+> no**.
+
+### 🔴 T31 — LA PARADOJA DE APAC: **LA ADOPCIÓN MÁS ALTA Y LA GOBERNANZA MÁS FLOJA**
+
+**94%** de 1.715 profesionales en 10 jurisdicciones APAC usa AI de propósito general, jurídica
+especializada o ambas (LexisNexis, 2026). El informe se titula **«adoption is near universal;
+governance is not»** — el propio proveedor nombra la brecha. ALITA mide ~90%.
+
+Compárese con Norteamérica (**71–87%** según Clio, creciendo con el tamaño del despacho) y con
+Chile, donde **41% de los jueces** declara usar AI «de forma amplia aunque poco visible».
+
+> **Lectura:** el mercado no necesita que lo convenzan de usar AI. **Ya la usa.** Lo que no tiene es
+> con qué demostrar que la usa bien. ⇒ **El producto vendible de 2026 no es la capacidad: es la
+> evidencia de control.** Esto refuerza `T26` del pase 8 (la factura como única superficie de
+> cumplimiento que alcanza al 100% de los expedientes) desde el otro extremo del flujo.
+
+### T32 — EL E-DISCOVERY ES EL USO Nº1 DECLARADO, Y SU FLUJO EN EXPANSIÓN NO TIENE SOFTWARE ABIERTO
+
+Clio sitúa **e-discovery como el primero** de los cinco usos de AI de mayor impacto en el despacho.
+Los pronósticos de sector para 2026 nombran, dentro de él, los flujos que más se automatizan:
+**revisión de primera pasada, *privilege log*, e investigaciones internas**. Además, el precio de las
+herramientas con AI **está cayendo rápido**, lo que convierte la revisión asistida en estándar barato
+y no en extra de gama alta.
+
+Y el cruce con lo medido en GitHub este pase es el dato:
+
+| Flujo declarado en expansión | Activo abierto localizable |
+|---|---|
+| Revisión de primera pasada | 🟡 parcial (`FreeEed` Apache-2.0; lo demás copyleft) |
+| **`privilege log`** | 🔴 **NINGUNO** — 902 resultados, cero relevantes; ningún calificador lo recupera |
+| Investigaciones internas | 🟡 parcial |
+
+> 🔑 **Si el precio de la herramienta cae y el flujo en expansión no tiene base abierta, el margen se
+> va del licenciamiento al *trabajo de integración*** — que es exactamente lo que vende un estudio.
+> `T32` es, de las tendencias de esta KB, la que más directamente favorece el modelo de Globant.
+
+### T33 — LA CAPA DE ESTÁNDARES ES DONDE EL OPEN SOURCE LEGAL **SÍ** ES PERMISIVO (y rompe `T28`)
+
+`T28` (pase 8) decía: de **{específico, maduro, permisivo}**, dos. La excepción medida hoy tiene
+causa estructural y por eso es regla: **`pyHanko`** las tiene las tres (MIT, 807★, 121 forks, 6 años,
+específico del artefacto PAdES), y es un patrón, no un accidente — **una implementación de estándar
+se publica permisiva porque su valor es la interoperabilidad**, mientras quien construye el flujo
+completo del despacho quiere capturarlo y elige AGPL.
+
+Confirmado en cuatro casos y dos pases: `pyHanko`/PAdES, `esig/dss`/listas de confianza UE,
+`loadfile-tool`/Concordance DAT, `billcheck`/LEDES 1998B. **⇒ Adoptar el estándar, construir el
+flujo.** Y el corolario negativo: en el plano de *plataforma* de la prueba **las cinco opciones
+abiertas son copyleft** (`doc_redaction`, `pii-gui`, `raiopdf`, `legion-pdf`, `autogram-portal`);
+forkear una parece ahorrar seis meses y convierte el entregable en software libre obligatorio.
+
+### ⚠️ T34 — NOTA DE MÉTODO SOBRE ESTE FICHERO Y SOBRE `intel/market.md`
+
+Dos defectos de **vocabulario cerrado de región** detectados y corregidos en este pase, ambos del
+tipo que el brief prohíbe expresamente:
+
+1. **Heredado:** `intel/market.md` tenía un `###` titulado *«🆕 PASE 4 — Brasil: …»* **al mismo nivel
+   que las cuatro regiones**, es decir un **quinto *bucket* de región** llamado «PASE 4 — Brasil».
+   Demotado a `####` bajo LATAM.
+2. **Propio, y cometido hoy:** al insertar el bloque LATAM de este pase introduje **dos `###` más**
+   (*HUECO INFORMADO* y *error de método*) al nivel de región. Detectados por el mismo control
+   inmediatamente después de escribir, y demotados.
+
+> 🔑 **La lección es la del segundo, no la del primero:** el control que encuentra el defecto
+> heredado **debe volver a ejecutarse después de escribir**, porque el propio acto de escribir lo
+> reintroduce. Es idéntico al caso del pase 6, donde documentar el bug de la barra vertical en una
+> celda **reprodujo el bug**. **Regla: todo control estructural se ejecuta DOS veces — antes de
+> editar y después de editar.** Recuento final de este pase: `## Opportunities by region` contiene
+> **exactamente 4 `###`**, uno por región del vocabulario cerrado.

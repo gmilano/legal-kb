@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🗺️ Mapa de mercado — Legal Services
@@ -523,6 +523,38 @@ sustituida por SB 189 en mayo-2026** y otras que la llaman **SB 26-189 con efect
 se elige lectura**: se publican las tres y se marca como el punto del mapa normativo estadounidense
 donde las fuentes secundarias son menos fiables.
 
+
+#### 🆕 PASE 9 (2026-11-25) — **Norteamérica regula la PRUEBA**, y el tribunal ya dijo sí
+
+Las tres regiones de esta KB regulan **objetos distintos** (ver la síntesis en `intel/trends.md`).
+El objeto de Norteamérica es **la prueba**: qué es descubrible, quién responde de la revisión y si
+el *prompt* está protegido.
+
+| Hecho | Fecha | Qué cambia | Canal |
+|---|---|---|---|
+| **`Schulte v. LinkedIn`** — primera resolución **federal** que acepta el uso de AI generativa para las **determinaciones finales de pertinencia** en *discovery* | **jul-2026** | **El principal freno comercial del e-discovery con AI —«¿lo aceptará el juez?»— tiene por primera vez una respuesta afirmativa citable.** Comentaristas señalan que deja abiertas las cuestiones de **prueba del sistema, los prompts y la salida escrita** | 🟡 **un solo canal** |
+| Los *prompts* creados en previsión de litigio: **privilegio litigado** en varios tribunales estatales y federales | 2026 | Y se distingue **herramienta pública de herramienta empresarial**, porque la pública **retiene y reutiliza** lo que se le entrega ⇒ **la soberanía del dato pasa de preferencia a requisito de privilegio** | 🟡 un canal |
+| Los datos de AI generativa **son descubribles**: no se les abre excepción | 2026 | Se aplican los principios tradicionales de *discovery* ⇒ lo que el despacho genere con AI **es material potencialmente producible** | 🟡 un canal |
+| La regla federal de prueba sobre **evidencia generada por máquina NO avanzó**: comentarios cerrados **16-feb-2026**, el comité declinó impulsarla el **7-may-2026** | 2026 | **No habrá regla nueva a corto plazo** ⇒ el terreno lo fijan las resoluciones caso a caso, y el valor se desplaza a la **defendibilidad documentada** del flujo | 🟡 un canal |
+| **Canadá / Ontario**: reglas de prueba sobre AI remitidas al fiscal general, texto revisado esperado en noviembre | 2026 | Primer marco procesal explícito de la región | 🟡 un canal |
+
+**Adopción (Clio, informe 2026):** entre **71% y 87%** según tamaño de despacho, y los cinco usos de
+mayor impacto son **e-discovery (el primero)**, investigación jurídica, automatización y gestión
+documental, *due diligence* y análisis de litigio. En despachos pequeños siguen dominando las
+herramientas genéricas (ChatGPT, Copilot) y **sólo ~1/3 usa plataformas jurídicas dedicadas**.
+
+> ⚠️ **Fuentes mayoritariamente de proveedor y de despacho** (Clio, Everlaw, Relativity, Reveal,
+> comentario de firma). Direccionales. Y `WebFetch` **no pudo** abrir los textos primarios en esta
+> sesión (ver canales en `agents/top.md`).
+
+**Oportunidad, y es la más directa de las cuatro regiones:** es la única donde el plano de la prueba
+que este pase incorporó **se vende tal cual**. `loadfile-tool` (MIT) para mover producciones entre
+proveedores, `Marisol` (MIT) para Bates y redacción, `legal-hold-manager` (MIT) para la conservación
+—que es donde se pierden los casos por sanción, no por el fondo—, `courtlistener-mcp-server`
+(Apache-2.0) para el docket federal, y la terna de deposición (MIT) sobre `pyHanko` para certificar
+el entregable. **El gancho comercial no es «AI para litigio»: es «su flujo con AI, documentado para
+ser defendible ante el juez que ya dijo sí».**
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -803,6 +835,38 @@ registra qué herramienta de AI intervino en cada entrada de tiempo (`P30`) sirv
 Regla 1.5 norteamericana y para el expediente documental del AI Act. **Una construcción, dos
 regímenes** — y ese es el argumento que convierte una obligación europea en un activo reutilizable.
 
+
+#### 🆕 PASE 9 (2026-11-25) — **EMEA regula la FIRMA y la IDENTIDAD**, y esta KB no tenía esa capa
+
+El objeto regulado en EMEA no es la prueba: es **la validez del documento firmado y quién es quien
+firma**. Y es la región donde este pase encontró los mejores activos permisivos de toda la KB.
+
+| Hecho | Estado | Qué cambia | Canal |
+|---|---|---|---|
+| **eIDAS 2.0** — la **Cartera de Identidad Digital de la UE (EUDI Wallet)** se señala como medida estrella **para finales de 2026** | pendiente de **actos de ejecución** de la Comisión | **El calendario es el riesgo, no la norma.** eIDAS 2.0 **no altera** la validez ni los efectos de las firmas ya existentes; lo que falta son los actos de ejecución que hacen operativos sus mecanismos | 🟡 un canal (y **fuentes de proveedor**) |
+| Sólo los **prestadores cualificados de servicios de confianza** garantizan plena validez legal de la firma | vigente | ⇒ la **firma cualificada** es el estándar de referencia para los flujos más sensibles del despacho | 🟡 un canal, fuente de proveedor |
+| **España — CGPJ, Instrucción 2/2026** (Pleno de **28-ene-2026**, `BOE-A-2026-2205`): los jueces **sólo** pueden usar sistemas de AI **facilitados por las administraciones competentes o por el propio Consejo** | vigente | **Es la restricción más dura que esta KB ha registrado en ninguna región:** no regula *cómo* se usa la AI judicial, sino **de quién puede venir**. Cierra de hecho la puerta a herramienta comercial directa al juez y abre la de **proveer a la administración** | 🟡 **un canal — `boe.es` NO resolvió (`ENOTFOUND`); no verificado contra el texto oficial** |
+| **CMS**, guía 2026 de firma electrónica en **Europa Central y del Este** (laboral, comercial, inmobiliario, societario y bancario) | 2026 | La fragmentación por materia y país es el trabajo real de un despliegue regional | 🟡 un canal |
+| **Thomson Reuters (nov-2026):** **51% de los directores jurídicos europeos** dicen que la **implantación de AI** será el mayor factor de diferenciación entre despachos en los próximos cinco años | 2026 | La demanda la empuja **el cliente**, no el despacho | 🟡 un canal |
+
+> ⚠️ **Conflicto de fuentes registrado, y es informativo:** un proveedor (nov-2025) situaba los actos
+> de ejecución «para finales de 2025»; la fuente de producto consultada hoy los sigue dando por
+> **pendientes**. **Dos fuentes, dos calendarios: el desacuerdo se publica, la KB no elige.**
+
+**Oportunidad, y es la mejor colocada del pase:** EMEA es la única región donde la capa que este pase
+incorporó viene **con autoridad normativa incluida**. `esig/dss` **es de la Comisión Europea**
+(`eu.europa.ec.joinup.sd-dss` en Maven Central) y es LGPL ⇒ enlazable desde producto cerrado;
+`pyHanko` (MIT, 807★) produce los perfiles PAdES; `eidas-validator` (MIT) traduce el informe técnico
+a lenguaje de abogado; `autogram-portal` (EUPL-1.2) demuestra el patrón ya en producción en un Estado
+miembro. Añádase la capa regional: `document-anonymizer` (MIT, alemán), `greek-pii-redaction` (MIT,
+griego), `AI-Legal-SkillsPL` + `kancelaria-lex` (MIT, Polonia), `claude-fuer-deutsches-recht`,
+`claude-para-abogados`.
+
+> 🔑 **Y el movimiento comercial que indica la Instrucción 2/2026 española:** donde el juez sólo puede
+> usar lo que le da la administración, **el cliente es la administración de justicia**, no el
+> despacho. Es un mercado de contratación pública — y ahí **EUPL-1.2 y LGPL dejan de ser un problema
+> de licencia y pasan a ser una ventaja de adjudicación**.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -1071,6 +1135,39 @@ flujos de *legal business management* del mercado ANZ/APAC, con impuesto tipo GS
 que no pueden quedar en descubierto. **Es el único activo del plano de ingresos de esta KB cuyo
 modelo de datos encaja de origen con una jurisdicción de APAC.**
 
+
+#### 🆕 PASE 9 (2026-11-25) — **APAC casi no regula, y es la región con MÁS adopción**: la brecha es el producto
+
+| Hecho | Dato | Canal |
+|---|---|---|
+| **LexisNexis, 2026 APAC AI Sentiment Survey** — **1.715 profesionales** jurídicos en **10 jurisdicciones** (India, Japón y Singapur entre ellas) | **94%** usa AI de propósito general, AI jurídica especializada o ambas. El informe se titula, literalmente, **«adoption is near universal; governance is not»** | 🟡 un canal, **fuente de proveedor, autodeclarado** |
+| **ALITA** + LexisNexis | ~**90%** de los profesionales jurídicos de Asia-Pacífico | 🟡 un canal, proveedor |
+| **Regulación** | **Mayoritariamente en fase de propuesta o de marco**: India y Sudeste Asiático siguen construyendo el andamiaje | 🟡 un canal |
+| **Singapur** | Primer principio de la guía de AI generativa del **Ministry of Law**: el profesional **sigue siendo responsable de todo su producto de trabajo** | 🟡 un canal |
+| **India — tribunales** | AI usada para **transcripción** en sala y **traducción de sentencias** | 🟡 un canal |
+| **Japón** | Investigación, redacción, asesoramiento y soporte operativo; foco regulatorio en **derechos de autor** | 🟡 un canal |
+| **Mercado** | **Mori Hamada & Matsumoto**, primer despacho con base en Asia que anuncia alianza con Harvey. **Singapur y Malasia** emergen como hubs de infraestructura | 🟡 un canal |
+
+> 🔴 **La asimetría que define la oportunidad en APAC:** es la región con **la adopción más alta
+> medida (94%)** y **la gobernanza más floja**. El riesgo no es que no usen AI: es que **ya la usan
+> sin controles**, y el principio singapurense deja la responsabilidad entera sobre el profesional.
+
+**Oportunidad:**
+
+1. **La capa de gobernanza y auditoría es el producto, y aquí se vende sola.** `judgment-compiler`
+   (MIT) encaja exactamente con el principio de Singapur: **el abogado fija la regla, la AI la
+   ejecuta** — responsabilidad profesional preservada por arquitectura. Sobre eso, la capa de
+   verificación de cita que esta KB ya documenta.
+2. **La transcripción judicial india es un encaje literal, y es el hallazgo del pase aplicado.** Los
+   tribunales indios **ya** usan AI para transcribir y traducir; la terna de deposición incorporada
+   hoy (`deposition-contradiction-analysis`, `depo-summarizer` **con LLM local**, `DepoIndex`, las
+   tres MIT) opera sobre **ese mismo artefacto** — el acta. Es el único caso de este pase donde un
+   activo encontrado por vocabulario estadounidense (*deposition*) sirve directamente a un flujo
+   público asiático.
+3. **China entra en el mapa.** `Decikingship/legal-agent-skills` (MIT, 23★): 60 skills + 33 flujos
+   expertos **con evaluaciones**. Esta KB documentaba el patrón «plantilla por jurisdicción» para
+   EE. UU., RU, India, Singapur, Alemania, Polonia y España; **faltaba China**, y ya está.
+
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -1252,7 +1349,7 @@ para entrar como constructor neutral.
   lista**: es coherente con el hueco de producto que esta KB declara, y es un argumento de
   *timing*, no de ausencia de demanda.
 
-### 🆕 PASE 4 — Brasil: el instrumento que esta KB citaba sin nombrar, ahora con número, mecanismo y plazo VENCIDO
+#### 🆕 PASE 4 — Brasil: el instrumento que esta KB citaba sin nombrar, ahora con número, mecanismo y plazo VENCIDO
 
 Este fichero decía que Brasil *«tiene marco propio de AI para el Poder Judicial (CNJ), descrito por
 las fuentes como uno de los instrumentos de gobernanza de AI más detallados en vigor»*. **Nombrado y
@@ -1451,6 +1548,55 @@ jurisprudencia o redacción de contratos que consumían **hasta 15 horas semanal
 minutos con herramienta especializada. Y el contrapeso, medido por **Stanford RegLab**: las
 herramientas jurídicas comerciales (Lexis+ AI, Westlaw) **alucinan entre el 17% y el 33%** — que es
 la razón por la que el ahorro sólo es facturable si va acompañado del rastro que lo respalda.
+
+
+#### 🆕 PASE 9 (2026-11-25) — **LATAM regula al ACTOR** (al juez y al abogado), no a la herramienta
+
+Tercera pieza de la asimetría regional: donde Norteamérica litiga la prueba y EMEA certifica la
+firma, **LATAM regula a quién usa la AI y con qué responsabilidad**.
+
+| Jurisdicción | Instrumento | Qué establece | Canal |
+|---|---|---|---|
+| **Brasil** | **Marco Legal da IA** | Clasifica los **sistemas decisorios automatizados del Poder Judicial como de ALTO RIESGO**, con límites claros a su uso. Se describe al país como **«terceira via»** entre la ausencia de regulación federal estadounidense y el dirigismo tecnológico chino | 🟡 un canal |
+| **México — Estado de México** | **Acuerdo `PTSJ/028/2026`** | **Reglas para los abogados que usen AI en juicio.** Firmado **20-oct-2026**, publicado en la **Gaceta del Gobierno 10-nov-2026**, **en vigor desde el 11-nov-2026**. El incumplimiento **puede generar sanciones** | 🟡 **un canal — `edomex.quadratin.com.mx` NO resolvió (`ENOTFOUND`)** |
+| **Iberoamérica** | **8 propuestas / 4 proyectos aprobados** por los poderes judiciales (jul-2026), presentadas por **Costa Rica, R. Dominicana, Ecuador, México, Panamá, Paraguay, Colombia y Portugal** | Incluye una **Guía Judicial Iberoamericana sobre IA y derechos humanos**, con enfoque en **acceso a la justicia**. Es el instrumento **multilateral** de la región | 🟡 un canal |
+| **Chile** | — (medición, no norma) | **41% de los jueces reconoce usar AI** en su trabajo. El uso «ya es amplio, aunque poco visible» | 🟡 un canal |
+| **Mercosur** | Informe del Centro Mercosur | La AI aparece como alternativa ante la **alta congestión** del Poder Judicial | 🟡 un canal |
+
+#### 🔴 HUECO INFORMADO — el marco **FEDERAL** mexicano de AI judicial NO se encontró
+
+Se buscó explícitamente y **no se encontró** un acuerdo del **Poder Judicial de la Federación** que
+regule el uso de AI en expedientes. Lo que sí existe y se midió: un **Acuerdo General del Pleno del
+Órgano de Administración Judicial** sobre integración y trámite del **expediente electrónico** y
+videoconferencias, publicado en el **DOF** con aclaración el **24-04-2026** — **y los fragmentos
+consultados no mencionan inteligencia artificial**, por lo que **no se puede afirmar que contenga
+disposiciones de AI**.
+
+> **Lo que esto significa, dicho con precisión:** México regula la AI judicial **a nivel estatal**
+> (Estado de México, en vigor hace dos semanas) y **el nivel federal no está confirmado**. Pendiente
+> para el próximo pase: `Semanario Judicial de la Federación` y el portal del **CJF/PJF**.
+> **Un silencio no es una cobertura: queda escrito como hueco.**
+
+#### 🔧 Y el error de método que este pase cometió y midió (`G-L19`)
+
+Buscar el marco mexicano **en español** devolvió **España**: de 10 resultados, **8 eran del CGPJ, el
+BOE y comentaristas españoles**, y el único resultado mexicano relevante apareció **en novena
+posición**. «Poder Judicial», «acuerdo» y «expediente» son vocabulario compartido por todas las
+jurisdicciones hispanohablantes, y el índice pondera por volumen editorial, donde España domina.
+
+> **Regla:** **el idioma de una consulta no es una región.** La jurisdicción se fija con un **nombre
+> propio institucional** que sólo exista en ella (`DOF`, `PJF`, `CJF`, `Gaceta del Gobierno` para
+> México; `STF`, `CNJ`, `DJe` para Brasil), no con el idioma. **Un pase que concluya «no hay nada en
+> LATAM» tras buscar en español ha medido el volumen editorial de España.**
+
+**Oportunidad:** la regulación del **actor** convierte la **trazabilidad de quién hizo qué** en el
+requisito central — no la validez de la firma (EMEA) ni la defendibilidad de la producción (NA). El
+alto riesgo brasileño para decisión judicial automatizada y la sanción mexicana al abogado apuntan
+al mismo producto: **registro verificable de intervención humana**. `judgment-compiler` (MIT) y la
+capa de verificación de cita de esta KB son la base; `kancelaria-lex` (MIT, Polonia) es el **patrón
+arquitectónico a replicar** —localidad impuesta por Docker con `internal: true` e integridad de cita
+carácter a carácter—, y sigue siendo, pase 9, **el mejor modelo disponible para una adaptación
+LATAM**, que continúa sin existir.
 
 ## Hueco de producto transversal (las cuatro regiones)
 

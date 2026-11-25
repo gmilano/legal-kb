@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🎯 Agentes AI — Legal Services
@@ -175,8 +175,17 @@ se corrige es un slug, un diagnóstico de método y tres campos de una fila.**
 | 🆕 **kancelaria-lex** | [AI4CharityPL/kancelaria-lex](https://github.com/AI4CharityPL/kancelaria-lex) | MIT (1.069 B) | **Polonia** · EMEA | 🆕 **El mejor activo nuevo del pase 5, y el que mejor encarna la tendencia nº1 de esta KB.** AI **totalmente local** para analizar expedientes judiciales polacos. **La localidad está impuesta por arquitectura, no prometida en el README:** cuatro segmentos Docker, **tres con `internal: true`**, así que no existe ruta hacia la pasarela. **Integridad de cita por construcción:** el código reconstruye el texto desde el documento fuente y lo compara **carácter a carácter**; una cita fabricada no puede sobrevivir al verificador. Declara **0 citas inconsistentes con la fuente en todas las corridas de medición** y precisión de cita **>80%**, contra el **17–34% de citas fabricadas** de las herramientas comerciales (el mismo estudio de Stanford que cita esta KB). **Y distingue la procedencia del OCR:** lo leído con Tesseract lleva **marcador permanente** y cada cita muestra `z OCR`, porque «la cita apunta a un carácter exacto del expediente» y «…de **la lectura de un escaneo**» no son la misma afirmación. Perfiles locales con TOTP. MIT explícito: «úsalo, vende servicios alrededor, bifúrcalo». | 60 | 2026-08-23 |
 | 🆕 **Kourti Legal** | [boyeesu/Kourti](https://github.com/boyeesu/Kourti) | MIT (1.069 B) | **Nigeria** (Lagos) · EMEA | 🆕 **CIERRA EL HUECO DE *PRACTICE MANAGEMENT* PERMISIVO QUE ESTA KB DECLARABA ABIERTO DESDE EL PASE 1** — y es el **primer activo africano** de esta KB. Workspace para **expedientes, documentos, clientes y plazos**: React + API Node + PostgreSQL, `docker compose up` y listo, workflow de CI, `SECURITY.md`, documentación de self-hosting y aviso explícito de que el contenido AI debe revisarlo un profesional. **524 refs** en `ls-remote` (ramas `chore/oss-release-prep`, `agent/codeql-remediation`): código real, no un esqueleto. ⚠️ **1★ y sin `description` ni `topics` en GitHub** — invisible para los tres controles de descubrimiento de esta KB. Ver el hallazgo G-L10 abajo. | 1 | 2026-11-01 |
 | 🆕 **legal-agent-workshop** | [meta-models/legal-agent-workshop](https://github.com/meta-models/legal-agent-workshop) | MIT | Global | 🆕 **El activo de *enablement* que esta KB no tenía: el patrón de verificación como material de formación ejecutable.** Dos sesiones: (1) construir el agente legal — bucle agéntico en SDK de OpenAI en Python, una herramienta por fichero, lectura de documentos por Files API, gestión de expediente con hechos *quote-checked*, y termina en un memo **sin verificar**; (2) **hacerlo confiable** — se construyen los dos controles de la capa de verificación (checklist contra la verdad de base del expediente, y reglas del memo) **que el kit ejecuta FUERA del control del agente**, más rechazos, escalado, liberación de evidencia nueva, reanudación y **firma del abogado**. Incluye caso de trabajo (`northbridge-v-caldera`) y consola de ejecución en vivo. | 73 | 2026-11-06 |
+| 🆕 **CourtListener MCP** | [cyanheads/courtlistener-mcp-server](https://github.com/cyanheads/courtlistener-mcp-server) | Apache-2.0 (11.317 B) | EE. UU. · North America | 🆕 **El puente MCP al expediente federal, y la cara que faltaba de CourtListener en esta KB.** Esta KB citaba CourtListener 40 veces como *corpus de jurisprudencia* (AGPL-3.0) y no tenía el acceso al **docket**: opiniones, **dockets federales**, fichas de jueces y redes de citación vía la API de CourtListener/RECAP. La diferencia importa porque el corpus sirve para investigar y el docket sirve para **litigar** (plazos, escritos presentados, histórico procesal). Apache-2.0 sobre el cliente, aunque el servidor de datos siga siendo AGPL: se integra sin contaminar el derivado. 72 refs. | 4 | 2026-11-21 |
+| 🆕 **legal-hold-manager** | [noamrazbuilds/legal-hold-manager](https://github.com/noamrazbuilds/legal-hold-manager) | MIT (1.090 B) | EE. UU. · North America | 🆕 **Primer activo de *legal hold* de esta KB — una categoría con 0 menciones en los 8 ficheros antes de hoy.** Crea, emite, sigue y gestiona órdenes de conservación con seguimiento de **custodios**. Es la obligación que nace ANTES del e-discovery: si la conservación falla, el caso se pierde por sanción (FRCP 37(e)) y no por el fondo. ⚠️ 1★, 2 refs, sin actividad desde 2026-03: **esqueleto correcto de una categoría vacía**, no producto. Se publica como punto de partida, con la advertencia. | 1 | 2026-03-06 |
+| 🆕 **deposition-contradiction-analysis** | [TaylorLegalEngineering/deposition-contradiction-analysis](https://github.com/TaylorLegalEngineering/deposition-contradiction-analysis) | MIT (1.086 B) | EE. UU. · North America | 🆕 Pipeline multi-agente de **5 rondas** que busca contradicciones en transcripciones de **deposición**. Capa nueva en esta KB (`deposition` y `transcript`: 0 menciones antes de hoy). El flujo tiene la propiedad que esta KB premia: la salida es **una lista de pasajes citados con referencia a línea**, es decir el abogado verifica contra el acta, no contra el modelo. ⚠️ 2★. **Y tiene una copia con descripción idéntica** (`EyeOfHorus158/CompraX`) — se registra para que un pase futuro no la cuente como hallazgo independiente. | 2 | 2026-03-11 |
+| 🆕 **depo-summarizer** | [Mermiges/depo-summarizer](https://github.com/Mermiges/depo-summarizer) | MIT (1.070 B) | Global | 🆕 Resumen de transcripciones de deposición **con LLM local** y cuatro formatos de salida. Encaja con la tendencia nº1 de esta KB (soberanía del dato): el acta de una deposición contiene testimonio bajo juramento y datos de terceros, y es exactamente el documento que no debe salir del despacho. ⚠️ 0★, 2 refs, sin actividad desde 2026-03. | 0 | 2026-03-20 |
+| 🆕 **DepoIndex** | [crowaltz24/DepoIndex](https://github.com/crowaltz24/DepoIndex) | MIT (1.062 B, cuerpo MIT sin línea de título) | Global | 🆕 Indexa transcripciones de deposición para producir el **índice por temas y testigos** que el litigante usa para preparar el juicio. Completa la terna de la capa de deposición junto a las dos filas anteriores. ⚠️ 0★, 5 refs, última actividad 2025-09. **Su `LICENSE.md` empieza directamente por `Copyright (c) 2025` sin la línea `MIT License`** — el texto es MIT íntegro, pero es otro caso del modo de fallo que esta KB mide: el clasificador acierta y el título engaña. | 0 | 2025-09-08 |
+| 🆕 **legal-agent-skills (CN)** | [Decikingship/legal-agent-skills](https://github.com/Decikingship/legal-agent-skills) | MIT (1.081 B) | **China** · APAC | 🆕 **La plaza de China en el patrón «plantilla por jurisdicción», que esta KB tenía documentado para EE. UU., RU, India, Singapur, Alemania, Polonia y España pero no para la segunda jurisdicción del mundo por volumen.** 60 skills legales chinas + **33 flujos de trabajo expertos**, con herramientas Python, **evaluaciones** y material de despliegue. Las evaluaciones son lo que lo separa de un paquete de prompts. 6 forks en 6 semanas. | 23 | 2026-10-14 |
+| 🆕 **AI-Legal-SkillsPL** | [GSkuza/AI-Legal-SkillsPL](https://github.com/GSkuza/AI-Legal-SkillsPL) | MIT (1.063 B) | **Polonia** · EMEA | 🆕 Paquetes de skills legaltech para derecho **polaco y de la UE**. Es el **segundo** activo polaco permisivo de esta KB tras `kancelaria-lex`, y confirma que Polonia es hoy el clúster legaltech abierto más activo de EMEA fuera de los grandes mercados. | 7 | 2026-10-13 |
+| 🆕 **judgment-compiler** | [jordanteague/judgment-compiler](https://github.com/jordanteague/judgment-compiler) | MIT (1.070 B) | Global | 🆕 **Compila el criterio experto de un abogado en *playbooks* estructurados y validados que la AI aplica de forma consistente.** Invierte la dirección habitual del producto: no es la AI la que decide y el humano la revisa, es **el humano el que fija la regla y la AI la ejecuta sin desviarse** — el patrón que esta KB viene recomendando desde el pase 2 para flujos con responsabilidad profesional detrás. 3 forks en un mes. | 12 | 2026-10-26 |
+| 🆕 **eidas-validator** | [juraj-jumic/eidas-validator](https://github.com/juraj-jumic/eidas-validator) | MIT (1.068 B) | **UE** · EMEA | 🆕 Validador **en lenguaje llano** de firmas electrónicas cualificadas (eIDAS) en PDF: traduce un informe de validación técnico a una afirmación que un abogado puede usar. Es la pieza de arriba de la capa de conformidad de firma que este pase añade a `repos/foundations.md` (`pyHanko`, `esig/dss`). ⚠️ 0★, 4 refs, creado 2026-10-12: **la categoría es nueva, no madura.** | 0 | 2026-10-12 |
 
-**43 agentes reales, los 43 verificados por API de búsqueda + lectura byte a byte de LICENSE. 0 filas de ejemplo, 0 placeholders.** (33 del pase 2, revalidadas una por una en el pase 3; 7 nuevas en el pase 3. De las 7 nuevas, **3 se publican como NO ADOPTABLES** — ver el clúster de licencias de abajo.) 🆕 **PASE 5 (2026-11-21): +3 filas** (`kancelaria-lex`, `Kourti Legal`, `legal-agent-workshop`), las tres MIT y verificadas por los dos canales. **Y una reparación estructural: esta tabla estaba PARTIDA EN DOS** — una línea en blanco dejaba 7 filas sin cabecera. Ver abajo.
+**⚠️ CIFRA CORREGIDA EN EL PASE 9 — eran 49, no 43.** El total se contó con script antes de tocar la tabla: **49 filas antes del pase 9, 58 después** (+9 este pase). La cifra «43» quedó congelada en el pase 3 y los pases 5–8 añadieron filas sin actualizarla. Todas las filas están verificadas por API de búsqueda + lectura byte a byte de `LICENSE`. **0 filas de ejemplo, 0 placeholders.** (33 del pase 2, revalidadas una por una en el pase 3; 7 nuevas en el pase 3. De las 7 nuevas, **3 se publican como NO ADOPTABLES** — ver el clúster de licencias de abajo.) 🆕 **PASE 5 (2026-11-21): +3 filas** (`kancelaria-lex`, `Kourti Legal`, `legal-agent-workshop`), las tres MIT y verificadas por los dos canales. **Y una reparación estructural: esta tabla estaba PARTIDA EN DOS** — una línea en blanco dejaba 7 filas sin cabecera. Ver abajo.
 
 > 📌 **Cómo leer la columna «Último commit»:** es `pushed_at` medido, no una impresión. 🪦 marca
 > dormancia > 6 meses. Un repo dormido **no** se retira: sigue sirviendo como patrón y como corpus.
@@ -863,3 +872,107 @@ Medido en este pase, con licencia leída: **se puede tener dos de tres propiedad
 | [manojrevenkar12-web/legal-invoice-review-agents](https://github.com/manojrevenkar12-web/legal-invoice-review-agents) | 1★, LEDES 1998B parser/writer en `src/lira/ledes.py`. **Licencia: 5/5 → 404** | **No adoptable, pero se lee**: su arquitectura es la referencia de diseño de `P29`. Se cita en prosa, **no se forkea** |
 | `emirmrkaljevic/awesome-legal-tech` | `search/repositories` → **422** | Indexado por el buscador web, inexistente por el canal de GitHub. Tercer índice `awesome-legaltech` clonado que aparece así (ver censo de nombre, `P18`) |
 | `udayasri10435/CounselFlow…`, `Nefus1/court-clock`, `thegreatsze/singapore-procedural-deadline-calculator` | 0★, sin licencia, sin forks | Fuera por `P15` (pertinencia) **y** por ausencia de licencia. Se registran para que un pase futuro no los redescubra como hallazgo |
+
+---
+
+## 🆕 PASE 9 (2026-11-25) — **un hueco cerrado con UN activo encontrado por el nombre de la categoría no está cerrado**
+
+**+9 filas** en la tabla principal (las 9 MIT o Apache-2.0, las 9 con licencia leída byte a byte,
+`ls-remote` con refs > 0 y metadatos de `search/repositories`). **Recuento medido de la tabla: 49
+filas antes de este pase, 58 después.**
+
+> ⚠️ **Y una corrección de cifra publicada:** el pie de la tabla afirmaba «**43 agentes reales**».
+> Contadas hoy mediante script, antes de añadir nada, eran **49**. Los pases 5–8 añadieron filas sin
+> actualizar el total. **Una cifra agregada escrita a mano se desincroniza en el pase siguiente:** se
+> cuenta con script o no se escribe.
+
+### El hallazgo central, y repite el diagnóstico del pase 8 en un plano distinto
+
+El **pase 2** declaró cerrado el hueco de e-discovery con **un solo activo** (`shmsoft/FreeEed`), y
+dejó escrita la medición que lo justificaba: la consulta `ediscovery OR e-discovery` devolvía 56
+repos *«y casi todos son falsos positivos»*. Esa frase es correcta **y es la prueba de que el plano
+no se había consultado**: lo que se consultó fue **el nombre de la categoría**, no el vocabulario de
+los artefactos que la componen.
+
+Censo sobre los 8 ficheros de esta KB, **antes** de este pase:
+
+| Término del plano | Menciones en la KB | `total_count` en GitHub | ¿Activo permisivo dentro? |
+|---|---|---|---|
+| `bates` (numeración Bates) | **0** | **150** | ✅ [Marisol](https://github.com/wikkiewikkie/Marisol) (MIT 1.075 B), [bates-master](https://github.com/bthomas530/bates-master) (**Unlicense** 1.211 B), [bates-stamping-tool](https://github.com/thaack/bates-stamping-tool) (MIT 1.063 B) |
+| `load file` / Concordance DAT | **0** | 5 | ✅ `loadfile-tool` (MIT) — **el único permisivo de la categoría** |
+| `legal hold` · `custodian` | **0** | 3 | ✅ `legal-hold-manager` (MIT) |
+| `deposition` · `transcript` | **0** | 15 | ✅ tres MIT (ver filas nuevas) |
+| `privilege log` | **0** | **902** | ❌ **ninguno — y no es recuperable; ver abajo** |
+| `PAdES` (perfil de firma PDF) | **0** | 676 | ✅ `pyHanko` (MIT, **807★**) y `esig/dss` (**la de la Comisión Europea**) |
+| `ESI protocol` | **0** | **0** | ⚠️ categoría genuinamente vacía (medida, no supuesta) |
+
+Seis planos con cero menciones, cinco con activos permisivos dentro. **Y el mejor activo de todo el
+pase —`pyHanko`, MIT, 807★, 121 forks, seis años de vida, commit de hace dos días— llevaba
+existiendo todo este tiempo a una consulta de distancia.**
+
+### 🔧 G-L18 — `total_count` TIENE **DOS** PATOLOGÍAS OPUESTAS, Y ESTA KB SÓLO SABÍA DIAGNOSTICAR UNA
+
+`G-L17` (pase 8) resolvió el caso **sobre-restringido**: añadir la palabra del sector al nombre de un
+estándar reduce el conjunto y entierra el mejor activo; síntoma, un `total_count` de un dígito. Este
+pase encontró el caso **contrario**, y el síntoma es el opuesto:
+
+| Forma de `total_count` | Diagnóstico | Arreglo |
+|---|---|---|
+| **Un dígito** y aparentemente confirma que la categoría no existe | **Sobre-restricción** — se añadió un calificador redundante | **QUITAR** el calificador: `{estándar}` + `{artefacto}`, nunca + `{sector}` (`G-L17`) |
+| **Centenares/miles** y todo irrelevante | **HOMÓNIMO** — el término colisiona con un dominio mucho más ruidoso | **AÑADIR** un sustantivo **del mismo plano** (jamás el nombre del sector, que agrava la sobre-restricción) |
+| Centenares, todo irrelevante **y ningún calificador lo recupera** | El término **no es alcanzable** por el índice de GitHub | Buscar **por función y fuera de GitHub** (`G-L10`) |
+
+**Los homónimos medidos hasta hoy, en cuatro industrias-plano distintos:**
+
+| Término legal | Colisiona con | `total_count` | ¿Recuperable? |
+|---|---|---|---|
+| `LEDES` (formato de factura legal) | la familia `LED` (`WLED` 19.102★, `FastLED` 7.539★) | 109.739 | ✅ con `+ invoice` → 26 (pase 8) |
+| `bates numbering` | `Bates` como apellido, y umbralizado por entropía difusa | 150 | ✅ con `+ pdf`/`+ stamp` → 18 |
+| **`PAdES signature`** | **«signature pad»** — widgets de firma táctil (7 de los 12 primeros) | 676 | ✅ con `+ eIDAS qualified` → 22 |
+| **`privilege log`** | **escalada de privilegios** (seguridad): `win-brute-logon` 1.174★, CVEs, RBAC | **902** | ❌ **NO** — ver abajo |
+
+### 🔴 El caso irrecuperable, y es el que más vale comercialmente
+
+`privilege log` → **902 resultados, cero relevantes**: el log de privilegio del litigio compite con
+la escalada de privilegios de seguridad informática, y **pierde**. Probado el arreglo de `G-L18`:
+`privileged document review redaction` → **`total_count` = 0**. No hay calificador que lo rescate.
+
+> 🔑 **Y aquí está el valor:** el pronóstico de sector para 2026 nombra **expresamente el privilege
+> log** entre los flujos de e-discovery que más se automatizan este año (junto a la revisión de
+> primera pasada y las investigaciones internas). **Es decir: el flujo que el mercado declara en
+> expansión es exactamente el que no tiene un solo activo abierto localizable.** Esto no es un hueco
+> de esta KB: es un hueco **del ecosistema**, medido por dos vías (índice ciego + ausencia de
+> activos), y se publica **abierto**. No se cierra inventando una fila.
+
+### 🔧 G-L19 — **EL IDIOMA DE UNA CONSULTA NO ES UNA REGIÓN**
+
+Esta KB ya sabía que `es/` en un repo es España (EMEA) y no LATAM. Hoy se midió el mismo error **un
+nivel más arriba, en la consulta**: buscar el marco mexicano de IA judicial en español devolvió
+**mayoritariamente España** — la Instrucción 2/2026 del CGPJ, el BOE, Iberley, Jueces para la
+Democracia. De los 10 resultados, **8 eran España**; el único resultado mexicano relevante
+(Estado de México, `PTSJ/028/2026`) llegó **en noveno lugar**.
+
+Causa: «Poder Judicial», «acuerdo», «expediente» y «amparo» son vocabulario **compartido** por todas
+las jurisdicciones hispanohablantes, y el índice pondera por volumen de publicación, donde España
+domina. **Fijar la jurisdicción exige el nombre de una institución que sólo exista en ella** — `DOF`,
+`PJF`, `Gaceta del Gobierno`, `CJF` para México; `STF`, `CNJ`, `DJe` para Brasil — no el idioma.
+
+> **Regla para las doce industrias:** una consulta en español, portugués o inglés **no** es una
+> consulta de LATAM, EMEA ni APAC. El idioma es un filtro de *publicación*; la región se fija con un
+> **nombre propio institucional**. Un pase que concluya «no hay nada en LATAM» tras buscar en español
+> ha medido el volumen editorial de España.
+
+### 🔌 Estado de los canales en esta sesión (cambia entre sesiones — por eso se escribe)
+
+| Canal | Estado | Nota |
+|---|---|---|
+| `gh api search/repositories` | ✅ | estrellas, SPDX, `pushed_at`, `created_at`, `forks`, `archived` en una llamada |
+| `git ls-remote` | ✅ | existencia real; 0 refs = no existe |
+| `curl` a `raw.githubusercontent.com` | ✅ | licencia byte a byte (200/404 discrimina) |
+| `curl -sI` a `github.com` | 🔴 **403 para todo** | el control prescrito por el brief **sigue siendo ciego aquí**: no distingue vivo de inexistente |
+| **`WebFetch` a fuentes legales primarias** | 🔴 **ENOTFOUND** | **nuevo este pase.** `boe.es` y `edomex.quadratin.com.mx` no resuelven: fuera de los dominios permitidos de la sesión |
+
+> ⚠️ **Consecuencia que afecta a todas las filas regulatorias de este pase:** las normas citadas
+> (CGPJ Instrucción 2/2026, Edomex `PTSJ/028/2026`, *Schulte v. LinkedIn*) **están verificadas por UN
+> solo canal — el índice de búsqueda — y NO contra el texto oficial.** Se publican marcadas. Por la
+> regla de dos canales de esta KB, eso es **señal, no hecho establecido**.

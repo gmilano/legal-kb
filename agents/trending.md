@@ -1,13 +1,95 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 📈 Agentes trending — Legal Services
 
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
+
+## 🆕 2026-11-25 (pase 9) — el plano de la **prueba**: seis categorías con cero menciones, cinco con activos dentro
+
+**Nueve agentes nuevos, todos MIT o Apache-2.0.** Y el pase no los encontró buscando mejor: los
+encontró **buscando otras palabras**. El pase 8 descubrió que esta KB consultaba con el vocabulario
+del producto jurídico y no con el de la factura. Este pase encuentra el mismo error en un tercer
+plano: **el de la prueba** — lo que se conserva, se numera, se redacta, se produce y se certifica.
+
+### 🔴 Lo que estaba declarado cerrado, y no lo estaba
+
+El **pase 2** escribió que el hueco de e-discovery quedaba **cerrado** con `shmsoft/FreeEed`, y dejó
+la medición que lo justificaba: `ediscovery OR e-discovery` → 56 repos *«y casi todos son falsos
+positivos»*. Esa frase es la prueba del fallo: **se consultó el nombre de la categoría, no sus
+artefactos.**
+
+| Término del plano | Menciones previas en la KB | `total_count` | Permisivo dentro |
+|---|---|---|---|
+| `bates` | **0** | 150 | ✅ 3 (MIT / Unlicense) |
+| `load file` / Concordance DAT | **0** | 5 | ✅ 1 (MIT) |
+| `legal hold` · `custodian` | **0** | 3 | ✅ 1 (MIT) |
+| `deposition` · `transcript` | **0** | 15 | ✅ 3 (MIT) |
+| `PAdES` | **0** | 676 | ✅ `pyHanko` 807★ MIT + DSS de la Comisión Europea |
+| `privilege log` | **0** | 902 | ❌ **irrecuperable** |
+| `ESI protocol` | **0** | **0** | ⚠️ vacía de verdad (medido) |
+
+> 🔑 **Un hueco cerrado con UN activo encontrado por el nombre de la categoría no está cerrado.**
+> Está cerrado **el nombre**. Y esta KB tiene más huecos cerrados así: hay que releerlos todos.
+
+### 🔧 G-L18 — `total_count` tiene **dos** patologías opuestas (la tabla completa está en `agents/top.md`)
+
+`G-L17` (pase 8) cubría el caso sobre-restringido: un dígito ⇒ quitar el calificador. Falta el
+opuesto: **centenares y todo irrelevante ⇒ el término es un HOMÓNIMO**, y el arreglo es añadir un
+sustantivo **del mismo plano**, nunca el nombre del sector. Medido en cuatro casos: `LEDES`→LED,
+`bates`→apellido, **`PAdES`→«signature pad»** (676, 7 de los 12 primeros son widgets de firma
+táctil), **`privilege log`→escalada de privilegios** (902, `win-brute-logon` 1.174★).
+
+### 🔴 La categoría que NO se pudo rescatar — y es la que el mercado declara en expansión
+
+`privilege log`: 902 resultados, **cero relevantes**. Arreglo intentado:
+`privileged document review redaction` → **`total_count` = 0**. Ningún calificador lo recupera.
+
+Y el pronóstico de sector para 2026 nombra **el privilege log** expresamente entre los flujos de
+e-discovery que más se automatizan este año. **El flujo que el mercado declara en expansión no tiene
+un solo activo abierto localizable.** Hueco **del ecosistema**, medido por dos vías, y se publica
+**abierto**.
+
+### Agentes nuevos con señal real (licencia byte a byte + `ls-remote` + `search/repositories`)
+
+| Agente | Licencia | Región | Por qué entra | ★ |
+|---|---|---|---|---|
+| [cyanheads/courtlistener-mcp-server](https://github.com/cyanheads/courtlistener-mcp-server) | Apache-2.0 (11.317 B) | North America | El **docket** federal vía MCP (opiniones, dockets, jueces, redes de citación). La KB tenía CourtListener como *corpus* (AGPL) y no como acceso procesal | 4 |
+| [Decikingship/legal-agent-skills](https://github.com/Decikingship/legal-agent-skills) | MIT (1.081 B) | **China** · APAC | **La plaza de China en el patrón «plantilla por jurisdicción»**: 60 skills + 33 flujos expertos, **con evaluaciones** | 23 |
+| [jordanteague/judgment-compiler](https://github.com/jordanteague/judgment-compiler) | MIT (1.070 B) | Global | Compila criterio experto en playbooks validados: **el humano fija la regla, la AI la ejecuta** | 12 |
+| [GSkuza/AI-Legal-SkillsPL](https://github.com/GSkuza/AI-Legal-SkillsPL) | MIT (1.063 B) | **Polonia** · EMEA | Segundo activo polaco permisivo tras `kancelaria-lex` | 7 |
+| [TaylorLegalEngineering/deposition-contradiction-analysis](https://github.com/TaylorLegalEngineering/deposition-contradiction-analysis) | MIT (1.086 B) | North America | Contradicciones en actas de deposición, salida citada a línea | 2 |
+| [noamrazbuilds/legal-hold-manager](https://github.com/noamrazbuilds/legal-hold-manager) | MIT (1.090 B) | North America | **Primer activo de *legal hold*** de la KB: la obligación anterior al e-discovery | 1 |
+| [Mermiges/depo-summarizer](https://github.com/Mermiges/depo-summarizer) | MIT (1.070 B) | Global | Resumen de deposición **con LLM local** (testimonio bajo juramento no sale del despacho) | 0 |
+| [crowaltz24/DepoIndex](https://github.com/crowaltz24/DepoIndex) | MIT (1.062 B) | Global | Índice por temas y testigos para preparar juicio | 0 |
+| [juraj-jumic/eidas-validator](https://github.com/juraj-jumic/eidas-validator) | MIT (1.068 B) | **UE** · EMEA | Validación eIDAS **en lenguaje llano** sobre la capa `pyHanko`/DSS | 0 |
+
+### 🧮 Censo de este pase
+
+- **19 direcciones verificadas** antes de escribir: 19/19 existen (`ls-remote` refs > 0), **0
+  archivadas**, 19/19 con licencia leída byte a byte.
+- **Checksum de licencias (932-G1), 19/19 coherente:** banda MIT **1.062–1.090 B** (12 casos),
+  Apache-2.0 **11.317 B**, GPL-3.0 **35.149 B**, AGPL-3.0 **34.523 B**, **LGPL-2.1 26.530 B
+  (banda nueva, primer caso de esta KB)**, EUPL-1.2 **13.832 B (banda nueva)**, Unlicense **1.211 B
+  (banda nueva)**.
+- **Un caso de título engañoso:** `DepoIndex/LICENSE.md` empieza en `Copyright (c) 2025` **sin** la
+  línea `MIT License`; cuerpo MIT íntegro. El clasificador acertó, el título engaña.
+- **0 filas de cabecera como dato, 0 placeholders, 0 columnas descuadradas** (barrido `G-L11`:
+  **142 bloques de tabla, 0 defectos**).
+
+### 🔌 Canales: una pérdida nueva que afecta a todo lo regulatorio
+
+`curl -sI github.com` sigue devolviendo **403 para todo** (ciego, como en los pases 6–8). **Nuevo:
+`WebFetch` a fuentes legales primarias falla con `ENOTFOUND`** — `boe.es` y
+`edomex.quadratin.com.mx` están fuera de los dominios permitidos de la sesión. ⚠️ **Por tanto las
+normas citadas en `intel/` de este pase están verificadas por UN canal (el índice de búsqueda) y NO
+contra el texto oficial. Se publican marcadas.**
+
+---
 
 ## 🆕 2026-11-22 (pase 8) — el caudal **no estaba seco**: estaba en un plano que esta KB nunca consultó
 

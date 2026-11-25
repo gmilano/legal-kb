@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🏗️ Repos fundacionales — Legal Services
@@ -555,3 +555,64 @@ leerlo, la causa es específica y no estaba catalogada: **el fichero abre con un
 > concesión sea impecable**. Las restricciones de marca **no son restricciones de código**: no se
 > puede redistribuir *bajo el nombre* InvoicePlane, y se puede hacer todo lo demás que MIT permite.
 > Tercer pase consecutivo en que `NOASSERTION` resulta ser una licencia utilizable.
+
+---
+
+## 🆕 PASE 9 (2026-11-25) — **la capa de conformidad de firma**, y es la que tiene los mejores activos permisivos de toda la KB
+
+Esta KB tenía el **producto** de firma electrónica (`OpenSign`, AGPL-3.0 compuesta) y no tenía la
+capa de **conformidad**: la que decide si una firma es válida ante un tribunal europeo. Censo previo:
+`PAdES` **0 menciones**, `eIDAS` **0 menciones**, `pyHanko` **0 menciones**. Los dos activos que
+siguen son, por estrellas, licencia y madurez, **de los más fuertes que esta KB ha incorporado**.
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [MatthiasValvekens/pyHanko](https://github.com/MatthiasValvekens/pyHanko) | HEAD | **MIT (1.080 B)** | **El mejor activo de este pase y uno de los mejores de la KB: firma y sellado de PDF en Python, con los perfiles avanzados (PAdES) que la UE exige para la firma cualificada.** Firma, sella, estampa, **y valida**. 121 forks, creado 2020-08-06, **commit de hace dos días**: seis años de continuidad. MIT íntegro ⇒ Globant puede empotrarlo en un entregable cerrado. **Es el cimiento permisivo de cualquier flujo de firma legal, y la KB no lo tenía.** | **807** | 2026-11-23 |
+| [esig/dss](https://github.com/esig/dss) | HEAD | LGPL-2.1 (26.530 B) | **La implementación de referencia de la propia Comisión Europea.** El README lo declara: *«This is the official repository for project DSS»*, alojado en los Digital Building Blocks de la CE y publicado en Maven Central bajo el grupo **`eu.europa.ec.joinup.sd-dss`**. Crea, extiende y **valida** firmas electrónicas avanzadas (PAdES, XAdES, CAdES, ASiC) contra las listas de confianza de la UE. 417 forks, Java. ⚠️ **LGPL-2.1: copyleft DÉBIL** — se puede enlazar como biblioteca desde un producto cerrado; lo que debe permanecer libre son las modificaciones **a DSS mismo**. Para un entregable comercial es la diferencia entre viable e inviable, y es **la única autoridad normativa** de esta capa. | **1.051** | 2026-11-04 |
+
+> 🔑 **Por qué esta capa importa más de lo que parece, y es un argumento de venta en EMEA:** el
+> entregable de un flujo legal automatizado casi siempre termina en **un documento firmado**. Si la
+> firma no es válida, nada de lo anterior cuenta. Y en la UE la validez no es una opinión: es un
+> perfil técnico (PAdES) contra una lista de confianza. **`pyHanko` lo produce y `esig/dss` lo
+> valida con la autoridad del regulador** — y las dos licencias permiten construir producto encima.
+
+## 🆕 PASE 9 — soporte de litigio: los artefactos que el plano de e-discovery sí tiene
+
+El pase 2 cerró «e-discovery» con un activo. Estos son los artefactos **dentro** del plano, que
+nunca se consultaron (ver `G-L18` en `agents/top.md`):
+
+| Repo | Rama | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [frisk55frisk/loadfile-tool](https://github.com/frisk55frisk/loadfile-tool) | HEAD | **MIT (1.078 B)** | **El único activo permisivo de la categoría de *load file*, y es la pieza de interoperabilidad del e-discovery.** CLI que **valida, convierte e inspecciona** `Concordance DAT`, `OPT`, `LFP` y `DII` — los formatos con los que las plataformas de revisión se intercambian producciones documentales. Sin esto, mover una producción entre proveedores es trabajo manual facturable. ⚠️ **0★, 2 refs, creado 2026-03-31**: la categoría es nueva y el activo es un cimiento, no un producto. **Y 0★ es exactamente por qué ningún filtro por estrellas lo encontraría nunca** (`G-L10`). | 0 | 2026-03-31 |
+| [wikkiewikkie/Marisol](https://github.com/wikkiewikkie/Marisol) | HEAD | **MIT (1.075 B)** | Biblioteca Python para **numeración Bates, estampado de texto y redacción** de PDF: las tres operaciones que convierten un documento en **prueba producible**. La numeración Bates es el identificador único por página con el que todo litigio estadounidense cita documentos. ⚠️ **Dormante: sin commits desde 2023-08-28** (16 refs, 4 forks). Se publica **como referencia de API y punto de partida para forkear**, no como dependencia viva — y por la regla `G-L14` de esta KB, dormancia y utilidad son ejes distintos. | 18 | 2023-08-28 |
+
+> ⚠️ **Lectura honesta de esta tabla:** son **dos** filas, no cinco. La capa de artefactos de
+> e-discovery **existe** y era invisible para esta KB, pero es **joven y poco poblada en lo
+> permisivo**: lo maduro de este plano es copyleft (`raiopdf` GPL-3.0, `legion-pdf` AGPL-3.0,
+> `doc_redaction` AGPL-3.0) o propietario (Relativity, Everlaw, Reveal). **Menos filas reales que
+> rellenas.**
+
+## 🆕 PASE 9 — **T29: la puerta de salida de la matriz T28, y es la *capa de estándares***
+
+El pase 8 publicó `T28`: de las tres propiedades **{específico del sector, maduro, permisivo}** se
+pueden tener **dos**, nunca las tres. Este pase encontró el contraejemplo, y tiene una causa
+estructural que lo convierte en regla y no en excepción:
+
+| Activo | Específico | Maduro | Permisivo | ¿Qué es? |
+|---|---|---|---|---|
+| `pyHanko` | ✅ del **artefacto** (PDF firmado PAdES) | ✅ 6 años, 807★, 121 forks | ✅ MIT | implementación de **estándar** |
+| `esig/dss` | ✅ del **artefacto** (firma UE) | ✅ 11 años, 1.051★, 417 forks | 🟡 LGPL débil | implementación de **estándar** |
+| `loadfile-tool` | ✅ del **artefacto** (Concordance DAT) | ❌ 8 meses | ✅ MIT | implementación de **estándar** |
+| `billcheck` (pase 8) | ✅ del **artefacto** (LEDES 1998B) | ❌ 6 días al hallarse | ✅ MIT | implementación de **estándar** |
+
+> 🔑 **La causa:** una implementación de estándar se publica permisiva **porque su valor es la
+> interoperabilidad, no el flujo de trabajo**. Quien implementa PAdES o LEDES quiere que todo el
+> mundo lo use; quien construye un despacho entero quiere capturarlo, y elige AGPL. **Por eso el
+> plano de estándares escapa a `T28` y el plano de producto no.**
+>
+> **Regla de arquitectura, y aplica a las doce industrias:** *adoptar la implementación del
+> **estándar**, construir el **flujo**.* No forkear el producto copyleft del sector —que es la
+> opción que parece ahorrar trabajo y cierra la puerta al entregable comercial— sino montar la
+> semántica propia sobre el parser/validador permisivo del formato. Comprobar en las otras once:
+> `HL7`/`FHIR` (salud), `ISO 20022` (financiero), `IEC 61850`/`CIM` (energía), `OpenTravel`/`NDC`
+> (viajes), `GS1`/`EDIFACT` (retail).

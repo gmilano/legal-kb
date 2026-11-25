@@ -1,7 +1,7 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🧩 Patrones de composición — Legal Services
@@ -1414,3 +1414,154 @@ curl -s https://raw.githubusercontent.com/<slug>/HEAD/LICENSE | wc -c
 > **El síntoma de que se ha caído en la trampa** es siempre el mismo: **un `total_count` de un solo
 > dígito que parece confirmar que la categoría no existe.** Antes de escribir «no existe X
 > permisivo», hay que repetir la consulta **sin la palabra del sector**.
+
+---
+
+## 🆕 P32 — **Producción documental defendible** (Norteamérica): el flujo que el juez ya aceptó
+
+**Para quién:** litigio o investigación interna en EE. UU./Canadá. **Por qué ahora:**
+`Schulte v. LinkedIn` (jul-2026) aceptó AI generativa para las determinaciones **finales** de
+pertinencia, y dejó abiertas las tres cuestiones que este patrón cubre: **prueba del sistema,
+prompts y salida escrita**. Todo lo que sigue es **MIT o Apache-2.0**: entregable cerrado viable.
+
+```
+1. CONSERVAR  → legal-hold-manager (MIT)      custodios, emisión y seguimiento de la orden
+2. INGESTAR   → apache/tika (Apache-2.0)      ~1.000 formatos, incl. legacy y correo
+                 + docling (MIT)              estructura y número de página
+3. REVISAR    → modelo + judgment-compiler (MIT)
+                 el abogado fija la regla de pertinencia -> la AI la ejecuta sin desviarse
+4. REDACTAR   → Marisol (MIT)                 redacción + estampado de texto
+5. NUMERAR    → Marisol (MIT)                 numeración Bates = identificador citable por página
+6. PRODUCIR   → loadfile-tool (MIT)           export/validación Concordance DAT · OPT · LFP · DII
+7. CERTIFICAR → pyHanko (MIT)                 firma del PDF de producción (integridad + autoría)
+8. REGISTRAR  → bitácora de prompts, versión de modelo, regla aplicada y quién firmó
+```
+
+**El paso 8 no es burocracia: es el entregable.** Las tres preguntas que la resolución dejó abiertas
+se responden con un registro, no con un modelo mejor. **Y los pasos 1 y 8 son los que ningún
+competidor que venda «AI para e-discovery» está entregando.**
+
+⚠️ **Dos salvedades medidas, no supuestas.** (1) `Marisol` está **dormante desde 2023-08-28**: se
+forkea y se asume mantenimiento, o se reimplementa su API —son tres operaciones sobre PDF—. (2)
+`loadfile-tool` tiene **0★ y 8 meses**: es un cimiento correcto, no una dependencia probada; el paso
+6 exige banco de pruebas propio con producciones reales antes de prometerlo a un cliente.
+
+## 🆕 P33 — **Conformidad de firma eIDAS de punta a punta** (EMEA), con la autoridad del regulador dentro
+
+**Para quién:** cualquier flujo legal en la UE cuyo entregable sea **un documento firmado** — que son
+casi todos. **La clave de licencia:** `esig/dss` es **LGPL-2.1**, copyleft **débil**; se **enlaza**
+como biblioteca desde un producto cerrado y sólo deben liberarse las modificaciones **a DSS mismo**.
+Esa distinción es la diferencia entre viable e inviable, y es la razón de que este patrón exista.
+
+```
+PRODUCIR LA FIRMA        → pyHanko (MIT, 807*)         perfiles PAdES (B-B, B-T, B-LT, B-LTA)
+VALIDAR CONTRA LA UE     → esig/dss (LGPL-2.1)         listas de confianza UE; PAdES/XAdES/CAdES/ASiC
+                                                        *** implementación OFICIAL de la Comisión Europea
+                                                            (eu.europa.ec.joinup.sd-dss en Maven Central)
+TRADUCIR EL INFORME      → eidas-validator (MIT)        del informe técnico a lenguaje de abogado
+PATRÓN DE PORTAL         → autogram-portal (EUPL-1.2)   referencia: ya en producción en un Estado miembro
+ANONIMIZAR ANTES         → document-anonymizer (MIT, alemán) · greek-pii-redaction (MIT, griego)
+```
+
+**Cómo se arma, y el orden importa:** `pyHanko` firma en el proceso del cliente; **DSS valida en un
+servicio aparte** (es Java y es LGPL — aislarlo mantiene limpia la frontera de licencia del producto
+Python/JS); `eidas-validator` convierte el veredicto en una frase que el abogado puede firmar.
+
+> 🔑 **El argumento de venta, y no lo tiene ningún competidor propietario:** *«la validez de su firma
+> no la afirmamos nosotros: la valida la implementación de referencia de la propia Comisión
+> Europea.»* En contratación pública europea, **LGPL y EUPL dejan de ser un problema de licencia y
+> pasan a ser una ventaja de adjudicación** — y la Instrucción 2/2026 del CGPJ español, que obliga al
+> juez a usar sólo sistemas **facilitados por la administración**, señala exactamente ese mercado.
+
+⚠️ **Riesgo de calendario, explícito:** la EUDI Wallet se anuncia para final de 2026 **pendiente de
+actos de ejecución** de la Comisión, y las fuentes consultadas **discrepan** sobre ese plazo (una de
+nov-2025 lo daba por vencido a final de 2025). Se diseña contra **PAdES**, que ya es estable, **no
+contra la Wallet**, que no lo es.
+
+## 🆕 P34 — **Gobernanza sobre adopción ya consumada** (APAC): el 94% que nadie controla
+
+**Para quién:** despachos y departamentos legales en APAC, donde **94%** ya usa AI y la gobernanza
+«no es universal». **No se vende capacidad: se vende evidencia de control.**
+
+```
+1. REGLA EXPLÍCITA     → judgment-compiler (MIT)   el abogado compila su criterio en playbook validado
+                                                     => cumple el 1er principio del MinLaw de Singapur:
+                                                        el profesional responde de TODO su producto
+2. EJECUCIÓN ACOTADA   → el modelo aplica el playbook; no improvisa criterio
+3. VERIFICACIÓN FUERA  → el control corre FUERA del agente (patrón legal-agent-workshop)
+4. CITA COMPROBADA     → reconstrucción desde el documento fuente y comparación carácter a carácter
+                           (patrón kancelaria-lex) + marcador permanente de procedencia OCR
+5. JURISDICCIÓN        → legal-ai-skills (India/EE.UU./RU/Singapur) · legal-agent-skills (China, MIT)
+6. EXPEDIENTE DE AUDITORÍA → qué regla, qué versión, qué fuente, quién firmó
+```
+
+**Variante India, y es un encaje literal:** los tribunales indios **ya** usan AI para **transcripción
+en sala y traducción de sentencias**. Sobre ese mismo artefacto —el acta— operan los tres activos MIT
+de deposición que este pase incorporó: `depo-summarizer` (**LLM local**, el acta no sale),
+`DepoIndex` (índice por tema y testigo) y `deposition-contradiction-analysis` (contradicciones con
+cita a línea). **Es el único caso de este pase en que un activo hallado con vocabulario procesal
+estadounidense sirve directamente a un flujo público asiático** — y conviene no olvidar por qué se
+encontró: porque se buscó `deposition`, palabra que esta KB no había consultado nunca.
+
+## 🆕 P35 — **El censo de planos**: el control que este pase debió existir antes y hay que copiar a las doce industrias
+
+Tres pases consecutivos encontraron activos **no buscando mejor, sino buscando otras palabras**: el
+pase 6 en portugués, el pase 8 en el plano de la factura, el pase 9 en el de la prueba. El patrón es
+siempre el mismo y por tanto es **automatizable**. Cuesta **cero llamadas de red**.
+
+```bash
+#!/bin/bash
+# censo-de-planos.sh — ejecutar AL EMPEZAR cada pase, antes de cualquier búsqueda.
+# Mide el VOCABULARIO DE LA PROPIA KB, no el ecosistema.
+# Un 0 no significa "no existe": significa "NUNCA SE PREGUNTO".
+for t in bates "load file" "legal hold" custodian "privilege log" deposition transcript \
+         PAdES eIDAS notar apostille "chain of custody" docket PACER efiling \
+         LEDES UTBMS IOLTA "trust account" conflicts calendaring "legal spend" \
+         "entity management" UBO "beneficial owner" "registry filing" immigration ; do
+  n=$(grep -rio "$t" --include='*.md' . | wc -l)
+  [ "$n" -eq 0 ] && echo "PLANO NO CONSULTADO: $t"
+done
+```
+
+**Y la lista de términos no se inventa: se extrae de los paréntesis de salvedad de la propia KB**
+(regla del pase 8 — *una limitación anotada en un paréntesis es una consulta pendiente, no una nota
+al pie*), más los **nombres de los artefactos** que el sector intercambia: formatos, identificadores,
+registros y plazos.
+
+> 🔑 **Y el criterio de interpretación, que es lo que convierte el censo en método (`G-L18`):** una
+> vez obtenido el `total_count` de un término no consultado, hay **tres** diagnósticos y **tres**
+> arreglos distintos:
+>
+> | `total_count` | Diagnóstico | Arreglo |
+> |---|---|---|
+> | **Un dígito** | sobre-restricción: se añadió un calificador redundante | **quitar** el calificador — `{estándar}` + `{artefacto}`, nunca + `{sector}` |
+> | **Centenares, todo irrelevante** | **homónimo** en un dominio más ruidoso | **añadir** un sustantivo **del mismo plano** |
+> | **Centenares y ningún calificador lo recupera** | término **inalcanzable** por el índice | buscar **por función, fuera de GitHub** |
+>
+> Casos medidos: `LEDES`→LED (109.739), `bates`→apellido (150), `PAdES`→«signature pad» (676),
+> `privilege log`→escalada de privilegios (**902, irrecuperable**).
+
+## 🆕 P36 — Gate de **nivel de encabezado de región** (amplía `G-L11`, que validaba filas y tablas pero no la jerarquía)
+
+`G-L11` valida la **estructura de tabla**. Este pase encontró —y **también cometió**— un defecto que
+`G-L11` no ve: un `###` al nivel de las regiones crea un ***bucket* de región fantasma**, que es
+exactamente lo que el brief prohíbe («`region` es vocabulario CERRADO»). Dos casos en un pase: uno
+heredado del pase 4 («PASE 4 — Brasil» como quinta región) y **dos introducidos por mí al escribir**.
+
+```bash
+#!/bin/bash
+# region-gate.sh — ejecutar ANTES y DESPUES de editar intel/market.md
+n=$(sed -n '/^## Opportunities by region/,/^## Hueco de producto transversal/p' intel/market.md \
+    | grep -c '^### ')
+echo "subsecciones de region: $n (debe ser 4)"
+sed -n '/^## Opportunities by region/,/^## Hueco de producto transversal/p' intel/market.md \
+  | grep '^### ' | grep -vE '^### (North America|EMEA|APAC|LATAM)$' \
+  && { echo "FALLO: encabezado de region fuera del vocabulario cerrado"; exit 1; }
+exit 0
+```
+
+> 🔑 **La regla general, y vale más que el script:** **todo control estructural se ejecuta DOS veces
+> — antes de editar y después de editar.** El acto de escribir reintroduce el defecto que el control
+> acababa de encontrar. Ya había ocurrido en el pase 6 (documentar el bug de la barra vertical en una
+> celda **reprodujo** el bug) y volvió a ocurrir hoy. Un control que sólo corre al principio
+> **audita el pasado y certifica mal el presente.**

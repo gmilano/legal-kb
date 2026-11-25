@@ -1,13 +1,79 @@
 ---
 industry: legal
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 📈 Repos trending — Legal Services
 
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
+
+## 🆕 2026-11-25 (pase 9) — **el caudal no estaba seco: estaba en la capa de estándares**, y ahí el permisivo gana
+
+Tercer pase consecutivo que mide el caudal de creación y tercer pase que encuentra activos fuera del
+vocabulario con el que lo midió. Lo de hoy, además, **refuta en parte la matriz `T28` del pase 8**.
+
+### Infraestructura añadida este pase — y son los mejores activos permisivos de la KB
+
+| Repo | Licencia (leída) | Capa | Por qué es cimiento | ★ | Último commit |
+|---|---|---|---|---|---|
+| [MatthiasValvekens/pyHanko](https://github.com/MatthiasValvekens/pyHanko) | **MIT (1.080 B)** | Conformidad de firma | Firma, sella **y valida** PDF con perfiles **PAdES** (los que la UE exige para firma cualificada). 121 forks, creado 2020-08-06, commit de hace 2 días. **MIT ⇒ empotrable en producto cerrado** | **807** | 2026-11-23 |
+| [esig/dss](https://github.com/esig/dss) | LGPL-2.1 (26.530 B) | Conformidad de firma | **La implementación de referencia de la Comisión Europea** (`eu.europa.ec.joinup.sd-dss` en Maven Central). PAdES, XAdES, CAdES, ASiC contra las listas de confianza de la UE. **LGPL = copyleft débil: enlazable desde producto cerrado** | **1.051** | 2026-11-04 |
+| [frisk55frisk/loadfile-tool](https://github.com/frisk55frisk/loadfile-tool) | **MIT (1.078 B)** | Interoperabilidad e-discovery | Único permisivo que **valida, convierte e inspecciona** `Concordance DAT`, `OPT`, `LFP`, `DII`: el intercambio de producciones entre plataformas de revisión | 0 | 2026-03-31 |
+| [wikkiewikkie/Marisol](https://github.com/wikkiewikkie/Marisol) | **MIT (1.075 B)** | Prueba producible | Numeración **Bates** + estampado + redacción de PDF. ⚠️ **dormante desde 2023-08-28**: referencia de API y base para forkear, no dependencia viva | 18 | 2023-08-28 |
+| [JuliusScheuerer/document-anonymizer](https://github.com/JuliusScheuerer/document-anonymizer) | **MIT (1.073 B)** | Redacción / PII | Anonimización **de documentos en alemán** con redacción **física** del PDF (no capa visual encima). 29 refs. **Alemania · EMEA** | 5 | 2026-03-30 |
+| [Markonick/greek-pii-redaction](https://github.com/Markonick/greek-pii-redaction) | **MIT (1.071 B)** | Redacción / PII | Detección PII **offline** y redacción real de PDF en **griego** (Presidio + PyMuPDF). **Grecia · EMEA** | 0 | 2026-10-12 |
+
+### 🔑 `T29` — la **capa de estándares** escapa a la matriz `T28`, y tiene causa estructural
+
+`T28` (pase 8) afirma: de **{específico del sector, maduro, permisivo}** se eligen dos. `pyHanko` las
+tiene **las tres** (MIT + 807★/121 forks/6 años + específico del artefacto PAdES), y `esig/dss` casi.
+No es excepción: **una implementación de estándar se publica permisiva porque su valor es la
+interoperabilidad**, mientras quien construye el flujo completo del despacho quiere capturarlo y
+elige AGPL. ⇒ **Adoptar el estándar, construir el flujo.** Detalle y tabla en `repos/foundations.md`.
+
+### 🧮 El checksum de licencias (932-G1) rindió 19/19 y añadió **tres bandas nuevas**
+
+| Licencia | Bytes medidos | Estado |
+|---|---|---|
+| MIT | **1.062 – 1.090** (12 casos) | banda confirmada, la más estable de la KB |
+| Apache-2.0 | 11.317 | confirmada |
+| **LGPL-2.1** | **26.530** | 🆕 **banda nueva — primer caso en esta KB** |
+| **EUPL-1.2** | **13.832** | 🆕 **banda nueva** (licencia pública de la UE, `autogram-portal`) |
+| **Unlicense** | **1.211** | 🆕 **banda nueva** — ⚠️ **cae DENTRO del rango alto de MIT**: por bytes **no** se distingue de MIT, sólo por el texto. Primera colisión de bandas que mide esta KB |
+| GPL-3.0 | 35.149 | confirmada |
+| AGPL-3.0 | 34.523 | confirmada |
+
+> ⚠️ **Y eso acota el propio instrumento:** el checksum de bytes es un *detector de anomalías*, no un
+> identificador. `Unlicense` (1.211 B) y `MIT` (hasta 1.090 B) están demasiado cerca. **La regla
+> sigue siendo abrir el fichero.**
+
+### 🔴 La capa de redacción confirma `T28` por tercera vez, y conviene verlo junto
+
+| Activo | Licencia | ★ | Lectura |
+|---|---|---|---|
+| `seanpedrick-case/doc_redaction` | **AGPL-3.0** (34.523 B) | 64 | lo **maduro** de la categoría es copyleft de red |
+| `sophia486/pii-gui` | **AGPL-3.0** | 49 | ídem, *local-first*, muy activo |
+| `JuliusScheuerer/document-anonymizer` | **MIT** | 5 | lo **permisivo** es regional y pequeño (alemán) |
+| `Markonick/greek-pii-redaction` | **MIT** | 0 | ídem (griego) |
+
+**Patrón, cuarta medición consecutiva:** maduro ⇒ copyleft; permisivo ⇒ joven y/o regional. Para un
+entregable comercial, las dos filas MIT son el punto de partida **aunque tengan 5★ y 0★**.
+
+### 🧮 Censo de URLs de este pase
+
+**19/19 direcciones resuelven** (`git ls-remote`, refs > 0), **0 archivadas**, **19/19 licencias
+leídas byte a byte**. Barrido de estructura `G-L11`: **0 defectos**. **0 cabeceras como dato.**
+
+### 🔌 Estado de los canales en esta sesión
+
+`gh api search/repositories` ✅ · `git ls-remote` ✅ · `raw.githubusercontent.com` ✅ ·
+`curl -sI github.com` 🔴 **403 para todo, ciego** · **`WebFetch` a fuentes legales primarias 🔴
+`ENOTFOUND`** (`boe.es`, `edomex.quadratin.com.mx` fuera de los dominios permitidos) ⇒ **lo
+regulatorio de este pase es de un solo canal y va marcado.**
+
+---
 
 ## 🆕 2026-11-22 (pase 8) — el espinazo permisivo del plano de ingresos **existe y es genérico**
 
