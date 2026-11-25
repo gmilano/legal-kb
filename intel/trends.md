@@ -797,3 +797,74 @@ tipo que el brief prohíbe expresamente:
 > celda **reprodujo el bug**. **Regla: todo control estructural se ejecuta DOS veces — antes de
 > editar y después de editar.** Recuento final de este pase: `## Opportunities by region` contiene
 > **exactamente 4 `###`**, uno por región del vocabulario cerrado.
+
+---
+
+## 🆕 Tendencias del pase 10 (2026-11-25) — la norma como dato
+
+### 🆕 18. **La norma misma es el cuarto plano, y el patrón ya es del método, no de la industria**
+
+Cuatro pases consecutivos han encontrado una capa entera de la industria legal invisible para esta
+KB, y en los cuatro casos **el activo existía y lo que faltaba era la palabra**:
+
+| Pase | Plano | Vocabulario que lo abrió | Activos nuevos |
+|---|---|---|---|
+| 7 | Producto jurídico | contrato, cita, cláusula | — (saturado) |
+| 8 | **La factura** | `LEDES`, `UTBMS`, `trust account`, `docketing` | 6 |
+| 9 | **La prueba** | `Bates`, `load file`, `PAdES`, `legal hold` | 9 |
+| **10** | **La norma** | `Akoma Ntoso`, `ELI`, `CELLAR`, `urn:lex`, `DOF` | **31** |
+
+El pase 10 es el de mayor rendimiento de los cuatro, y el censo de entrada era el más vacío
+(9 términos, 0 ocurrencias). ⇒ **La tendencia ya no es «hay un plano que falta»: es que el
+rendimiento de un pase está determinado por el vocabulario de entrada, y el vocabulario se puede
+auditar antes de consultar nada** (`P36` censo + `P23` cobertura). Para las otras once industrias:
+**el plano de la norma es universal** —toda industria regulada tiene un texto que la obliga— y el
+censo de 9 términos cuesta una llamada.
+
+### 🆕 19. La licencia de un activo legal se predice **desde quién lo publica**, no desde qué capa ocupa
+
+Es la primera regla de esta KB que **predice** la licencia en vez de constatarla, y sustituye a `T28`
+(pase 8) y `T29` (pase 9), que eran la misma regla mal enunciada:
+
+| De qué vive el publicador | Licencia elegida | Casos medidos |
+|---|---|---|
+| **Opera un servicio** sobre ese código | Copyleft (GPL/LGPL/AGPL) | Laws.Africa (`indigo`, `cobalt`, `bluebell`), OpenFisca, PolicyEngine |
+| **Investigación** — busca adopción de la técnica | **Permisiva** | **Catala** (Apache-2.0, 2.453★, INRIA), `cellar-extractor` (Maastricht) |
+| **Bien público cívico** | **La más permisiva posible** | `unitedstates/congress`, `openstates/people` (**CC0**) |
+| **Organismo de estandarización** | Creative Commons (es documento) | OASIS LegalDocML (**CC-BY-2.0**) |
+| **Estado publicando su propio corpus** | CC-BY | Senado italiano |
+
+⇒ **Operativamente:** ante un activo legal desconocido, mirar **la organización propietaria antes
+que el README**. Predice la licencia mejor que la madurez, las estrellas o la capa técnica.
+`CatalaLang/catala` tiene las tres propiedades que `T28` declaraba incompatibles —específico, maduro
+y permisivo— **porque es investigación**. Detalle en `repos/trending.md` (`T33`).
+
+### 🆕 20. **El dato legislativo se publica más permisivo que el código que lo procesa**
+
+Tres casos independientes en una sola capa: `openstates` publica el scraper en **GPL-3.0** y las
+personas en **CC0**; `unitedstates/congress` en **CC0**; el Senado italiano su Akoma Ntoso en
+**CC-BY-4.0**. ⇒ **El corpus normativo abierto es adoptable aunque su tooling no lo sea**, y es
+la inversión exacta del «grant partido código/corpus» del pase 3 (código permisivo, corpus
+CC-BY-NC-ND). **Consecuencia práctica: las dos mitades se leen siempre por separado, en los dos
+sentidos** — nunca se hereda la licencia de una a la otra.
+
+### 🆕 21. El fin de la ventana de gracia europea **no alcanza a quien el sector cree**
+
+El 2026-12-02 cierra **sólo** el Art. 50(2) (marcado legible por máquina) y **sólo** para sistemas
+generativos **ya en el mercado antes del 2026-08-02** (nuevo Art. 111(4), Reglamento (UE)
+2026/1744). El Art. 50(1) —divulgar que se habla con una AI— **rige para todos desde el
+2026-08-02**, y cualquier sistema lanzado después de agosto **debe marcar desde su lanzamiento**.
+⇒ **El titular «llega el 2 de diciembre» es falso para la mayoría: o ya les obligaba, o nunca
+tuvieron prórroga.** El mensaje correcto es un diagnóstico de dos preguntas (¿cuándo se lanzó?,
+¿genera contenido sintético?), no una cuenta atrás.
+
+### 🆕 22. La **fuente primaria citable** dejó de ser el cuello de botella en tres regiones
+
+Lo que esta KB midió durante nueve pases como «el problema nº1 del sector» —la cita verificable—
+tiene ya infraestructura abierta, gratuita y **sin API key** en tres de las cuatro regiones:
+**UE** (SPARQL de la Oficina de Publicaciones, con **CELEX + ECLI en cada respuesta**), **EE. UU.**
+(`openstates` + `unitedstates/congress` en CC0, 522 y 228 forks), **LATAM** (DOF, InfoLeg, LeyChile,
+LexML, Boletín Oficial — 7 de 8 activos **MIT**). ⇒ **El diferenciador se desplaza de "tener acceso
+a la fuente" a "demostrar que la respuesta se derivó de ella"**, que es trazabilidad y es
+arquitectura — coherente con la tendencia 6 y con `P10`. En **APAC** sigue incompleto: Australia
+(`lex-au`, MIT) y Nueva Zelanda (`openfisca-aotearoa`) sí; el resto, no medido.

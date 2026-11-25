@@ -9,6 +9,79 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-25 (pase 10) — el plano de la **norma como dato**, y el primer plano que **refuta** a los dos anteriores
+
+Censo de entrada sobre los ocho ficheros, hecho **antes** de consultar nada: `Akoma Ntoso` **0**,
+`legislative` **0**, `bill tracking` **0**, `parliament` **0**, `regulatory change` **0**,
+`obligations register` **0**, `access to justice` **0**, `cap table` **0**, `land registry` **0**.
+Nueve términos, cero ocurrencias en 7.429 líneas. El pase 8 encontró el plano de **la factura**, el
+pase 9 el de **la prueba**; este encuentra el de **la norma misma**: el texto legislativo como dato
+estructurado, versionado y citable. Es el cuarto plano consecutivo que aparece completo al cambiar
+de vocabulario, y **ya no es un hallazgo sobre la industria: es un hallazgo sobre el método.**
+
+### Agentes y clientes nuevos (licencia byte a byte + `ls-remote` + `search/repositories`)
+
+| Agente | Licencia (leída) | Región | Por qué entra | ★ | Último commit |
+|---|---|---|---|---|---|
+| [CodeandoGuadalajara/dof-rag](https://github.com/CodeandoGuadalajara/dof-rag) | **MIT (1.077 B)** | **LATAM** (México) | RAG sobre el **Diario Oficial de la Federación**. 10 forks, colectivo cívico de Guadalajara. El activo LATAM más maduro de este plano | 25 | 2026-11-02 |
+| [lexml/lexml-parser-projeto-lei](https://github.com/lexml/lexml-parser-projeto-lei) | GPL-2.0 (18.033 B) | **LATAM** (Brasil) | **El parser oficial del Senado Federal**. La KB citaba LexML como *fuente que un MCP consulta*; su propio código nunca entró. Activo: commit de hace 8 días sobre un repo de 2013 | 20 | 2026-11-17 |
+| [alvarosdev/lex-chile-mcp](https://github.com/alvarosdev/lex-chile-mcp) | **MIT (1.069 B)** | **LATAM** (Chile) | MCP sobre la ley chilena. Llega **11 días antes** de que la Ley 21.719 entre en vigor (ver `intel/market.md`) | 2 | 2026-11-14 |
+| [ejaircastillo/InfoLeg-MCP](https://github.com/ejaircastillo/InfoLeg-MCP) | **MIT (1.036 B)** | **LATAM** (Argentina) | MCP sobre **InfoLeg**, el repositorio normativo nacional argentino. ⚠️ Su `LICENSE` son **1.036 B**: por debajo de la banda MIT que esta KB publicaba (1.062–1.090) | 0 | 2026-05-20 |
+| [diegoparras/notarum](https://github.com/diegoparras/notarum) | **MIT (1.069 B)** | **LATAM** (Argentina) | Boletín Oficial argentino. Único resultado de los **19** que devolvió su categoría | 2 | 2026-11-20 |
+| [LibreCodeCoop/dou-collector](https://github.com/LibreCodeCoop/dou-collector) | **MIT (1.071 B)** | **LATAM** (Brasil) | Recolector del **Diário Oficial da União**, de una cooperativa de software libre. ⚠️ **dormante desde 2024-11-13**: base para forkear, no dependencia viva | 11 | 2024-11-13 |
+| [cyanheads/eur-lex-mcp-server](https://github.com/cyanheads/eur-lex-mcp-server) | Apache-2.0 (11.317 B) | **EMEA** | Legislación UE, jurisprudencia del TJUE y grafo **CELLAR** por MCP, **sin API key**. Endpoint sobreescribible ⇒ apunta a un espejo Virtuoso propio | 13 | 2026-11-18 |
+| [elconcept/mcp-eu-sparql](https://github.com/elconcept/mcp-eu-sparql) | **MIT (1.082 B)** | **EMEA** | SPARQL de la Oficina de Publicaciones + 57k sentencias del TJUE. **Devuelve CELEX y ECLI en cada cita** ⇒ la cita es verificable por construcción | n/d | n/d |
+| [tseidl/eurlex-builder](https://github.com/tseidl/eurlex-builder) | **MIT (1.067 B)** | **EMEA** | CLI que construye *datasets* de EUR-Lex y los enriquece con **ELI**, fechas de adopción y descriptores **EuroVoc** | 9 | 2026-10-17 |
+| [cchew/lex-au](https://github.com/cchew/lex-au) | **MIT (1.067 B)** | **APAC** (Australia) | Legislación australiana estructurada. **La plaza de Australia** en el patrón «plantilla por jurisdicción» (`agents/top.md`) | 6 | 2026-11-22 |
+| [TBI-AI-Incubator/codify](https://github.com/TBI-AI-Incubator/codify) | Apache-2.0 (11.358 B) | **EMEA** (UK) | Convierte un **corpus legal completo** (PDF, texto o XML) en Akoma Ntoso: adquisición, transcripción, estructuración por anclas, recuperación y comparación. Commit de **hoy** | 15 | 2026-11-25 |
+| [portable-genai/obligation-register-kit](https://github.com/portable-genai/obligation-register-kit) | Apache-2.0 (11.344 B) | Global | Descompone una fuente normativa en **obligaciones atómicas** y las mapea a políticas, controles y evidencia en un registro **versionado y append-only**. Commit de hace 2 días | 0 | 2026-11-23 |
+
+### 🔴 `G-L20` — LA LICENCIA QUE EL BUSCADOR AFIRMA Y EL FICHERO NIEGA: primer caso de **licencia bespoke no comercial** de esta KB
+
+El índice de búsqueda web describió [`hendrillara/akoma`](https://github.com/hendrillara/akoma)
+—legislación federal brasileña por artículo, para agentes— con la frase literal **«its code is
+MIT-licensed»**. Su `LICENSE` son **6.732 B** y empieza así:
+
+```
+Akoma Noncommercial and Commercial Licence 1.0
+```
+
+No es MIT. No es ninguna licencia OSI. Es un **texto bespoke con frontera comercial**, y
+`search/repositories` lo clasifica como `NOASSERTION`, que es exactamente lo que debe hacer. Los dos
+canales que esta KB considera fiables acertaron; **el que falló es el que no verifica**.
+
+> **La regla que esto confirma por cuarta vez, y ahora con el peor modo de fallo posible:** una
+> afirmación de licencia en prosa —de un buscador, de un *awesome list*, de un README ajeno— **no
+> es un dato de licencia**. 6.732 B no caen en ninguna banda conocida: el checksum lo marcó como
+> anomalía *antes* de abrir el fichero. Y el daño de confiar aquí no es un enlace roto, es un
+> entregable comercial construido sobre material que prohíbe el uso comercial.
+
+### 🧮 Censo de este pase
+
+- **34 direcciones verificadas** antes de escribir: **34/34 existen** (`ls-remote`, refs > 0),
+  **32/34 con licencia leída byte a byte**, **2 sin fichero de licencia en ninguna de las 6 rutas
+  probadas** (`usgpo/bulk-data` y `SenatoDellaRepubblica/AkomaNtosoBulkData`).
+- **2 archivadas, y las dos importaban:** `laws-africa/slaw` (MIT, 28★ — el **único** permisivo del
+  stack Akoma Ntoso) y `diegocaro/leychile` (MIT, Chile). Ambas se publican **marcadas como
+  archivadas**, no se retiran: siguen siendo referencia de API y base de fork.
+- **0 cabeceras como dato, 0 placeholders, 0 columnas descuadradas.**
+- **1 anomalía de metadato registrada:** `ejaircastillo/InfoLeg-MCP` declara `pushed_at`
+  (2026-05-20) **anterior** a `created_at` (2026-05-22). Ocurre con historia importada. Se publica
+  `pushed_at` tal cual se midió y no se deriva antigüedad de él.
+
+### 🔌 Estado de los canales en esta sesión
+
+`gh api search/repositories` ✅ · `git ls-remote` ✅ · `raw.githubusercontent.com` ✅ ·
+`gh api search/code` ✅ (no usado este pase) · **`curl -sI github.com` — ⚠️ CAMBIO RESPECTO DE LOS
+PASES 6–9:** ya **no** devuelve 403, pero devuelve `HTTP/1.1 200 Connection Established`, que es la
+respuesta **del CONNECT del proxy**, no el estado HTTP del recurso. **Es un falso positivo
+universal: devuelve «200» también para repos inexistentes.** Hay que medirlo con
+`curl -s -o /dev/null -w '%{http_code}'`. ⇒ **La comprobación de URL que prescribe el brief pasó de
+ciega (403 para todo) a engañosa (200 para todo). La segunda es peor.** `ls-remote` sigue siendo el
+único canal de existencia fiable.
+
+---
+
 ## 🆕 2026-11-25 (pase 9) — el plano de la **prueba**: seis categorías con cero menciones, cinco con activos dentro
 
 **Nueve agentes nuevos, todos MIT o Apache-2.0.** Y el pase no los encontró buscando mejor: los

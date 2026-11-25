@@ -9,6 +9,101 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-25 (pase 10) — la **norma como dato**: aquí `T28` se rompe de verdad, y el que la rompe tiene 2.453★
+
+El pase 9 dijo que la capa de estándares «escapa a `T28`» con `pyHanko` (MIT, 807★). Este pase
+encuentra un caso **más fuerte y más incómodo**, y además encuentra el contraejemplo del
+contraejemplo: la capa de estándares **no** es uniformemente permisiva. Las dos cosas se miden abajo.
+
+### Infraestructura añadida este pase
+
+| Repo | Licencia (leída) | Capa | Por qué es cimiento | ★ | Último commit |
+|---|---|---|---|---|---|
+| [CatalaLang/catala](https://github.com/CatalaLang/catala) | **Apache-2.0 (11.358 B)** | Ley como código | **Lenguaje de programación para especificar legislación** en *literate programming*: el código se anota línea a línea contra el texto legal, y su lógica por defecto (*default logic*) expresa **la excepción**, que es la forma nativa de la norma. 124 forks, 6 años, commit de hace 2 días | **2.453** | 2026-11-23 |
+| [laws-africa/indigo](https://github.com/laws-africa/indigo) | LGPL-3.0 (*stub* 633 B) | Plataforma legislativa | Base de datos de legislación: gestiona, **consolida** y publica normativa en Akoma Ntoso. 38 forks. Es la plataforma vertical de este plano (ficha en `verticals/solutions.md`) | 78 | 2026-11-23 |
+| [laws-africa/bluebell](https://github.com/laws-africa/bluebell) | GPL-3.0 (35.149 B) | Parser AN3 | Parser genérico de Akoma Ntoso 3: `act`, `bill`, `debate`, `doc`. Su documentación afirma que **produce siempre AN estructuralmente válido, cualquiera sea la entrada** | 23 | 2026-07-13 |
+| [laws-africa/cobalt](https://github.com/laws-africa/cobalt) | LGPL-3.0 (*stub* 633 B) | Lib AN3 | Librería Python ligera: parsea y **valida contra el esquema AN 3.0** (estricto o relajado), operando sobre el XML sin objetos intermedios | 29 | 2026-06-18 |
+| [laws-africa/slaw](https://github.com/laws-africa/slaw) | **MIT (1.067 B)** | Parser AN3 (Ruby) | ⚠️ **ARCHIVADO** (último commit 2022-06-28). Importa porque es el **único permisivo de todo el stack Akoma Ntoso**: referencia de API y base de fork, no dependencia | 28 | 2022-06-28 |
+| [bungenix/akomantoso-lib](https://github.com/bungenix/akomantoso-lib) | Apache-2.0 (10.358 B) | API Java AN3 | API Java generada con JAXB desde el esquema AN 3.0. ⚠️ **dormante 9,4 años** (2017-06-29): se usa como *binding* de referencia, no como dependencia | 15 | 2017-06-29 |
+| [oasis-open/legaldocml-akomantoso](https://github.com/oasis-open/legaldocml-akomantoso) | **CC-BY-2.0 (12.545 B)** | **El esquema** | El XSD normativo de OASIS LegalDocML. ⚠️ **No es código: es un documento con licencia Creative Commons.** 19 forks | 87 | 2022-06-02 |
+| [unitedstates/congress](https://github.com/unitedstates/congress) | **CC0-1.0 (7.048 B)** | Datos legislativos 🇺🇸 | Recolector del Congreso federal. **CC0 = dominio público, sin atribución exigible**: la licencia más permisiva posible para un corpus. 228 forks | **1.071** | 2026-10-03 |
+| [openstates/openstates-scrapers](https://github.com/openstates/openstates-scrapers) | GPL-3.0 (35.147 B) | Datos legislativos 🇺🇸 | Los 50 estados + DC + Puerto Rico, normalizados. **522 forks** y commit **de hoy**: el repo más vivo de este plano | **929** | 2026-11-25 |
+| [openstates/people](https://github.com/openstates/people) | **CC0-1.0 (7.048 B)** | Datos de legisladores 🇺🇸 | El registro de personas y cargos, **separado del código GPL** y en CC0. Commit de hoy | 162 | 2026-11-25 |
+| [openfisca/openfisca-core](https://github.com/openfisca/openfisca-core) | AGPL-3.0 (34.523 B) | Motor de reglas | Motor que ejecuta legislación socio-fiscal como código. 100 forks, 12 años, commit de ayer. **AGPL ⇒ ver aviso en `repos/foundations.md`** | 252 | 2026-11-24 |
+| [PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us) | AGPL-3.0 (**34.519 B**) | Reglas 🇺🇸 | El modelo estadounidense sobre OpenFisca. **224 forks**, commit de ayer | 178 | 2026-11-24 |
+| [maastrichtlawtech/cellar-extractor](https://github.com/maastrichtlawtech/cellar-extractor) | Apache-2.0 (11.357 B) | Corpus UE | Extrae metadatos de jurisprudencia de **CELLAR** por SPARQL y los enriquece. Procedencia académica (Maastricht Law & Tech Lab) | 8 | 2026-09-30 |
+| [SenatoDellaRepubblica/AkomaNtosoBulkData](https://github.com/SenatoDellaRepubblica/AkomaNtosoBulkData) | CC-BY-4.0 (**sin fichero de licencia en 6 rutas**) | Corpus AN3 oficial 🇮🇹 | Volcado masivo en Akoma Ntoso del **Senado italiano**. Commit **de hoy** sobre un repo de 2016: el corpus AN oficial más longevo y más vivo que existe | 42 | 2026-11-25 |
+| [silegis-mg/editor-articulacao](https://github.com/silegis-mg/editor-articulacao) | LGPL-3.0 (`COPYING` = **GPL-3.0, 35.147 B**) | Redacción legislativa 🇧🇷 | Editor de articulación de **la Asamblea Legislativa de Minas Gerais**: redacta el texto normativo con su estructura (artículo, parágrafo, inciso). ⚠️ dormante desde 2024-06-25 | 18 | 2024-06-25 |
+| [step21/eurlex](https://github.com/step21/eurlex) | AGPL-3.0 (34.523 B) | Cliente CELLAR | Paquete Python que construye consultas SPARQL contra Cellar y descarga. Deriva del paquete R `eurlex` | 14 | 2026-03-09 |
+| [seljaseppala/eu_corpus_compiler](https://github.com/seljaseppala/eu_corpus_compiler) | GPL-3.0 (35.149 B) | Corpus UE | *Pipeline* que recoge IDs de CELLAR por SPARQL y descarga el XML/HTML correspondiente. ⚠️ dormante desde 2021-12-03 | 19 | 2021-12-03 |
+| [usgpo/bulk-data](https://github.com/usgpo/bulk-data) | 🔴 **SIN LICENCIA** (null; 6 rutas probadas, 6 × 404) | Datos federales 🇺🇸 | Documentación de los volcados masivos del **Government Publishing Office**. 146 forks, **387★ y ningún fichero de licencia**: obra del gobierno de EE. UU., pero **eso es una presunción jurídica, no un grant** | 387 | 2026-06-11 |
+
+### 🔑 `T33` — `T28` y `T29` eran la misma regla mal enunciada. El discriminante no es la capa: es **si quien publica opera un servicio**
+
+`T28` (pase 8): de {específico, maduro, permisivo} se eligen dos. `T29` (pase 9): la capa de
+estándares se escapa «porque su valor es la interoperabilidad». **Este plano rompe las dos**, y en
+direcciones opuestas:
+
+| Caso | Específico | Maduro | Permisivo | ¿Encaja en `T28`/`T29`? |
+|---|---|---|---|---|
+| `CatalaLang/catala` | **Sí** (lenguaje *para* legislación) | **Sí** (2.453★, 124 forks, 6 años, activo) | **Sí** (Apache-2.0) | 🔴 **Rompe `T28`: tiene las tres** |
+| `laws-africa/{cobalt,bluebell,indigo}` | Sí | Sí (10 años, activos) | 🔴 **No** (LGPL/GPL) | 🔴 **Rompe `T29`: son implementaciones de estándar y son copyleft** |
+| `oasis-open/legaldocml-akomantoso` | Sí | Sí | n/a (**CC-BY**, es un documento) | — |
+| `unitedstates/congress`, `openstates/people` | Sí | Sí | **Sí (CC0)** | 🔴 Rompe `T28` |
+
+La regla que explica **los cuatro** casos a la vez:
+
+> **`T33` — Lo que determina la licencia no es la capa (estándar vs. flujo) ni la madurez: es si
+> quien publica OPERA UN SERVICIO sobre ese código.** Laws.Africa **opera** una plataforma de
+> publicación de legislación africana; sus parsers son su producto, y elige LGPL/GPL aunque sean
+> implementaciones de un estándar abierto. Catala es **investigación** (INRIA): su objetivo es que
+> la técnica se adopte, y elige Apache-2.0 aunque sea madura y específica. `unitedstates/congress`
+> y `openstates/people` son **bienes públicos cívicos**: eligen CC0, la licencia más permisiva que
+> existe. La pregunta operativa no es «¿qué capa es?» sino **«¿de qué vive el que lo publica?»** —
+> y eso se lee en la organización propietaria, no en el `README`. **Probar en las otras once
+> industrias: es la primera regla de esta KB que predice la licencia desde el publicador.**
+
+### 🧮 El checksum de licencias (932-G1) rindió 32/32, **corrigió dos bandas publicadas** y añadió cuatro
+
+| Licencia | Bytes medidos este pase | Estado |
+|---|---|---|
+| MIT | **1.036** · 1.067 (×4) · 1.069 (×2) · 1.071 · 1.077 · 1.082 | 🔴 **CORRECCIÓN: el suelo baja de 1.062 a 1.036** (`InfoLeg-MCP`). Banda acumulada **1.036–1.090** |
+| AGPL-3.0 | **34.519** (×2) · 34.523 | 🔴 **CORRECCIÓN: el pase 8 la declaró «constante 34.523 exactos» y el pase 9 lo confirmó. Es FALSO: es una banda de 34.519–34.523** |
+| GPL-3.0 | **35.147** (×2) · 35.149 (×2) | 🔴 **Refinada: no es 35.149, es 35.147–35.149** |
+| Apache-2.0 | **10.358** · 11.314 · 11.317 · 11.344 · 11.357 · 11.358 (×2) | 🔴 **Banda muy ensanchada por abajo:** el de 2013 (`akomantoso-lib`) pesa **~1 KB menos** que el clúster moderno |
+| **GPL-2.0** | **18.033** | 🆕 **banda nueva** (`lexml-parser-projeto-lei`) |
+| **CC0-1.0** | **7.048** (×2, organizaciones independientes) | 🆕 **banda nueva** |
+| **CC-BY-2.0** | **12.545** | 🆕 **banda nueva** |
+| **LGPL-3.0** (*stub*) | **633** (×2) | 🆕 **banda nueva — y es un *stub*, no el texto:** 633 B de remisión a la LGPL, no la licencia íntegra |
+| 🔴 *bespoke* no comercial | **6.732** | 🆕 **«Akoma Noncommercial and Commercial Licence 1.0»** — ninguna banda, marcado como anomalía antes de abrir el fichero |
+
+> ⚠️ **Dos lecciones de método, y la segunda es nueva:**
+> **(1)** Una banda «confirmada» por dos pases consecutivos puede seguir siendo falsa: la de AGPL lo
+> era. Dos confirmaciones **del mismo valor** no prueban que no exista otro.
+> **(2)** 🆕 `G-L21` — **para LGPL hay que leer DOS ficheros.** `silegis-mg/editor-articulacao` es
+> LGPL-3.0 según el clasificador, pero su `COPYING` contiene el texto **GPL-3.0** (35.147 B): la
+> LGPL-3.0 **se expresa como GPL-3.0 + un suplemento** (`COPYING.LESSER`). Leer sólo `COPYING`
+> devuelve «GPL-3.0» y **endurece la licencia por error** — copyleft fuerte donde hay copyleft
+> débil, que es *enlazable* desde producto cerrado. El error es conservador, pero descarta activos
+> utilizables.
+
+### 🧮 Censo de URLs de este pase
+
+**34/34 direcciones resuelven** (`git ls-remote`, refs > 0). **32/34 licencias leídas byte a byte**;
+**2 sin fichero de licencia** en 6 rutas probadas (`usgpo/bulk-data`, `AkomaNtosoBulkData`), ambas
+publicadas con el hueco explícito. **2 archivadas, marcadas** (`laws-africa/slaw`,
+`diegocaro/leychile`). Barrido de estructura `G-L11`: **0 defectos**, **0 cabeceras como dato**.
+
+### 🔌 Estado de los canales — **una regresión que invalida el instrumento del brief, otra vez y al revés**
+
+`curl -sI github.com/<slug>` ya **no** devuelve 403 (como en los pases 6–9): devuelve
+`HTTP/1.1 200 Connection Established`, **la respuesta del CONNECT del proxy**, idéntica para un repo
+real y para uno inexistente. ⇒ **La verificación pasó de ciega a engañosa.** Medida correcta:
+`curl -s -o /dev/null -w '%{http_code}'`. `git ls-remote` sigue siendo el único canal de existencia
+fiable y `raw.githubusercontent.com` el único de lectura de licencia.
+
+---
+
 ## 🆕 2026-11-25 (pase 9) — **el caudal no estaba seco: estaba en la capa de estándares**, y ahí el permisivo gana
 
 Tercer pase consecutivo que mide el caudal de creación y tercer pase que encuentra activos fuera del

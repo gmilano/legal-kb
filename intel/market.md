@@ -555,6 +555,48 @@ proveedores, `Marisol` (MIT) para Bates y redacción, `legal-hold-manager` (MIT)
 el entregable. **El gancho comercial no es «AI para litigio»: es «su flujo con AI, documentado para
 ser defendible ante el juez que ya dijo sí».**
 
+
+#### 🆕 Pase 10 (2026-11-25) — **el conflicto de Colorado, abierto durante tres pases, queda RESUELTO**
+
+Los pases 8 y 9 publicaron tres lecturas incompatibles sin elegir entre ellas: «derogada/sustituida
+por SB 189 (may-2026)», «SB 26-189 con efecto 1-ene-2027» y «muerta» (esta última de la KB de
+gaming). **Las tres eran correctas y describían objetos distintos.** La secuencia completa:
+
+| Hito | Fecha | Qué pasó |
+|---|---|---|
+| SB 24-205 aprobada | 2024 | La Colorado AI Act original |
+| SB25B-004 firmada | 2025-08-28 | **Retrasa** la entrada en vigor 5 meses, al **2026-06-30** |
+| Demanda de xAI | 2026-04-09 | xAI demanda en tribunal federal para bloquear SB 24-205 |
+| Orden estipulada | 2026-04-27 | **Prohíbe aplicar** SB 24-205 hasta 14 días después de resolverse la medida cautelar |
+| **SB 26-189 firmada** | **2026-05-14** | **Deroga** el fondo de SB 24-205 y lo **reemplaza** por una ley **ADMT más estrecha** |
+| Vigencia de SB 26-189 | **2027-01-01** | Excepto las dos cláusulas de *rulemaking* del Fiscal General y la de *joinder*, vigentes desde la promulgación |
+
+> 🔑 **Y la lección de método vale más que el dato:** SB 24-205 **nunca entró en vigor** — fue
+> derogada antes de su propia fecha retrasada. Por eso «muerta», «derogada» y «vigente el
+> 1-ene-2027» convivían: **había dos estatutos y las fuentes no decían de cuál hablaban.**
+> `G-L23` — **cuando tres fuentes se contradicen sobre una norma, la hipótesis a probar primero no
+> es que una se equivoque, sino que están describiendo objetos distintos con el mismo nombre
+> popular** («la ley de AI de Colorado»). Lo que lo resuelve es reconstruir la **cadena de
+> números de boletín**, no buscar más resúmenes. ⚠️ Varias fuentes vigentes hoy siguen diciendo
+> «entra en vigor el 30-jun-2026»: están **superadas**, no equivocadas en su fecha de redacción.
+
+- **Federal, con precisión:** el único estatuto federal autónomo que regula AI en el fondo sigue
+  siendo la **TAKE IT DOWN Act** (imágenes íntimas no consentidas, incluidos *deepfakes*). El marco
+  de preempción de la Casa Blanca (mar-2026) **no se ha promulgado**. 🆕 En **enero de 2026 el DOJ
+  creó una AI Litigation Task Force**.
+- **El juez sigue siendo el regulador efectivo** (cuarta medición consecutiva): la Indiana Trial
+  Rule 11 sobre escritos asistidos por AI, y un sistema judicial estatal con política interina que
+  **obliga a formar en AI a todos los jueces y al personal**.
+- 🆕 **La capa de datos legislativos de EE. UU. es la más rica del mundo y esta KB no la tenía:**
+  `openstates/openstates-scrapers` (GPL-3.0, **929★, 522 forks, commit de hoy**) normaliza **los 50
+  estados + DC + Puerto Rico**; `openstates/people` y `unitedstates/congress` publican el dato en
+  **CC0** (dominio público). ⇒ **Oportunidad concreta:** el rastreo de cambio normativo
+  multiestatal —el dolor declarado por los *trackers* que «no se reconcilian» entre sí y que esta
+  KB viene registrando desde el pase 6— tiene **infraestructura abierta y viva** para construirse.
+  Receta en `compose/patterns.md` (`P37`).
+- ⚠️ **`usgpo/bulk-data`** (387★, 146 forks) **no tiene fichero de licencia** en ninguna de las 6
+  rutas probadas. Obra del gobierno federal es dominio público por presunción jurídica, **pero una
+  presunción no es un grant escrito**: para un entregable con cliente hay que documentarlo.
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -867,6 +909,43 @@ griego), `AI-Legal-SkillsPL` + `kancelaria-lex` (MIT, Polonia), `claude-fuer-deu
 > despacho. Es un mercado de contratación pública — y ahí **EUPL-1.2 y LGPL dejan de ser un problema
 > de licencia y pasan a ser una ventaja de adjudicación**.
 
+
+#### 🆕 Pase 10 (2026-11-25) — **faltan 7 días** para el 2-dic, y el alcance real es mucho más estrecho de lo que esta KB publicó
+
+El pase 8 anotó «quedan 10 días para el marcado legible por máquina del 2-dic-2026». La fecha es
+correcta; **el alcance estaba sin acotar, y acotarlo cambia a quién hay que llamar**:
+
+| Obligación del Art. 50 | Desde cuándo | A quién alcanza |
+|---|---|---|
+| **Art. 50(1)** — divulgación de que se interactúa con una AI (chatbots) | **2026-08-02, ya vigente** | **Todos**, sin prórroga |
+| **Art. 50(2)** — **marcado legible por máquina** del contenido sintético | **2026-12-02** | **Sólo** los proveedores de sistemas generativos **ya en el mercado antes del 2026-08-02** |
+| Art. 50(2) para sistemas lanzados **a partir** del 2026-08-02 | **Desde su lanzamiento** | Sin prórroga de ningún tipo |
+
+Base de la prórroga: **nuevo Art. 111(4)** introducido por el **Reglamento (UE) 2026/1744**
+(*Digital Omnibus*), en vigor desde el **2026-07-27**. ⇒ **El 2-dic no es una fecha nueva para
+nadie: es el fin de una ventana de gracia para un conjunto cerrado de sistemas heredados.** Un
+cliente que lanzó después de agosto **ya está incumpliendo si no marca**, y eso es un mensaje
+comercial más urgente —y más cierto— que «llega el 2 de diciembre». ⚠️ Verificado por índice de
+búsqueda, **no contra el texto del DOUE** (ver estado de canales).
+
+- 🆕 **El TJUE va a entrar en el fondo:** se espera la **primera resolución del Tribunal de Justicia
+  sobre AI y minería de textos y datos** en *Like Company v Google*, a finales de 2026 o principios
+  de 2027. Es el primer precedente vinculante de la UE sobre entrenamiento, y afecta a la
+  **procedencia del corpus**, que es exactamente el riesgo que esta KB mide en cada licencia.
+- 🆕 **Golfo:** los **EAU anunciaron el 2026-06-14 un organismo federal** de supervisión de AI y
+  datos. EMEA deja de ser «UE + RU» en este fichero.
+- **Reguladores de datos como actores de AI** (consistente con los pases 6–9): opinión conjunta
+  **EDPB/EDPS** sobre el Digital Omnibus —a favor de simplificar, **en contra de diluir derechos
+  fundamentales**—, recomendaciones de la **CNIL** francesa y guía de la **DSK** alemana.
+- 🆕 **El corpus normativo europeo es abierto, permisivo y está desatendido.** El endpoint SPARQL de
+  la Oficina de Publicaciones (`publications.europa.eu/webapi/rdf/sparql`) **no exige API key**, y
+  sobre él hay cuatro clientes nuevos de este año, **tres de ellos permisivos**:
+  `cyanheads/eur-lex-mcp-server` (Apache-2.0), `elconcept/mcp-eu-sparql` (MIT, **devuelve CELEX y
+  ECLI en cada cita**), `tseidl/eurlex-builder` (MIT, enriquece con **ELI** y **EuroVoc**). Y el
+  **Senado italiano** publica su Akoma Ntoso oficial en bulk (commit de hoy).
+  ⇒ **Oportunidad:** en la región donde la obligación de documentar es más exigente, la **fuente
+  primaria citable es gratuita, abierta y sin clave**. El `61 %` de adopción *in-house* europea con
+  sólo `14 %` de herramienta legal especializada (pase 8) es la demanda; esto es la oferta.
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -1168,6 +1247,39 @@ modelo de datos encaja de origen con una jurisdicción de APAC.**
    expertos **con evaluaciones**. Esta KB documentaba el patrón «plantilla por jurisdicción» para
    EE. UU., RU, India, Singapur, Alemania, Polonia y España; **faltaba China**, y ya está.
 
+
+#### 🆕 Pase 10 (2026-11-25) — **Corea queda resuelta, y entra un régimen que esta KB no tenía: Vietnam**
+
+- 🟢 **Corea — CONFLICTO DE FECHA CERRADO.** Los pases 7 y 8 llevaban el dato en conflicto
+  («22-ene-2026» vs. «a lo largo de 2026»). Confirmado: el **Framework Act on the Development of
+  Artificial Intelligence and the Creation of a Foundation for Trust** entró en vigor el
+  **2026-01-22**, **junto con su decreto de desarrollo**. Sigue siendo **el único régimen general
+  obligatorio de la región**.
+- 🆕 **Vietnam — régimen nuevo, y es el primero del Sudeste Asiático.** Ley de AI autónoma en vigor
+  desde el **2026-03-01**: modelo **basado en riesgo**, con **supervisión humana obligatoria para
+  AI generativa** y **etiquetado de contenido**. ⚠️ Una fuente la denomina *Digital Technology
+  Industry Law*: **el nombre está en conflicto, la fecha y el contenido no**. Esta KB no tenía
+  Vietnam en ningún fichero.
+- ⚠️ **Taiwán — conflicto nuevo que se publica sin elegir.** El pase 8 registró «AI Basic Act
+  14-ene-2026»; la fuente de este pase dice **aprobada en diciembre de 2025**. Puede ser
+  aprobación vs. vigencia, pero **no se resuelve con las fuentes disponibles**.
+- **China** sigue siendo el régimen más extenso: **registro obligatorio**, etiquetado de contenido
+  estricto y sanciones **de hasta 50 millones de CNY**.
+- **Singapur**, confirmando el pase 8: **sin estatuto vinculante**. AI Verify como vía para
+  *demostrar* cumplimiento mediante evaluación estandarizada ⇒ y por eso su **guía sectorial legal
+  del MinLaw (6-mar-2026)** sigue siendo el documento que el cliente usará como criterio de compra.
+- **India:** etiquetado de contenido AI tratado **dentro de marcos sectoriales existentes**, no en
+  una ley general. **Nueva Zelanda** se posiciona como *sophisticated adopter*: actualiza privacidad
+  y consumo en vez de legislar AI.
+- 🔴 **Y el dato de adopción de la región sigue sin fuente verificable.** «APAC tiene la adopción
+  legal más rápida del mundo y la gobernanza más débil» proviene de una página de un solo canal, mal
+  formateada, cuya afirmación vecina (una alianza Thomson Reuters–Anthropic en may-2026) **tampoco
+  se pudo confirmar**. ⇒ **Se publica marcado como no verificado**, igual que el `44 %→87 %` del
+  pase 8. **Tercer pase consecutivo en que la adopción APAC es el dato peor sostenido del fichero.**
+- 🆕 **Activos regionales nuevos:** `cchew/lex-au` (**MIT**, legislación australiana) ocupa la plaza
+  de Australia en el patrón «plantilla por jurisdicción»; `BetterRules/openfisca-aotearoa`
+  (AGPL-3.0, 45★, 23 forks) es **la referencia mundial de *legislación como código*** y es de
+  **Nueva Zelanda** — APAC lidera esta categoría, no NA ni EMEA. ⚠️ dormante desde 2025-03-13.
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -1598,6 +1710,76 @@ arquitectónico a replicar** —localidad impuesta por Docker con `internal: tru
 carácter a carácter—, y sigue siendo, pase 9, **el mejor modelo disponible para una adaptación
 LATAM**, que continúa sin existir.
 
+
+#### 🆕 Pase 10 (2026-11-25) — **Chile en 6 días**, Brasil se cae a 2027, y el hueco de activos era un artefacto del vocabulario
+
+**🔴 La fecha más cercana de todo este fichero, en cualquier región: Chile, 2026-12-01 — dentro de
+6 días.** Y viene con una advertencia que hay que dar junto con la fecha:
+
+| Elemento | Estado medido |
+|---|---|
+| **Ley 21.719** (protección de datos personales) | Publicada **2024-12-13**; art. 1º transitorio ⇒ vigencia **24 meses después = 2026-12-01** |
+| Proyecto de postergación | **Boletín 18.623-07**, ingresado por el Gobierno el **2026-09-01**, suma urgencia renovada el **2026-10-06** |
+| Trámite | El **Senado aprobó postergar al 2027-10-15**; está en la **Cámara de Diputados** (corte al 2026-11-09) |
+| ⚠️ Fecha operativa **hoy** | **2026-12-01.** Mientras sea proyecto, la obligación rige |
+| Agencia | La **Agencia de Protección de Datos Personales** opera **antes** de la fecha general |
+| Discrepancia registrada | Otra fuente (corte sep-2026) menciona **2027-12-01** como fecha propuesta, no el 15-oct. **Se publica sin elegir** |
+
+> **Cómo se dice esto a un cliente, porque la ambigüedad es el mensaje:** la obligación entra en
+> **6 días** y existe un proyecto con suma urgencia que podría moverla a 2027 **aprobado a medias**.
+> ⇒ **Lo que no se puede hacer es esperar**: si la postergación se publica, lo construido sigue
+> sirviendo; si no se publica, se incumple desde el día 7. **El riesgo es asimétrico y eso es
+> precisamente el argumento de venta.** ⚠️ Un solo canal (índice de búsqueda), **no verificado
+> contra la BCN ni la Cámara**: el estado del boletín 18.623-07 hay que comprobarlo antes de usar
+> esto con un cliente.
+
+- 🔄 **Brasil — corrección al pase 8.** El pase 8 publicó «PL 2.338/2023 aprobado por el Senado,
+  sigue sin ser ley». Lo que faltaba: **el Congreso dejó cerrar la ventana legislativa en agosto de
+  2026 sin votarlo** (calendario electoral), y **el proyecto se difiere a 2027**. Entretanto la
+  **ANPD** gestiona la AI por **guías, *sandboxes* y fiscalización**, no por ley. ⇒ Refuerza la
+  conclusión del pase 8 (`P17`): en Brasil el límite operativo **no es el AI Act, es el Estatuto da
+  Advocacia y la responsabilidad colegial**, ya vigentes.
+- **México:** sin ley general de AI; rigen **LFPDPPP y LGPDPPSO** (desde 2025-03-21) y reformas
+  sectoriales. **Sin cambios** respecto del pase 8.
+- 🟢 **El hueco de activos LATAM estaba CERRADO, y la causa corrige el método de los pases 6 y 8.**
+  Seis consultas con vocabulario importado (`rules as code latam`, `openfisca brasil/mexico/`
+  `colombia/chile`, `legislacion como codigo`) devuelven **0**. Seis consultas con el **nombre propio
+  de la fuente oficial** devuelven **141 repos y 8 activos, 7 de ellos MIT**:
+
+| País | Activo | Licencia | ★ |
+|---|---|---|---|
+| México | [`CodeandoGuadalajara/dof-rag`](https://github.com/CodeandoGuadalajara/dof-rag) — RAG sobre el **DOF** | **MIT** | 25 |
+| Brasil | [`lexml/lexml-parser-projeto-lei`](https://github.com/lexml/lexml-parser-projeto-lei) — **parser oficial del Senado** | GPL-2.0 | 20 |
+| Brasil | [`silegis-mg/editor-articulacao`](https://github.com/silegis-mg/editor-articulacao) — redacción legislativa (**Minas Gerais**) | LGPL-3.0 | 18 |
+| Brasil | [`LibreCodeCoop/dou-collector`](https://github.com/LibreCodeCoop/dou-collector) — **DOU** ⚠️ dormante | **MIT** | 11 |
+| Chile | [`alvarosdev/lex-chile-mcp`](https://github.com/alvarosdev/lex-chile-mcp) — MCP de ley chilena | **MIT** | 2 |
+| Chile | [`diegocaro/leychile`](https://github.com/diegocaro/leychile) — corpus ⚠️ **archivado** | **MIT** | 3 |
+| Argentina | [`ejaircastillo/InfoLeg-MCP`](https://github.com/ejaircastillo/InfoLeg-MCP) — MCP de **InfoLeg** | **MIT** | 0 |
+| Argentina | [`diegoparras/notarum`](https://github.com/diegoparras/notarum) — **Boletín Oficial** | **MIT** | 2 |
+
+> 🔑 **`G-L22`, y afecta a las doce industrias:** un hueco regional medido con el nombre de un
+> estándar extranjero **no mide la región: mide la huella del estándar.** El pase 8 razonó
+> correctamente que LEDES/UTBMS son de origen estadounidense y que el equivalente LATAM es la
+> factura fiscal de cada país —**y aun así dejó el hueco declarado**. La consecuencia que no sacó:
+> **si la causa del hueco es el origen del estándar, la medición no es informativa sobre la región
+> y hay que repetirla con el nombre local.** Hecho aquí: 0 → 8 activos. **Antes de escribir «hueco
+> LATAM», consultar con `DOF`, `InfoLeg`, `LeyChile`, `urn:lex`, `Boletín Oficial`, `Diário
+> Oficial`.**
+
+- 🔴 **Pero queda un hueco LATAM real, y este sí resiste la prueba del vocabulario:** **no existe
+  ningún modelo de *legislación como código* de ningún país latinoamericano.** Hay modelos de
+  Francia, EE. UU., Nueva Zelanda y Senegal. Se consultó también en español y con el nombre del
+  motor: **cero**. La causa no es técnica (`openfisca/country-template` existe para arrancar un país
+  nuevo) sino **institucional**: en Francia es un *commun numérique* con apoyo estatal y en LATAM no
+  hay equivalente que lo sostenga. ⚠️ El motor es **AGPL-3.0**: un `openfisca-mx` o `openfisca-br`
+  es **bien común y carta de presentación regional**, no activo propietario. Detalle y receta en
+  `repos/foundations.md` y `compose/patterns.md` (`P38`).
+- **Desinformación regional — CUARTA medición consecutiva, ya es constante.** Las guías de
+  *compliance* que afirman que Brasil y México «ya tienen ley de AI activa» siguen siendo falsas en
+  ambos casos, y **la fuente errónea sigue mejor indexada que la correcta**. 🆕 Este pase añade un
+  caso del mismo género en la propia capa de datos: un índice de legal tech LATAM titulado **2026**
+  cuyo contenido está etiquetado **«2024 market data»**. ⇒ **En esta región, la fecha del título no
+  es la fecha del dato.**
 ## Hueco de producto transversal (las cuatro regiones)
 
 No existe un **"Odoo de los despachos legales"**: no se halló plataforma de *practice management*

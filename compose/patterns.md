@@ -1565,3 +1565,214 @@ exit 0
 > acababa de encontrar. Ya había ocurrido en el pase 6 (documentar el bug de la barra vertical en una
 > celda **reprodujo** el bug) y volvió a ocurrir hoy. Un control que sólo corre al principio
 > **audita el pasado y certifica mal el presente.**
+
+---
+
+## 🆕 P37 — Rastreo de **cambio normativo multiestatal** sobre infraestructura cívica (North America)
+
+**El dolor, y está medido en esta KB desde el pase 6:** los *trackers* de legislación de AI de
+EE. UU. **no se reconcilian entre sí** (29 estados con legislación y 1.561 proyectos en la sesión
+2026, según rastreadores que dan cifras distintas). El comprador —legal ops corporativo, el mismo
+del `P29`— no necesita otro resumen: necesita **saber qué cambió esta semana en los 50 estados y qué
+obligación suya toca**.
+
+**La infraestructura existe, es abierta y tuvo commits hoy.** Nadie la ha conectado a un registro de
+obligaciones.
+
+### Las piezas, con su licencia y el papel exacto
+
+| Pieza | Licencia | Papel | Por qué esa y no otra |
+|---|---|---|---|
+| [`openstates/openstates-scrapers`](https://github.com/openstates/openstates-scrapers) | **GPL-3.0** | Ingesta: 50 estados + DC + PR, normalizados | 929★, **522 forks**, commit de hoy. No hay alternativa permisiva con esta cobertura |
+| [`openstates/people`](https://github.com/openstates/people) | **CC0-1.0** | Legisladores, cargos, comisiones | **CC0 = dominio público.** Se copia al modelo propio sin condición alguna |
+| [`unitedstates/congress`](https://github.com/unitedstates/congress) | **CC0-1.0** | Capa federal | Ídem. 228 forks |
+| [`portable-genai/obligation-register-kit`](https://github.com/portable-genai/obligation-register-kit) | **Apache-2.0** | Fuente → **obligaciones atómicas** → políticas/controles/evidencia, en registro **versionado append-only** | Es la primitiva correcta y es permisiva. 0★: se adopta como librería, se audita antes |
+| [`CatalaLang/catala`](https://github.com/CatalaLang/catala) | **Apache-2.0** | *(opcional)* Codificar la obligación cuando es calculable | Única base permisiva de ley-como-código |
+
+### El cableado, y el orden importa
+
+```
+openstates-scrapers  ──►  bulk JSON  ──►  [FRONTERA DE PROCESO]  ──►  normalizador propio
+   (GPL-3.0, servicio                                                  (tu licencia)
+    separado, sin enlazar)                                                   │
+                                                                             ▼
+openstates/people + unitedstates/congress (CC0) ──────────────►  modelo de datos propio
+                                                                             │
+                                                                             ▼
+                                            obligation-register-kit (Apache-2.0)
+                                            · 1 obligación atómica = 1 fila versionada
+                                            · cada fila lleva CITA LITERAL + URL de la fuente
+                                                                             │
+                              ┌──────────────────────────────────────────────┤
+                              ▼                                              ▼
+                   REGLAS DETERMINISTAS                            MODELO (sólo donde hay juicio)
+                   · ¿cambió el texto? (diff)                      · clasificar la materia
+                   · ¿cambió el estado del proyecto?               · proponer a qué control mapea
+                   · ¿venció un plazo?                             · DEBE citar la fila
+                              └──────────────────────────────┬───────────────┘
+                                                             ▼
+                                              VERIFICADOR: descarta toda salida
+                                              cuya cita no se compruebe contra el bulk
+                                                             ▼
+                                              COLA HUMANA (legal ops aprueba el mapeo)
+                                                             ▼
+                                              registro append-only + alerta por obligación
+```
+
+### 🔴 La decisión de arquitectura que hay que tomar el primer día: **la frontera GPL**
+
+`openstates-scrapers` es **GPL-3.0** y es la única pieza con esa cobertura. La forma de usarla sin
+contaminar el entregable **no es un truco de licencia, es una frontera de proceso**: se despliega
+**como servicio separado, sin modificar y sin enlazar**, y se consume **su salida de datos**. Los
+datos que produce **no son obra derivada del scraper** — y además las dos piezas de datos
+(`people`, `congress`) ya son **CC0**. ⇒ **Lo que se entrega al cliente es el normalizador, el
+registro de obligaciones y la capa agéntica; lo GPL se despliega, no se vende.** Si el cliente
+exige no tener GPL ni en despliegue, la alternativa es pagar la cobertura a un proveedor de datos:
+**es una decisión de coste, no de ingeniería**, y conviene ponerla por escrito en la propuesta.
+
+> ⚠️ **Y el control que esta KB aprendió en el pase 8 y aquí vuelve a aplicar:** la revisión por LLM
+> **en lote es inconsistente** (el mismo defecto se marca en la entrada 3 y pasa en la 47). Por eso
+> el diff textual, el cambio de estado y el vencimiento de plazo son **reglas deterministas** y el
+> modelo sólo ve lo que requiere juicio. **Reglas primero, modelo después.**
+
+---
+
+## 🆕 P38 — **Legislación como código** para un país LATAM: las dos arquitecturas, y la licencia decide
+
+**El hueco, medido y resistente al vocabulario** (a diferencia del de activos, que era un artefacto —
+ver `G-L22`): **no existe ningún modelo de legislación como código de ningún país latinoamericano.**
+Hay Francia, EE. UU., Nueva Zelanda y Senegal. Seis consultas, incluida una en español, devuelven
+**0**. La causa es institucional, no técnica: en Francia es un *commun numérique* con apoyo estatal.
+
+### Dos caminos, y **no** son equivalentes
+
+| | **Camino A — contribuir al común** | **Camino B — producto propio** |
+|---|---|---|
+| Base | [`openfisca/country-template`](https://github.com/openfisca/country-template) + [`openfisca-core`](https://github.com/openfisca/openfisca-core) | [`CatalaLang/catala`](https://github.com/CatalaLang/catala) |
+| Licencia | 🔴 **AGPL-3.0** — copyleft de **red** | **Apache-2.0** — empotrable sin condiciones |
+| Qué se obtiene | `openfisca-mx` / `openfisca-br` público, ecosistema y referencias (PolicyEngine tiene **224 forks**) | Especificación ejecutable **anotada contra el texto legal**, con *default logic* para la excepción |
+| Qué NO se obtiene | **Activo propietario**: exponerlo como servicio arrastra la obligación de fuente | Ecosistema: hay que construir el motor y las pruebas |
+| Cuándo elegirlo | Cliente **público**, o posicionamiento regional (ver abajo) | Cliente **privado** que necesita el cálculo dentro de su producto |
+
+### Por qué el camino A **no** es una concesión
+
+Lo medido en `verticals/solutions.md` aplica aquí entero: **en este plano el comprador natural es
+público, y para un comprador público el copyleft es argumento de venta** —garantiza que el Estado no
+queda capturado por el proveedor—. Un `openfisca-mx` publicado es **la carta de presentación más
+barata que existe** para entrar en un ministerio de hacienda o una agencia tributaria de la región,
+y el margen está en la implantación, la calidad del modelo y la capa agéntica. **El reflejo de
+«evitar AGPL» viene del producto SaaS y aquí se aplica al revés.**
+
+### Receta del camino A, en orden
+
+1. **Elegir un cuerpo normativo acotado y calculable** — no «el código fiscal»: un beneficio, una
+   retención, un tramo. Debe tener fórmula y casos reales publicados.
+2. `openfisca/country-template` como esqueleto; **un commit por artículo**, con el `urn:lex` o la
+   referencia oficial en el mensaje del commit. Eso hace el modelo auditable por un jurista que no
+   lee Python.
+3. **La fuente del texto, por país** (todas verificadas en este pase): México
+   [`dof-rag`](https://github.com/CodeandoGuadalajara/dof-rag) (**MIT**) · Brasil
+   [`lexml-parser-projeto-lei`](https://github.com/lexml/lexml-parser-projeto-lei) (GPL-2.0,
+   **oficial del Senado**) y [`dou-collector`](https://github.com/LibreCodeCoop/dou-collector)
+   (**MIT**, ⚠️ dormante) · Chile [`lex-chile-mcp`](https://github.com/alvarosdev/lex-chile-mcp)
+   (**MIT**) · Argentina [`InfoLeg-MCP`](https://github.com/ejaircastillo/InfoLeg-MCP) y
+   [`notarum`](https://github.com/diegoparras/notarum) (**MIT** ambos).
+4. **El papel del modelo es asistir la anotación, no escribir la regla.** Propone la fórmula a
+   partir del artículo; **el jurista la acepta o la rechaza**; el modelo genera además los casos de
+   prueba, que el jurista revisa. La regla publicada **siempre lleva firma humana**.
+5. **Validación cruzada obligatoria:** cada regla contra casos reales ya resueltos por la
+   administración. Una regla sin caso de prueba **no se publica**.
+
+⚠️ **Y la salvedad que convierte esto en un proyecto y no en un demo:** `BetterRules/openfisca-aotearoa`
+(45★, 23 forks, la referencia mundial) está **dormante desde 2025-03-13**. **Un modelo de país no se
+mantiene solo**, y sin compromiso institucional de mantenimiento el entregable envejece hasta ser
+engañoso — una regla derogada que sigue calculando es peor que no tener la regla.
+
+---
+
+## 🆕 P39 — **Cita normativa verificable por construcción** (EMEA): el identificador hace el trabajo del verificador
+
+Esta KB lleva nueve pases tratando la verificación de cita como un **control posterior**: generar y
+luego comprobar. En la UE eso es innecesario, porque **la fuente devuelve un identificador
+persistente con cada respuesta** y el identificador es comprobable sin el modelo.
+
+### Piezas, todas verificadas en este pase
+
+| Pieza | Licencia | Papel |
+|---|---|---|
+| [`elconcept/mcp-eu-sparql`](https://github.com/elconcept/mcp-eu-sparql) | **MIT (1.082 B)** | MCP sobre el SPARQL de la Oficina de Publicaciones; **devuelve CELEX y ECLI en cada cita**. 57k+ sentencias del TJUE |
+| [`cyanheads/eur-lex-mcp-server`](https://github.com/cyanheads/eur-lex-mcp-server) | **Apache-2.0** | MCP de EUR-Lex + travesía del grafo **CELLAR** + resolución de conceptos **EuroVoc**. **Sin API key**; endpoint sobreescribible |
+| [`tseidl/eurlex-builder`](https://github.com/tseidl/eurlex-builder) | **MIT** | CLI: construye el *dataset* y lo enriquece con **ELI**, fechas de adopción y descriptores EuroVoc |
+| [`maastrichtlawtech/cellar-extractor`](https://github.com/maastrichtlawtech/cellar-extractor) | **Apache-2.0** | Metadatos de jurisprudencia en bloque, para la línea base y la evaluación |
+
+**Las cuatro son permisivas y el endpoint es gratuito y sin clave** (`publications.europa.eu/webapi/rdf/sparql`).
+
+### El cableado
+
+```
+pregunta ──► MCP (mcp-eu-sparql | eur-lex-mcp-server)
+                 │  devuelve: texto + CELEX + ECLI + ELI
+                 ▼
+         el modelo redacta, y CADA afirmación arrastra su CELEX/ECLI
+                 ▼
+         VERIFICADOR DETERMINISTA (sin modelo, sin red salvo al endpoint oficial):
+           1. ¿el CELEX/ECLI resuelve en CELLAR?        → si no: se descarta la afirmación
+           2. ¿el pasaje citado aparece en ese documento? → si no: se descarta
+           3. ¿la versión es la vigente a la fecha?       → si no: se marca «histórica»
+                 ▼
+         sólo lo que pasa los tres controles llega al jurista
+```
+
+> 🔑 **La diferencia con `P10`, y es la razón de ser de este patrón:** `P10` verifica una cita
+> **después** de que el modelo la escribe, y por eso tiene que resolver el problema difícil de
+> *localizar* la fuente. Aquí la fuente **viene con su identificador desde el origen**, así que el
+> verificador sólo **resuelve un identificador** — una operación determinista, barata y sin
+> ambigüedad. ⇒ **Donde exista un identificador persistente oficial, el patrón correcto es
+> arrastrarlo, no reconstruirlo.** Equivalentes a usar: `urn:lex` (Brasil, vía LexML, ya en la KB),
+> **ECLI** (jurisprudencia europea), **ELI** (legislación europea y nacional), **CELEX** (UE).
+> Donde **no** exista identificador persistente, `P10` sigue siendo el patrón — y esa es la
+> situación de la mayoría de LATAM y APAC.
+
+### Y para qué se vende en EMEA
+
+El pase 8 midió la demanda: **61 % de adopción *in-house* europea** (la más alta del mundo), **56 %
+usando herramientas genéricas** y **sólo 14 % con AI legal especializada implantada** — es decir,
+cuatro de cada cinco usuarios **no pueden documentar nada**, justo donde el AI Act exige documentar.
+Este patrón produce **el rastro documental** (identificador por afirmación, verificación
+determinista registrada, descartes contados) con **cuatro dependencias permisivas y coste de fuente
+cero**.
+
+---
+
+## 🆕 P40 — Ingesta de un **cuerpo normativo completo** a Akoma Ntoso (la base de P37–P39)
+
+Los tres patrones anteriores asumen que el texto ya está estructurado. Cuando no lo está —el caso
+normal fuera de la UE y EE. UU.— esto es lo que hay, con la advertencia de licencia por delante.
+
+| Pieza | Licencia | Papel | Advertencia |
+|---|---|---|---|
+| [`TBI-AI-Incubator/codify`](https://github.com/TBI-AI-Incubator/codify) | **Apache-2.0** | PDF/texto/XML → Akoma Ntoso: adquisición, transcripción, **estructuración por anclas**, recuperación, comparación | Creado 2026-09-18, 15★. **Lo más nuevo y lo único permisivo de extremo a extremo.** Requiere Python ≥3.12 |
+| [`laws-africa/bluebell`](https://github.com/laws-africa/bluebell) | 🔴 GPL-3.0 | Parser AN3: garantiza salida **estructuralmente válida** con cualquier entrada | Copyleft fuerte ⇒ **frontera de proceso**, igual que en `P37` |
+| [`laws-africa/cobalt`](https://github.com/laws-africa/cobalt) | 🔴 LGPL-3.0 (*stub* 633 B) | **Validación** contra el esquema AN 3.0 | LGPL es enlazable, **pero el texto de la licencia no está en el repo** ⇒ resolver con el mantenedor antes de enlazar |
+| [`laws-africa/slaw`](https://github.com/laws-africa/slaw) | **MIT** | Parser AN3 en Ruby | ⚠️ **ARCHIVADO** 2022-06-28. **El único permisivo del stack**: referencia de API y base de fork |
+| [`oasis-open/legaldocml-akomantoso`](https://github.com/oasis-open/legaldocml-akomantoso) | **CC-BY-2.0** | **El esquema XSD normativo** | **Es un documento, no código**: se implementa contra él, no se enlaza |
+| [`SenatoDellaRepubblica/AkomaNtosoBulkData`](https://github.com/SenatoDellaRepubblica/AkomaNtosoBulkData) | CC-BY-4.0 | **Corpus oficial de referencia** para probar el pipeline | Senado italiano, repo de 2016 con commit de hoy. **La mejor verdad-terreno gratuita que existe** |
+
+### El orden, y el control que lo hace defendible
+
+1. **Validar antes de confiar:** todo lo que salga del pipeline pasa por validación de esquema
+   (`cobalt`, o un validador propio contra el XSD de OASIS). Un AN inválido que *parece* válido
+   envenena los tres patrones anteriores.
+2. **Probar contra el corpus italiano primero.** Es AN oficial, masivo y gratuito: si el pipeline no
+   reproduce la estructura de un acto del Senado italiano, no está listo para el cuerpo del cliente.
+3. **La estructura es juicio jurídico, no formato.** Qué es artículo, parágrafo, inciso o anexo
+   **lo decide la tradición jurídica del país** (ver `editor-articulacao`, de la Asamblea de Minas
+   Gerais, para la brasileña). El modelo propone la jerarquía; **un jurista local la aprueba** antes
+   de que se consolide.
+4. **Cada nodo lleva su identificador persistente** desde el primer día (`urn:lex`, ELI, o el que
+   use la jurisdicción). Añadirlo después obliga a reprocesar todo, y es lo que hace posible `P39`.
+
+> ⚠️ **El activo que NO se usa aquí, y el motivo:** [`hendrillara/akoma`](https://github.com/hendrillara/akoma)
+> (legislación federal brasileña por artículo) aparece en los buscadores descrito como **MIT**. Su
+> `LICENSE` son **6.732 B** titulados **«Akoma Noncommercial and Commercial Licence 1.0»** —
+> licencia bespoke con frontera comercial. **No entra en ningún entregable.** Es el caso `G-L20`.

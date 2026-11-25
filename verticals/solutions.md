@@ -456,3 +456,48 @@ privilegios» en seguridad); `privileged document review redaction` → **0**. E
 de sector de 2026, **uno de los flujos de e-discovery que más se automatiza este año**. Para un
 engagement, eso es un hueco de producto; para esta KB, un hueco que **no se cierra con una fila
 inventada**.
+
+---
+
+## 🆕 PASE 10 (2026-11-25) — plataformas de **legislación**: la vertical que faltaba, y es «el Odoo» de este plano
+
+Este fichero tenía plataformas de **despacho** (practice management, e-discovery, firma). No tenía
+ninguna del lado **del que produce la norma**: parlamento, asamblea, ministerio, regulador. Es el
+comprador público, y en LATAM es el comprador más grande que existe.
+
+| Plataforma | Licencia (leída) | Qué es | Customizable con AI en | ★ | Último commit |
+|---|---|---|---|---|---|
+| [laws-africa/indigo](https://github.com/laws-africa/indigo) | **LGPL-3.0** (*stub* 633 B) | **Plataforma de publicación de legislación**: gestiona, **consolida** (aplica las enmiendas al texto vigente) y publica en Akoma Ntoso. Django + Django REST. 38 forks, 11 años, commit de hace 2 días. Es lo más cercano a un «Odoo de la legislación» que existe | Consolidación asistida (proponer el texto resultante de una enmienda y dejar que un humano lo apruebe), detección de derogaciones, control de vigencia, extracción de referencias cruzadas | 78 | 2026-11-23 |
+| [openfisca/openfisca-core](https://github.com/openfisca/openfisca-core) + [country-template](https://github.com/openfisca/country-template) | 🔴 **AGPL-3.0** (34.523 B) | **Motor de reglas socio-fiscales**: ejecuta legislación como código, con *reforms* para simular cambios normativos. En el **EU OSS Catalogue** | Traducir el texto del artículo a la fórmula del motor (con el humano validando), explicar en lenguaje llano por qué un caso da el resultado que da, simulación de impacto de una reforma | 252 | 2026-11-24 |
+| [PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us) | 🔴 **AGPL-3.0** (34.519 B) | El modelo de EE. UU. sobre OpenFisca, con **224 forks**: la prueba de que el patrón «modelo de país» se adopta | Ídem, con línea base real para medir | 178 | 2026-11-24 |
+| [CatalaLang/catala](https://github.com/CatalaLang/catala) | **Apache-2.0 (11.358 B)** | No es plataforma, es **lenguaje** — se incluye aquí porque es la única base **permisiva** de esta vertical y por tanto la única empotrable en producto cerrado. 2.453★, 124 forks | Asistir la *anotación* del texto legal contra el código (que es trabajo humano experto y lento), y generar los casos de prueba que el jurista revisa | **2.453** | 2026-11-23 |
+
+### ⚠️ Lectura de licencia para esta vertical — **y es la inversa de la del despacho**
+
+En `practice management` (pase 5) la conclusión fue: **hay base permisiva madura, el producto se
+adopta**. Aquí no:
+
+- **Indigo** es LGPL-3.0 con el texto declarado pero **no adjunto** (*stub* de 633 B). LGPL es
+  copyleft **débil** —enlazable desde producto cerrado— pero una plataforma Django no se «enlaza»:
+  se despliega modificada, y ahí la frontera es discutible. **Para un cliente público no suele
+  importar** (el entregable es del Estado y publicarlo es coherente con su misión); para un
+  producto cerrado de Globant, sí importa.
+- **OpenFisca y PolicyEngine** son **AGPL-3.0**: copyleft de **red**. Exponer el motor como servicio
+  arrastra la obligación de fuente al servicio.
+- **Catala** es Apache-2.0 y es lo único de esta tabla que se empotra sin condiciones.
+
+> 🔑 **Regla de encuadre comercial, y es la más clara que ha salido de esta vertical:** en este plano
+> **el comprador natural es público**, y para un comprador público el copyleft **no es un defecto,
+> es un argumento de venta** (garantiza que el Estado no queda capturado por el proveedor). ⇒
+> **Indigo y OpenFisca se proponen tal cual en un engagement de gobierno**, y el margen está en la
+> implantación, los datos y la capa agéntica, no en la licencia. El reflejo de «evitar AGPL» viene
+> del producto SaaS y **aquí se aplica al revés**.
+
+### 🔴 Lo que NO existe en esta vertical, y se consultó
+
+No hay plataforma de **gestión del cambio normativo para la empresa** (el otro lado: no producir la
+norma sino rastrear la que te obliga) con licencia permisiva y madurez. Lo medido:
+`portable-genai/obligation-register-kit` (Apache-2.0, **0★**, creado 2026-08-22) descompone una
+fuente en obligaciones atómicas y las versiona en registro *append-only* — **es la primitiva
+correcta y no es una plataforma**. Por encima de ella, lo maduro es propietario o AGPL. ⇒ Categoría
+**abierta**, y es la que conecta este plano con el comprador corporativo del `P29` (pase 8).

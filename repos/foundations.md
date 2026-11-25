@@ -616,3 +616,93 @@ estructural que lo convierte en regla y no en excepción:
 > semántica propia sobre el parser/validador permisivo del formato. Comprobar en las otras once:
 > `HL7`/`FHIR` (salud), `ISO 20022` (financiero), `IEC 61850`/`CIM` (energía), `OpenTravel`/`NDC`
 > (viajes), `GS1`/`EDIFACT` (retail).
+
+---
+
+## 🆕 PASE 10 (2026-11-25) — **la norma como dato**: Akoma Ntoso, ELI/CELLAR y la ley como código
+
+La capa que esta KB no tenía en ningún fichero: **el texto normativo mismo**, estructurado,
+versionado y citable. Censo de entrada: `Akoma Ntoso` 0 · `legislative` 0 · `bill tracking` 0 ·
+`parliament` 0 · `regulatory change` 0 · `obligations register` 0 ocurrencias en 7.429 líneas.
+
+### El estándar y su tooling — y aquí **lo permisivo es la excepción**
+
+| Repo | Licencia (leída) | Lenguaje / rol | Descripción | ★ | Último commit |
+|---|---|---|---|---|---|
+| [oasis-open/legaldocml-akomantoso](https://github.com/oasis-open/legaldocml-akomantoso) | **CC-BY-2.0 (12.545 B)** | XSD normativo | El esquema OASIS LegalDocML. ⚠️ **Documento con licencia Creative Commons, no código**: se implementa, no se enlaza | 87 | 2022-06-02 |
+| [laws-africa/bluebell](https://github.com/laws-africa/bluebell) | GPL-3.0 (35.149 B) | Python · parser | Parser AN3 genérico (`act`, `bill`, `debate`, `doc`); garantiza salida **estructuralmente válida** con cualquier entrada | 23 | 2026-07-13 |
+| [laws-africa/cobalt](https://github.com/laws-africa/cobalt) | LGPL-3.0 (*stub* 633 B) | Python · lib | Lectura/validación AN 3.0 (esquema estricto o relajado) operando sobre el XML | 29 | 2026-06-18 |
+| [laws-africa/slaw](https://github.com/laws-africa/slaw) | **MIT (1.067 B)** | Ruby · parser | ⚠️ **ARCHIVADO** 2022-06-28. **El único permisivo del stack**: referencia de API y base de fork | 28 | 2022-06-28 |
+| [bungenix/akomantoso-lib](https://github.com/bungenix/akomantoso-lib) | Apache-2.0 (10.358 B) | Java · JAXB | *Binding* Java generado desde el XSD AN 3.0. ⚠️ **dormante 9,4 años** | 15 | 2017-06-29 |
+| [TBI-AI-Incubator/codify](https://github.com/TBI-AI-Incubator/codify) | **Apache-2.0 (11.358 B)** | Python ≥3.12 | PDF/texto/XML → Akoma Ntoso: adquisición, transcripción, **estructuración por anclas**, recuperación y comparación. Commit **de hoy**, creado 2026-09-18 | 15 | 2026-11-25 |
+
+> ⚠️ **`cobalt` e `indigo` traen un `LICENSE` de 633 B que NO es la licencia:** es un *stub* de
+> remisión («this program is free software… under the terms of the GNU Lesser General Public…»).
+> El texto íntegro de la LGPL no está en esa ruta. `search/repositories` devuelve `NOASSERTION`
+> para los dos, **y el clasificador tiene razón**: el fichero no contiene una licencia completa.
+> Para un entregable comercial eso no es «sin licencia», es **LGPL declarada sin texto adjunto** —
+> hay que resolverlo con el mantenedor antes de enlazar.
+
+### Ley como código — y el mejor activo permisivo específico de toda esta KB
+
+| Repo | Licencia (leída) | Descripción | ★ | Forks | Último commit |
+|---|---|---|---|---|---|
+| [CatalaLang/catala](https://github.com/CatalaLang/catala) | **Apache-2.0 (11.358 B)** | **Lenguaje para especificar legislación** en *literate programming*: el código se anota contra el texto legal línea a línea, y su *default logic* expresa **la excepción** —la forma nativa de la norma jurídica—. Origen de investigación (INRIA) | **2.453** | 124 | 2026-11-23 |
+| [openfisca/openfisca-core](https://github.com/openfisca/openfisca-core) | AGPL-3.0 (34.523 B) | Motor Python que ejecuta legislación socio-fiscal como código. Catalogado en el **EU OSS Catalogue**. 12 años | 252 | 100 | 2026-11-24 |
+| [PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us) | AGPL-3.0 (**34.519 B**) | Modelo estadounidense sobre OpenFisca | 178 | 224 | 2026-11-24 |
+| [BetterRules/openfisca-aotearoa](https://github.com/BetterRules/openfisca-aotearoa) | AGPL-3.0 (**34.519 B**) | **Legislación de Nueva Zelanda como código** — la referencia *rules as code* de APAC. ⚠️ dormante desde 2025-03-13 | 45 | 23 | 2025-03-13 |
+| [openfisca/country-template](https://github.com/openfisca/country-template) | AGPL-3.0 (declarada; **sin fichero en 6 rutas**) | La plantilla para **crear el modelo de un país nuevo**. Es el punto de partida del hueco LATAM de abajo | 44 | 20 | 2026-11-23 |
+
+> 🔴 **Aviso AGPL-3.0 — y aquí muerde más que en otras capas.** Las cuatro filas de OpenFisca son
+> **copyleft de red**: si el motor de reglas se expone como servicio al cliente, la obligación de
+> fuente alcanza al servicio. **Catala (Apache-2.0) es la única base de esta capa empotrable en un
+> entregable cerrado**, y además es la más madura. Es una coincidencia afortunada y poco frecuente
+> en esta KB: ver `T33` en `repos/trending.md` para la causa.
+
+### Corpus legislativo abierto — por región, y con la licencia del *dato* separada de la del *código*
+
+| Repo | Licencia (leída) | Región | Qué contiene | ★ |
+|---|---|---|---|---|
+| [unitedstates/congress](https://github.com/unitedstates/congress) | **CC0-1.0 (7.048 B)** | North America | Congreso federal 🇺🇸. **CC0 = dominio público sin atribución exigible** | 1.071 |
+| [openstates/people](https://github.com/openstates/people) | **CC0-1.0 (7.048 B)** | North America | Legisladores y cargos de los 50 estados, **en CC0 aunque el código del scraper sea GPL-3.0** | 162 |
+| [usgpo/bulk-data](https://github.com/usgpo/bulk-data) | 🔴 **SIN LICENCIA** (6 × 404) | North America | Volcados del **GPO**. 387★ sin fichero de licencia: obra del gobierno de EE. UU. es presunción jurídica, **no un grant escrito** | 387 |
+| [SenatoDellaRepubblica/AkomaNtosoBulkData](https://github.com/SenatoDellaRepubblica/AkomaNtosoBulkData) | CC-BY-4.0 (declarada; **sin fichero en 6 rutas**) | EMEA · Italia | **Akoma Ntoso oficial del Senado italiano.** Repo de 2016 con commit **de hoy**: el corpus AN oficial más longevo y más vivo | 42 |
+| [maastrichtlawtech/cellar-extractor](https://github.com/maastrichtlawtech/cellar-extractor) | Apache-2.0 (11.357 B) | EMEA · UE | Metadatos de jurisprudencia de **CELLAR** por SPARQL, enriquecidos | 8 |
+| [seljaseppala/eu_corpus_compiler](https://github.com/seljaseppala/eu_corpus_compiler) | GPL-3.0 (35.149 B) | EMEA · UE | IDs de CELLAR por SPARQL + descarga XML/HTML. ⚠️ dormante 2021-12-03 | 19 |
+| [step21/eurlex](https://github.com/step21/eurlex) | AGPL-3.0 (34.523 B) | EMEA · UE | Cliente Python de Cellar (deriva del paquete R `eurlex`) | 14 |
+| [lexml/lexml-parser-projeto-lei](https://github.com/lexml/lexml-parser-projeto-lei) | GPL-2.0 (**18.033 B**) | LATAM · Brasil | **Parser oficial del Senado Federal** de proyectos de ley. Repo de 2013 con commit de hace 8 días | 20 |
+| [silegis-mg/editor-articulacao](https://github.com/silegis-mg/editor-articulacao) | LGPL-3.0 (`COPYING` = GPL-3.0) | LATAM · Brasil | Editor de articulación de la **Asamblea Legislativa de Minas Gerais** | 18 |
+| [CodeandoGuadalajara/dof-rag](https://github.com/CodeandoGuadalajara/dof-rag) | **MIT (1.077 B)** | LATAM · México | RAG sobre el **Diario Oficial de la Federación** | 25 |
+| [cchew/lex-au](https://github.com/cchew/lex-au) | **MIT (1.067 B)** | APAC · Australia | Legislación federal australiana estructurada | 6 |
+
+> 🔑 **El patrón de licencia de esta capa, y es útil:** en **tres** casos independientes
+> (`openstates`, `unitedstates`, Senado italiano) **el dato se publica más permisivo que el
+> código** — CC0 o CC-BY frente a GPL-3.0. ⇒ **El corpus legislativo abierto es, en general,
+> adoptable aunque su tooling no lo sea.** Es la inversión exacta del «grant partido
+> código/corpus» que esta KB documentó en el pase 3, donde el código era permisivo y el corpus
+> CC-BY-NC-ND. **Las dos mitades hay que leerlas siempre por separado, en los dos sentidos.**
+
+### 🔴 El hueco **real** de esta capa, medido y explicado: no hay un solo modelo *rules as code* de LATAM
+
+| Consulta | `total_count` |
+|---|---|
+| `openfisca brasil` | **0** |
+| `openfisca mexico` | **0** |
+| `openfisca colombia` | **0** |
+| `openfisca chile` | **0** |
+| `legislacion como codigo` | **0** |
+| `rules as code latam` | **0** |
+
+Seis consultas, **cero resultados**. Existen modelos de país para Francia, EE. UU., Nueva Zelanda y
+Senegal; **ninguno de ningún país de América Latina.** A diferencia del hueco de los pases 6 y 8,
+**este no es un artefacto del vocabulario**: se consultó también en español (`legislacion como
+codigo`) y con el nombre del motor, y sigue en cero. Y la causa no es técnica —el motor es agnóstico
+y `openfisca/country-template` existe precisamente para arrancar un país nuevo— sino de **ausencia
+de proyecto**: en Francia es un *commun numérique* mantenido con apoyo estatal, y en LATAM no hay
+equivalente institucional que lo sostenga.
+
+⚠️ **Y el aviso que lo acompaña, porque la oportunidad es más estrecha de lo que parece:** el motor
+es **AGPL-3.0**, así que un modelo de país construido sobre él hereda copyleft de red. Un `openfisca-mx`
+o `openfisca-br` es una **contribución a un bien común y una carta de presentación regional** —no un
+activo propietario—. El entregable comercial se construye encima con **Catala (Apache-2.0)** o con
+una reimplementación del motor. Receta en `compose/patterns.md` (`P38`).

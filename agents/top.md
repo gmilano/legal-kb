@@ -976,3 +976,67 @@ domina. **Fijar la jurisdicción exige el nombre de una institución que sólo e
 > (CGPJ Instrucción 2/2026, Edomex `PTSJ/028/2026`, *Schulte v. LinkedIn*) **están verificadas por UN
 > solo canal — el índice de búsqueda — y NO contra el texto oficial.** Se publican marcadas. Por la
 > regla de dos canales de esta KB, eso es **señal, no hecho establecido**.
+
+---
+
+## 🆕 PASE 10 (2026-11-25) — la capa de **fuentes legislativas oficiales**: la plaza por jurisdicción, completada en cuatro regiones
+
+Los pases 6 y 7 establecieron que «el MCP de fuentes oficiales es el patrón dominante del sector»
+(`intel/trends.md` §13) y lo midieron sobre **jurisprudencia** (tribunales, sentencias). Este pase
+aplica el mismo patrón a la **otra** fuente oficial —**la legislación**— y encuentra que la plaza
+está ocupada en las cuatro regiones, con permisivo en todas menos una.
+
+| Agente | Licencia (leída) | Región | Fuente oficial que resuelve | ★ | Último commit |
+|---|---|---|---|---|---|
+| [alvarosdev/lex-chile-mcp](https://github.com/alvarosdev/lex-chile-mcp) | **MIT (1.069 B)** | **LATAM** · Chile | Ley chilena por MCP | 2 | 2026-11-14 |
+| [ejaircastillo/InfoLeg-MCP](https://github.com/ejaircastillo/InfoLeg-MCP) | **MIT (1.036 B)** | **LATAM** · Argentina | **InfoLeg** (normativa nacional) | 0 | 2026-05-20 |
+| [CodeandoGuadalajara/dof-rag](https://github.com/CodeandoGuadalajara/dof-rag) | **MIT (1.077 B)** | **LATAM** · México | **Diario Oficial de la Federación** (RAG) | 25 | 2026-11-02 |
+| [diegoparras/notarum](https://github.com/diegoparras/notarum) | **MIT (1.069 B)** | **LATAM** · Argentina | **Boletín Oficial** | 2 | 2026-11-20 |
+| [LibreCodeCoop/dou-collector](https://github.com/LibreCodeCoop/dou-collector) | **MIT (1.071 B)** | **LATAM** · Brasil | **Diário Oficial da União**. ⚠️ dormante 2024-11-13 | 11 | 2024-11-13 |
+| [cyanheads/eur-lex-mcp-server](https://github.com/cyanheads/eur-lex-mcp-server) | Apache-2.0 (11.317 B) | **EMEA** · UE | EUR-Lex + TJUE + grafo **CELLAR**, sin API key | 13 | 2026-11-18 |
+| [elconcept/mcp-eu-sparql](https://github.com/elconcept/mcp-eu-sparql) | **MIT (1.082 B)** | **EMEA** · UE | SPARQL de la Oficina de Publicaciones; **CELEX + ECLI en cada cita** | n/d | n/d |
+| [cchew/lex-au](https://github.com/cchew/lex-au) | **MIT (1.067 B)** | **APAC** · Australia | Legislación federal australiana | 6 | 2026-11-22 |
+| [openstates/openstates-scrapers](https://github.com/openstates/openstates-scrapers) | GPL-3.0 (35.147 B) | **North America** · EE. UU. | **50 estados + DC + PR**, normalizados. 522 forks | 929 | 2026-11-25 |
+
+### 🟢 El hueco LATAM de esta categoría estaba **cerrado**, y la razón corrige la conclusión del pase 8
+
+El pase 8 cerró su investigación del plano de ingresos con un hueco LATAM declarado explícitamente:
+*«CERO activos con anclaje en LATAM»* tras consultar `LEDES`, `UTBMS`, `trust accounting IOLTA` y
+`legal timekeeping`. Y razonó bien **por qué**: LEDES y UTBMS son estándares **de origen
+estadounidense**, y en LATAM el equivalente funcional es la factura electrónica fiscal de cada país.
+
+Ese razonamiento es correcto **y se queda corto**, porque implica algo que el pase 8 no sacó: si el
+hueco venía del origen del estándar, entonces **cualquier categoría anclada en un estándar
+estadounidense va a medir hueco en LATAM, y la medición no dice nada sobre la región.** Repetida la
+consulta con la fuente oficial **de cada país** —`diario oficial`, `InfoLeg`, `LeyChile`,
+`DOF`, `LexML`, `boletín oficial`— aparecen **ocho activos LATAM, siete de ellos MIT**.
+
+| Consulta | `total_count` | Activos útiles |
+|---|---|---|
+| `legislacion como codigo` | **0** | — |
+| `rules as code latam` | **0** | — |
+| `openfisca brasil` / `mexico` / `colombia` / `chile` | **0** cada una | — |
+| `diario oficial federacion dof` | 21 | `dof-rag` (**MIT, 25★**), `dof-chat` (AGPL) |
+| `leychile` | 13 | `lex-chile-mcp` (**MIT**), `leychile` (**MIT**, ⚠️ archivado) |
+| `infoleg argentina` | 8 | `InfoLeg-MCP` (**MIT**), `argentina-data-mcp` (NOASSERTION) |
+| `lexml` | 79 | `lexml-parser-projeto-lei` (GPL-2.0, **oficial del Senado**), `lexml-eta`, `editor-articulacao` (LGPL) |
+| `diario oficial scraper` | 19 | `dou-collector` (**MIT**) |
+| `boletin oficial argentina api` | 1 | `notarum` (**MIT**) |
+
+> **`G-L22` — UN HUECO REGIONAL MEDIDO SOBRE UN ESTÁNDAR EXTRANJERO NO ES UN HUECO REGIONAL: ES LA
+> HUELLA DEL ESTÁNDAR.** Las cuatro consultas con vocabulario importado (`rules as code`,
+> `openfisca {país}`, `legislacion como codigo`) devuelven **0**. Las seis con el nombre propio de
+> la fuente oficial devuelven **141 repos y 8 activos**. El `0` no medía LATAM: medía si alguien en
+> LATAM había adoptado una palabra de fuera. **Antes de declarar un hueco regional, hay que
+> consultar con el nombre que la cosa tiene EN esa región** — el `urn:lex` brasileño, el `DOF`
+> mexicano, el `Boletín Oficial` argentino. Aplicable a las doce industrias y **explica
+> retroactivamente** los huecos LATAM de los pases 6 y 8.
+
+### ⚠️ Y la fila que **no** se escribe como permisiva, aunque el buscador lo afirme
+
+[`hendrillara/akoma`](https://github.com/hendrillara/akoma) —legislación federal brasileña por
+artículo, para agentes, creada hace 5 semanas— fue descrita por el índice de búsqueda con la frase
+**«its code is MIT-licensed»**. Su `LICENSE` son **6.732 B** titulados **«Akoma Noncommercial and
+Commercial Licence 1.0»**: licencia bespoke con frontera comercial, `NOASSERTION` en la API. **No
+entra en la tabla de agentes** y se registra aquí como descarte documentado. Detalle en
+`agents/trending.md` (`G-L20`).
