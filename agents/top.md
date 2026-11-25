@@ -1268,3 +1268,89 @@ mantenimiento menores que la hacen parecer viva.
 librería con más estrellas puede ser la que fue reemplazada.** La migración no mueve las
 estrellas: el repo nuevo empieza en cero y el viejo conserva el histórico de toda su vida útil.
 Comprobar siempre la **primera línea del README del repo más estrellado** antes de coronarlo.
+
+---
+
+## 🆕 PASE 14 (2026-11-25) — el plano del **TRIBUNAL MISMO**, y el Estado como editor de software
+
+> Segundo pase del día (el 13 cubrió la *admisión del cliente*). Censo previo con límite de
+> palabra sobre los 9 ficheros de esta KB: `arbitration` **0**, `mediation` **0**, `ODR` **0**,
+> `dispute resolution` **0**, `insolvency` **0**, `bankruptcy` **0**, `probate` **0**,
+> `conveyancing` **0**, `family law` **0**, `divorce` **0**, `asylum` **0**, `legal aid` **0**,
+> `hmcts` **0**, `ccd` **0**. **Ocho planos a cero a la vez** — y resultó que los cubre un solo
+> hallazgo: *el software con el que un Estado hace funcionar sus tribunales, publicado con
+> licencia MIT.*
+
+### Agentes nuevos verificados hoy (doble canal: API de búsqueda + LICENSE byte a byte en `raw/HEAD`)
+
+| Agente | Licencia (leída) | Región | Rama | Qué aporta | ★ | `pushed_at` |
+|---|---|---|---|---|---|---|
+| [DeHor-Labs/mcp-juridico-brasil](https://github.com/DeHor-Labs/mcp-juridico-brasil) | MIT (1.071 B) | LATAM | main | Plataforma jurídica modular por MCP, módulo de **acompañamiento procesal** brasileño. El agente LATAM más estrellado que entra en esta KB. | **143** | 2026-11-16 |
+| [NEU-ZHA/legal-ai-skills](https://github.com/NEU-ZHA/legal-ai-skills) | MIT (1.085 B) | APAC | main | Agent skills legales sobre **PKULaw (北大法宝)**, verificación de citas y flujos DOCX. ⚠️ **No confundir con `rohasnagpal/legal-ai-skills`**, ya en esta KB: mismo nombre, repo distinto (ver `G-L20`). | **72** | **2026-11-25** |
+| [90le/worker-rights-cn](https://github.com/90le/worker-rights-cn) | Apache-2.0 (11.357 B) | APAC | main | Agente para que un trabajador en China continental **organice los hechos de su relación laboral** como material probatorio. Derecho laboral desde el lado del justiciable, no del despacho. | **106** | 2026-08-11 |
+| [kleros/kleros-v2](https://github.com/kleros/kleros-v2) | MIT (1.063 B) | Global | **dev** ⚠️ | Protocolo de **arbitraje** descentralizado v2. **El único activo serio de todo el plano `arbitration`** (ver el hueco medido abajo). ⚠️ Rama por defecto `dev`, no `main`: una URL `raw` con `/main/` falla. | **83** | 2026-11-23 |
+| [rvsanches/skills-datajud-djen](https://github.com/rvsanches/skills-datajud-djen) | MIT (1.072 B) | LATAM | main | Agent skills con conocimiento **de producción** sobre las APIs públicas del CNJ: **DataJud** (metadatos) y **DJEN** (diario de justicia). Convierte la capa de dato abierta brasileña en algo operable. | 34 | 2026-07-12 |
+| [Nolpak14/getregdata](https://github.com/Nolpak14/getregdata) | MIT (1.064 B) | Global | master | Datos **oficiales de registro mercantil** para agentes: KYC/AML y titularidad real (UBO). Extiende el plano del pase 13 con fuente registral. | 8 | 2026-11-24 |
+| [martinhavel/cz-agents-mcp](https://github.com/martinhavel/cz-agents-mcp) | MIT (1.069 B) | EMEA | main | Servidores MCP de *due diligence* checa y UE: sanciones (UE + OFAC) e **insolvencia**. Primer activo del plano `insolvency` en esta KB. | 6 | **2026-11-25** |
+| [MoverlyLtd/conveyancing-toolkit](https://github.com/MoverlyLtd/conveyancing-toolkit) | MIT (1.068 B) | EMEA | master | Agent skills de **conveyancing** (compraventa inmobiliaria RU): calculadora de SDLT, explicador del *title register*. Primer activo del plano `conveyancing`. | 3 | 2026-09-12 |
+| [Wolfgangrush/indian-contracts-drafting-litigation](https://github.com/Wolfgangrush/indian-contracts-drafting-litigation) | MIT (1.107 B) | APAC | main | Plugin para redacción de contratos indios, conveyancing y litigio. Pequeño, pero es jurisdicción india con licencia limpia. | 3 | 2026-07-28 |
+| [AI-WorkDeck/aiworkdeck](https://github.com/AI-WorkDeck/aiworkdeck) | **AGPL-3.0** (34.524 B) ⚠️ | Global | master | Espacio de trabajo AI para documento legal: ediciones AI **como cambios rastreados** (*tracked changes*). Técnicamente lo que el pase 7 pedía. ⚠️ **AGPL: no entra en entregable cerrado de cliente.** | **191** | **2026-11-25** |
+| [cristianoaredes/mcp-dadosbr](https://github.com/cristianoaredes/mcp-dadosbr) | **AGPL-3.0** (34.020 B) ⚠️ | LATAM | main | MCP de datos públicos brasileños, 29 herramientas. ⚠️ AGPL — se consume como **servicio externo**, no se incorpora. | 10 | 2026-11-23 |
+
+**9 de 11 permisivos.** Los dos AGPL se publican con la marca ⚠️ y la lectura comercial explícita,
+no se omiten: son los dos más estrellados del lote y un barrido por estrellas los encontrará.
+
+### 🔧 `G-L19` — **LA CONSULTA MULTIPALABRA DE GITHUB ES UN `AND`, Y FABRICA HUECOS QUE NO EXISTEN**
+
+Este es el hallazgo de método más transferible del pase, y **afecta directamente a las consultas
+que prescribe el brief de esta tarea**. Medido hoy, en la misma sesión, sobre el mismo índice:
+
+| Consulta | Resultados |
+|---|---|
+| `mediation negotiation agreement in:name,description stars:>10` | **0 — vacío total** |
+| `arbitration dispute resolution in:name,description stars:>5` | **2**, ninguno legal |
+| `mediation in:name,description` (término único) | primer resultado **★11.853** |
+| `arbitration in:name,description` (término único) | `kleros/kleros-v2`, **MIT, ★83, activo** |
+
+`in:name,description` con varias palabras exige **todas** en el mismo campo. Un plano real se
+declara vacío por construcción de la consulta. **El primer barrido de este pase concluyó —y
+escribió— que arbitraje y mediación no tenían activos open source. Era falso, y la causa era la
+consulta, no el ecosistema.**
+
+> **Regla:** todo plano se censa con **términos únicos** antes de declararlo vacío. Una consulta
+> multipalabra vacía **no es evidencia de ausencia**; es evidencia de que la consulta era un `AND`.
+> Las consultas del brief (`top open source AI agents {industry} {year} github MIT`) son
+> multipalabra: valen para WebSearch, **no** para `search/repositories`.
+
+### 🔧 `G-L20` — **EL SLUG ES LA IDENTIDAD; EL NOMBRE NO.** Dos `legal-ai-skills` distintos, los dos MIT
+
+| Slug | ★ | `pushed_at` | Jurisdicciones | Estado en esta KB |
+|---|---|---|---|---|
+| [rohasnagpal/legal-ai-skills](https://github.com/rohasnagpal/legal-ai-skills) | 215 | 2026-11-12 | India, EE. UU., RU, Singapur | Ya publicado (pase anterior) |
+| [NEU-ZHA/legal-ai-skills](https://github.com/NEU-ZHA/legal-ai-skills) | 72 | **2026-11-25** | China (PKULaw) | **Nuevo hoy** |
+
+Un `grep` por nombre sobre esta KB da **positivo** para el segundo repo, que **no estaba**. Si el
+cribado de duplicados de un pase se hace por nombre —y el de este pase empezó así— el activo
+nuevo se descarta como «ya cubierto». **El cribado se hace por `owner/name` completo.**
+`G-L18` (leer la primera línea del README) y `G-L20` resuelven dos fallos distintos: uno mira
+*vitalidad*, el otro *identidad*.
+
+### 🔧 `G-L22` — **colisión de vocabulario: `mediation` en legal está sepultada bajo un patrón de diseño .NET**
+
+Los 8 primeros resultados de `mediation in:name,description` por estrellas: `MediatR` (★11.853),
+`CTMediator` (★4.004), `Mediator` (★3.763), `Architecture` (★3.279)… **todos son el patrón
+*Mediator* de Gang of Four**, cero relación con mediación jurídica. El plano parece poblado y está
+vacío. Es la misma clase de fallo que `P15` ya corrige para `law` dentro de `openclaw`, pero al
+revés: aquí la colisión no infla un repo, **infla un plano entero**. El `relevance-gate.sh` de
+`P15` es el control correcto y se aplica tal cual.
+
+### 🕳️ Huecos MEDIDOS de este pase (términos únicos, tras corregir `G-L19`)
+
+| Plano | Qué se encontró realmente | Lectura |
+|---|---|---|
+| `arbitration` | **1 activo serio**: `kleros/kleros-v2` (MIT, ★83) — arbitraje **descentralizado**, no arbitraje comercial/CCI | Hueco **real** en arbitraje institucional |
+| `ODR` (resolución en línea) | ~10 repos, **casi todos ★0 y proyectos de estudiante**; el mejor es `Jaylukmann/iSettle` (MIT, ★3, **2023-01-24** 🪦) | Hueco **real y grande** |
+| `mediation` | 0 activos jurídicos (ver `G-L22`) | Hueco **real** |
+| `probate` | Sólo `hmcts/probate-back-office` + satélites — **y son del Estado, no de la comunidad** | Cubierto **sólo** por la vía estatal |
+| `notarization` / `apostille` | Colisión total con notarización de binarios **macOS**; lo único institucional es `UKForeignOffice/verify-apostille-service`, **sin fichero de licencia** | Hueco **real** |
+| `insolvency` | 3 activos MIT reales, dos **dormidos ≥4 años** (ver `repos/foundations.md`) | Cubierto a medias |

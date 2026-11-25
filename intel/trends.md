@@ -8,6 +8,95 @@ updated: 2026-11-25
 
 > Última actualización: 2026-11-20
 
+## 🆕 Tendencias del pase 14 (2026-11-25) — el plano del tribunal
+
+### 🏛️ 18. El mayor editor de software legal open source es un Estado, y la señal social no lo ve
+
+`org:hmcts` tiene **1.827 repos indexados**, licencia dominante MIT, docenas con commits de hoy, y
+dentro están ocho planos legales completos (sucesiones, asilo, divorcio, liquidación matrimonial,
+laboral, audio judicial, justicia gratuita, menores). El motor de todo ello,
+`ccd-data-store-api`, tiene **★16**.
+
+La tendencia no es «hay software público»; es que **la métrica con la que el sector descubre
+activos no puede verlo**. Los 15 repos núcleo de esa pila suman **★96 en total** y 13 tienen
+commits de las últimas 24 horas. Ningún filtro `stars:>20` —el que usa cualquier barrido
+automático, incluido el que prescribe este brief— los devuelve. `T32` del pase 13 mostró que las
+estrellas coronan a la librería muerta; esto muestra el fallo complementario: **coronan a
+cualquier cosa antes que a la infraestructura crítica**, porque el software de un tribunal no
+tiene audiencia de desarrollador, tiene usuarios que son jueces.
+
+**Señal sustitutiva, validada en este pase:** `owner` institucional + `pushed_at` reciente +
+`archived: false`. Con eso, 15 activos correctos; con estrellas, cero.
+
+### ⚖️ 19. El hueco de licencia se mudó otra vez: ahora está en la CONFIGURACIÓN
+
+Tercera clase de bloqueo de licencia que encuentra esta KB, y las tres son distintas:
+
+| Pase | Clase | Qué quedaba bloqueado |
+|---|---|---|
+| 12 | La licencia es propiedad del **tag**, no del repo | La versión que se fija |
+| 13 | Código MIT / **datos** CC-BY-NC | El corpus |
+| **14** | **Motor MIT / configuración SIN licencia** | **El procedimiento** |
+
+En CCD el motor es MIT (1.104 B, leído) y de las cuatro definiciones de jurisdicción medidas,
+**tres no tienen fichero de licencia** —`ia-ccd-definitions`, `finrem-ccd-definitions`,
+`div-ccd-definitions`— con 404 en los seis nombres probados y corroborado por el canal de API.
+La cuarta, `prl-ccd-definitions`, sí (MIT, 1.086 B).
+
+La tendencia general: **a medida que el software legal separa motor de reglas, el valor jurídico
+migra a las reglas, y la licencia deja de seguirlo.** Auditar la licencia del repo principal ya no
+dice nada sobre si el entregable es viable. Hay que auditar **la capa donde vive el derecho**.
+
+### 🌍 20. El mismo plano tiene cuatro economías de activos distintas, y una propuesta no se traslada
+
+Medido en este pase, los cuatro regímenes del software judicial:
+
+| Región | Quién publica | Qué publica | Licencia | Consecuencia |
+|---|---|---|---|---|
+| **EMEA** (RU) | **El Estado** | El **código** en producción | **MIT** | Se puede construir encima |
+| **LATAM** (BR) | El Estado | El **dato** (DataJud); el código en `git.cnj.jus.br` | Marco que admite **Creative Commons** para software ⚠️ | Dato sí, código no |
+| **NA** (EE. UU.) | Sociedad civil / programas financiados | Programa piloto (Nueva Orleans, **sin repo aún**) | **GPL-3.0** declarada | Servicio, no producto cerrado |
+| **APAC** (IN/CN/SG) | El Estado **compra y digitaliza** | Nada de código judicial medido | — | Se vende arquitectura |
+
+Esto es lo que la instrucción de «colocar los hallazgos por región» compra de verdad: **el mismo
+hallazgo técnico tiene cuatro lecturas comerciales incompatibles.** Un entregable escrito para
+EMEA (fork de CCD) es inejecutable en APAC (no hay código) y jurídicamente distinto en NA (GPL) y
+en LATAM (el dato puede ser no comercial).
+
+### 🔬 21. «El Estado lo publica» y «el Estado lo licencia» se desacoplaron
+
+Dentro del mismo gobierno británico: `hmcts` licencia MIT a escala de 1.827 repos, mientras
+`UKForeignOffice/verify-apostille-service` (★2, 2026-11-24, rama `develop`) y
+`companieshouse/insolvency-api` (★4, 2026-11-23) publican código **sin ningún fichero de
+licencia**. Sin cesión expresa de derechos, *visible* no es *usable*.
+
+La tendencia: la publicación en abierto se ha vuelto la norma por defecto en la administración
+digital, **y el licenciamiento no**. Para un integrador eso significa que el campo `license` hay
+que leerlo **repo a repo**, nunca por organización ni por reputación del emisor — y que el aviso
+«es del gobierno, será reutilizable» es exactamente el atajo que falla.
+
+### 📉 22. Medir mal produce huecos, y los huecos falsos son más caros que los datos ausentes
+
+`search/repositories` interpreta la consulta multipalabra en `in:name,description` como un `AND`.
+Consecuencia medida hoy en esta misma sesión: `mediation negotiation agreement … stars:>10` →
+**0 resultados**; `mediation` solo → primer resultado **★11.853**. El primer barrido de este pase
+**concluyó y escribió** que arbitraje, mediación y ODR no tenían activos open source. Era falso, y
+la causa era la consulta.
+
+Dos planos de este pase (`court deadline limitation period calculator`,
+`notary signature document authentication`) se midieron **sólo** con consulta inválida y por eso
+quedan marcados en `repos/trending.md` como **no medidos**, no como vacíos. Es la distinción que
+esta KB necesita mantener: *informed gap* ≠ *silencio* ≠ *error de instrumento*.
+
+### 🧭 23. Lo que el plano del tribunal NO tiene, después de medirlo bien
+
+- **ODR / mediación / arbitraje institucional**: sin plataforma utilizable. Único activo serio:
+  `kleros/kleros-v2` (MIT, ★83, rama `dev`), que es arbitraje **descentralizado** —otro problema—.
+  El mejor ODR identificado, `Jaylukmann/iSettle` (MIT, ★3), lleva **sin commits desde 2023-01-24**.
+- **Notarización / apostilla**: el vocabulario colisiona íntegramente con la notarización de
+  binarios **macOS**; lo único institucional no tiene licencia.
+- Ambos son huecos **reales y verificados con término único**, no artefactos de consulta.
+
 ## 🆕 Tendencias del pase 3 (2026-11-21, auditoría)
 
 ### A. La comoditización llegó por arriba: cuatro verticales legales de laboratorio en seis meses

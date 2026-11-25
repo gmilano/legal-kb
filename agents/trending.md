@@ -9,6 +9,88 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-25 (pase 14) — **el Estado publica el tribunal**, y la consulta que fabricaba huecos
+
+Segunda sección de hoy (la del pase 13 queda íntegra debajo). Ocho planos estaban a **cero** en el
+censo: `arbitration`, `mediation`, `ODR`, `insolvency`, `probate`, `conveyancing`, `divorce`,
+`asylum`. **No los cubrió un agente: los cubrió un editor** — HM Courts & Tribunals Service
+publica el software con el que funcionan los tribunales de Inglaterra y Gales, **MIT, con commits
+de hoy**.
+
+### Agentes nuevos de esta semana (★ y `pushed_at` medidos 2026-11-25)
+
+| Agente | Licencia (leída) | Región | Qué aporta | ★ |
+|---|---|---|---|---|
+| [DeHor-Labs/mcp-juridico-brasil](https://github.com/DeHor-Labs/mcp-juridico-brasil) | MIT (1.071 B) | LATAM | MCP jurídico modular BR, módulo de acompañamiento procesal | **143** |
+| [90le/worker-rights-cn](https://github.com/90le/worker-rights-cn) | Apache-2.0 (11.357 B) | APAC | El trabajador en China organiza los hechos laborales como prueba | **106** |
+| [kleros/kleros-v2](https://github.com/kleros/kleros-v2) | MIT (1.063 B) | Global | Arbitraje descentralizado; rama por defecto **`dev`** ⚠️ | **83** |
+| [NEU-ZHA/legal-ai-skills](https://github.com/NEU-ZHA/legal-ai-skills) | MIT (1.085 B) | APAC | Skills sobre PKULaw + citas + DOCX; **repo distinto** del homónimo ya publicado | **72** |
+| [rvsanches/skills-datajud-djen](https://github.com/rvsanches/skills-datajud-djen) | MIT (1.072 B) | LATAM | Skills de producción sobre DataJud y **DJEN** del CNJ | 34 |
+| [martinhavel/cz-agents-mcp](https://github.com/martinhavel/cz-agents-mcp) | MIT (1.069 B) | EMEA | Due diligence CZ/UE: sanciones + **insolvencia** | 6 |
+| [MoverlyLtd/conveyancing-toolkit](https://github.com/MoverlyLtd/conveyancing-toolkit) | MIT (1.068 B) | EMEA | Conveyancing RU: SDLT, *title register* | 3 |
+
+Con ⚠️ por copyleft, y se publican porque un barrido por estrellas los va a encontrar primero:
+[AI-WorkDeck/aiworkdeck](https://github.com/AI-WorkDeck/aiworkdeck) (**AGPL-3.0**, 34.524 B, ★191,
+`pushed_at` de hoy — *tracked changes* generados por AI) y
+[cristianoaredes/mcp-dadosbr](https://github.com/cristianoaredes/mcp-dadosbr) (**AGPL-3.0**, ★10).
+
+### 🏛️ `T34` — **el activo legal open source más grande de esta KB no lo publica una empresa: lo publica un ministerio**
+
+Medido hoy con `search/repositories`:
+
+| Organización | Repos indexados | Licencia dominante | Actividad |
+|---|---|---|---|
+| [`hmcts`](https://github.com/hmcts) (HM Courts & Tribunals Service) | **1.827** | MIT | commits **de hoy** en docenas |
+| [`ministryofjustice`](https://github.com/ministryofjustice) (consulta `court OR tribunal OR legal`) | **51** | MIT | commits **de hoy** |
+
+Dentro hay, con licencia MIT leída byte a byte y `archived: false`: **sucesiones**
+(`probate-back-office`), **inmigración y asilo** (`ia-case-api`, ★15), **divorcio sin culpa**
+(`nfdiv-case-api`), **liquidación económica matrimonial** (`finrem-case-orchestration-service`),
+**tribunales laborales** (`et-ccd-callbacks`), **audio judicial y transcripción**
+(`darts-api`), **justicia gratuita** (`laa-check-client-qualifies`,
+`laa-access-civil-legal-aid`) y **acuerdos sobre menores** (`c100-application`).
+
+Esto no es «ley como código» —lo que el pase 3 encontró en `betagouv/mon-entreprise`— sino el
+escalón siguiente: **el procedimiento como código, y en producción en un sistema judicial
+nacional**. Un patrón de workflow sacado de aquí no es una propuesta de consultoría; es la
+descripción de cómo tramita un tribunal real.
+
+### ⚖️ `T35` — **el motor está licenciado y el PROCEDIMIENTO no: el hueco de licencia se mueve de los datos a la configuración**
+
+El pase 13 encontró la clase «código MIT / datos CC-BY-NC». Aquí aparece una **tercera** clase, y
+dentro de la misma organización estatal. CCD (*Core Case Data*) separa **motor** de
+**definición de jurisdicción**: la definición es la que codifica el procedimiento legal.
+De los **20** repos `*-ccd-definitions` de `hmcts`, medidos por los dos canales:
+
+| Repo de definiciones | Jurisdicción | Licencia (API) | LICENSE en `raw` | ★ | `pushed_at` |
+|---|---|---|---|---|---|
+| `hmcts/prl-ccd-definitions` | Derecho privado / menores | MIT | **MIT, 1.086 B** ✅ | 2 | 2026-11-25 |
+| `hmcts/ia-ccd-definitions` | **Inmigración y asilo** | `none` | **404 en los 6 nombres** ❌ | 1 | 2026-11-25 |
+| `hmcts/finrem-ccd-definitions` | **Liquidación matrimonial** | `none` | **404 en los 6 nombres** ❌ | 6 | 2026-11-25 |
+| `hmcts/div-ccd-definitions` | **Divorcio** | `none` | **404 en los 6 nombres** ❌ | 5 | 2026-11-21 |
+
+El motor (`ccd-data-store-api`, MIT 1.104 B) es reutilizable. **Las tres definiciones más
+interesantes para un engagement, no.** Y no es `NOASSERTION` —el falso negativo contra el que
+avisa el método de esta KB— sino ausencia **confirmada por el segundo canal**: 404 en `LICENSE`,
+`LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING` y `LICENSE-MIT`.
+
+> **Consecuencia operativa:** las definiciones se leen como **documentación del procedimiento**
+> (lo que permite el acceso público) y **no se copian** al entregable. Es exactamente el régimen
+> que esta KB ya aplica a `openlegaldata/awesome-legal-data`: *mapa, no mercancía*.
+
+### 🧭 `T36` — **«el Estado lo publica» y «el Estado lo licencia» son dos hechos distintos, y hay que medir los dos**
+
+Dos repos de organismos públicos británicos, código visible, **sin ningún fichero de licencia**:
+
+| Repo | Organismo | ★ | `pushed_at` | Rama | Licencia |
+|---|---|---|---|---|---|
+| [`UKForeignOffice/verify-apostille-service`](https://github.com/UKForeignOffice/verify-apostille-service) | Foreign Office (apostillas) | 2 | 2026-11-24 | **`develop`** | **ninguna** ❌ |
+| [`companieshouse/insolvency-api`](https://github.com/companieshouse/insolvency-api) | Companies House (insolvencia) | 4 | 2026-11-23 | main | **ninguna** ❌ |
+
+Sin licencia expresa no hay cesión de derechos: *visible* no es *usable*. Frente a los 1.827
+repos MIT de `hmcts`, esto demuestra que **la vía estatal no es homogénea ni siquiera dentro de un
+mismo gobierno**, y que el campo `license` hay que leerlo repo a repo, nunca por organización.
+
 ## 🆕 2026-11-25 (pase 13) — el plano de la **admisión del cliente**, y **las estrellas apuntando a la librería muerta**
 
 Séptimo plano consecutivo que aparece completo al cambiar de vocabulario

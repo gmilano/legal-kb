@@ -734,6 +734,65 @@ Los cinco repos que aparecieron **están sin licencia** (`Gitoffmylawn-ui/confli
 `Clayton0818/Legal-intake-engine`, `FinCrimeRadar/fincrimeradar`) **y tres más no existen**. No hay
 nada forkeable con anclaje norteamericano en esta capa: lo que hay es infraestructura global
 (OpenSanctions, GLEIF, BODS) y la aplicación hay que construirla.
+#### 🆕 Pase 14 (2026-11-25) — el plano del tribunal: **en Norteamérica el tribunal compra software, no lo publica**
+
+**Medición directa, no inferencia.** Buscando organización publicadora de software judicial:
+
+| Canal | Resultado |
+|---|---|
+| `org:uscourts` (dos consultas) | **`total_count: 0`** — nada indexado |
+| `org:justice-canada` | **HTTP 422** — la organización no existe |
+| `org:codeforamerica court` | sólo `courtbot` (ISC, ★49, **2022-09-21** 🪦) y `court.atlantaga.gov` (★13, 2020) |
+
+**El único programa open source de tribunal que sí existe en la región — y todavía no tiene
+repositorio.** *Online Case Resolution* del **Municipal & Traffic Court de Nueva Orleans**, con el
+Justice Management Institute (JMI) y Kalamuna, financiado por el **State Justice Institute (SJI)**:
+
+- Presentado en el Code for America Summit de Chicago el **2026-05-08**.
+- Permite al justiciable resolver **casos de tráfico y faltas** en línea: gestión de trámites,
+  vistas, **negociación de la condena** y comparecencia virtual cuando el tribunal la autoriza;
+  con módulos propios para defensa y acusación.
+- **Licencia declarada: GPL-3.0** — *copyleft fuerte, no permisiva.* Esto es lo primero que hay
+  que leer en una propuesta: no entra en un entregable cerrado de cliente.
+- Piloto anunciado para **septiembre de 2026** en Nueva Orleans; **cinco jurisdicciones piloto** y
+  un grupo de trabajo nacional de **más de 10 estados**. Apoyo técnico del AOC de Nueva Jersey.
+  JMI trabaja con ese tribunal desde 2015.
+- ⚠️ **Verificado hoy: el repositorio no es público.** `org:kalamuna` → 0 indexados;
+  `kalamuna/online-case-resolution`, `JMI-Justice/ocr`, `jmijustice/online-case-resolution` →
+  **0 refs** en `git ls-remote`. Las fuentes indican que el repositorio público **seguía en diseño
+  en 2026**. Queda como seguimiento, **no como activo**.
+
+**Y el eje regulatorio que toca directamente a este plano** (verificar contra fuente primaria; son
+fuentes secundarias de despacho):
+
+- **Indiana**: regla vigente desde **2026-08-01** que exige certificar que **toda autoridad citada
+  es auténtica**, y cubre expresamente los escritos asistidos por AI. Es el gancho comercial
+  directo de `P10` (verificación de cita ejecutable).
+- **Nueva York**: política provisional del sistema judicial que **obliga a formación en AI a todos
+  los jueces y personal** y limita la AI generativa a herramientas aprobadas.
+- Texas **TRAIGA** en vigor 2026-01-01; California **SB 53** (transparencia de modelos frontera)
+  2026-01-01; enmienda a la Human Rights Act de **Illinois** 2026-01-01 para empleadores con ≥20
+  empleados; **task force de litigación en AI del DOJ** anunciada 2026-01-09; marco legislativo
+  federal de la Casa Blanca (2026-03-20) que **propone** preempción de leyes estatales — propuesto,
+  **no aprobado**. La única ley federal sustantiva vigente sigue siendo la **TAKE IT DOWN Act**.
+- ⚠️ **Conflicto de fuentes sin resolver** sobre la Colorado AI Act: una sitúa la entrada en
+  aplicación en 2026-06-30 (desde 2026-02-01) y otra dice que en mayo de 2026 se reescribió como
+  régimen más estrecho de notificación y explicación desde 2027-01-01. **No se resuelve aquí.**
+
+**Oportunidad para Globant, en esta región y en este plano:**
+
+1. **La arquitectura de referencia se importa; el código, no.** No hay código judicial
+   estadounidense reutilizable, pero **CCD de HMCTS es MIT** (ver EMEA): la separación
+   motor/definición de jurisdicción es transferible como diseño a un tribunal o agencia de EE. UU.
+   sin arrastrar su licencia.
+2. **Integración, no derivado, cuando aterrice el OCR de Nueva Orleans.** GPL-3.0 permite
+   servicio, despliegue y adaptación para el propio tribunal; cierra el producto cerrado. Con
+   5 jurisdicciones piloto y >10 estados en el grupo de trabajo, el trabajo escalable es
+   **implantación y adaptación jurisdiccional**, no reventa.
+3. **Certificación de autenticidad de citas como producto regulado**, anclada a Indiana (vigente)
+   y a la política de NY: es la primera vez que la obligación tiene **firma y norma detrás** en
+   esta región.
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -1260,6 +1319,73 @@ implemente **murallas éticas / barreras de información** entre equipos del mis
 el mecanismo que la normativa europea presupone para aceptar un asunto con conflicto consentido.
 Censo: `ethics wall` **0**, `information barrier` **0**, `muralla china` **0**. Ver
 `verticals/solutions.md`.
+#### 🆕 Pase 14 (2026-11-25) — **la única pila judicial estatal publicada del mundo medida hoy está aquí**, y hay que venderla con su riesgo delante
+
+**La medición.** `org:hmcts` → **1.827 repos indexados**, licencia dominante **MIT**, docenas con
+commits **de hoy**. `org:ministryofjustice` filtrado por `court OR tribunal OR legal` → **51**,
+también MIT y también con commits de hoy. Ocho planos legales que esta KB tenía **a cero** están
+dentro: sucesiones, inmigración y asilo, divorcio, liquidación matrimonial, tribunales laborales,
+audio judicial, justicia gratuita y acuerdos sobre menores. Detalle y licencias byte a byte en
+`repos/foundations.md`; la arquitectura, en `verticals/solutions.md`.
+
+El informe del **Administrative Justice Council de marzo de 2026** confirma el papel de la pieza
+central: **CCD sostiene los sistemas de gestión de casos de los tribunales reformados de HMCTS**,
+en sustitución del sistema heredado GAPs.
+
+**⚠️ Y el riesgo que hay que poner por delante en cualquier propuesta, porque un cliente lo va a
+encontrar.** Según información periodística de 2025-2026 sobre un informe interno filtrado, un
+error de software vinculado a CCD provocó que **pruebas desaparecieran, se sobrescribieran o
+parecieran perdidas**, y se tardó «varios años» en reaccionar. **HMCTS discute ese relato** y su
+investigación interna, según lo publicado, **no encontró evidencia de impacto en el resultado de
+ningún caso**. Por separado, un anuncio de licitación de 2025 indica que HMCTS planea **sustituir
+su aplicación de *Scheduling & Listing***, integrada con las aplicaciones reformadas de civil,
+familia y tribunales.
+
+> **Lectura comercial honesta, que es la que sirve:** CCD es la mejor arquitectura de referencia
+> disponible **y** un sistema con historial público de integridad de datos cuestionado. Las dos
+> cosas son ciertas. Presentarlo sin la segunda es exactamente el tipo de recomendación que se
+> cae en la primera due diligence del cliente. El riesgo, además, **nombra el entregable**:
+> *integridad y trazabilidad del expediente* es el trabajo, no un extra.
+
+**Activos permisivos nuevos de la región en este pase** (verificados 2026-11-25, doble canal):
+[`martinhavel/cz-agents-mcp`](https://github.com/martinhavel/cz-agents-mcp) (MIT, ★6, hoy —
+sanciones UE+OFAC e **insolvencia** checa),
+[`AsisTeam/isir`](https://github.com/AsisTeam/isir) (MIT, ★4, **2021-12-07** 🪦 — registro ISIR),
+[`NDelventhal/InsolvencyAnnouncementsGer`](https://github.com/NDelventhal/InsolvencyAnnouncementsGer)
+(MIT, ★9, **2022-01-16** 🪦 — anuncios de insolvencia alemanes) y
+[`MoverlyLtd/conveyancing-toolkit`](https://github.com/MoverlyLtd/conveyancing-toolkit)
+(MIT, ★3 — SDLT y *title register* del RU).
+
+**Eje regulatorio** (fuentes secundarias en conflicto; **verificar en EUR-Lex antes de usar en
+propuesta**):
+
+- ⚠️ **Conflicto de calendario del EU AI Act, sin resolver aquí.** Una fuente sitúa la entrada en
+  vigor del **AI Omnibus el 2026-07-27**; un rastreador cita el **Reglamento (UE) 2026/1744**
+  retrasando las obligaciones de alto riesgo a **2027-12-02** (Anexo III) y **2028-08-02**
+  (Anexo I); una recopilación anterior decía que la mayoría de requisitos aplicaban desde agosto
+  de 2026. Las fuentes más recientes son la guía mejor, pero **esto se verifica, no se cita**.
+- **EDPB y EDPS**: dictamen conjunto sobre el Digital Omnibus — apoyan la simplificación y avisan
+  contra diluir derechos fundamentales. **Alemania**: guía de AI de la DSK. **Francia**: checklist
+  de la CNIL para la fase de desarrollo. **Reino Unido**: enfoque basado en principios y dirigido
+  por reguladores, sin ley única de AI. **EAU**: nueva autoridad federal de AI y datos (junio 2026).
+- **CJEU**: primera resolución de copyright y AI (*Like Company v Google*) esperada a finales de
+  2026 o principios de 2027.
+- Adopción: una fuente de sector (blog de proveedor, **dato a tratar como direccional**) sitúa a
+  los juristas *in-house* europeos como los de **mayor adopción mundial, 61%** (ACC/Everlaw 2025).
+
+**Oportunidad para Globant, en esta región y en este plano:**
+
+1. **Modernización procesal sobre CCD para sector público europeo.** Es la única base judicial
+   permisiva que existe, está en producción y la mantiene quien tramita con ella. La propuesta se
+   escribe con el riesgo de integridad delante y convertido en alcance de trabajo.
+2. **Reimplementación de las definiciones no licenciadas.** `ia-ccd-definitions`,
+   `finrem-ccd-definitions` y `div-ccd-definitions` **no tienen licencia**: son legibles como
+   documentación del procedimiento y no copiables. *Leer el procedimiento público y
+   reimplementarlo con licencia limpia* es un entregable concreto, acotado y defendible.
+3. **Insolvencia transfronteriza UE** con los tres activos MIT de arriba más la pila de titularidad
+   real del pase 13 — advirtiendo que dos de los tres llevan **≥4 años dormidos**: lo que se
+   adopta es el conocimiento de la fuente oficial, no el código.
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -1743,6 +1869,78 @@ cálculo. No hay que convencer a nadie de que la obligación llega: llegó.
 APAC**: ni implementación de las obligaciones de AUSTRAC, ni plantilla de programa AML/CTF, ni
 adaptador de las listas australianas (DFAT Consolidated List). Es un hueco **de implementación
 sobre una obligación vigente** — la clase más valiosa, porque el comprador ya existe.
+#### 🆕 Pase 14 (2026-11-25) — **el Estado digitaliza a la mayor escala del mundo y no publica el código**; lo permisivo está en la capa de *skills*
+
+**La medición del plano del tribunal.** `org:ecourts-india` → **HTTP 422** (no existe);
+`org:digitalindiacorporation` con `court OR legal` → **0 indexados**; `org:GovTechSG` con
+`legal OR court` → **0 indexados** (la organización existe, no tiene repo del plano);
+`org:AusDTO`/`org:australiangovernment` con `court` → **0 indexados**. Búsqueda abierta
+`ecourts judiciary india` → sólo proyectos de estudiante (★1 y ★0, 2024).
+
+**Y sin embargo es la región con el programa de digitalización judicial más grande que se midió en
+este pase.** India, según el material oficial del PIB: **más de 753 crore de páginas** de
+expedientes históricos digitalizadas y buscables; **e-Courts Fase III ≈ ₹7.210 crore**, con
+objetivos de tribunales sin papel, ampliación de vistas virtuales y repositorios en nube. El
+e-Committee del Tribunal Supremo declara **Digital Courts 2.1 en piloto**, con despliegue nacional
+después. Existe además el **National Judicial Data Grid**.
+⚠️ Conflicto de cifras: otra fuente de menor calidad dice «más de 660 crore». **Se usa la del
+PIB.** Y sobre si el *Case Information System* corre sobre código abierto: una fuente de baja
+calidad lo afirma, **no se verificó, no se usa**.
+
+> **La asimetría, que es el hallazgo:** en EMEA el Estado es el **editor de software**; en APAC el
+> Estado es el **comprador y digitalizador**. Mismo plano, dos economías de activos
+> completamente distintas, y una propuesta escrita para una no funciona en la otra.
+
+**Dónde sí hay activos permisivos en esta región: la capa de agent skills**, y es la más viva del
+pase (verificado 2026-11-25, doble canal):
+
+| Activo | Licencia (leída) | ★ | `pushed_at` | Jurisdicción |
+|---|---|---|---|---|
+| [`NEU-ZHA/legal-ai-skills`](https://github.com/NEU-ZHA/legal-ai-skills) | MIT (1.085 B) | **72** | **2026-11-25** | China — **PKULaw (北大法宝)**, citas, DOCX |
+| [`90le/worker-rights-cn`](https://github.com/90le/worker-rights-cn) | Apache-2.0 (11.357 B) | **106** | 2026-08-11 | China — derecho laboral **desde el justiciable** |
+| [`Wolfgangrush/indian-contracts-drafting-litigation`](https://github.com/Wolfgangrush/indian-contracts-drafting-litigation) | MIT (1.107 B) | 3 | 2026-07-28 | India — contratos, conveyancing, litigio |
+
+Súmese lo que esta KB ya tenía para la región: `DevnorsAI/devnors-data-python` (MIT, sentencias y
+articulado chinos), `thunlp/CAIL` (MIT, benchmark legal chino) y las 18 skills de Singapur de
+`rohasnagpal/legal-ai-skills` (MIT). ⚠️ Recordar `G-L20`: `NEU-ZHA/legal-ai-skills` y
+`rohasnagpal/legal-ai-skills` son **repos distintos con el mismo nombre**.
+
+**Eje regulatorio** (fuentes secundarias; verificar antes de propuesta):
+
+- **Corea del Sur**: *AI Framework Act* en vigor **2026-01-22** con su decreto de desarrollo;
+  categoría de «AI de alto impacto» parecida a la de alto riesgo de la UE **pero sin evaluación de
+  conformidad previa obligatoria**.
+- **Vietnam**: ⚠️ fuentes en conflicto sobre nombre y fechas — una indica ley de AI aprobada
+  **2025-12-10** y vigente **2026-03-01**, con decreto de desarrollo **142/2026/ND-CP** de
+  2026-04-30; otra habla de una ley de tecnología digital con disposiciones de AI vigentes en 2026.
+- **China**: el marco más vinculante de la región — **registro obligatorio**, etiquetado estricto
+  de contenido y sanciones de **hasta 50 millones de CNY**.
+- **Singapur, Japón, Australia**: marcos voluntarios. Singapur: *Model AI Governance Framework*
+  (2.ª edición) y el *toolkit* **AI Verify** para demostrar cumplimiento con evaluaciones
+  estandarizadas. **Taiwán**: *AI Basic Act* aprobada en diciembre de 2025.
+- **India**: etiquetado de contenido AI dentro de normas sectoriales existentes; **DPDPA** en
+  despliegue por fases, con cumplimiento pleno el **2027-05-13**.
+- **Alcance extraterritorial del EU AI Act**, art. 2(1)(c): aplica a proveedores y responsables de
+  despliegue de un tercer país cuando **la salida del sistema se usa en la Unión**. Invierte quién
+  compra cumplimiento europeo.
+- ⚠️ **Dato de una sola fuente, sin confirmar**: una guía para GC sitúa el **2026-05-12** una
+  alianza que pondría el **Claude Agent SDK** debajo de CoCounsel Legal, con disponibilidad general
+  prevista para el verano de 2026. La misma fuente afirma que APAC tiene «la mayor velocidad de
+  adopción legal del mundo y los marcos de gobernanza más débiles»: **es opinión, no medición.**
+
+**Oportunidad para Globant, en esta región y en este plano:**
+
+1. **Vender la arquitectura, no el código.** El Estado digitaliza a escala y no publica: CCD (MIT,
+   EMEA) es la referencia transferible de separación motor/definición, y la capa de definición por
+   jurisdicción es exactamente el trabajo que una Fase III necesita y no compra hecho.
+2. **La capa de skills es donde está la licencia limpia en APAC.** Tres activos nuevos permisivos
+   este pase, dos de ellos con más estrellas que cualquier repo de HMCTS. Componer sobre ellos es
+   barato y la licencia no bloquea el entregable.
+3. **Gobernanza como entregable, con calendario real por país**: Corea (vigente), China (sanción
+   cuantificada), Vietnam (fechas en conflicto → auditoría previa), India (2027-05-13), Singapur
+   (AI Verify como evidencia auditable). El déficit de gobernanza que la fuente de sector declara
+   —y que no está medido— es precisamente lo que un AI Studio sí puede medir y documentar.
+
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -2352,6 +2550,102 @@ regiones, porque la plantilla ya existe nueve veces (`P47`) y solo hay que insta
    consulta pública abierta sobre patentabilidad de AI en la mayor economía de LATAM.
 4. **Cartera multi-oficina LATAM** (`P47`) sobre la plantilla ya probada: INPI, IMPI, ONAPI, INAPI,
    SIC. Ninguno exige tecnología nueva; exigen el adaptador y alguien que lo mantenga.
+
+#### 🆕 Pase 14 (2026-11-25) — **el Estado publica el DATO y no el CÓDIGO**, y la licencia que el propio reglamento admite no sirve para software
+
+**El caso PJe, y es el contraste exacto con HMCTS.** Brasil opera **PJe (Processo Judicial
+Eletrônico)**, uno de los sistemas de justicia electrónica mayores del mundo. Medido hoy:
+
+| Canal | Resultado |
+|---|---|
+| `pje processo judicial eletronico in:name,description` en GitHub | **7 resultados, todos de terceros**: automatizaciones y conversores de particulares (★14, ★12, ★12, ★5, ★3, ★0, ★0) |
+| `judiciario tribunal justica in:name,description` | **0 indexados** |
+| `tribunal electronico expediente judicial in:name,description` | **0 indexados** |
+| `org:cnj-pdpj` | **HTTP 422** — no existe |
+
+**El código del PJe no está en GitHub: está en `git.cnj.jus.br`.** La documentación oficial del PJe
+apunta al repositorio `pje/pje` (y `pje2-web` para el cliente) en ese servidor. **Git.jus** fue
+instituido por la **Portaria CNJ nº 7/2020** como plataforma de control de versiones del Poder
+Judicial, abierta a tribunales, magistrados y servidores; su **art. 8º** hace obligatorio su uso
+para los tribunales que ya implantaron PJe, incluidos sistemas satélite y módulos que interactúen
+con él.
+
+> 🔴 **Y aquí está el bloqueo estructural, que es el hallazgo regional del pase.** Esa misma
+> portaria exige que cada proyecto publicado **defina su licencia** y establece que **«serán
+> aceptadas las licencias Creative Commons»** para los fines del normativo. **Creative Commons no
+> es una familia de licencias de software**: no cubre patentes, no resuelve la obra derivada de
+> código y sus variantes NC/ND son incompatibles con un entregable comercial. Un marco que admite
+> CC como régimen de licenciamiento de software **no produce código reutilizable por un
+> integrador**, ni siquiera cuando el código es visible.
+>
+> No se afirma aquí qué licencia tiene hoy el PJe: **no se pudo verificar**, y las fuentes
+> consultadas no lo dicen. Lo que sí está medido es que **no es accesible por los canales de este
+> método** y que el marco normativo que lo rige apunta a CC.
+
+**Lo que sí está abierto en la región es el dato.** La **API Pública del DataJud**, administrada
+por el Departamento de Pesquisas Judiciárias (DPJ) del CNJ: endpoint base
+`api-publica.datajud.cnj.jus.br` más un *alias* por tribunal (p. ej. `api_publica_tjsp/_search`),
+con clave pública publicada en la wiki oficial y cabecera `Authorization: APIKey`. Campos: número
+CNJ, clase, asuntos, órgano juzgador, grado, fechas y **movimientos codificados por las Tablas
+Procesales Unificadas**.
+
+⚠️ **Límites que deciden la arquitectura, y hay que leerlos antes de prometer nada:**
+- **No hay inteiro teor**: ni peticiones, ni decisiones en PDF, ni despachos. Son **metadatos y
+  movimientos**. Una fuente añade que tampoco trae partes ni abogados, y que puede haber desfase.
+- ⚠️ **Términos de uso: una fuente secundaria afirma restricción a fines NO comerciales.**
+  **No verificado contra los términos oficiales del CNJ, y es exactamente la clase de bloqueo que
+  el pase 13 encontró en OpenSanctions** (código abierto / dato CC-BY-NC). **Antes de cualquier
+  propuesta comercial hay que leer los términos oficiales en la wiki del DataJud.** Esta KB no
+  afirma que sea libre para uso comercial.
+- Una prueba de septiembre de 2026 reportada por un blog no encontró *alias* para el **STF**.
+- Se menciona la **Portaria nº 374** del CNJ sobre saneamiento del DataJud y acceso por API, con
+  fechas inconsistentes en la propia página de actos → **no se cita fecha**.
+
+**Los envoltorios permisivos los hace la comunidad, no el Estado** (verificados 2026-11-25):
+
+| Activo | Licencia (leída) | ★ | `pushed_at` | Qué cubre |
+|---|---|---|---|---|
+| [`DeHor-Labs/mcp-juridico-brasil`](https://github.com/DeHor-Labs/mcp-juridico-brasil) | MIT (1.071 B) | **143** | 2026-11-16 | MCP jurídico modular, acompañamiento procesal |
+| [`rvsanches/skills-datajud-djen`](https://github.com/rvsanches/skills-datajud-djen) | MIT (1.072 B) | 34 | 2026-07-12 | Skills de producción sobre **DataJud y DJEN** |
+| [`cristianoaredes/mcp-dadosbr`](https://github.com/cristianoaredes/mcp-dadosbr) | **AGPL-3.0** (34.020 B) ⚠️ | 10 | 2026-11-23 | 29 herramientas de dato público BR — **se consume como servicio, no se incorpora** |
+
+Más lo que esta KB ya tenía: `matematicsolutions/br-eli-mcp` (Apache-2.0, 8 APIs oficiales sin
+clave, **incluido DataJud/CNJ**, STJ, TST, CARF, TCU) y `daniel-filius/awesome-mcp-brasil` (CC0).
+Nota de pista no cerrada: el **TRE-SE** publicó la librería **JustiCodeX** para la API del **Codex**
+del CNJ con licencia abierta; en GitHub sólo se halló `loud-technology/loud-technology-codex-cnj-sdk`
+(MIT, ★0, 2026-10-06), **que no se verificó como el mismo artefacto**.
+
+**Eje regulatorio** (fuentes en conflicto, marcadas):
+
+- **Perú**: el caso más claro — reglamento aprobado por **Decreto Supremo 115-2025-PCM**, basado en
+  riesgo, con **clasificación por riesgo, supervisión humana y auditoría de seguridad previa** al
+  despliegue público. En vigor **2026-01-22**, con plazos de cumplimiento de 1 a 4 años por sector.
+- **Brasil**: proyecto de ley de AI **aún pendiente** de la Cámara de Diputados y sanción
+  presidencial. ⚠️ Una fuente de enero de 2026 esperaba aprobación próxima en Brasil y Chile.
+- **Chile**: la Ley **21.855** movió la entrada en vigor de la **21.719** (protección de datos) a
+  **2027-10-15**, desde 2026-12-01.
+- **Colombia**: vía blanda — **CONPES 4144**, programa de gobierno hasta **2030**, sin obligaciones
+  horizontales inmediatas. **México**: **sin ley de AI aprobada**, varios proyectos federales.
+- **Principios OCDE de AI** adoptados formalmente por Argentina, Brasil, Chile, Colombia, Costa
+  Rica, México y Perú. **Uruguay**: primer país latinoamericano en firmar el Convenio Marco de AI
+  del Consejo de Europa (2025).
+- **RIPD** (Red Iberoamericana de Protección de Datos): estándares sobre uso de datos personales en
+  sistemas de AI aprobados el **12 de noviembre**. **No vinculantes**, pero previsiblemente
+  referencia interpretativa para los reguladores nacionales.
+
+**Oportunidad para Globant, en esta región y en este plano:**
+
+1. **La asimetría es el producto.** LATAM abre **dato** y no **código**; EMEA abre código. La
+   combinación —arquitectura CCD (MIT) + capa de dato DataJud/DJEN vía envoltorios MIT— es
+   construible hoy y **ningún proveedor regional la está vendiendo** con las licencias leídas.
+2. **Asesoría de licenciamiento al propio Judiciario.** Que la Portaria 7/2020 admita Creative
+   Commons para software es un problema concreto, nombrable y resoluble: política de licencias,
+   SPDX por repositorio y gate de licencia (`P9`/`P13`) para un Git.jus con cientos de proyectos.
+   Es trabajo de gobernanza, no de desarrollo, y lo necesita el emisor.
+3. **Primero, leer los términos del DataJud.** Si la restricción no comercial se confirma, toda
+   oferta construida sobre DataJud cambia de forma: pasa a ser **implantación para el propio
+   tribunal** (que es el titular del dato) en lugar de producto de mercado. Es la misma corrección
+   que el pase 13 obligó a hacer con OpenSanctions, y conviene hacerla **antes** de la propuesta.
 
 ## Hueco de producto transversal (las cuatro regiones)
 

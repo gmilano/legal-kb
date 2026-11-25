@@ -9,6 +9,85 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-25 (pase 14) — **1.827 repos de un ministerio**, y la consulta `AND` que fabricaba huecos
+
+### Infraestructura añadida este pase — la pila judicial estatal (todo MIT, leído byte a byte)
+
+| Repo | Rama | Licencia (leída) | ★ | `pushed_at` | Capa |
+|---|---|---|---|---|---|
+| [hmcts/ccd-data-store-api](https://github.com/hmcts/ccd-data-store-api) | master | MIT (1.104 B) | 16 | **2026-11-25** | **El motor de expedientes judiciales** |
+| [hmcts/ia-case-api](https://github.com/hmcts/ia-case-api) | master | MIT (1.086 B) | 15 | **2026-11-25** | Inmigración y asilo |
+| [hmcts/ccd-docker](https://github.com/hmcts/ccd-docker) | master | MIT (1.138 B) | 11 | 2026-10-19 | Entorno local de CCD |
+| [hmcts/finrem-case-orchestration-service](https://github.com/hmcts/finrem-case-orchestration-service) | master | MIT (1.104 B) | 9 | **2026-11-25** | Liquidación matrimonial |
+| [hmcts/ccd-definition-store-api](https://github.com/hmcts/ccd-definition-store-api) | master | MIT (1.104 B) | 7 | **2026-11-25** | Esquema del procedimiento |
+| [hmcts/ccd-case-ui-toolkit](https://github.com/hmcts/ccd-case-ui-toolkit) | master | MIT (1.104 B) | 7 | **2026-11-25** | UI declarativa del expediente |
+| [hmcts/probate-back-office](https://github.com/hmcts/probate-back-office) | master | MIT (1.104 B) | 6 | **2026-11-25** | Sucesiones |
+| [ministryofjustice/laa-check-client-qualifies](https://github.com/ministryofjustice/laa-check-client-qualifies) | main | MIT (1.094 B) | 6 | 2026-11-24 | Elegibilidad de justicia gratuita |
+| [hmcts/darts-api](https://github.com/hmcts/darts-api) | master | MIT (1.104 B) | 5 | **2026-11-25** | Audio judicial y transcripción |
+| [ministryofjustice/laa-access-civil-legal-aid](https://github.com/ministryofjustice/laa-access-civil-legal-aid) | main | MIT (1.094 B) | 5 | 2026-11-24 | Acceso a asistencia civil |
+| [hmcts/nfdiv-case-api](https://github.com/hmcts/nfdiv-case-api) | master | MIT (1.104 B) | 4 | 2026-11-24 | Divorcio sin culpa |
+| [hmcts/rse-cft-lib](https://github.com/hmcts/rse-cft-lib) | main | MIT (1.104 B) | 2 | **2026-11-25** | **SDK: levanta la pila en local** |
+| [hmcts/prl-ccd-definitions](https://github.com/hmcts/prl-ccd-definitions) | master | MIT (1.086 B) | 2 | **2026-11-25** | Definición de jurisdicción **licenciada** |
+| [hmcts/et-ccd-callbacks](https://github.com/hmcts/et-ccd-callbacks) | master | MIT (1.103 B) | 1 | **2026-11-25** | Tribunales laborales |
+| [ministryofjustice/c100-application](https://github.com/ministryofjustice/c100-application) | master | MIT (1.104 B) | 0 | **2026-11-25** | Acuerdos sobre menores |
+
+Y los registros de insolvencia, primer activo de ese plano en esta KB:
+[`martinhavel/cz-agents-mcp`](https://github.com/martinhavel/cz-agents-mcp) (MIT, ★6, hoy),
+[`AsisTeam/isir`](https://github.com/AsisTeam/isir) (MIT, ★4, **2021-12-07** 🪦) y
+[`NDelventhal/InsolvencyAnnouncementsGer`](https://github.com/NDelventhal/InsolvencyAnnouncementsGer)
+(MIT, ★9, **2022-01-16** 🪦).
+
+### 🔌 `T-P14-1` — **la métrica de estrellas se rompe del todo en el software estatal**
+
+`ccd-data-store-api` tiene **★16** y es el motor de gestión de expedientes de un sistema judicial
+nacional. `MediatR`, un patrón de diseño .NET, tiene **★11.853**. Cualquier orden por estrellas
+—el que prescribe cualquier barrido automático— pone al segundo 700 veces por delante.
+
+Causa estructural, no accidente: **las estrellas miden audiencia de desarrollador, y el software
+de un tribunal no tiene audiencia de desarrollador**; tiene usuarios que son jueces y
+funcionarios, que no abren GitHub. Ninguno de los 15 repos de la tabla de arriba pasaría un
+filtro `stars:>20`, y entre todos ellos están ocho planos legales completos.
+
+> **Corolario para el método de esta KB:** `pushed_at` + `archived` + **quién es el `owner`** son
+> señales más fuertes que ★ cuando el `owner` es un organismo público. Los 15 repos de arriba
+> suman **★96 en total** y **13 de ellos tienen commits de las últimas 24 horas**. `T32` (pase 13)
+> ya mostró que las estrellas apuntan a la librería muerta; `T-P14-1` muestra el fallo complementario:
+> **apuntan a cualquier sitio menos a la infraestructura crítica.**
+
+### 🧪 `T-P14-2` — **la consulta multipalabra de `search/repositories` es un `AND` y fabrica huecos** (ver `G-L19`)
+
+Medido en la misma sesión, mismo índice, minutos de diferencia:
+
+| Consulta | `total_count` | Conclusión que produce |
+|---|---|---|
+| `mediation negotiation agreement in:name,description stars:>10` | **0** | «no hay nada» ❌ |
+| `arbitration dispute resolution in:name,description stars:>5` | 2, ninguno legal | «no hay nada» ❌ |
+| `arbitration in:name,description` | `kleros/kleros-v2`, MIT, ★83, activo | ✅ |
+| `court deadline limitation period calculator in:name,description stars:>3` | **0** | plano aún **sin medir de verdad** |
+| `notary signature document authentication in:name,description stars:>50` | **0** | plano aún **sin medir de verdad** |
+
+Las dos últimas filas se dejan **explícitamente marcadas como no medidas**, no como vacías: la
+consulta era inválida y el pase se quedó sin recenso. Honestidad de medición, no cobertura
+aparente.
+
+### 📡 `T-P14-3` — el tercer canal, aplicado a un repo que **no existe todavía**
+
+Para el programa de *Online Case Resolution* del Municipal & Traffic Court de Nueva Orleans
+(JMI + Kalamuna, financiación del State Justice Institute; piloto anunciado para septiembre 2026,
+**licencia declarada GPL-3.0**), se probó existencia por los dos canales:
+
+| Candidato | `search/repositories` | `git ls-remote HEAD` |
+|---|---|---|
+| `org:kalamuna` (court/justice/resolution) | `total_count: 0` | — |
+| `org:codeforamerica court` | sólo `courtbot` (ISC, ★49, **2022-09-21** 🪦) y `court.atlantaga.gov` | — |
+| `kalamuna/online-case-resolution` | — | **0 refs** |
+| `JMI-Justice/ocr` | — | **0 refs** |
+| `jmijustice/online-case-resolution` | — | **0 refs** |
+
+**No se escribe fila de tabla para esto.** Un repo que no responde no es un hallazgo; es un
+seguimiento. Queda anotado en `intel/market.md` como el único programa open source de tribunal
+medido en Norteamérica, con su licencia declarada —GPL-3.0, **no permisiva**— por delante.
+
 ## 🆕 2026-11-25 (pase 13) — la **admisión del cliente**: una organización MIT entera viva, y el primer canal que distingue *renombrado* de *muerto*
 
 ### Infraestructura añadida este pase — el espinazo permisivo del plano

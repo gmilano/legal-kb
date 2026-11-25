@@ -940,3 +940,80 @@ y escribirla en la tabla de `agents/top.md` habría metido en la KB una fila con
 descripción convincente. `0 refs` no distingue *inexistente* de *privado* (el control contra un
 slug inventado tampoco da 404 limpio, sino petición de credenciales) — pero para esta KB da igual:
 **lo que no se puede clonar no se puede entregar.**
+
+---
+
+## 🆕 PASE 14 (2026-11-25) — **la pila judicial de un Estado**, y es la base más grande de este fichero
+
+> Todo lo de esta sección se verificó el **2026-11-25** por los dos canales del método: API de
+> búsqueda (`total_count`, SPDX, ★, `archived`, `pushed_at`, rama) y **lectura byte a byte del
+> LICENSE** en `raw.githubusercontent.com/<slug>/HEAD/<fichero>`, probando `LICENSE`,
+> `LICENSE.md`, `LICENSE.txt`, `LICENCE`, `COPYING` y `LICENSE-MIT`.
+>
+> ⚠️ **La columna de rama es crítica en este bloque: `hmcts` usa `master` en casi todo y
+> `ministryofjustice` usa `main`.** Por eso las URL van siempre sobre `/HEAD/`.
+
+### El motor: CCD (*Core Case Data*) — el repo fundacional del plano
+
+CCD separa **motor** de **definición de jurisdicción**. El motor almacena, busca y versiona
+expedientes y provee *workbaskets*; cada jurisdicción (sucesiones, asilo, divorcio, laboral) es
+**configuración encima**. Es, literalmente, un gestor de expedientes judiciales genérico y
+multi-jurisdicción, con licencia MIT.
+
+| Repo | Rama | Licencia (leída) | Descripción | ★ | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [hmcts/ccd-data-store-api](https://github.com/hmcts/ccd-data-store-api) | **master** | MIT (1.104 B) | 🏛️ **El motor.** Almacena/busca expedientes y provee *workbaskets*. Según el informe de marzo-2026 del Administrative Justice Council, CCD **sostiene los sistemas de gestión de casos de los tribunales reformados de HMCTS** y sustituyó al sistema heredado GAPs. | 16 | **2026-11-25** |
+| [hmcts/ccd-definition-store-api](https://github.com/hmcts/ccd-definition-store-api) | **master** | MIT (1.104 B) | Donde vive la **definición de jurisdicción**: estados, eventos, roles, campos y transiciones. Es el esquema del procedimiento. | 7 | **2026-11-25** |
+| [hmcts/ccd-case-ui-toolkit](https://github.com/hmcts/ccd-case-ui-toolkit) | **master** | MIT (1.104 B) | Componentes de UI generados **desde** la definición: el formulario del expediente no se programa, se declara. | 7 | **2026-11-25** |
+| [hmcts/rse-cft-lib](https://github.com/hmcts/rse-cft-lib) | main | MIT (1.104 B) | 🔑 **El repo que decide si esto es usable o sólo mirable.** SDK de componentes comunes que permite **levantar la pila del tribunal en local**. Sin él, CCD es un conjunto de servicios sin orquestación reproducible. | 2 | **2026-11-25** |
+| [hmcts/ccd-docker](https://github.com/hmcts/ccd-docker) | **master** | MIT (1.138 B) | Entorno Docker de CCD: la vía corta para arrancar motor + *definition store* + importador. | 11 | 2026-10-19 |
+
+### Las jurisdicciones: ocho planos que esta KB tenía a cero, en producción y con licencia MIT
+
+| Repo | Rama | Licencia (leída) | Plano que cubre | ★ | Último commit |
+|------|------|------------------|-----------------|-------|---------------|
+| [hmcts/ia-case-api](https://github.com/hmcts/ia-case-api) | **master** | MIT (1.086 B) | **Inmigración y asilo** (`asylum` estaba a 0). El más estrellado de las jurisdicciones. | **15** | **2026-11-25** |
+| [hmcts/probate-back-office](https://github.com/hmcts/probate-back-office) | **master** | MIT (1.104 B) | **Sucesiones / probate** (estaba a 0). Con satélites: `probate-orchestrator-service`, `probate-submit-service`, `probate-business-service`, `probate-caveats-frontend`, `probate-frontend`, todos MIT y todos con commits de hoy. | 6 | **2026-11-25** |
+| [hmcts/finrem-case-orchestration-service](https://github.com/hmcts/finrem-case-orchestration-service) | **master** | MIT (1.104 B) | **Liquidación económica matrimonial** (*financial remedy*). | 9 | **2026-11-25** |
+| [hmcts/nfdiv-case-api](https://github.com/hmcts/nfdiv-case-api) | **master** | MIT (1.104 B) | **Divorcio sin culpa** (`divorce` estaba a 0). | 4 | 2026-11-24 |
+| [hmcts/et-ccd-callbacks](https://github.com/hmcts/et-ccd-callbacks) | **master** | MIT (1.103 B) | **Tribunales laborales** (*Employment Tribunals*). | 1 | **2026-11-25** |
+| [hmcts/darts-api](https://github.com/hmcts/darts-api) | **master** | MIT (1.104 B) | 🎙️ **Audio judicial: grabación, transcripción y custodia** (DARTS). Es el lado *tribunal* del plano acústico que el pase 11 cubrió por el lado del despacho. Con `darts-portal` y `darts-gateway`, ambos MIT. | 5 | **2026-11-25** |
+| [hmcts/prl-ccd-definitions](https://github.com/hmcts/prl-ccd-definitions) | **master** | MIT (1.086 B) | **La única definición de jurisdicción con licencia** de las cuatro medidas (derecho privado/menores). Ver el aviso de abajo. | 2 | **2026-11-25** |
+| [ministryofjustice/laa-check-client-qualifies](https://github.com/ministryofjustice/laa-check-client-qualifies) | main | MIT (1.094 B) | ⚖️ **Elegibilidad para justicia gratuita** como servicio ejecutable (`legal aid` estaba a 0). *Rules as code* del acceso a la justicia, mantenido por la Legal Aid Agency. | 6 | 2026-11-24 |
+| [ministryofjustice/laa-access-civil-legal-aid](https://github.com/ministryofjustice/laa-access-civil-legal-aid) | main | MIT (1.094 B) | Servicio público de acceso a asistencia jurídica civil. | 5 | 2026-11-24 |
+| [ministryofjustice/c100-application](https://github.com/ministryofjustice/c100-application) | **master** | MIT (1.104 B) | **Acuerdos sobre menores** ante el tribunal (formulario C100). `family law` estaba a 0. | 0 | **2026-11-25** |
+
+### ⚠️ Lo que NO se puede reutilizar de esta pila, y es la parte que más valdría
+
+Las **definiciones de jurisdicción** son las que codifican el procedimiento. De los **20** repos
+`*-ccd-definitions` de la organización, cuatro medidos hoy:
+
+| Repo | Licencia (API) | LICENSE en `raw` (6 nombres probados) | Lectura |
+|---|---|---|---|
+| `hmcts/prl-ccd-definitions` | MIT | **MIT, 1.086 B** | ✅ Reutilizable |
+| `hmcts/ia-ccd-definitions` | `none` | **404 en los 6** | ❌ Sólo lectura |
+| `hmcts/finrem-ccd-definitions` | `none` | **404 en los 6** | ❌ Sólo lectura |
+| `hmcts/div-ccd-definitions` | `none` | **404 en los 6** | ❌ Sólo lectura |
+
+No es el falso negativo `NOASSERTION` contra el que avisa este fichero: es **ausencia
+corroborada por el segundo canal**. Régimen a aplicar: **mapa, no mercancía** — el mismo que esta
+KB ya usa con `openlegaldata/awesome-legal-data`. Se leen para *entender cómo tramita un tribunal*
+y se reimplementa; no se copian al entregable.
+
+Y dos repos públicos de organismos británicos **sin licencia alguna**, que confirman que la vía
+estatal no es homogénea:
+[`UKForeignOffice/verify-apostille-service`](https://github.com/UKForeignOffice/verify-apostille-service)
+(rama **`develop`**, ★2, 2026-11-24) y
+[`companieshouse/insolvency-api`](https://github.com/companieshouse/insolvency-api) (★4, 2026-11-23).
+
+### 🟡 Registros de insolvencia — permisivos, reales y dos de ellos dormidos
+
+| Repo | Rama | Licencia (leída) | Descripción | ★ | Último commit |
+|------|------|------------------|-------------|-------|---------------|
+| [martinhavel/cz-agents-mcp](https://github.com/martinhavel/cz-agents-mcp) | main | MIT (1.069 B) | MCP de *due diligence* checa y UE: sanciones (UE + OFAC) e **insolvencia**. El único vivo del plano. | 6 | **2026-11-25** |
+| [AsisTeam/isir](https://github.com/AsisTeam/isir) | **master** | MIT (1.065 B) | Cliente PHP del **ISIR**, el registro de insolvencias checo (fuente oficial). 🪦 **Sin commits desde 2021-12-07 (~5 años).** Se incorpora por el **contrato del servicio oficial**, que no caduca como caduca el código. | 4 | 2021-12-07 🪦 |
+| [NDelventhal/InsolvencyAnnouncementsGer](https://github.com/NDelventhal/InsolvencyAnnouncementsGer) | main | MIT (1.073 B) | Librería Python sobre los **anuncios de insolvencia alemanes** (`insolvenzbekanntmachungen`). 🪦 **Sin commits desde 2022-01-16.** Mismo criterio: vale el conocimiento de la fuente, no el código. | 9 | 2022-01-16 🪦 |
+
+> 📌 Se marcan 🪦 y se publican igual, con la misma distinción que este fichero aplica a
+> `thunlp/CAIL`: **un cliente de una fuente oficial envejece distinto que un producto.** Lo que
+> aporta `isir` no son sus clases PHP de 2021, es *saber que el ISIR es consultable y cómo*.

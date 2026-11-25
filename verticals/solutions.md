@@ -656,3 +656,62 @@ gestor documental** es ingeniería de permisos corriente, no AI. Se registra com
   Se prefiere el original `jube-home`, que está vivo. Caso de canal interesante: ver
   `repos/trending.md` → estado de canales.
 - **`Clayton0818/Legal-intake-engine`**: **renombrado**, no muerto. Ver `repos/trending.md`.
+
+---
+
+## 🆕 PASE 14 (2026-11-25) — la vertical del **tribunal**: CCD es «el Odoo» de la gestión de expedientes
+
+Las 13 pasadas anteriores buscaron la plataforma vertical **del despacho** (practice management,
+facturación, e-discovery, legislación). Este pase encuentra la del **otro lado del mostrador**: el
+sistema con el que el tribunal tramita. Y existe, es MIT, y está en producción en los tribunales
+de Inglaterra y Gales.
+
+### Plataforma de partida, verificada 2026-11-25 (doble canal)
+
+| Plataforma | Repos núcleo | Licencia (leída) | Qué es | Personalizable |
+|---|---|---|---|---|
+| **CCD — Core Case Data** (HMCTS) | [`ccd-data-store-api`](https://github.com/hmcts/ccd-data-store-api) · [`ccd-definition-store-api`](https://github.com/hmcts/ccd-definition-store-api) · [`ccd-case-ui-toolkit`](https://github.com/hmcts/ccd-case-ui-toolkit) · [`rse-cft-lib`](https://github.com/hmcts/rse-cft-lib) · [`ccd-docker`](https://github.com/hmcts/ccd-docker) | **MIT** (1.104 / 1.104 / 1.104 / 1.104 / 1.138 B) | Gestor de expedientes **genérico y multi-jurisdicción**: estados, eventos, roles, transiciones y UI **declarados como definición**, no programados. 11 jurisdicciones reales encima en la misma organización. | ✅ Alta — la jurisdicción *es* configuración |
+
+**Por qué es «la vía Odoo» y no una referencia más:** igual que Odoo separa núcleo ERP de módulos
+verticales, CCD separa **motor** de **definición de jurisdicción**. Un procedimiento nuevo
+—extranjería en otro país, un tribunal arbitral, una comisión administrativa— se expresa como
+definición, no como desarrollo a medida. La diferencia frente a Odoo es la procedencia: **el que
+lo mantiene tramita con él**, con commits de hoy y 1.827 repos en la organización.
+
+### ⚠️ Lectura de licencia de esta vertical — y es la **tercera** clase de hueco que encuentra esta KB
+
+| Clase de hueco | Dónde se encontró | Qué queda bloqueado |
+|---|---|---|
+| Código MIT / **datos** CC-BY-NC | Pase 13 (OpenSanctions) | El corpus |
+| Licencia por **tag**, no por repo | Pase 12 (`G-L14`/`P13`) | La versión que se fija |
+| 🆕 **Motor licenciado / configuración NO licenciada** | **Este pase (CCD)** | **El procedimiento** |
+
+`ia-ccd-definitions`, `finrem-ccd-definitions` y `div-ccd-definitions` **no tienen fichero de
+licencia** (404 en los seis nombres probados, corroborado por el canal de API). `prl-ccd-definitions`
+sí (MIT, 1.086 B). Es decir: **se puede reutilizar el motor y no se puede reutilizar el
+procedimiento de las tres jurisdicciones más valiosas.**
+
+### Cómo customizar con AI esta capa — y dónde NO poner el modelo
+
+| Capa | Qué poner | Por qué |
+|---|---|---|
+| Estado del expediente | **CCD, nunca el LLM** | El estado procesal es el sistema de registro. Un modelo no puede ser la fuente de verdad de en qué fase está un procedimiento judicial. |
+| Definición de jurisdicción | Configuración revisada por jurista | Es el procedimiento. Generarla con un LLM sin revisión es generar norma procesal. |
+| Admisión / formulario guiado | `docassemble` + `AssemblyLine` (MIT, ya en esta KB) delante de CCD | El documento sale de plantilla determinista: patrón defendible ante regulador (tesis de `repos/foundations.md`). |
+| Elegibilidad (justicia gratuita) | [`laa-check-client-qualifies`](https://github.com/ministryofjustice/laa-check-client-qualifies) (MIT) | *Rules as code* ya escrito por quien concede la ayuda. Un LLM aquí sólo añade riesgo. |
+| Redacción y resumen | LLM **con cita verificable** (`P10`) | Única capa donde la generación aporta y el error es recuperable. |
+| PII | `presidio` (MIT) antes de cualquier salida | Expediente judicial = datos especialmente protegidos. |
+| Audio de vista | [`darts-api`](https://github.com/hmcts/darts-api) (MIT) como custodia + STT del pase 11 | La custodia del audio es prueba; la transcripción es derivada. |
+
+### 🔴 Lo que NO existe en esta vertical, y se consultó
+
+- **Ningún equivalente estatal medido en Norteamérica, APAC ni LATAM** (ver `intel/market.md`).
+  `org:uscourts` → `total_count: 0`; `org:justice-canada`, `org:ecourts-india` → **422** (no
+  existen); `org:GovTechSG` con `legal OR court` → **0 indexados**.
+- **ODR / mediación / arbitraje institucional**: sin plataforma open source utilizable. Lo único
+  serio es [`kleros/kleros-v2`](https://github.com/kleros/kleros-v2) (MIT, ★83, rama **`dev`**), y
+  es arbitraje **descentralizado**, que resuelve un problema distinto al de una cámara arbitral.
+- **Notarización / apostilla**: el término colisiona por completo con la notarización de binarios
+  macOS (`G-L22`). Lo único institucional,
+  [`UKForeignOffice/verify-apostille-service`](https://github.com/UKForeignOffice/verify-apostille-service),
+  **no tiene licencia**.

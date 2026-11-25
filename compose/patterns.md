@@ -2227,3 +2227,166 @@ permisos corriente, que es exactamente lo que Globant ya construye.
 **Encaje**: el punto 4 es el que convierte esto en un patrón de esta KB y no en una tarea de
 infraestructura. Todo el resto del catálogo legal de esta KB apunta a RAG sobre material del
 despacho; **un RAG sin herencia de permisos es una fuga de confidencialidad con buena interfaz.**
+
+---
+
+## 🆕 P16 — **Expediente judicial sobre CCD**: el estado procesal fuera del LLM (EMEA, y arquitectura de referencia para las otras tres)
+
+**Problema que resuelve.** Todo patrón anterior de esta KB pone el documento en el centro. Un
+procedimiento no es un documento: es una **máquina de estados con competencia, plazos y roles**.
+Si el estado procesal vive en el contexto de un modelo, no hay sistema de registro.
+
+**Piezas, todas MIT verificadas byte a byte el 2026-11-25:**
+
+| Rol | Repo | Licencia | Rama |
+|---|---|---|---|
+| Motor de expedientes | [`hmcts/ccd-data-store-api`](https://github.com/hmcts/ccd-data-store-api) | MIT (1.104 B) | `master` |
+| Esquema del procedimiento | [`hmcts/ccd-definition-store-api`](https://github.com/hmcts/ccd-definition-store-api) | MIT (1.104 B) | `master` |
+| UI declarativa | [`hmcts/ccd-case-ui-toolkit`](https://github.com/hmcts/ccd-case-ui-toolkit) | MIT (1.104 B) | `master` |
+| Arranque local | [`hmcts/rse-cft-lib`](https://github.com/hmcts/rse-cft-lib) + [`hmcts/ccd-docker`](https://github.com/hmcts/ccd-docker) | MIT | `main` / `master` |
+| Definición **de ejemplo con licencia** | [`hmcts/prl-ccd-definitions`](https://github.com/hmcts/prl-ccd-definitions) | **MIT (1.086 B)** | `master` |
+| Admisión guiada | `jhpyle/docassemble` + `SuffolkLITLab/docassemble-AssemblyLine` | MIT | `master` / `main` |
+| Elegibilidad de ayuda | [`ministryofjustice/laa-check-client-qualifies`](https://github.com/ministryofjustice/laa-check-client-qualifies) | MIT (1.094 B) | `main` |
+| PII | `data-privacy-stack/presidio` | MIT | `main` |
+| Audio de vista | [`hmcts/darts-api`](https://github.com/hmcts/darts-api) | MIT (1.104 B) | `master` |
+
+**Cableado, en orden:**
+
+1. **Levantar la pila** con `rse-cft-lib` (o `ccd-docker` para la vía corta) + `rse-idam-simulator`
+   (MIT) para autenticación simulada. Sin esto CCD es un conjunto de servicios sin orquestación.
+2. **Escribir la definición de jurisdicción** en el *definition store*: estados, eventos, roles,
+   campos, transiciones. **Partir de `prl-ccd-definitions`, que es la única de las cuatro medidas
+   con licencia MIT.**
+3. ⚠️ **`ia-ccd-definitions`, `finrem-ccd-definitions` y `div-ccd-definitions` NO tienen licencia**
+   (404 en los seis nombres, corroborado por API). Se leen como **documentación del procedimiento**
+   y se **reimplementa**; no se copian. Régimen «mapa, no mercancía».
+4. **Admisión** con `docassemble` + `AssemblyLine` delante: el escrito sale de **plantilla
+   determinista**, no de generación → patrón defendible ante regulador.
+5. **Elegibilidad** con `laa-check-client-qualifies`: *rules as code* ya escrito por quien concede
+   la ayuda. El LLM no decide elegibilidad.
+6. **`presidio` antes de cualquier salida**: expediente judicial = categoría especial de datos.
+7. **El LLM, sólo en tres sitios**: resumen del expediente, borrador de escrito con cita
+   verificable (`P10`) y clasificación sugerida **que un humano confirma** (`human gate`).
+8. **Audio** a `darts-api` como custodia; la transcripción es derivada y se marca como tal.
+
+**La regla que hace defendible el patrón:** *el agente lee CCD y propone eventos; **nunca** escribe
+el estado del expediente sin confirmación humana.* En CCD eso se expresa en la propia definición
+(el evento requiere rol), no en el prompt — que es la razón de usar CCD y no una base de datos.
+
+⚠️ **Divulgación obligatoria en propuesta.** Hay información periodística (informe interno
+filtrado, 2025-2026) sobre un fallo vinculado a CCD con pruebas perdidas o sobrescritas y años de
+reacción; **HMCTS discute el relato** y su investigación interna, según lo publicado, no halló
+impacto en resultados de casos. Se pone delante y **se convierte en alcance**: integridad y
+trazabilidad del expediente es el trabajo.
+
+---
+
+## 🆕 P17 — **Acompañamiento procesal LATAM**: metadatos del CNJ + plazos deterministas
+
+**Problema.** En Brasil el dato procesal está abierto y el texto **no**. Un agente que prometa
+«seguimiento de procesos» sobre DataJud y hable de contenido de piezas está prometiendo lo que la
+API no entrega.
+
+**Piezas (verificadas 2026-11-25):**
+
+| Rol | Repo | Licencia |
+|---|---|---|
+| Acompañamiento procesal (MCP) | [`DeHor-Labs/mcp-juridico-brasil`](https://github.com/DeHor-Labs/mcp-juridico-brasil) | MIT (1.071 B) |
+| Skills DataJud + **DJEN** | [`rvsanches/skills-datajud-djen`](https://github.com/rvsanches/skills-datajud-djen) | MIT (1.072 B) |
+| Fuentes oficiales con texto íntegro | `matematicsolutions/br-eli-mcp` (STJ, TST, CARF, TCU) | Apache-2.0 |
+| Normativa a nivel de artículo | `leis-mcp` + `br-eli-mcp` (`normas.leg.br`) | MIT / Apache-2.0 |
+
+**Cableado:**
+
+1. **Movimientos** desde DataJud (`api-publica.datajud.cnj.jus.br` + *alias* por tribunal),
+   codificados por **Tablas Procesales Unificadas**. Los códigos son la clave: el disparador es el
+   **código de movimiento**, no una frase interpretada por un modelo.
+2. **Publicación** vía **DJEN** con `skills-datajud-djen`: es el canal que marca el inicio del
+   plazo.
+3. **Cómputo de plazo: código determinista, nunca LLM.** Entrada = fecha de publicación + código de
+   movimiento + regla procesal. Un modelo que calcula un plazo de recurso es una fuente de
+   responsabilidad profesional.
+4. **Texto íntegro, cuando haga falta, por otra puerta**: `br-eli-mcp` (STJ y TST sí dan íntegro).
+   **DataJud no entrega piezas**: ni peticiones, ni decisiones en PDF, ni despachos.
+5. **Human gate** antes de cualquier comunicación al cliente, por la línea del colegio de abogados
+   ya documentada en `intel/trends.md` (§F).
+
+🔴 **Gate previo que condiciona todo el patrón:** una fuente secundaria afirma que los términos del
+DataJud **restringen el uso no comercial**. **No verificado contra los términos oficiales.** Si se
+confirma, el patrón sólo es vendible como **implantación para el propio tribunal** (titular del
+dato), no como producto de mercado. **Leer la wiki oficial del DataJud antes de cotizar.** Es la
+misma corrección que obligó a hacer OpenSanctions en el pase 13.
+
+---
+
+## 🆕 P18 — **Insolvencia y solvencia de contraparte en la UE** (extiende el plano del pase 13)
+
+**Piezas (verificadas 2026-11-25):**
+
+| Rol | Repo | Licencia | Estado |
+|---|---|---|---|
+| Sanciones UE+OFAC e insolvencia CZ | [`martinhavel/cz-agents-mcp`](https://github.com/martinhavel/cz-agents-mcp) | MIT (1.069 B) | ✅ commits de hoy |
+| Registro ISIR (insolvencia checa) | [`AsisTeam/isir`](https://github.com/AsisTeam/isir) | MIT (1.065 B) | 🪦 2021-12-07 |
+| Anuncios de insolvencia alemanes | [`NDelventhal/InsolvencyAnnouncementsGer`](https://github.com/NDelventhal/InsolvencyAnnouncementsGer) | MIT (1.073 B) | 🪦 2022-01-16 |
+| Registro mercantil / UBO | [`Nolpak14/getregdata`](https://github.com/Nolpak14/getregdata) | MIT (1.064 B) | ✅ 2026-11-24 |
+| Resolución de entidades | `opensanctions/nomenklatura` + `rigour` + `followthemoney` | MIT | ✅ |
+
+**Cableado:** identidad de la contraparte por **número de registro** (no por nombre) con
+`getregdata` → forma jurídica con `Sociovestix/lenu` (CC0) → cotejo de sanciones con `yente`
+(MIT, autoalojable) → **estado de insolvencia** por registro nacional (`isir` para CZ,
+`InsolvencyAnnouncementsGer` para DE, `cz-agents-mcp` como fachada MCP) → grafo con
+`followthemoney`.
+
+⚠️ **Dos avisos que no se omiten.** (1) Dos de los cinco llevan **≥4 años sin commits**: lo que se
+adopta es **el conocimiento del endpoint oficial**, y el cliente se reescribe; se declara así en la
+propuesta. (2) **El trap del pase 13 sigue vigente**: el código de la pila OpenSanctions es MIT y
+**el dato es CC-BY-NC**, con definición de «comercial» que incluye cribar a tus propios clientes.
+El dato de sanciones se licencia aparte o se sustituye por fuente propia.
+
+---
+
+## 🆕 P19 — **Censo de plano**: el recipe que evita declarar vacío un plano que existe (corrige `G-L19`)
+
+Este patrón existe porque el primer barrido del pase 14 **escribió una conclusión falsa**: que
+arbitraje, mediación y ODR no tenían activos open source. La causa fue la consulta.
+
+```bash
+#!/bin/bash
+# censo-plano.sh — censa un plano legal SIN fabricar huecos.
+# Uso: ./censo-plano.sh arbitration mediation odr insolvency probate
+# Regla dura: UN TERMINO POR CONSULTA. `in:name,description` con varias
+# palabras es un AND y devuelve 0 para planos que si existen.
+
+for t in "$@"; do
+  # (1) termino unico, ordenado por estrellas, SIN filtro de estrellas:
+  #     el software institucional tiene ~0 estrellas (ver T-P14-1).
+  out=$(gh api -X GET search/repositories -f q="$t in:name,description" \
+          -f sort=stars -f per_page=20 \
+          --jq '.items[]? | select(.archived==false)
+                | "\(.full_name)|\(.license.spdx_id // "NONE")|\(.stargazers_count)|\(.pushed_at[0:10])|\(.description // "")"' \
+        2>/dev/null)
+
+  n=$(printf '%s' "$out" | grep -c . )
+  echo "== $t : $n candidatos activos"
+
+  # (2) gate de PERTINENCIA (P15): el termino puede colisionar con otro dominio.
+  #     'mediation' -> patron Mediator .NET ; 'notarization' -> binarios macOS.
+  printf '%s\n' "$out" | grep -iE 'legal|law|court|tribunal|justice|juris|contract|compliance' \
+    | head -10
+
+  # (3) si (1) da >0 y (2) da 0, el plano NO esta vacio: esta COLISIONADO.
+  #     Son diagnosticos distintos y se escriben distinto.
+done
+```
+
+**Las tres salidas posibles, y cada una se escribe de forma distinta en la KB:**
+
+| Candidatos (1) | Pertinentes (2) | Diagnóstico | Qué se escribe |
+|---|---|---|---|
+| 0 | 0 | **Hueco real** | «medido con término único, no hay activos» |
+| >0 | 0 | **Colisión de vocabulario** | «el plano parece poblado y no lo está — ver `G-L22`» |
+| >0 | >0 | Activos reales | Filas de tabla, tras verificar licencia por doble canal |
+
+Y la cuarta, la que motivó el patrón: **consulta multipalabra → resultado inválido**, que no es
+ninguna de las tres y **no se publica como hueco**. Se marca «no medido» y se vuelve a medir.
+Dos planos de este pase (`court deadline`, `notary`) están así marcados en `repos/trending.md`.
