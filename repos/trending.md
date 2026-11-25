@@ -9,6 +9,77 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. Este fichero cubre **repos e infraestructura**; los agentes van en `agents/trending.md`.
 
+## 🆕 2026-11-25 (pase 11) — el plano **acústico**: 113.000★ de infraestructura, **0★** de producto jurídico
+
+El contraste más extremo que esta KB ha medido en once pases. La infraestructura de voz es
+permisiva, madura y de altísima actividad; la capa jurídica encima **está vacía**.
+
+### Lo que se movió esta semana (★ y `pushed_at` medidos 2026-11-25)
+
+| Repo | Licencia | ★ | Commit | Señal |
+|---|---|---|---|---|
+| [ggml-org/whisper.cpp](https://github.com/ggml-org/whisper.cpp) | MIT | 55.504 | **2026-11-25** | Commit de hoy. Inferencia sin Python ni GPU |
+| [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper) | MIT | 27.003 | 2026-11-23 | El motor real bajo casi todos los servidores del plano |
+| [NVIDIA-NeMo/Speech](https://github.com/NVIDIA-NeMo/Speech) | Apache-2.0 | 18.787 | **2026-11-25** | **Monorepo partido**: `NVIDIA/NeMo` ya no es la dirección |
+| [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | Apache-2.0 | 16.223 | 2026-11-24 | Offline en Android/iOS/RISC-V: *appliance* de sala |
+| [m-bain/whisperX](https://github.com/m-bain/whisperX) | BSD-2-Clause | 25.661 | 2026-11-21 | `timestamp` por palabra = cita anclada al segundo |
+| [pyannote/pyannote-audio](https://github.com/pyannote/pyannote-audio) | MIT (pesos CC-BY-4.0) | 10.841 | 2026-11-24 | Diarización de referencia |
+| [speaches-ai/speaches](https://github.com/speaches-ai/speaches) | MIT | 3.782 | **2026-11-25** | API compatible OpenAI ⇒ migración a on-premise sin tocar clientes |
+| [MahmoudAshraf97/ctc-forced-aligner](https://github.com/MahmoudAshraf97/ctc-forced-aligner) | BSD-2-Clause | 578 | 2026-11-24 | Alineación forzada permisiva |
+| [revdotcom/fstalign](https://github.com/revdotcom/fstalign) | Apache-2.0 | 170 | 2026-11-16 | Medición de WER: la capa sin competencia |
+| [gitchrisqueen/hearing-copilot](https://github.com/gitchrisqueen/hearing-copilot) | MIT | **0** | 2026-11-23 | **Único permisivo jurídico-específico del plano** |
+
+### El censo del ecosistema jurídico, con `total_count` a la vista
+
+| Consulta | `total_count` | Utilizable |
+|---|---|---|
+| `court transcript page line` | **0** | — |
+| `hearing transcription judicial` | **0** | — |
+| `legal transcript diarization` | 1 | 0 (sin fichero de licencia) |
+| `deposition transcript parser` | 1 | 1 (`DepoIndex`, MIT, 0★, del pase 9) |
+| `courtroom transcription` | 7 | **1** (`hearing-copilot`, MIT, 0★) |
+
+Diez pases midieron este patrón en la capa de contratos y lo llamaron escasez. Aquí no es escasez:
+es **ausencia estructural**, y tiene una causa nombrable — ver `T29`/`T31`.
+
+### `T31` — **`T29` se repite, y esta vez el estándar es de PAGO y el formato es propietario**
+
+`T29` (pase 8): *especificación abierta ≠ implementación disponible, y la distancia es el alcance de
+un proyecto.* En el plano acústico la distancia es mayor porque **el artefacto certificado no tiene
+especificación abierta en absoluto**:
+
+- La cita de deposición es **`página:línea`** (`Smith Dep. 42:10-17`), con la página **a 25 líneas**
+  y numeración consecutiva exigida por reglas procesales (p. ej. la regla californiana de líneas
+  numeradas consecutivamente en cada página).
+- Los formatos de intercambio del sector son **propietarios**: `PTX` (*E-Transcript Manager*,
+  Thomson Reuters), `LEF` (LiveNote, transcript + exhibits + enlaces + vídeo sincronizado), y el
+  `ASCII` de *Page Image* que generan los sistemas CAT.
+- **Implementaciones permisivas medidas: cero.** Ni un lector de `PTX`, ni uno de `LEF`.
+  `docling` (MIT, 70.821★, ya en esta KB) preserva números de página de un PDF, pero **nadie emite
+  `página:línea` conforme**.
+
+> **Consecuencia directa para una propuesta:** el stack ASR permisivo entrega *texto con
+> timestamps*. El entregable que un litigio consume es **texto paginado y citable**. Ese salto
+> —paginador determinista a 25 líneas, numeración, y el índice `página:línea`— es **código a
+> escribir, no repo a adoptar**, y es pequeño, determinista y auditable. Es el hueco de producto
+> mejor delimitado de los once pases.
+
+### Canales, remedidos hoy (se reescribe porque cambia entre sesiones)
+
+- `gh api -X GET search/repositories -f q='repo:<slug>'` — **OK**. Devuelve ★, SPDX, `pushed_at`,
+  `archived` y forks en una llamada. `rate_limit` de búsqueda: 30/30 disponibles, no fue el
+  limitante en ningún momento del pase.
+- `HTTP 422` en ese canal = **renombrado o mudado**, confirmado 3/3 (`presidio`, `NeMo`,
+  más un caso de inexistencia real). **No es un punto ciego del índice** — se formuló esa hipótesis
+  y se descartó midiendo.
+- `git ls-remote https://github.com/<slug>` — **OK**, sigue redirects, único árbitro de existencia.
+- `curl raw.githubusercontent.com/<slug>/HEAD/<ruta>` — **OK**, único canal de lectura de licencia.
+- `curl -sI github.com/<slug>` — **403 para todo** a través del proxy. **Quinto pase consecutivo
+  midiéndolo:** la comprobación de URL que el brief prescribe sigue aportando **cero información**
+  en este entorno, y se sustituye por `ls-remote` + `search/repositories`.
+- `eur-lex.europa.eu` — **no resuelve** desde esta sesión (fuera de los dominios permitidos). El
+  texto del Reglamento UE de AI de este pase viene de **fuentes secundarias y del *AI Act Service
+  Desk* de la Comisión**, y se marca como tal en `intel/market.md`.
 ## 🆕 2026-11-25 (pase 10) — la **norma como dato**: aquí `T28` se rompe de verdad, y el que la rompe tiene 2.453★
 
 El pase 9 dijo que la capa de estándares «escapa a `T28`» con `pyHanko` (MIT, 807★). Este pase

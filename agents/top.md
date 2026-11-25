@@ -1040,3 +1040,75 @@ artículo, para agentes, creada hace 5 semanas— fue descrita por el índice de
 Commercial Licence 1.0»**: licencia bespoke con frontera comercial, `NOASSERTION` en la API. **No
 entra en la tabla de agentes** y se registra aquí como descarte documentado. Detalle en
 `agents/trending.md` (`G-L20`).
+
+## 🆕 PASE 11 (2026-11-25) — el plano **acústico**: de dónde sale la transcripción que los pases 9 y 10 daban por hecha
+
+Censo de entrada sobre los ocho ficheros, **antes** de consultar nada: `whisper` **0**, `diariz` **0**,
+`speech` **0**, `estenotip` **0**, `taquigra` **0**, `audiencia` **0**, `oralidad` **0**,
+`ASR` **2**, `audio` **3**, `voz` **1**. Diez sondas, cero señal en 8.235 líneas.
+
+El pase 9 inventarió el **plano de la prueba** y cerró la capa de deposición con `DepoIndex`,
+`deposition-contradiction-analysis` y `depo-summarizer`. Los tres **parten de una transcripción que
+ya existe**. Ninguno dice de dónde sale, y en 2026 es exactamente donde está el cuello de botella:
+el récord verbatim cuesta días y lo produce una profesión que se está vaciando. **Esta KB sabía
+explotar la transcripción y no sabía producirla.**
+
+> **Frontera limpia con el pase 9.** Pase 9 = *qué se hace con el transcript* (texto dentro, análisis
+> fuera). Pase 11 = *audio dentro, transcript fuera*. No hay solape: cero de los 28 activos de este
+> pase aparecía en la KB.
+
+### Agentes y servidores de transcripción (licencia leída + `ls-remote` + `search/repositories`, 2026-11-25)
+
+| Agente | Licencia (leída) | Región | Por qué entra | ★ | Último commit |
+|---|---|---|---|---|---|
+| [QuentinFuxa/WhisperLiveKit](https://github.com/QuentinFuxa/WhisperLiveKit) | Apache-2.0 | Global | Transcripción **en vivo** con diarización, servidor local. El perfil exacto de una sala de audiencias: streaming, no lote | **11.294** | 2026-11-23 |
+| [MahmoudAshraf97/whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization) | BSD-2-Clause | Global | Pipeline ASR + **quién habla** ya ensamblado. En una audiencia multiparte la atribución de locutor *es* el dato jurídico | **5.676** | 2026-08-15 |
+| [collabora/WhisperLive](https://github.com/collabora/WhisperLive) | MIT | Global | Cliente/servidor de transcripción casi en tiempo real. Respaldo institucional (Collabora), no proyecto de una persona | **4.362** | 2026-11-24 |
+| [speaches-ai/speaches](https://github.com/speaches-ai/speaches) | MIT | Global | Servidor con **API compatible OpenAI** para STT y TTS. Sustituye el endpoint de un proveedor sin tocar el cliente: la pieza de migración a on-premise | **3.782** | 2026-11-25 |
+| [ahmetoner/whisper-asr-webservice](https://github.com/ahmetoner/whisper-asr-webservice) | MIT | Global | Servicio ASR en Docker, el despliegue más repetido de la categoría (582 forks) | **3.371** | 2026-11-24 |
+| [innovatorved/whisper.api](https://github.com/innovatorved/whisper.api) | MIT | Global | API autoalojada sobre `whisper.cpp` con endpoints compatibles OpenAI **y Deepgram**: reemplazo directo de dos nubes distintas | 914 | 2026-11-20 |
+| [BUTSpeechFIT/DiariZen](https://github.com/BUTSpeechFIT/DiariZen) | **MIT (leída)** | **EMEA** (Chequia, BUT Brno) | Diarización de grupo académico europeo. Alternativa a `pyannote` **sin** la dependencia de pesos con registro previo | 573 | 2026-08-04 |
+| [hwdsl2/scribecrate](https://github.com/hwdsl2/scribecrate) | **NOASSERTION** → MIT íntegro (**2.304 B**) | Global | Servidor `faster-whisper` **offline por diseño**: modelos en caché, diarización, salida JSON/SRT/VTT, Docker CPU o CUDA. ⚠️ **RENOMBRADO desde `hwdsl2/docker-whisper`** | 125 | 2026-11-18 |
+| [gitchrisqueen/hearing-copilot](https://github.com/gitchrisqueen/hearing-copilot) | **MIT (1.074 B)** | Global | **El único activo jurídico-específico permisivo de todo el plano.** Copiloto de sala para litigante **autorrepresentado**: transcripción en vivo, etiquetado de locutor y cotejo contra un catálogo de réplicas preparadas. ⚠️ 0★, creado hace días. Núcleo compartido en [copilot-core](https://github.com/gitchrisqueen/copilot-core) (MIT, 0★) | **0** | 2026-11-23 |
+
+**Nueve filas, nueve reales.** No se rellena: lo que la categoría jurídica tiene medido es una fila
+con 0★, y esa escasez *es* el hallazgo (ver `T30` más abajo).
+
+### ⛔ La trampa de licencia del pase, y es **geográfica**
+
+[moonshine-ai/moonshine](https://github.com/moonshine-ai/moonshine) — 11.598★, `NOASSERTION`,
+renombrado desde `usefulsensors/moonshine`. Su `LICENSE` son **14.180 B** y empieza por un
+reparto, no por una concesión. Leído byte a byte:
+
+- El **código** es MIT. Los modelos **streaming** y **todos los de inglés** son MIT.
+- Los modelos heredados **no-streaming** de los demás idiomas quedan bajo *Moonshine Community
+  License*, y la lista es exhaustiva: **árabe, japonés, coreano, mandarín, español (Base),
+  ucraniano y vietnamita**.
+- Esa licencia **limita el uso comercial por facturación**: permite uso comercial sólo por debajo de
+  **USD 1.000.000 de ingresos anuales** (o equivalente en moneda local).
+
+> 🔴 **Para Globant esto es un «no» directo, y cae sólo fuera de Norteamérica.** El único idioma que
+> un despliegue judicial en LATAM o España necesita —**español**— está en la lista restringida; el
+> inglés no. **En este plano la exclusión de licencia no es por componente: es por idioma, y por
+> tanto por región.** Un equipo que leyera «11.598★, MIT» y lo metiera en una propuesta en México,
+> Chile o Madrid estaría enviando un modelo no licenciable para uso comercial.
+>
+> **Mitigación medida, sin coste:** `openai/whisper` (MIT), `SYSTRAN/faster-whisper` (MIT),
+> `k2-fsa/sherpa-onnx` (Apache-2.0) y `alphacep/vosk-api` (Apache-2.0) cubren español sin
+> restricción de ingresos. Ver `repos/foundations.md`.
+
+### `T30` — la matriz `T28` se confirma por **cuarta** industria, y aquí con el contraste más brutal
+
+`T28` (pase 8): *se pueden tener dos de tres propiedades, nunca las tres.* Medido hoy en este plano:
+
+- **permisivo + maduro ⇒ GENÉRICO**: `whisper` 113.472★, `whisper.cpp` 55.504★,
+  `faster-whisper` 27.003★, `whisperX` 25.661★, `pyannote-audio` 10.841★. **Ninguno sabe qué es una
+  audiencia, una deposición ni una línea de transcript.**
+- **permisivo + específico ⇒ 0★ y días de vida**: `hearing-copilot` (MIT, 0★, commit de hace 2
+  días), `DepoIndex` (MIT, 0★, del pase 9).
+- Y el censo del ecosistema, con `total_count` de `search/repositories`:
+  `court transcript page line` = **0** · `hearing transcription judicial` = **0** ·
+  `legal transcript diarization` = **1** (sin licencia) · `deposition transcript parser` = **1** ·
+  `courtroom transcription` = **7** (de los 7, **uno** permisivo y vivo).
+
+La capa con **113.000 estrellas de infraestructura** tiene **cero estrellas de producto jurídico**.

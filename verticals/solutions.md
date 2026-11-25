@@ -501,3 +501,55 @@ norma sino rastrear la que te obliga) con licencia permisiva y madurez. Lo medid
 fuente en obligaciones atómicas y las versiona en registro *append-only* — **es la primitiva
 correcta y no es una plataforma**. Por encima de ella, lo maduro es propietario o AGPL. ⇒ Categoría
 **abierta**, y es la que conecta este plano con el comprador corporativo del `P29` (pase 8).
+
+## 🆕 PASE 11 (2026-11-25) — la vertical del **acta**: aquí la plataforma a customizar es **pública**, no comercial
+
+Los diez pases anteriores buscaron la vertical como *producto que se licencia* (Odoo para el ERP,
+Docassemble para el documento, Kourti para el practice management). En el plano acústico ese encuadre
+falla, y el dato es que **las plataformas que ya están en producción las opera una judicatura**:
+
+### Sistemas de transcripción judicial **ya desplegados** (el «Odoo» de este plano es un tribunal)
+
+| Sistema | Jurisdicción | Región | Estado medido | Naturaleza |
+|---|---|---|---|---|
+| **TERES** | India (Tribunal Supremo) | **APAC** | *Speech-to-text* **en vivo** en Salas Constitucionales; texto buscable casi en tiempo real **desde 2023**; pilotos de sala híbrida en juzgados de distrito para **declaraciones de testigos** | Operado por el tribunal, con verificación humana obligatoria por su propio *white paper* |
+| **Adalat AI** | India (Kerala) | **APAC** | Transcripción a escala estatal **con política formal** de uso por el personal | Estatal |
+| **iCTS** | Singapur | **APAC** | *Intelligent Court Transcription System* desplegado | Estatal |
+| *Smart Courts* | China | **APAC** | OCR + ASR + NLP para transcripción automática, incl. tribunales de internet | Estatal |
+| **JUSTA** | Chile (Poder Judicial) | **LATAM** | Prototipo del laboratorio de innovación: **2–3 min por audio**, actas en segundos. ⚠️ **Sobre modelos de OpenAI** ⇒ el audio sale de la institución | Estatal, nube externa |
+| **Themis** | Chile (Poder Judicial) | **LATAM** | Transcripción y **análisis** de audio de audiencias | Estatal |
+| *(sin nombre público)* | Argentina (Consejo de la Magistratura) | **LATAM** | Transcripción automática de audiencias **desde el 28 de octubre**, en **servidores propios**, declarando que *«ninguna información va a plataformas externas»* | Estatal, **on-premise** |
+
+> 🟢 **El hallazgo comercial de la vertical.** Chile y Argentina resolvieron el mismo problema en la
+> misma región con **arquitecturas opuestas sobre el dato más sensible que produce un tribunal**.
+> Eso convierte la pregunta de compra en una sola: *¿sale el audio de la institución?* Y es
+> precisamente la pregunta que un stack **MIT/Apache autoalojado** contesta sin negociación
+> contractual. **No hay que vender AI: hay que vender el lugar donde se ejecuta.**
+
+### Lo comercial del plano, y por qué no es la vertical a customizar
+
+Los sistemas de grabación y transcripción de sala que dominan el mercado —**JAVS**, **For The
+Record**, **Verbit**— son **cerrados**: no hay capa que extender ni API abierta que envolver. La
+mayoría de las cifras públicas de este plano **provienen de sus blogs**, y se marcan como fuente de
+parte en `intel/market.md`.
+
+### El stack permisivo equivalente, ensamblable hoy (todo verificado en `repos/foundations.md`)
+
+| Función de la plataforma cerrada | Sustituto permisivo | Licencia |
+|---|---|---|
+| Captura y servidor de sala | [hwdsl2/scribecrate](https://github.com/hwdsl2/scribecrate) · [ahmetoner/whisper-asr-webservice](https://github.com/ahmetoner/whisper-asr-webservice) | MIT |
+| Transcripción en vivo | [QuentinFuxa/WhisperLiveKit](https://github.com/QuentinFuxa/WhisperLiveKit) · [collabora/WhisperLive](https://github.com/collabora/WhisperLive) | Apache-2.0 · MIT |
+| Motor offline embarcado | [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) · [ggml-org/whisper.cpp](https://github.com/ggml-org/whisper.cpp) | Apache-2.0 · MIT |
+| Atribución de locutor | [pyannote/pyannote-audio](https://github.com/pyannote/pyannote-audio) · [BUTSpeechFIT/DiariZen](https://github.com/BUTSpeechFIT/DiariZen) | MIT |
+| Anclaje al segundo | [m-bain/whisperX](https://github.com/m-bain/whisperX) · [MahmoudAshraf97/ctc-forced-aligner](https://github.com/MahmoudAshraf97/ctc-forced-aligner) | BSD-2-Clause |
+| **Informe de exactitud** (nadie lo vende) | [revdotcom/fstalign](https://github.com/revdotcom/fstalign) · [jitsi/jiwer](https://github.com/jitsi/jiwer) · [pyannote/pyannote-metrics](https://github.com/pyannote/pyannote-metrics) | Apache-2.0 · MIT |
+| Anonimización del acta | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT |
+| Migración sin tocar clientes | [speaches-ai/speaches](https://github.com/speaches-ai/speaches) | MIT |
+
+### 🔴 El hueco de la vertical, delimitado
+
+**Lo que ninguna pieza de la tabla hace: emitir el acta certificable.** Falta el paginador
+determinista (25 líneas por página, numeración consecutiva, índice `página:línea`), la plantilla
+procesal de cada foro y el gate de certificación humana. No hay implementación permisiva de `PTX`
+ni de `LEF` (ver `T31` en `repos/trending.md`). **Es código a escribir y es pequeño** — y es lo
+único que separa «texto con timestamps» de «documento que un juzgado acepta».

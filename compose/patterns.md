@@ -1776,3 +1776,143 @@ normal fuera de la UE y EE. UU.— esto es lo que hay, con la advertencia de lic
 > (legislación federal brasileña por artículo) aparece en los buscadores descrito como **MIT**. Su
 > `LICENSE` son **6.732 B** titulados **«Akoma Noncommercial and Commercial Licence 1.0»** —
 > licencia bespoke con frontera comercial. **No entra en ningún entregable.** Es el caso `G-L20`.
+
+## 🆕 P41 — **Acta oral soberana**: el audio de la audiencia no sale de la institución, y sale `página:línea`
+
+**Problema que resuelve.** El Estado autorizó grabar y no financió transcribir (North America), la
+judicatura ya transcribe pero manda el audio a una nube ajena (Chile) o no (Argentina), y el
+artefacto que el litigio consume —**texto paginado y citable**— no lo emite ninguna pieza del stack.
+
+**Arquitectura, reutilizando la regla del pase 8 «el modelo lee, las reglas deciden»:**
+
+1. **Captura e ingesta.** [hwdsl2/scribecrate](https://github.com/hwdsl2/scribecrate) (MIT, 2.304 B)
+   como servidor: **offline por diseño**, modelos en caché, Docker CPU o CUDA. En sala sin red,
+   [ggml-org/whisper.cpp](https://github.com/ggml-org/whisper.cpp) (MIT) o
+   [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) (Apache-2.0) embarcados.
+2. **ASR.** [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper) (MIT) para lote;
+   [QuentinFuxa/WhisperLiveKit](https://github.com/QuentinFuxa/WhisperLiveKit) (Apache-2.0) si se
+   quiere texto en vivo en estrados. ⛔ **No `moonshine` si el idioma es español** (ver `P44`).
+3. **Atribución de locutor.** [pyannote/pyannote-audio](https://github.com/pyannote/pyannote-audio)
+   (MIT, pesos CC-BY-4.0) o [BUTSpeechFIT/DiariZen](https://github.com/BUTSpeechFIT/DiariZen) (MIT)
+   si los pesos con registro previo son un problema de aprovisionamiento. En una audiencia multiparte
+   **quién habla es el dato jurídico**, no un adorno.
+4. **Anclaje temporal.** [m-bain/whisperX](https://github.com/m-bain/whisperX) (BSD-2) o
+   [MahmoudAshraf97/ctc-forced-aligner](https://github.com/MahmoudAshraf97/ctc-forced-aligner)
+   (BSD-2) para `timestamp` por palabra ⇒ **toda línea del acta apunta al segundo exacto del audio**.
+   ⛔ **No `whisper-timestamped`: es AGPL-3.0.**
+5. **🟢 Paginador determinista — ESTO ES EL CÓDIGO A ESCRIBIR, no hay repo.** 25 líneas por página,
+   numeración consecutiva, índice `página:línea`, plantilla del foro. **Determinista y reproducible
+   al carácter; sin modelo dentro.** Es la pieza que convierte el stack en entregable (`T-P11-6`).
+6. **Anonimización, si el foro la exige.**
+   [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) (MIT) sobre el
+   **texto**, nunca sobre la voz: la síntesis de voz **mete el sistema en el Art. 50 del Reglamento
+   UE de AI** (ver `P43`).
+7. **Gate de certificación humana.** El informe de `P42` adjunto, y **una persona certifica**. No es
+   opcional ni es prudencia: es la condición expresa del *white paper* del Tribunal Supremo de India
+   y la práctica declarada en India, y es lo que hace aceptable el récord.
+
+**Entregables:** el acta paginada, el `JSON` con `timestamp` por palabra y locutor, el informe de
+exactitud, y el audio original con su hash. **Coste de licencia del stack: cero.**
+
+---
+
+## 🆕 P42 — **Informe de exactitud del acta**: el entregable que nadie vende y que decide la compra
+
+**Por qué existe.** `T-P11-2`: ningún proveedor publica su WER sobre audio judicial. Un tribunal no
+compra «buena transcripción», compra **récord defendible**. Si la exactitud no está medida, la
+objeción en sala es libre.
+
+**Receta, todo permisivo y verificado:**
+
+1. **Referencia humana** sobre una muestra estratificada: por **idioma, acento, rol procesal**
+   (juez, letrado, testigo, intérprete) y **condición acústica** (micrófono de estrados vs. sala vs.
+   videoconferencia). La estratificación es el método; sin ella el número agregado engaña.
+2. **WER palabra a palabra** con [revdotcom/fstalign](https://github.com/revdotcom/fstalign)
+   (Apache-2.0) — alineación por transductores finitos, de una empresa de transcripción.
+   Segunda opinión con [jitsi/jiwer](https://github.com/jitsi/jiwer) (Apache-2.0).
+3. **DER por locutor** con [pyannote/pyannote-metrics](https://github.com/pyannote/pyannote-metrics)
+   (MIT) y contraste independiente con [nryant/dscore](https://github.com/nryant/dscore) (BSD-2).
+   **Separar WER de DER es obligatorio:** un acta con 2% de WER y locutores intercambiados es
+   **inservible** y el WER no lo ve.
+4. **Gate con umbral y cola humana selectiva.** Por debajo del umbral, el segmento va a revisión
+   humana; por encima, pasa. **La persona revisa segmentos, no el acta entera** — es lo que hace
+   viable el volumen.
+5. **Línea base del cliente, nunca cifra de folleto.** Mismo criterio que el pase 8 impuso a los
+   ahorros de facturación: se mide contra **el tiempo y el coste actuales del propio tribunal o
+   despacho**.
+
+> **Error que esta receta previene, documentado en esta KB.** `billing-lint` (pase 8) midió que
+> **la revisión por LLM en lote es inconsistente**: «el mismo defecto se marca en la entrada 3 y pasa
+> callado en la 47». En transcripción el efecto es el mismo y peor: **el error que pasa en el minuto
+> 47 entra en el récord oficial.** Reglas y métricas deterministas primero; el modelo sólo donde cabe
+> un juicio.
+
+---
+
+## 🆕 P43 — **Expediente de clasificación de riesgo** (EMEA): el mismo software, dos clases según quién lo despliega
+
+⚠️ **Fuente:** `eur-lex.europa.eu` no resuelve desde esta sesión. Basado en el *AI Act Service Desk*
+de la Comisión y fuentes secundarias de práctica. **Verificar literalidad en el Diario Oficial antes
+de entregar.**
+
+**El árbol de decisión, y es el entregable:**
+
+1. **¿Quién despliega?**
+   - **Un tribunal** ⇒ zona **no resuelta**. El Anexo III.8(a) cubre asistir a la autoridad judicial
+     a *investigar e interpretar hechos y Derecho*; la transcripción **no es eso**. El Considerando 61
+     excluye **actividades administrativas accesorias**, y la lista del *Service Desk*
+     (anonimización/pseudonimización de resoluciones y documentos, comunicación interna, verificación
+     de tasas) **no menciona la transcripción**. ⇒ **Se documenta la posición, no se asume.**
+   - **Un despacho o una parte** ⇒ **fuera del ámbito de 8(a)**: no actúa por cuenta de una autoridad
+     judicial. **Vía de entrada comercial sin carga de conformidad de alto riesgo**, y es la misma
+     inversión de comprador que `P29` encontró en la factura.
+2. **¿Genera contenido sintético?** La transcripción **consume audio real y emite texto: NO**.
+   El marcado legible por máquina del **Art. 50(2) vence el 2026-12-02** y **este diseño queda
+   fuera**. ⛔ **Entra en ámbito si se añade** lectura por voz sintética (TTS) o **anonimización de la
+   voz del testigo por síntesis**. ⇒ **Decisión de arquitectura con consecuencia regulatoria: el
+   anonimizado se hace sobre el texto (`P41` paso 6), no sobre la voz.**
+3. **¿Es penal?** Entonces entra la **Directiva 2010/64/UE** (derecho a interpretación y traducción):
+   interpretación «sin demora» y **deber de confidencialidad**. ⚠️ Está escrita para intérpretes
+   **humanos**, así que aplicarla a un sistema es **inferencia, no regla**. Operativamente fija el
+   estándar contra el que se comparará el sistema, y es **la razón técnica por la que el audio penal
+   europeo se procesa en local**.
+4. **Apoyo doctrinal concurrente, de otra jurisdicción:** la **Academia Judicial de Colombia**
+   (abril 2026) clasifica la transcripción como **apoyo administrativo, el más bajo de tres niveles de
+   intensidad decisoria**. **No vinculante en la UE**, pero es doctrina concurrente e independiente
+   para el mismo encuadre, y en un expediente de clasificación eso **se cita**.
+
+**Entregable:** el dossier de clasificación, el registro de decisiones de arquitectura que lo
+sostienen (local, sin TTS, anonimización sobre texto) y el informe de `P42` como evidencia de
+diligencia. **Alto riesgo diferido a 2027/2028** ⇒ **ventana para dejar el expediente hecho antes de
+que obligue.**
+
+---
+
+## 🆕 P44 — **Auditoría de licencia por idioma** (la receta que `T-P11-1` obliga a escribir, y aplica a las doce industrias)
+
+**El fallo que previene, medido hoy.** `moonshine-ai/moonshine`: 11.598★, el buscador y los
+comparadores lo presentan como MIT, su `LICENSE` son **14.180 B** y empieza por un **reparto**. El
+código es MIT, los modelos *streaming* y todos los de inglés son MIT, y **español (Base), árabe,
+japonés, coreano, mandarín, ucraniano y vietnamita** quedan bajo licencia **no comercial por encima
+de USD 1 M de facturación anual**. ⇒ **Permisivo en Norteamérica, no utilizable en LATAM, España,
+Japón o Corea.**
+
+**Procedimiento, cinco sondas:**
+
+1. **La unidad de auditoría es el artefacto que se carga en producción**, no el repositorio: el
+   fichero de pesos, para el idioma concreto del despliegue.
+2. **Leer el `LICENSE` entero, no la cabecera.** Un fichero muy por encima de la banda
+   (MIT 1.052–1.183 B; Apache-2.0 ~10.1–11.5 kB; AGPL 34.523 B) **es un reparto o un compuesto**.
+   14.180 B no es ninguna licencia conocida ⇒ leer.
+3. **Buscar el eje de la excepción**, que puede no ser técnico: por **idioma**, por **facturación**,
+   por **directorio** (el *carve-out* de `Extras` en `bullet3`, KB de gaming), por **marca**
+   (`InvoicePlane`, pase 8) o por **tercero obligatorio** (la EULA de `cuRobo` en `IsaacLab`).
+4. **Separar concesión de código y concesión de pesos.** `pyannote-audio`: código **MIT**, pesos
+   `community-1` **CC-BY-4.0**. Son **dos lecturas**, y en la capa de modelos es la norma.
+5. **Registrar el sustituto antes de necesitarlo.** Para español sin restricción, verificado:
+   `whisper` (MIT), `faster-whisper` (MIT), `sherpa-onnx` (Apache-2.0), `vosk-api` (Apache-2.0).
+
+> **Copiar a las once KBs restantes.** Donde haya pesos por idioma o por región —voz, traducción,
+> OCR, TTS— **la licencia puede variar con el mercado del engagement**. Una auditoría hecha en
+> Norteamérica **no vale** para la propuesta de LATAM, y es el tipo de defecto que no aparece hasta
+> la due diligence del cliente.

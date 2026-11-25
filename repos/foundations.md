@@ -706,3 +706,61 @@ es **AGPL-3.0**, así que un modelo de país construido sobre él hereda copylef
 o `openfisca-br` es una **contribución a un bien común y una carta de presentación regional** —no un
 activo propietario—. El entregable comercial se construye encima con **Catala (Apache-2.0)** o con
 una reimplementación del motor. Receta en `compose/patterns.md` (`P38`).
+
+## 🆕 PASE 11 (2026-11-25) — fundaciones del **plano acústico**: el audio de la audiencia como fuente primaria
+
+> Esta capa no existía en la KB (`whisper` 0, `diariz` 0, `speech` 0, `audiencia` 0 antes de este
+> pase). Es la capa **anterior** a todo lo que los pases 9 y 10 construyeron: sin acta no hay
+> transcript, y sin transcript no hay `DepoIndex` ni análisis de contradicciones.
+>
+> Verificación: `search/repositories` (SPDX, ★, `archived`, `pushed_at`, forks) + lectura byte a byte
+> del `LICENSE` en `raw` sobre `/HEAD/`. Todo medido el **2026-11-25**.
+
+### Motores ASR — el espinazo permisivo (y aquí la madurez **no** cuesta licencia)
+
+| Repo | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------------------|-------------|-------|---------------|
+| [openai/whisper](https://github.com/openai/whisper) | MIT | El modelo y el código de referencia del sector, multilingüe. **MIT sin reservas, también en español.** La línea base contra la que se compara todo lo demás | **113.472** | 2026-08-31 |
+| [ggml-org/whisper.cpp](https://github.com/ggml-org/whisper.cpp) | MIT | Inferencia en C/C++ sin Python ni GPU: el camino a un **equipo de sala sin red**. 6.352 forks | **55.504** | 2026-11-25 |
+| [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper) | MIT | Reimplementación sobre CTranslate2, varias veces más rápida con menos memoria. **El motor que casi todos los servidores de la tabla de agentes usan por debajo** | **27.003** | 2026-11-23 |
+| [NVIDIA-NeMo/Speech](https://github.com/NVIDIA-NeMo/Speech) | **Apache-2.0 (11.357 B)** | Suite de voz de NVIDIA: ASR, diarización (incl. *Sortformer* en streaming) y alineación. ⚠️ **RENOMBRADO: `NVIDIA/NeMo` se partió por dominios y la voz vive aquí.** Las URL antiguas siguen sirviendo `git` pero **dan 422 en la API de búsqueda** | **18.787** | 2026-11-25 |
+| [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | **Apache-2.0 (11.358 B)** | ASR/TTS/diarización **sin red, en 10+ lenguajes de programación** y sobre Android, iOS, RISC-V y servidor. El candidato más serio para un *appliance* embarcado en sala | **16.223** | 2026-11-24 |
+| [alphacep/vosk-api](https://github.com/alphacep/vosk-api) | Apache-2.0 | Reconocimiento offline con modelos compactos, **español incluido**, y vocabulario reconfigurable en caliente (útil para nombres de partes y peritos). ⚠️ `LICENSE` **no** está en la raíz (`raw` da 404); el SPDX lo da el clasificador | **15.285** | 2026-10-15 |
+| [speechbrain/speechbrain](https://github.com/speechbrain/speechbrain) | Apache-2.0 | Toolkit completo de habla en PyTorch: ASR, verificación e **identificación de locutor**, realce de audio | **11.951** | 2026-10-14 |
+
+### Diarización y alineación — *quién habló y en qué segundo*, que en lo jurídico **es el dato**
+
+| Repo | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------------------|-------------|-------|---------------|
+| [pyannote/pyannote-audio](https://github.com/pyannote/pyannote-audio) | MIT | El estándar de facto en diarización de locutor. ⚠️ **El código es MIT; los pesos `community-1` son CC-BY-4.0** (sólo atribución) — en este plano **la concesión del código y la del modelo son dos lecturas distintas** | **10.841** | 2026-11-24 |
+| [m-bain/whisperX](https://github.com/m-bain/whisperX) | **BSD-2-Clause** | Whisper + *timestamps a nivel de palabra* + diarización. El `timestamp` por palabra es lo que permite **anclar una cita al segundo exacto del audio** | **25.661** | 2026-11-21 |
+| [MahmoudAshraf97/ctc-forced-aligner](https://github.com/MahmoudAshraf97/ctc-forced-aligner) | BSD-2-Clause | Alineación forzada texto↔audio multilingüe. **Sustituto permisivo de `whisper-timestamped`, que es AGPL-3.0** | 578 | 2026-11-24 |
+| [BUTSpeechFIT/DiariZen](https://github.com/BUTSpeechFIT/DiariZen) | MIT | Diarización del grupo de habla de BUT Brno (**EMEA**). Vía alternativa cuando los pesos con registro previo son un problema de aprovisionamiento | 573 | 2026-08-04 |
+
+### 🟢 La capa que nadie usa como producto: **medir la exactitud**
+
+Esta es la pieza que convierte un transcript automático en algo que un tribunal puede aceptar, y es
+**la única del plano donde no hay competencia comercial** (ver `T-P11-2` en `agents/trending.md`).
+
+| Repo | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------------------|-------------|-------|---------------|
+| [revdotcom/fstalign](https://github.com/revdotcom/fstalign) | Apache-2.0 | Alineación por transductores finitos para **WER y diffs palabra a palabra** contra una referencia. De Rev.com, es decir de una empresa de transcripción: el instrumento con el que el sector se mide a sí mismo | 170 | 2026-11-16 |
+| [jitsi/jiwer](https://github.com/jitsi/jiwer) | Apache-2.0 | Cálculo de WER/CER/MER con normalización de texto. La dependencia mínima para un gate automático de calidad | 947 | 2026-09-03 |
+| [pyannote/pyannote-metrics](https://github.com/pyannote/pyannote-metrics) | MIT | Métricas reproducibles de diarización: **DER**, pureza y cobertura **por locutor** | 260 | 2026-11-14 |
+| [nryant/dscore](https://github.com/nryant/dscore) | BSD-2-Clause | Puntuación de diarización usada en los *challenges* DIHARD. Segunda opinión independiente de `pyannote-metrics` | 273 | 2026-04-08 |
+
+### Anonimización del acta (reutiliza lo que la KB ya tenía)
+
+| Repo | Licencia (leída) | Descripción | Stars | Último commit |
+|------|------------------|-------------|-------|---------------|
+| [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT (1.084 B) | Detección y redacción de PII. **Remedido hoy: 12.047★** (el pase 9 publicó 11.989). Aplicado al transcript es lo que el Reglamento UE de AI nombra *expresamente* como actividad **no** de alto riesgo (anonimización de documentos judiciales) | **12.047** | 2026-11-24 |
+
+### ⚠️ Descartados, con el motivo medido
+
+| Repo | ★ | Motivo del descarte |
+|---|---|---|
+| [jianfch/stable-ts](https://github.com/jianfch/stable-ts) | 2.290 | **`archived: true`.** Entraría por estrellas; lo frena el campo. `T74` |
+| [linto-ai/whisper-timestamped](https://github.com/linto-ai/whisper-timestamped) | 2.859 | **AGPL-3.0.** Muy citado, no apto para entregable comercial. Sustituto: `ctc-forced-aligner` |
+| [moonshine-ai/moonshine](https://github.com/moonshine-ai/moonshine) | 11.598 | **El modelo en español es no-comercial** por encima de USD 1 M de facturación. Ver `agents/top.md` |
+| [Stage-Whisper/Stage-Whisper](https://github.com/Stage-Whisper/Stage-Whisper) | 261 | Sin commits desde **2023-04-27**. Base para forkear, no dependencia |
+| `alphacep/vosk-models` | — | **No existe.** Conjetura propia que dio 404 por `ls-remote` y por `raw`; el real es `vosk-api` y los modelos se distribuyen fuera de GitHub |

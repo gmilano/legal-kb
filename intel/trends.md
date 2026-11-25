@@ -868,3 +868,83 @@ LexML, Boletín Oficial — 7 de 8 activos **MIT**). ⇒ **El diferenciador se d
 a la fuente" a "demostrar que la respuesta se derivó de ella"**, que es trazabilidad y es
 arquitectura — coherente con la tendencia 6 y con `P10`. En **APAC** sigue incompleto: Australia
 (`lex-au`, MIT) y Nueva Zelanda (`openfisca-aotearoa`) sí; el resto, no medido.
+
+## 🆕 Tendencias del pase 11 (2026-11-25) — el plano acústico, y una de ellas **acota una regla propia de esta KB**
+
+### `T-P11-1` — La exclusión de licencia de los modelos de voz es **geográfica**, no por componente
+
+Primera vez en once pases que esta KB mide una concesión **partida por idioma**.
+`moonshine-ai/moonshine` (11.598★, `NOASSERTION`, `LICENSE` de **14.180 B**) libera el código y los
+modelos *streaming* bajo MIT, y deja bajo licencia **no comercial por encima de USD 1.000.000 de
+facturación anual** los modelos heredados no-streaming de **español (Base), árabe, japonés, coreano,
+mandarín, ucraniano y vietnamita**. El inglés queda MIT.
+
+**Consecuencia:** *el mismo repositorio es permisivo en Norteamérica y no utilizable en LATAM,
+España, Japón o Corea.* Una auditoría que mire el repo y no **el idioma del despliegue** no lo
+detecta. **Generalizable a las doce industrias:** donde hay pesos de modelo por idioma o por región
+(voz, traducción, OCR), la unidad de auditoría de licencia **no es el repo: es el artefacto que se
+carga en producción**. Receta `P44`.
+
+### `T-P11-2` — Nadie vende **exactitud certificada**, y el instrumental está completo y permisivo
+
+El tribunal no necesita una transcripción *buena*: necesita una **medida**. Permisivo, vivo y
+verificado hoy: `revdotcom/fstalign` (Apache-2.0, 170★), `jitsi/jiwer` (Apache-2.0, 947★),
+`pyannote/pyannote-metrics` (MIT, 260★), `nryant/dscore` (BSD-2, 273★) — WER palabra a palabra y
+**DER por locutor** contra referencia humana. **Ningún proveedor del sector publica su WER sobre
+audio judicial.** Eco literal del hallazgo de la KB de gaming («nadie vende determinismo como
+servicio»): **segunda industria en que la capa de medición es un hueco de mercado y no un hueco
+técnico.**
+
+### `T-P11-3` — APAC **ya desplegó** lo que Occidente está regulando (inversión del patrón de diez pases)
+
+`TERES` en el Tribunal Supremo de India (en vivo, desde 2023, y declaraciones de testigos en
+distrito), `Adalat AI` en Kerala, `iCTS` en Singapur, *Smart Courts* en China. Y la regla de
+gobernanza más clara del plano la escribe un tribunal supremo, no un regulador: transcripción
+admitida **si «los resultados se revisen y verifiquen manualmente»**. ⚠️ Con dos salvedades
+publicadas: el «−30% de duración de juicio» chino lo matiza su propia fuente, y la página de
+transcripciones del Supremo indio devolvía **«No records found»** el 2026-11-03.
+
+### `T-P11-4` — La **soberanía del audio** ya separa a dos judicaturas de la misma región
+
+No es prospectiva: **Chile** corre `JUSTA` sobre modelos de OpenAI (el audio sale) y **Argentina**
+transcribe audiencias **en servidores propios desde el 28 de octubre** (el audio no sale). Mismo
+problema, misma región, mismo año, decisión opuesta sobre material privilegiado. **La pregunta de
+compra de todo el plano se reduce a dónde se ejecuta el modelo**, y ahí el stack MIT/Apache gana por
+construcción.
+
+### `T-P11-5` — 🔴 **ACOTA `T-P5-1`** («el caudal de activos nuevos se ha secado»), por segunda vez y por la misma causa
+
+El pase 8 ya acotó esta tendencia midiendo el plano de la factura. **Hoy vuelve a fallar en el plano
+acústico, y el mecanismo es idéntico:** `whisper.cpp`, `NVIDIA-NeMo/Speech` y `speaches` tienen
+commits **de hoy**; `faster-whisper`, `sherpa-onnx`, `pyannote-audio`, `ctc-forced-aligner` y
+`whisper-asr-webservice`, **de los últimos cuatro días**. El caudal no está seco: **la KB lo medía
+con el vocabulario del producto jurídico**, y la infraestructura que ese producto necesita se publica
+bajo palabras que no eran jurídicas (`whisper`, `diarization`, `WER`, `forced alignment`).
+
+> **`T-P5-1` queda ACOTADA POR SEGUNDA VEZ, y la regla se eleva de categoría.** Pase 8:
+> *«una KB que lleva tres pases midiendo "no hay nada nuevo" está midiendo su propio vocabulario».*
+> Pase 11: **dos confirmaciones independientes en planos distintos la convierten en método, no en
+> observación.** Antes de declarar sequía hay que **nombrar el plano** y censar su vocabulario
+> (`P35`). Cinco planos, cinco aciertos: factura, prueba, norma, acústico — y en los cuatro el censo
+> previo dio **cero** en la mayoría de las sondas.
+
+### `T-P11-6` — El artefacto certificable **no tiene especificación abierta**, y ahí está el producto
+
+Ampliación de `T29`. La cita de deposición es **`página:línea`** con página a **25 líneas** y
+numeración consecutiva exigida por regla procesal; los formatos de intercambio (`PTX` de
+*E-Transcript*, `LEF` de LiveNote, el `ASCII` *Page Image* de los sistemas CAT) son **propietarios**;
+y las implementaciones permisivas medidas son **cero**. ⇒ El stack ASR entrega *texto con
+timestamps*; el litigio consume *texto paginado y citable*. **Ese salto es código a escribir, es
+pequeño y es determinista** — el hueco de producto mejor delimitado de los once pases.
+
+### Corrección de método del pase (hipótesis propia descartada **antes** de publicarse)
+
+Tres repos dieron `HTTP 422` en `search/repositories` con `ls-remote` y `raw` correctos. Se formuló
+que el índice de búsqueda de GitHub tenía un **punto ciego** que podía reportar como inexistente un
+repo público y vivo. **Se midió y es falso:** los tres eran renombrados o mudados
+(`microsoft/presidio` → `data-privacy-stack/presidio`, ya registrado por el pase 9 de esta propia KB;
+`NVIDIA/NeMo` → `NVIDIA-NeMo/Speech`, monorepo partido por dominios) más **una inexistencia real**
+(`alphacep/vosk-models`, conjetura propia). **`T95` se confirma.** Refinamiento genuino:
+`<nombre> in:name org:<dueño-antiguo>` **falla por diseño** cuando el repo ha salido de la
+organización, que es justo el caso en que se necesita. **La KB consultada es un canal de resolución
+de renombrados** — `presidio` estaba ya resuelto en `repos/foundations.md` desde el pase 9.

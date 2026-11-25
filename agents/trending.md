@@ -9,6 +9,91 @@ updated: 2026-11-25
 > **Fichero APPEND-ONLY.** Cada pase añade una sección datada arriba y conserva el histórico
 > debajo. No se reescribe: la serie temporal *es* el contenido.
 
+## 🆕 2026-11-25 (pase 11) — el plano **acústico**, y la primera exclusión de licencia que esta KB mide **por idioma**
+
+Quinto plano consecutivo que aparece completo al cambiar de vocabulario (factura → prueba → norma →
+acústico). Censo previo: `whisper` 0, `diariz` 0, `speech` 0, `audiencia` 0, `oralidad` 0,
+`estenotip` 0. **28 activos nuevos, 0 solapaban con la KB.**
+
+### Lo nuevo de esta semana (medido 2026-11-25)
+
+| Agente | Licencia (leída) | Región | Qué aporta | ★ |
+|---|---|---|---|---|
+| [QuentinFuxa/WhisperLiveKit](https://github.com/QuentinFuxa/WhisperLiveKit) | Apache-2.0 | Global | Transcripción en vivo con diarización, local | 11.294 |
+| [moonshine-ai/moonshine](https://github.com/moonshine-ai/moonshine) | ⛔ NOASSERTION (14.180 B) | Global | ASR rápido — **pero el modelo español es no-comercial**, ver abajo | 11.598 |
+| [MahmoudAshraf97/whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization) | BSD-2-Clause | Global | ASR + atribución de locutor ya ensamblado | 5.676 |
+| [speaches-ai/speaches](https://github.com/speaches-ai/speaches) | MIT | Global | API compatible OpenAI: la pieza de migración a on-premise | 3.782 |
+| [BUTSpeechFIT/DiariZen](https://github.com/BUTSpeechFIT/DiariZen) | MIT | **EMEA** (Brno) | Diarización europea sin pesos con registro | 573 |
+| [revdotcom/fstalign](https://github.com/revdotcom/fstalign) | Apache-2.0 | Global | **Mide** la exactitud del transcript contra una referencia humana | 170 |
+| [hwdsl2/scribecrate](https://github.com/hwdsl2/scribecrate) | MIT íntegro (2.304 B) | Global | Servidor offline por diseño. Renombrado desde `docker-whisper` | 125 |
+| [gitchrisqueen/hearing-copilot](https://github.com/gitchrisqueen/hearing-copilot) | MIT (1.074 B) | Global | **Único permisivo jurídico-específico del plano.** Litigante autorrepresentado | 0 |
+
+### 🔴 Tendencia nueva `T-P11-1` — **la exclusión de licencia de los modelos de voz es geográfica**
+
+Primera vez que esta KB mide una concesión que **se parte por idioma**. `moonshine` libera código y
+modelos streaming bajo MIT, pero deja **español (Base), árabe, japonés, coreano, mandarín, ucraniano
+y vietnamita** bajo una licencia que tope el uso comercial en **USD 1.000.000 de facturación anual**.
+El inglés queda MIT. Consecuencia operativa: **el mismo repositorio es permisivo en Norteamérica y
+no utilizable en LATAM, España, Japón o Corea.** Una auditoría de licencia que mire el repo y no el
+*idioma del despliegue* no detecta esto. Receta en `compose/patterns.md` `P44`.
+
+### 🔴 Tendencia nueva `T-P11-2` — **nadie vende exactitud certificada**, y el instrumental existe
+
+Eco exacto del hallazgo de la KB de gaming («nadie vende determinismo como servicio»). El tribunal
+no necesita una transcripción *buena*: necesita una **medida**. Lo que existe, permisivo y vivo:
+`fstalign` (Apache-2.0, 170★, Rev.com), `jitsi/jiwer` (Apache-2.0, 947★),
+`pyannote/pyannote-metrics` (MIT, 260★) y `nryant/dscore` (BSD-2, 273★) — WER palabra a palabra y
+DER por locutor contra una referencia. **Ningún proveedor del sector publica su WER sobre audio
+judicial.** El entregable que falta no es un ASR: es el **informe de exactitud** que acompaña al
+acta.
+
+### 🔴 Tendencia nueva `T-P11-3` — APAC **ya desplegó** lo que Occidente está regulando
+
+Invierte el patrón de los diez pases anteriores, donde APAC era la región de la guía blanda:
+
+- **India**: `TERES` da *speech-to-text en vivo* en audiencias de Sala Constitucional del Tribunal
+  Supremo, con texto buscable casi en tiempo real **desde 2023**; pilotos de sala híbrida en
+  juzgados de distrito graban **declaraciones de testigos**. El *white paper* del Tribunal Supremo
+  admite la AI «para transcripción de actuaciones» siempre que *«los resultados se revisen y
+  verifiquen manualmente»*. Kerala opera `Adalat AI` a escala estatal con política formal de uso.
+- **Singapur**: `iCTS` (*Intelligent Court Transcription System*) desplegado.
+- **China**: los *Smart Courts* combinan OCR + ASR + NLP para transcripción automática.
+
+⚠️ Dos salvedades que se publican: la cifra de «−30% en duración media de juicio» (Stimson Center)
+la **matiza la propia fuente** y no se ha verificado contra dato primario; y una comprobación del
+**2026-11-03** de la página de *Argument Transcripts* del Tribunal Supremo de India devolvió **«No
+records found»** (fuente secundaria), así que *desplegado* no equivale a *publicado de forma estable*.
+
+### 🔴 Tendencia nueva `T-P11-4` — la soberanía del audio ya separa a dos judicaturas LATAM
+
+No es una tendencia prospectiva: **las dos arquitecturas están en producción en la misma región**.
+Chile ejecuta `JUSTA`, prototipo del laboratorio de innovación del Poder Judicial, **sobre modelos
+de OpenAI** (2–3 minutos por audio, actas en segundos), más `Themis` para transcribir y analizar
+audio de audiencias. Argentina anunció transcripción automática de audiencias en el Consejo de la
+Magistratura **desde el 28 de octubre, corriendo en servidores propios «para que ninguna información
+vaya a plataformas externas»**. Mismo problema, misma región, decisión opuesta sobre dónde vive el
+audio privilegiado. **Ahí es donde el stack MIT/Apache gana por construcción**, y es el argumento de
+venta más limpio del plano.
+
+### Correcciones de método de este pase
+
+- **`T95` CONFIRMADA, y mi hipótesis contraria descartada antes de publicarla.** Tres repos
+  devolvieron `HTTP 422` en `search/repositories` siendo `ls-remote` y `raw` correctos
+  (`microsoft/presidio`, `NVIDIA/NeMo`, `alphacep/vosk-models`). Llegué a formular que el índice de
+  búsqueda tenía un punto ciego. **Falso:** los tres son renombrados/mudados —
+  `microsoft/presidio` → **`data-privacy-stack/presidio`** (12.047★, ya registrado por el pase 9 de
+  esta KB), `NVIDIA/NeMo` → **`NVIDIA-NeMo/Speech`** (18.787★, el monorepo se partió por dominios),
+  y `alphacep/vosk-models` **no existe** (conjetura propia; el real es `alphacep/vosk-api`).
+  **Refinamiento real:** `<nombre> in:name org:<dueño-antiguo>` **falla por diseño** cuando el repo
+  ha salido de la organización. El canal de resolución es el redirect o la web, nunca la búsqueda
+  acotada al dueño viejo.
+- **`T74` cobrada una vez más:** `jianfch/stable-ts` (MIT, **2.290★**) está **`archived`**
+  (`push` 2026-05-30). Habría entrado en la tabla por estrellas; lo frenó el campo `archived`.
+- **Dormido con buena ficha:** `Stage-Whisper/Stage-Whisper` (MIT, 261★) no tiene commits desde
+  **2023-04-27**. `kyutai-labs/delayed-streams-modeling` (Apache-2.0, 3.055★), desde 2026-01-26.
+- **Copyleft donde menos se espera:** `linto-ai/whisper-timestamped` (**AGPL-3.0**, 2.859★) es el
+  recurso más citado para *timestamps* precisos. Sustituto permisivo medido:
+  `MahmoudAshraf97/ctc-forced-aligner` (BSD-2-Clause, 578★, commit de ayer).
 ## 🆕 2026-11-25 (pase 10) — el plano de la **norma como dato**, y el primer plano que **refuta** a los dos anteriores
 
 Censo de entrada sobre los ocho ficheros, hecho **antes** de consultar nada: `Akoma Ntoso` **0**,

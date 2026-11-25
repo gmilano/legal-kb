@@ -597,6 +597,46 @@ gaming). **Las tres eran correctas y describían objetos distintos.** La secuenc
 - ⚠️ **`usgpo/bulk-data`** (387★, 146 forks) **no tiene fichero de licencia** en ninguna de las 6
   rutas probadas. Obra del gobierno federal es dominio público por presunción jurídica, **pero una
   presunción no es un grant escrito**: para un entregable con cliente hay que documentarlo.
+#### 🆕 Pase 11 (2026-11-25) — el **récord verbatim** se está quedando sin quien lo escriba, y el Congreso lo está estudiando
+
+Norteamérica es la única región donde este plano es una **crisis de oferta medida**, no un proyecto
+de modernización:
+
+| Dato | Valor | Fuente y salvedad |
+|---|---|---|
+| Caída de taquígrafos judiciales en EE.UU. | **−21% en la década** | *Governing*, citando análisis sectorial |
+| Déficit declarado en California | **458 FTE** | Fuente de **parte** (proveedor), publicada marcada |
+| Audiencias sin récord verbatim, abr-2023 a mar-2026 | **>3 millones** | Fuente de **parte** (proveedor). Cifra grande y sin dato primario: **usar la dirección, no el número** |
+| Informe estatal comparado | Texas A&M, **2026-10-01**, políticas de grabación digital en los **50 estados + federal** | Vía nota de prensa del Tribunal Superior de Los Ángeles |
+
+**Lo vinculante y nuevo:** el **Tribunal Supremo de California** resolvió en **agosto de 2026** que
+los tribunales **deben permitir la grabación electrónica** de las vistas de litigantes de bajos
+ingresos que cualifiquen **cuando no se consiga un taquígrafo certificado**. Es el mecanismo por el
+que el audio sin transcribir se multiplica: la grabación se autoriza, la transcripción no se
+financia.
+
+**Lo federal, y es específico de este plano:** `S.4154` — ***Research and Oversight of AI in Courts
+Act of 2026***, presentada el **2026-03-19** (compañera en la Cámara: `H.R. 7997`). Ordena
+**estudiar si un récord judicial creado o modificado por AI de voz a texto afecta a la calidad o
+exactitud del transcript**, e incluye **marcado de agua y metadatos** para récords tocados por AI.
+⚠️ **No autoriza fondos, no impone sanciones y no obliga a adoptar ni a rechazar nada.** Es la
+primera vez que esta KB registra una norma federal que habla **del acta** y no del escrito.
+
+**Lo que NO está en vigor, y conviene no venderlo como si lo estuviera:** la propuesta de
+**`FRE 707`** sobre prueba generada por AI **no ha entrado en vigor**; la fecha más temprana posible
+que citan las fuentes es **2027-12-01**, y al **2026-11-06** no existía regla nacional. El Comité
+Asesor de Reglas Civiles **declinó** legislar sobre AI en abril de 2026 y el Quinto Circuito
+**declinó** adoptar una regla de certificación.
+
+> ⚠️ **Dato que circula y esta KB NO da por bueno:** varios blogs de proveedor afirman que *«un
+> tribunal de Texas anuló una deposición transcrita por AI»*. **Sólo se localizó titular y resumen,
+> nunca la resolución.** Se publica como **no verificado**. Si fuese cierto es el precedente más
+> citable del plano, y por eso mismo hay que localizarlo en fuente primaria antes de usarlo.
+
+**Oportunidad, en una línea:** el Estado ya autorizó grabar y no pagó por transcribir. El entregable
+no es un ASR, es **el acta certificable y su informe de exactitud** (`P41`, `P42`), y el comprador es
+la administración judicial estatal, no el despacho.
+
 ### EMEA
 
 - **El EU AI Act es el driver y el calendario es concreto.** Las obligaciones de **transparencia
@@ -946,6 +986,60 @@ búsqueda, **no contra el texto del DOUE** (ver estado de canales).
   ⇒ **Oportunidad:** en la región donde la obligación de documentar es más exigente, la **fuente
   primaria citable es gratuita, abierta y sin clave**. El `61 %` de adopción *in-house* europea con
   sólo `14 %` de herramienta legal especializada (pase 8) es la demanda; esto es la oferta.
+#### 🆕 Pase 11 (2026-11-25) — la clasificación de riesgo de la transcripción judicial **está sin resolver**, y es vendible por eso
+
+⚠️ **Nota de fuente para todo este bloque:** `eur-lex.europa.eu` **no resuelve desde esta sesión**
+(fuera de los dominios de red permitidos). El texto que sigue viene del ***AI Act Service Desk* de
+la Comisión Europea** y de fuentes secundarias de práctica profesional. **No se ha leído el Diario
+Oficial.** Verificar literalidad antes de meterlo en una propuesta.
+
+**El problema de clasificación, que es el producto:**
+
+- **Anexo III, punto 8(a)** marca como **alto riesgo** la AI destinada a asistir a una autoridad
+  judicial en **investigar e interpretar hechos y Derecho y aplicar la ley a hechos concretos**, o a
+  usarse de forma análoga en resolución alternativa de conflictos.
+- El **Considerando 61** excluye las **actividades administrativas accesorias que no afectan a la
+  administración de justicia en casos individuales**. El *Service Desk* de la Comisión **enumera**
+  las accesorias: **anonimización y pseudonimización de resoluciones, documentos o datos
+  judiciales**, comunicación interna entre personal, búsqueda de dirección de entrega y
+  **verificación de tasas judiciales**.
+- 🔴 **La transcripción de la vista no está en esa lista, y tampoco es «investigar e interpretar
+  hechos y Derecho».** Queda en un **medio no resuelto**, y las obligaciones de alto riesgo están
+  **diferidas a 2027/2028** (calendario post-Omnibus, estable y corroborado cinco veces por esta KB).
+
+**El hallazgo que reencuadra la venta — el mismo software, dos clases de riesgo según quién lo
+despliega:** fuentes de práctica sostienen que la AI usada por **las partes y sus abogados queda
+fuera del punto 8(a)**, porque el despacho **no actúa por cuenta de una autoridad judicial**.
+⇒ El tribunal que transcribe su vista está en el medio no resuelto; **el despacho que transcribe su
+propia deposición está fuera de ámbito.** Misma pila, misma función, carga de conformidad distinta.
+Es el eco exacto del reencuadre `P29` del pase 8 (la factura tiene dos lados) y **la vía de entrada
+es otra vez la que no requiere vender a una institución pública**.
+
+**El Artículo 50(2) NO aplica, y la frontera hay que escribirla:** el marcado legible por máquina de
+contenido sintético vence el **2026-12-02 — dentro de 7 días**. **La transcripción consume audio real
+y emite texto: no genera contenido sintético.** Queda fuera, igual que el *plano del cuerpo* de la KB
+de gaming. ⚠️ **Pero entra en ámbito en el momento en que se añade** lectura por voz sintética (TTS)
+o **anonimización de la voz del testigo por síntesis**. Decisión de arquitectura con consecuencia
+regulatoria a 7 días: **no añadir TTS a un acta si no se quiere el marcado.**
+
+**Instrumento que entra por primera vez en esta KB:** la **Directiva 2010/64/UE** sobre el derecho a
+**interpretación y traducción en procesos penales** — reglas mínimas, interpretación «sin demora» y
+**deber de confidencialidad del intérprete**. ⚠️ Su ámbito está escrito para **intérpretes y
+traductores humanos**, de modo que aplicarla a un sistema automático **es una inferencia, no una
+regla directa**. Importa de todas formas: fija el estándar de calidad y el deber de
+confidencialidad **contra el que se comparará** cualquier transcripción automática en penal, y es la
+razón por la que el audio de un proceso penal europeo **no puede salir a una nube ajena** sin
+análisis previo.
+
+Literatura que ya plantea el límite constitucional: *«¿Puede la inteligencia artificial oír a un
+justiciable en el sentido del art. 6 CEDH?»* (revista *Laws*, MDPI), que sitúa la frontera en si el
+sistema **asiste o sustituye** la decisión judicial.
+
+**Oportunidad, en una línea:** en EMEA se vende **el expediente de clasificación**, no la
+transcripción: un dossier que sitúe el despliegue en el Considerando 61, documente por qué no es
+8(a), mantenga el Art. 50 fuera de ámbito por diseño y resuelva el deber de confidencialidad de la
+Directiva 2010/64/UE con ejecución local (`P43`).
+
 ### APAC
 
 - **Región sin modelo común — hay que tratarla país por país.** Tres modelos: leyes integrales
@@ -1280,6 +1374,45 @@ modelo de datos encaja de origen con una jurisdicción de APAC.**
   de Australia en el patrón «plantilla por jurisdicción»; `BetterRules/openfisca-aotearoa`
   (AGPL-3.0, 45★, 23 forks) es **la referencia mundial de *legislación como código*** y es de
   **Nueva Zelanda** — APAC lidera esta categoría, no NA ni EMEA. ⚠️ dormante desde 2025-03-13.
+#### 🆕 Pase 11 (2026-11-25) — **APAC ya desplegó lo que Occidente está regulando.** Primer pase en que la región no es la de la guía blanda
+
+Diez pases describieron APAC como la región del marco voluntario (Singapur `MinLaw`, Japón sin
+sanciones, *Model AI Governance Framework*). **En el plano acústico el orden se invierte: aquí está
+el despliegue real.**
+
+| Jurisdicción | Sistema | Alcance medido |
+|---|---|---|
+| **India** (Tribunal Supremo) | **TERES** | *Speech-to-text* **en vivo** en audiencias de Sala Constitucional; texto buscable casi en tiempo real **desde 2023**. Pilotos de sala híbrida en juzgados de distrito para **declaraciones de testigos** |
+| **India** (Kerala) | **Adalat AI** | Transcripción a escala estatal **con política formal** de uso del personal |
+| **Singapur** | **iCTS** | *Intelligent Court Transcription System*, desplegado |
+| **China** | *Smart Courts* | OCR + **ASR** + NLP para transcripción automática, incluidos tribunales de internet |
+
+**La regla de gobernanza más clara del plano, y viene de India:** el *white paper* del Tribunal
+Supremo admite la AI **«para transcripción de actuaciones»** con la condición expresa de que
+**«los resultados se revisen y verifiquen manualmente para comprobar su exactitud»**. Y el
+explicativo gubernamental (PIB) describe el sistema como **ASR entrenado sobre vocabulario jurídico,
+acentos y diálogo de sala**, con **validación final humana**. ⇒ **Es exactamente la arquitectura
+«el modelo propone, la persona certifica»** que esta KB viene recomendando desde el pase 8, y aquí
+ya está escrita por un tribunal supremo. **Se cita como autoridad, no como buena práctica.**
+
+⚠️ **Dos salvedades que se publican, no se esconden:**
+
+1. La cifra de **«−30% en la duración media de los juicios»** en los *Smart Courts* chinos la **matiza
+   la propia fuente** que la publica (Stimson Center) y **no se ha verificado contra dato primario**.
+2. Una comprobación del **2026-11-03** de la página de *Argument Transcripts* del Tribunal Supremo de
+   India devolvió **«No records found»** (fuente secundaria). ⇒ **«Desplegado» no es «publicado de
+   forma estable»**, y es justo el tipo de brecha operativa que un engagement cierra.
+
+**Dato de clasificación obsoleto, y se marca:** un artículo de 2023 analizó la transcripción y
+traducción del Tribunal Supremo de India contra el Reglamento de AI **entonces en propuesta** y la
+clasificó de alto riesgo. **Precede al texto final** y, por tanto, **no sirve** para la clasificación
+de hoy (ver el bloque EMEA).
+
+**Oportunidad, en una línea:** APAC no compra transcripción, **ya la tiene**. Compra lo que le falta
+al despliegue: **medición de exactitud por idioma y por acento** (`P42`), publicación estable del
+récord y el gate de verificación humana que su propio tribunal supremo exige. Mercado de servicios
+sobre sistemas existentes, no de plataforma nueva.
+
 ### LATAM
 
 - **Panorama regulatorio verificable:**
@@ -1780,6 +1913,54 @@ LATAM**, que continúa sin existir.
   caso del mismo género en la propia capa de datos: un índice de legal tech LATAM titulado **2026**
   cuyo contenido está etiquetado **«2024 market data»**. ⇒ **En esta región, la fecha del título no
   es la fecha del dato.**
+
+#### 🆕 Pase 11 (2026-11-25) — 🟢 **LATAM no es un hueco en este plano: es la región con las dos arquitecturas en producción**
+
+Ocho pases de esta KB declararon LATAM como hueco informado. **En el plano acústico hay que decir lo
+contrario, y con mediciones fechadas.** Es el primer plano de los cinco inventariados donde la
+región aparece **operando**, no adoptando.
+
+| País | Qué está en producción | Arquitectura del dato |
+|---|---|---|
+| **Chile** | **JUSTA**, prototipo del laboratorio de innovación del Poder Judicial: **2–3 minutos por audio**, actas generadas en segundos. Además **Themis**, para transcribir **y analizar** audio de audiencias | ⚠️ **Sobre modelos de OpenAI** ⇒ el audio de la audiencia **sale de la institución** |
+| **Argentina** | Consejo de la Magistratura: transcripción automática de audiencias **desde el 28 de octubre** | 🟢 **Servidores propios**, declarando que *«ninguna información va a plataformas externas»* |
+| **Colombia** | Presentación de la **Academia Judicial (abril 2026)**: clasifica la transcripción como **apoyo administrativo, el más bajo de tres niveles de intensidad decisoria**. Señala que **la mayoría de los jueces declara no haber recibido formación** en estas herramientas | Doctrinal |
+| **México** | **Hueco informado y explícito** | Se consultó política judicial mexicana 2026 sobre transcripción de audiencias y **no se encontró nada relevante**. No es que no exista: es que **esta medición no lo localizó** |
+
+> 🔴 **El hallazgo regional del pase, y es el mejor argumento comercial de los once:** Chile y
+> Argentina resolvieron **el mismo problema, en la misma región, el mismo año, con decisiones
+> opuestas sobre el dato más sensible que produce un tribunal**. La pregunta de compra se reduce a
+> una: **¿sale el audio privilegiado de la institución?** Un stack **MIT/Apache autoalojado**
+> (`whisper.cpp`, `sherpa-onnx`, `faster-whisper`, `pyannote`) la contesta **por construcción y sin
+> coste de licencia** — y es la única respuesta que no depende de una cláusula contractual con un
+> tercero.
+
+**Convergencia doctrinal que vale como argumento en dos continentes:** la Academia Judicial de
+Colombia clasifica la transcripción como **apoyo administrativo de mínima intensidad decisoria**
+(abril 2026) y el **Considerando 61** del Reglamento UE de AI excluye del alto riesgo las
+**actividades administrativas accesorias**. **Dos jurisdicciones sin relación llegan a la misma
+lectura, y ninguna de las dos es vinculante.** Para una propuesta eso es exactamente lo
+aprovechable: hay base doctrinal concurrente para situar la transcripción fuera del alto riesgo, y
+hay que documentarla, no asumirla.
+
+⚠️ **La trampa de licencia de este plano cae sobre esta región.** El modelo **español** de
+`moonshine` (11.598★, el repo que un lector apresurado toma por MIT) está bajo licencia
+**no comercial por encima de USD 1 M de facturación anual**. Ver `agents/top.md`. **Alternativas sin
+restricción, verificadas:** `whisper` (MIT), `faster-whisper` (MIT), `sherpa-onnx` (Apache-2.0) y
+`vosk-api` (Apache-2.0, con modelos compactos en español y vocabulario reconfigurable para nombres de
+partes y peritos).
+
+⚠️ **Lo que se razona pero NO se ha medido, y se marca como tal:** que la reforma a la **oralidad**
+de las últimas décadas en la región (juicios orales) sea *la causa* del volumen de audio judicial sin
+transcribir es **estructural y razonado, no medido**. No se localizó estadística regional de horas de
+audiencia grabadas ni de retraso de transcripción. **Dato pendiente para el próximo pase.**
+
+**Fuentes de parte en este bloque, marcadas:** los comparadores de software jurídico colombianos que
+listan transcripción como funcionalidad son **marketing**; y la columna de opinión chilena
+(octubre 2026) que sostiene que **«la transcripción nunca fue la causa del retraso judicial»** es
+**editorial**. Se publica porque es la objeción que un comprador público va a plantear, y conviene
+tenerla escrita antes de la reunión.
+
 ## Hueco de producto transversal (las cuatro regiones)
 
 No existe un **"Odoo de los despachos legales"**: no se halló plataforma de *practice management*
